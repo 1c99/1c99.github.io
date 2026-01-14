@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="../../images/logo.png" />
+    <title>DeepCatch X - Wonchan Son</title>
+    <link rel="stylesheet" href="../../css/fa6-all.min.css" />
+    <link rel="stylesheet" href="../../css/fa6-local-fonts.css" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="DeepCatch X: AI-Powered X-ray Analysis Platform for Aortic Disease Detection" />
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/skel.min.js"></script>
+    <script src="../../js/skel-layers.min.js"></script>
+    <script src="../../js/init.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="../../css/skel.css" />
+      <link rel="stylesheet" href="../../css/style.css" />
+      <link rel="stylesheet" href="../../css/style-xlarge.css" />
+    </noscript>
+    <link rel="stylesheet" href="../../css/project.css" />
+  </head>
+
+  <body class="project-page">
+    <div id="wrapper">
+      <div id="main">
+        <!-- Back Navigation -->
+        <section class="project-nav">
+          <div class="container">
+            <a href="../../index.html#experience">
+              <i class="fa-solid fa-arrow-left"></i> Back to Main
+            </a>
+          </div>
+        </section>
+
+        <!-- Project Header -->
+        <section id="project-header">
+          <div class="container">
+            <header class="major">
+              <h2>DeepCatch X</h2>
+              <p>AI-Powered X-ray Analysis Platform</p>
+            </header>
+            <p class="project-meta">
+              <i class="fa-solid fa-building"></i> Medical IP &nbsp;|&nbsp;
+              <i class="fa-solid fa-calendar"></i> Nov. 2023 &ndash; Present &nbsp;|&nbsp;
+              <i class="fa-solid fa-location-dot"></i> Seoul, South Korea
+            </p>
+          </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#gtc">NVIDIA GTC 2025 Showcase</a></li>
+            <li><a href="#diffusion">Conditional Diffusion Model</a></li>
+            <li><a href="#ray-pipeline">Ray Distributed Inference Pipeline</a></li>
+            <li><a href="#nuitka">Nuitka Compilation Pipeline</a></li>
+            <li><a href="#bioage">BioAge Prediction Module</a></li>
+            <li><a href="#dataset">Dataset Acquisition</a></li>
+          </ul>
+        </nav>
+
+        <!-- Overview -->
+        <section id="overview">
+          <div class="container">
+            <h3>Overview</h3>
+            <p>
+              DeepCatch X is an AI-powered medical imaging platform that extracts 3D aortic structures
+              from 2D chest X-rays, enabling non-invasive screening for thoracic aortic diseases.
+              The project encompasses end-to-end development from research prototypes to production-ready
+              deployment, including novel deep learning architectures, distributed inference systems,
+              and regulatory compliance pipelines.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">Ray</span>
+              <span class="tech-tag">TensorRT</span>
+              <span class="tech-tag">ONNX</span>
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">Nuitka</span>
+              <span class="tech-tag">DDP</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 1: NVIDIA GTC -->
+        <section id="gtc" class="card">
+          <div class="container">
+            <h3>NVIDIA GTC 2025 Showcase</h3>
+
+            <h4>Background</h4>
+            <p>
+              Showcased DeepCatch X at NVIDIA GTC 2025 in San Jose, demonstrating novel generative AI
+              applications in medical imaging to a global audience of researchers, engineers, and
+              healthcare professionals.
+            </p>
+
+            <div class="placeholder">
+              <i class="fa-solid fa-image"></i>
+              <p>Demo screenshots and booth photos coming soon</p>
+            </div>
+
+            <h4>Key Demonstrations</h4>
+            <ul>
+              <li>Real-time X-ray to 3D aorta extraction pipeline</li>
+              <li>AI-powered quantitative measurements for aortic aneurysm detection</li>
+              <li>Integration with clinical workflows</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 2: Diffusion Model -->
+        <section id="diffusion" class="card">
+          <div class="container">
+            <h3>Conditional Diffusion Model for X-ray-to-Aorta Extraction</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Traditional GAN-based approaches for medical image synthesis suffered from mode collapse
+              and produced artifacts that could lead to clinical misinterpretation. We needed a more
+              reliable generative model that could faithfully reconstruct 3D aortic structures from
+              2D projections.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Pioneered a Conditional Diffusion model architecture specifically designed for
+              X-ray-to-Aorta extraction. The model conditions on the input X-ray and iteratively
+              denoises to produce high-fidelity aortic segmentations. Additionally proposed LDM-based
+              volumetric reconstruction for full 3D geometry recovery.
+            </p>
+
+            <div class="placeholder">
+              <i class="fa-solid fa-diagram-project"></i>
+              <p>Architecture diagram coming soon</p>
+            </div>
+
+            <h4>Technical Details</h4>
+            <ul>
+              <li>Implemented custom conditioning mechanism for X-ray feature injection</li>
+              <li>Accelerated training via Distributed Data Parallel (DDP) across multiple GPUs</li>
+              <li>Used Gradient Accumulation to simulate large-batch learning on memory-constrained hardware</li>
+              <li>Proposed Latent Diffusion Model (LDM) variant for volumetric reconstruction</li>
+            </ul>
+
+            <div class="metrics">
+              <h4>Results</h4>
+              <div class="metric-item">
+                <span class="metric-value">Superior</span>
+                <span class="metric-label">Fidelity vs GANs</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">Reduced</span>
+                <span class="metric-label">Synthesis Artifacts</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 3: Ray Pipeline -->
+        <section id="ray-pipeline" class="card">
+          <div class="container">
+            <h3>Ray Distributed Inference Pipeline</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Production deployment required processing thousands of X-ray studies efficiently across
+              heterogeneous hardware. Single-node inference created bottlenecks that prevented
+              scaling to clinical workloads.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Engineered a scalable inference pipeline using Ray Distributed computing framework.
+              Designed adaptive DAG scheduling to optimize task allocation across multi-node workstations
+              with varying GPU capabilities.
+            </p>
+
+            <h4>Technical Implementation</h4>
+            <ul>
+              <li>Implemented Ray actors for stateful model serving</li>
+              <li>Designed adaptive DAG scheduling based on hardware availability</li>
+              <li>Applied hardware-aware optimizations: TensorRT compilation, ONNX export, FP16 precision</li>
+              <li>Built auto-scaling mechanisms for dynamic workload handling</li>
+            </ul>
+
+            <div class="metrics">
+              <h4>Results</h4>
+              <div class="metric-item">
+                <span class="metric-value">6x</span>
+                <span class="metric-label">Batch Throughput</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">2.8x</span>
+                <span class="metric-label">Faster Per-Case Inference</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 4: Nuitka -->
+        <section id="nuitka" class="card">
+          <div class="container">
+            <h3>Nuitka Compilation Pipeline</h3>
+
+            <h4>Problem</h4>
+            <p>
+              On-premise deployment at hospital sites required complex Python environment setup,
+              creating significant installation overhead and potential dependency conflicts.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Built a Nuitka compilation pipeline to deploy deep learning models as standalone
+              executables. This eliminated the need for Python installation on target machines
+              and simplified the deployment process.
+            </p>
+
+            <h4>Technical Details</h4>
+            <ul>
+              <li>Refactored codebase for compilation compatibility</li>
+              <li>Configured Nuitka for PyTorch and CUDA library bundling</li>
+              <li>Created automated build scripts for cross-platform deployment</li>
+              <li>Implemented license protection mechanisms</li>
+            </ul>
+
+            <div class="metrics">
+              <h4>Results</h4>
+              <div class="metric-item">
+                <span class="metric-value">73%</span>
+                <span class="metric-label">Codebase Reduction</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">Simplified</span>
+                <span class="metric-label">On-Premise Setup</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: BioAge -->
+        <section id="bioage" class="card">
+          <div class="container">
+            <h3>BioAge Prediction Module</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Research-grade biological age prediction algorithms were implemented in R, making
+              integration with the production C++ pipeline challenging and introducing performance
+              overhead.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Ported the research-grade R algorithms to a C++ production environment, ensuring
+              numerical equivalence while achieving significant performance improvements.
+            </p>
+
+            <h4>Technical Details</h4>
+            <ul>
+              <li>Analyzed and documented the R algorithm implementation</li>
+              <li>Implemented equivalent C++ code with Eigen for linear algebra</li>
+              <li>Validated numerical accuracy against R reference implementation</li>
+              <li>Integrated with existing C++ inference pipeline</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 6: Dataset -->
+        <section id="dataset" class="card">
+          <div class="container">
+            <h3>Dataset Acquisition</h3>
+
+            <h4>Challenge</h4>
+            <p>
+              FDA and MFDS regulatory submissions require extensive clinical validation on
+              diverse, representative datasets. Acquiring and managing medical imaging data
+              at scale presents unique logistical and compliance challenges.
+            </p>
+
+            <h4>Contributions</h4>
+            <ul>
+              <li>Directed end-to-end acquisition of massive-scale medical datasets (100TB+)</li>
+              <li>Coordinated with multiple hospital partners for data collection</li>
+              <li>Established data governance and de-identification pipelines</li>
+              <li>Managed storage infrastructure and data versioning</li>
+              <li>Prepared documentation for regulatory submissions</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="project-footer">
+          <p>&copy; Wonchan Son | <a href="../../index.html">Back to Home</a></p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

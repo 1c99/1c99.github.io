@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="../../images/logo.png" />
+    <title>DeepCatch M - Wonchan Son</title>
+    <link rel="stylesheet" href="../../css/fa6-all.min.css" />
+    <link rel="stylesheet" href="../../css/fa6-local-fonts.css" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="DeepCatch M: Multi-organ MRI Segmentation Platform" />
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/skel.min.js"></script>
+    <script src="../../js/skel-layers.min.js"></script>
+    <script src="../../js/init.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="../../css/skel.css" />
+      <link rel="stylesheet" href="../../css/style.css" />
+      <link rel="stylesheet" href="../../css/style-xlarge.css" />
+    </noscript>
+    <link rel="stylesheet" href="../../css/project.css" />
+  </head>
+
+  <body class="project-page">
+    <div id="wrapper">
+      <div id="main">
+        <!-- Back Navigation -->
+        <section class="project-nav">
+          <div class="container">
+            <a href="../../index.html#experience">
+              <i class="fa-solid fa-arrow-left"></i> Back to Main
+            </a>
+          </div>
+        </section>
+
+        <!-- Project Header -->
+        <section id="project-header">
+          <div class="container">
+            <header class="major">
+              <h2>DeepCatch M</h2>
+              <p>Multi-organ MRI Segmentation Platform</p>
+            </header>
+            <p class="project-meta">
+              <i class="fa-solid fa-building"></i> Medical IP &nbsp;|&nbsp;
+              <i class="fa-solid fa-calendar"></i> Nov. 2023 &ndash; Present &nbsp;|&nbsp;
+              <i class="fa-solid fa-location-dot"></i> Seoul, South Korea
+            </p>
+          </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#segmentation">Multi-organ MRI Segmentation</a></li>
+            <li><a href="#mlops">MLOps Pipeline</a></li>
+          </ul>
+        </nav>
+
+        <!-- Overview -->
+        <section id="overview">
+          <div class="container">
+            <h3>Overview</h3>
+            <p>
+              DeepCatch M is an AI-powered MRI analysis platform for automated segmentation of
+              multiple organ structures. The project focuses on accurate quantification of
+              anatomical features from MRI scans, supporting clinical decision-making and
+              research applications.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">MLFlow</span>
+              <span class="tech-tag">DVC</span>
+              <span class="tech-tag">Medical Imaging</span>
+              <span class="tech-tag">Segmentation</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 1: Segmentation -->
+        <section id="segmentation" class="card">
+          <div class="container">
+            <h3>Multi-organ MRI Segmentation Models</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Manual segmentation of organs in MRI scans is time-consuming and subject to
+              inter-observer variability. Automated segmentation enables consistent, reproducible
+              quantitative analysis at scale.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Trained and evaluated deep learning models for multi-organ segmentation on MRI,
+              targeting specific anatomical structures including subcutaneous fat (SF) and
+              abdominal visceral fat (AVF).
+            </p>
+
+            <div class="placeholder">
+              <i class="fa-solid fa-image"></i>
+              <p>Segmentation examples coming soon</p>
+            </div>
+
+            <h4>Technical Details</h4>
+            <ul>
+              <li>Developed segmentation models for multiple organ targets</li>
+              <li>Implemented comprehensive evaluation with quantitative metrics (Dice, IoU, Hausdorff distance)</li>
+              <li>Created validation pipelines for cross-dataset generalization testing</li>
+              <li>Optimized model architectures for inference efficiency</li>
+            </ul>
+
+            <h4>Target Structures</h4>
+            <ul>
+              <li>Subcutaneous Fat (SF)</li>
+              <li>Abdominal Visceral Fat (AVF)</li>
+              <li>Additional organ structures</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 2: MLOps -->
+        <section id="mlops" class="card">
+          <div class="container">
+            <h3>MLOps Pipeline Template</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Reproducible machine learning experiments require systematic tracking of experiments,
+              model versions, and artifacts. Ad-hoc approaches lead to difficulty in comparing
+              results and deploying the best models.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Built a reusable MLOps pipeline template that standardizes experiment tracking
+              and model weight management across the team's projects.
+            </p>
+
+            <h4>Pipeline Components</h4>
+            <ul>
+              <li><strong>Experiment Tracking:</strong> MLFlow integration for logging metrics, parameters, and artifacts</li>
+              <li><strong>Model Registry:</strong> Centralized model version management with deployment status tracking</li>
+              <li><strong>Data Versioning:</strong> DVC integration for reproducible dataset management</li>
+              <li><strong>Config Management:</strong> Hydra-based configuration for experiment reproducibility</li>
+              <li><strong>Automated Reports:</strong> Generation of comparison reports across experiment runs</li>
+            </ul>
+
+            <div class="metrics">
+              <h4>Impact</h4>
+              <div class="metric-item">
+                <span class="metric-value">Improved</span>
+                <span class="metric-label">Deployment Efficiency</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">Standardized</span>
+                <span class="metric-label">Team Workflows</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="project-footer">
+          <p>&copy; Wonchan Son | <a href="../../index.html">Back to Home</a></p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

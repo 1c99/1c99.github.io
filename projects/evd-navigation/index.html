@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="../../images/logo.png" />
+    <title>EVD Surgical Navigation - Wonchan Son</title>
+    <link rel="stylesheet" href="../../css/fa6-all.min.css" />
+    <link rel="stylesheet" href="../../css/fa6-local-fonts.css" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="3D FaceLandmark and AR Registration for EVD Surgical Navigation" />
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/skel.min.js"></script>
+    <script src="../../js/skel-layers.min.js"></script>
+    <script src="../../js/init.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="../../css/skel.css" />
+      <link rel="stylesheet" href="../../css/style.css" />
+      <link rel="stylesheet" href="../../css/style-xlarge.css" />
+    </noscript>
+    <link rel="stylesheet" href="../../css/project.css" />
+  </head>
+
+  <body class="project-page">
+    <div id="wrapper">
+      <div id="main">
+        <!-- Back Navigation -->
+        <section class="project-nav">
+          <div class="container">
+            <a href="../../index.html#experience">
+              <i class="fa-solid fa-arrow-left"></i> Back to Main
+            </a>
+          </div>
+        </section>
+
+        <!-- Project Header -->
+        <section id="project-header">
+          <div class="container">
+            <header class="major">
+              <h2>3D FaceLandmark and AR Registration</h2>
+              <p>EVD Surgical Navigation System</p>
+            </header>
+            <p class="project-meta">
+              <i class="fa-solid fa-building"></i> Medical IP &nbsp;|&nbsp;
+              <i class="fa-solid fa-calendar"></i> Nov. 2023 &ndash; Present &nbsp;|&nbsp;
+              <i class="fa-solid fa-location-dot"></i> Seoul, South Korea
+            </p>
+          </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#landmark">3D Facial Landmark Extraction</a></li>
+            <li><a href="#registration">Real-time Surgical Registration</a></li>
+          </ul>
+        </nav>
+
+        <!-- Overview -->
+        <section id="overview">
+          <div class="container">
+            <h3>Overview</h3>
+            <p>
+              External Ventricular Drainage (EVD) is a critical neurosurgical procedure that requires
+              precise catheter placement. This project develops an AR-assisted navigation system that
+              helps surgeons accurately position the drainage catheter by registering preoperative
+              CT scans to the patient's actual anatomy in real-time.
+            </p>
+            <p>
+              The system achieved regulatory-compliant accuracy (FRE 1.8 mm, ISO standards compliant)
+              and has been filed for MFDS approval. Two patents have been filed covering the auto and
+              manual registration methods.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">Computer Vision</span>
+              <span class="tech-tag">ICP</span>
+              <span class="tech-tag">Kabsch Algorithm</span>
+              <span class="tech-tag">ARKit</span>
+              <span class="tech-tag">iOS</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 1: Landmark Extraction -->
+        <section id="landmark" class="card">
+          <div class="container">
+            <h3>3D Facial Landmark Extraction Pipeline</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Accurate surgical registration requires robust correspondence between preoperative
+              CT data and the patient's physical anatomy. Traditional marker-based registration
+              adds preparation overhead and can be uncomfortable for patients.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Built a markerless 3D facial landmark extraction pipeline that automatically identifies
+              anatomical landmarks from head CT scans. The pipeline combines deep learning-based
+              segmentation with geometric processing.
+            </p>
+
+            <div class="placeholder">
+              <i class="fa-solid fa-diagram-project"></i>
+              <p>Pipeline diagram coming soon</p>
+            </div>
+
+            <h4>Technical Pipeline</h4>
+            <ul>
+              <li><strong>Skin Segmentation:</strong> Deep learning model extracts facial surface from CT volume</li>
+              <li><strong>2D Landmark Detection:</strong> Facial landmark detection on rendered views</li>
+              <li><strong>Ray Tracing:</strong> Projects 2D landmarks back to 3D surface via ray-mesh intersection</li>
+              <li><strong>Anatomical Validation:</strong> Ensures detected landmarks are anatomically plausible</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 2: Registration -->
+        <section id="registration" class="card">
+          <div class="container">
+            <h3>Real-time Surgical Registration</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Surgical navigation requires sub-millimeter registration accuracy between CT coordinate
+              space and physical patient space. The registration must be fast enough for real-time
+              AR overlay and robust to partial occlusions.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Implemented a two-stage registration approach combining rigid transformation estimation
+              (Kabsch algorithm) with iterative refinement (ICP) to achieve regulatory-compliant accuracy.
+            </p>
+
+            <h4>Technical Details</h4>
+            <ul>
+              <li><strong>Initial Alignment (Kabsch):</strong> Computes optimal rigid transformation from landmark correspondences using SVD-based closed-form solution</li>
+              <li><strong>Refinement (ICP):</strong> Iterative Closest Point algorithm for fine registration with surface point clouds</li>
+              <li><strong>Outlier Rejection:</strong> RANSAC-based filtering for robust estimation</li>
+              <li><strong>iOS Integration:</strong> Collaborated with iOS developers to adapt algorithms for ARKit on mobile platforms</li>
+            </ul>
+
+            <div class="metrics">
+              <h4>Results</h4>
+              <div class="metric-item">
+                <span class="metric-value">1.8 mm</span>
+                <span class="metric-label">Fiducial Registration Error</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">ISO</span>
+                <span class="metric-label">Standards Compliant</span>
+              </div>
+            </div>
+
+            <h4>Regulatory Filing</h4>
+            <p>
+              The registration system has been prepared for MFDS regulatory filing, with two Korean
+              patents covering the auto registration (10-2025-0107691) and manual registration
+              (10-2025-0107692) methods.
+            </p>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="project-footer">
+          <p>&copy; Wonchan Son | <a href="../../index.html">Back to Home</a></p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

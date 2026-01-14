@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!--
+  Read Only by HTML5 UP
+  html5up.net | @n33co
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <link rel="shortcut icon" href="./images/logo.png" />
+    <title>Wonchan Son</title>
+    <link rel="stylesheet" href="css/fa6-all.min.css" />
+    <link rel="stylesheet" href="css/fa6-local-fonts.css" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta
+      name="description"
+      content="AI Research Engineer specializing in medical imaging and deep learning."
+    />
+    <meta
+      name="keywords"
+      content="Wonchan Son, AI Research Engineer, Medical IP, Deep Learning, Medical Imaging, Computer Vision, PyTorch, Imperial College London"
+    />
+    <!-- Add your own Google Analytics here if desired -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.scrollzer.min.js"></script>
+    <script src="js/jquery.scrolly.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="css/skel.css" />
+      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/style-xlarge.css" />
+    </noscript>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <!-- Header -->
+      <section id="header" class="skel-layers-fixed">
+        <header>
+          <span class="image avatar"
+            ><img src="images/avatars/placeholder.png" alt="Wonchan Son"
+          /></span>
+          <h1>Wonchan Son</h1>
+        </header>
+        <nav id="nav">
+          <ul>
+            <li><a href="#about" class="active">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#patents">Patents</a></li>
+            <li><a href="#presentations">Presentations</a></li>
+            <li><a href="#skills">Skills</a></li>
+          </ul>
+        </nav>
+        <footer>
+          <ul class="icons">
+            <li>
+              <a
+                href="https://github.com/1c99"
+                target="_blank"
+                class="icon fa-github"
+                ><span class="label">GitHub</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/wonchanson"
+                target="_blank"
+                class="icon fa-linkedin"
+                ><span class="label">LinkedIn</span></a
+              >
+            </li>
+          </ul>
+        </footer>
+      </section>
+
+      <!-- Main -->
+      <div id="main">
+        <!-- About -->
+        <section id="about">
+          <div class="container">
+            <header class="major">
+              <h3>About</h3>
+              <p>Wonchan Son</p>
+            </header>
+            <p>
+              AI Research Engineer at <b>Medical IP</b>, currently serving as Technical Research Personnel
+              (Military Alternative Service). Bridging the gap between academic research and industrial
+              engineering, I specialize in proactively defining ambiguous problems and realizing theoretical
+              ideas into working prototypes. I am now seeking to apply this expertise to solve novel challenges
+              that deliver scalable impact to the real world.
+            </p>
+
+            <p>
+              <a class="button unclickable icon fa-envelope small"
+                >wonchan.son99 <w>at</w> gmail <w>dot</w> com
+              </a>
+            </p>
+
+            <h4>Education</h4>
+            <table class="invisible">
+              <tbody class="invisible">
+                <tr class="invisible">
+                  <td>
+                    <i class="fa-solid fa-graduation-cap fa-fw"></i>&ensp;M.Res. in Biomedical Research (Data Science),
+                    <b>Imperial College London</b>, Oct. 2021 &ndash; Sep. 2022
+                  </td>
+                </tr>
+                <tr class="invisible">
+                  <td>
+                    <i class="fa-solid fa-graduation-cap fa-fw"></i>&ensp;B.Eng. in Biomedical Systems Engineering,
+                    <b>University of Warwick</b>, Oct. 2018 &ndash; Jun. 2021
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience">
+          <div class="container">
+            <header class="major">
+              <h3>Experience</h3>
+            </header>
+
+            <h4>
+              <i class="fa-solid fa-building fa-fw"></i>&ensp;Medical IP &mdash; AI Research Engineer
+              <span style="float: right; font-weight: normal; font-size: 0.9em;">Nov. 2023 &ndash; Present | Seoul, South Korea</span>
+            </h4>
+
+            <h5>DeepCatch X (X-ray) <a class="lowkey" href="projects/deepcatch-x/" target="_blank">[details]</a></h5>
+            <ul>
+              <li>Showcased DeepCatch X at <b>NVIDIA GTC 2025</b>, demonstrating novel generative AI applications in medical imaging to a global audience.</li>
+              <li>Pioneered a <b>Conditional Diffusion model</b> for X-ray-to-Aorta extraction achieving superior fidelity to GANs; proposed LDM-based volumetric reconstruction; accelerated training via DDP and Gradient Accumulation.</li>
+              <li>Engineered a scalable inference pipeline using <b>Ray Distributed</b> across multi-node workstations; achieved 6x batch throughput and 2.8x faster per-case inference via adaptive DAG scheduling and hardware-aware optimizations (TensorRT, ONNX, FP16).</li>
+              <li>Reduced codebase size by 73% via refactoring and built a <b>Nuitka compilation pipeline</b> to deploy models as standalone executables.</li>
+              <li>Implemented a BioAge prediction module by porting research-grade R algorithms to a <b>C++ production environment</b>.</li>
+              <li>Directed the end-to-end acquisition of massive-scale medical datasets (100TB+) for FDA/MFDS regulatory submissions.</li>
+            </ul>
+
+            <h5>3D FaceLandmark and AR Registration for EVD Surgical Navigation <a class="lowkey" href="projects/evd-navigation/" target="_blank">[details]</a></h5>
+            <ul>
+              <li>Built a 3D facial landmark extraction pipeline from head CTs using segmentation model, 2D detection, and ray tracing.</li>
+              <li>Implemented and optimized real-time surgical registration (<b>Kabsch + ICP</b>) achieving FRE 1.8 mm (ISO standards compliant) for MFDS regulatory filing, and collaborated with iOS developers to adapt algorithms for mobile AR platforms.</li>
+            </ul>
+
+            <h5>LLM-based De-Identification System and Translation with Agentic Systems <a class="lowkey" href="projects/llm-deidentification/" target="_blank">[details]</a></h5>
+            <ul>
+              <li>Developed a multi-modal PHI de-identification pipeline achieving <b>98% accuracy</b>; leveraged OCR + NER for pixel-level masking and LLM for metadata anonymization.</li>
+              <li>Engineered a scalable multilingual translation pipeline (KR to 5 languages) integrating a persistent Translation Memory (TM) for cost reduction and a statistical consistency checker to validate terminology and auto-correct hallucinations.</li>
+            </ul>
+
+            <h5>DeepCatch M (MRI) <a class="lowkey" href="projects/deepcatch-m/" target="_blank">[details]</a></h5>
+            <ul>
+              <li>Trained and evaluated multi-organ MRI segmentation models (e.g., SF, AVF) with comprehensive quantitative metrics.</li>
+              <li>Built an <b>MLOps pipeline template</b> for experiment tracking and model weight management, improving deployment efficiency.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Research -->
+        <section id="research">
+          <div class="container">
+            <header class="major">
+              <h3>Research</h3>
+            </header>
+            <div class="table-wrapper">
+              <div class="features">
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>"NLP in Radiology Report: Auto-Label Generation for CXR Image Classification"</b>
+                    <br />
+                    M.Res. Thesis and Presentation, <b>Imperial College London</b>
+                    <br />
+                    Advisors: Dr. Joram M. Posma, Dr. Matthew Grech-Sollars
+                    <br />
+                    <span style="color: #888;">Apr. 2022 &ndash; Sep. 2022 | London, UK</span>
+                  </div>
+                </article>
+
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>"Optimization of the DL model for Histopathology Image Diagnostics"</b>
+                    <br />
+                    M.Res. Thesis and Poster-presentation, <b>Imperial College London</b>
+                    <br />
+                    Advisor: Dr. James McKenzie
+                    <br />
+                    <span style="color: #888;">Oct. 2021 &ndash; Mar. 2022 | London, UK</span>
+                  </div>
+                </article>
+
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>"Predicting Alzheimer's disease in the earlier stage with DL"</b>
+                    <br />
+                    B.Eng. Thesis, Progress Report, and Ethical Approval, <b>University of Warwick</b>
+                    <br />
+                    Advisor: Dr. Joanna Collingwood
+                    <br />
+                    <span style="color: #888;">Oct. 2020 &ndash; Jun. 2021 | Coventry, UK</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Publications -->
+        <section id="publications">
+          <div class="container">
+            <header class="major">
+              <h3>Publications</h3>
+            </header>
+            <div class="table-wrapper">
+              <div class="features">
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <a
+                      class="lowkey"
+                      target="_blank"
+                      href="https://doi.org/10.1371/journal.pdig.0000835"
+                      >[paper]</a
+                    >
+                    <br />
+                    <b>Designing a CAD system for cardiomegaly detection and radiology report generation</b>
+                    <br />
+                    Tianhao Zhu, Kenxin Xu, <u>Wonchan Son</u>, Kristofer Linton-Reid, Marc Boubnovski-Martell, Matt Grech-Sollars, Antoine D. Lain, Joram M. Posma
+                    <br />
+                    <b>PLOS Digital Health</b>, May 2025
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Patents -->
+        <section id="patents">
+          <div class="container">
+            <header class="major">
+              <h3>Patents</h3>
+            </header>
+            <div class="table-wrapper">
+              <div class="features">
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>OOD detection method and apparatus for Medical Image Segmentation</b>
+                    <br />
+                    Korean Patent 10-2024-0171453
+                    <br />
+                    <span style="color: #888;">Nov. 2024 | Seoul, Korea</span>
+                  </div>
+                </article>
+
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>AR auto registration method and apparatus for EVD surgery</b>
+                    <br />
+                    Korean Patent 10-2025-0107691
+                    <br />
+                    <span style="color: #888;">Aug. 2025 | Seoul, Korea</span>
+                  </div>
+                </article>
+
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>AR manual registration method and apparatus for EVD surgery</b>
+                    <br />
+                    Korean Patent 10-2025-0107692
+                    <br />
+                    <span style="color: #888;">Aug. 2025 | Seoul, Korea</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Presentations -->
+        <section id="presentations">
+          <div class="container">
+            <header class="major">
+              <h3>Presentations</h3>
+            </header>
+            <div class="table-wrapper">
+              <div class="features">
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>Exhibitor - A New Dimension of X-ray</b>
+                    <br />
+                    <b>NVIDIA GTC 2025</b>
+                    <br />
+                    Showcased X-ray-based organ extraction and AI-powered quantifications to a global audience.
+                    <br />
+                    <span style="color: #888;">Mar. 2025 | San Jose, USA</span>
+                  </div>
+                </article>
+
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>Internship Program Host</b>
+                    <br />
+                    <b>Medical IP - DK Medical</b>
+                    <br />
+                    Provided mentoring on AI research careers and productivity tools, while introducing Medical IP's solutions.
+                    <br />
+                    <span style="color: #888;">Jan. 2025 | Seoul, Korea</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+          <div class="container">
+            <header class="major">
+              <h3>Skills</h3>
+            </header>
+            <table class="invisible">
+              <tbody class="invisible">
+                <tr class="invisible">
+                  <td style="width: 200px;"><b>Programming Languages</b></td>
+                  <td>Python, C++, Linux, MATLAB</td>
+                </tr>
+                <tr class="invisible">
+                  <td><b>Frameworks</b></td>
+                  <td>PyTorch, Scikit-Learn, HuggingFace, MLFlow, Ray</td>
+                </tr>
+                <tr class="invisible">
+                  <td><b>Tools</b></td>
+                  <td>Git, Docker</td>
+                </tr>
+                <tr class="invisible">
+                  <td><b>Languages</b></td>
+                  <td>Korean (Native), English (Fluent)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- Footer -->
+      <section id="footer">
+        <div class="container">
+          <ul class="copyright">
+            <li>&copy; Wonchan Son</li>
+            <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

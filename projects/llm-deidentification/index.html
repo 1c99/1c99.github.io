@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="../../images/logo.png" />
+    <title>LLM De-Identification & Translation - Wonchan Son</title>
+    <link rel="stylesheet" href="../../css/fa6-all.min.css" />
+    <link rel="stylesheet" href="../../css/fa6-local-fonts.css" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="LLM-based De-Identification System and Translation with Agentic Systems" />
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/skel.min.js"></script>
+    <script src="../../js/skel-layers.min.js"></script>
+    <script src="../../js/init.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="../../css/skel.css" />
+      <link rel="stylesheet" href="../../css/style.css" />
+      <link rel="stylesheet" href="../../css/style-xlarge.css" />
+    </noscript>
+    <link rel="stylesheet" href="../../css/project.css" />
+  </head>
+
+  <body class="project-page">
+    <div id="wrapper">
+      <div id="main">
+        <!-- Back Navigation -->
+        <section class="project-nav">
+          <div class="container">
+            <a href="../../index.html#experience">
+              <i class="fa-solid fa-arrow-left"></i> Back to Main
+            </a>
+          </div>
+        </section>
+
+        <!-- Project Header -->
+        <section id="project-header">
+          <div class="container">
+            <header class="major">
+              <h2>LLM-based De-Identification & Translation</h2>
+              <p>Agentic Systems for Medical Data Processing</p>
+            </header>
+            <p class="project-meta">
+              <i class="fa-solid fa-building"></i> Medical IP &nbsp;|&nbsp;
+              <i class="fa-solid fa-calendar"></i> Nov. 2023 &ndash; Present &nbsp;|&nbsp;
+              <i class="fa-solid fa-location-dot"></i> Seoul, South Korea
+            </p>
+          </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#deidentification">PHI De-Identification Pipeline</a></li>
+            <li><a href="#translation">Multilingual Translation System</a></li>
+          </ul>
+        </nav>
+
+        <!-- Overview -->
+        <section id="overview">
+          <div class="container">
+            <h3>Overview</h3>
+            <p>
+              Medical data processing requires strict compliance with privacy regulations (HIPAA, GDPR)
+              while enabling research and international collaboration. This project develops AI-powered
+              systems for automated de-identification of Protected Health Information (PHI) and
+              multilingual translation of medical documents with quality assurance.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">LLM</span>
+              <span class="tech-tag">OCR</span>
+              <span class="tech-tag">NER</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Translation Memory</span>
+              <span class="tech-tag">Agentic Systems</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 1: De-Identification -->
+        <section id="deidentification" class="card">
+          <div class="container">
+            <h3>Multi-modal PHI De-Identification Pipeline</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Medical images and documents contain Protected Health Information (PHI) embedded in
+              multiple modalities: burned-in text on images, DICOM metadata, PDF documents, and
+              handwritten annotations. Manual de-identification is time-consuming and error-prone.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Developed a comprehensive multi-modal pipeline that combines OCR, Named Entity Recognition,
+              and Large Language Models to detect and anonymize PHI across different data types.
+            </p>
+
+            <div class="placeholder">
+              <i class="fa-solid fa-diagram-project"></i>
+              <p>Pipeline architecture diagram coming soon</p>
+            </div>
+
+            <h4>Technical Pipeline</h4>
+            <ul>
+              <li><strong>Image PHI Detection:</strong> OCR extracts text from images; NER identifies PHI entities for pixel-level masking</li>
+              <li><strong>Metadata Anonymization:</strong> LLM-based parsing and anonymization of DICOM headers and document metadata</li>
+              <li><strong>Document Processing:</strong> PDF text extraction with layout-aware PHI detection</li>
+              <li><strong>Quality Assurance:</strong> Multi-stage validation to ensure no PHI leakage</li>
+            </ul>
+
+            <div class="metrics">
+              <h4>Results</h4>
+              <div class="metric-item">
+                <span class="metric-value">98%</span>
+                <span class="metric-label">Detection Accuracy</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">Multi-modal</span>
+                <span class="metric-label">Coverage</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2: Translation -->
+        <section id="translation" class="card">
+          <div class="container">
+            <h3>Multilingual Translation System</h3>
+
+            <h4>Problem</h4>
+            <p>
+              International regulatory submissions and medical documentation require accurate translation
+              into multiple languages. Medical terminology must be consistent across documents, and
+              LLM-based translation can suffer from hallucinations that introduce dangerous inaccuracies.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Engineered a scalable multilingual translation pipeline from Korean to 5 target languages,
+              integrating Translation Memory for consistency and cost reduction, with statistical
+              quality checks to detect and correct hallucinations.
+            </p>
+
+            <h4>Technical Architecture</h4>
+            <ul>
+              <li><strong>Translation Memory (TM):</strong> Persistent database of approved translations; reduces API costs and ensures terminology consistency</li>
+              <li><strong>LLM Translation:</strong> Uses large language models for context-aware translation of new segments</li>
+              <li><strong>Consistency Checker:</strong> Statistical analysis to validate terminology usage across documents</li>
+              <li><strong>Hallucination Detection:</strong> Automated checks for numerical consistency, entity preservation, and semantic alignment</li>
+              <li><strong>Auto-Correction:</strong> Rule-based correction for detected issues before human review</li>
+            </ul>
+
+            <h4>Target Languages</h4>
+            <ul>
+              <li>Korean (source) to English, Japanese, Chinese, Spanish, German</li>
+            </ul>
+
+            <div class="metrics">
+              <h4>Key Features</h4>
+              <div class="metric-item">
+                <span class="metric-value">5</span>
+                <span class="metric-label">Target Languages</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">TM</span>
+                <span class="metric-label">Cost Reduction</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="project-footer">
+          <p>&copy; Wonchan Son | <a href="../../index.html">Back to Home</a></p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
