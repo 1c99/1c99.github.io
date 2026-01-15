@@ -54,8 +54,8 @@
             <li><a href="#gtc">NVIDIA GTC 2025 Showcase</a></li>
             <li><a href="#diffusion">Conditional Diffusion Model</a></li>
             <li><a href="#ray-pipeline">Ray Distributed Inference Pipeline</a></li>
-            <li><a href="#nuitka">Nuitka Compilation Pipeline</a></li>
-            <li><a href="#bioage">BioAge Prediction Module</a></li>
+            <li><a href="#nuitka">Refactoring &amp; Nuitka Deployment</a></li>
+            <li><a href="#bioage">BioAge Prediction Module (R to C++)</a></li>
             <li><a href="#dataset">Dataset Acquisition</a></li>
           </ul>
         </nav>
@@ -116,42 +116,36 @@
 
             <h4>Problem</h4>
             <p>
-              Traditional GAN-based approaches for medical image synthesis suffered from mode collapse
-              and produced artifacts that could lead to clinical misinterpretation. We needed a more
-              reliable generative model that could faithfully reconstruct 3D aortic structures from
-              2D projections.
+              Extracting 3D aortic structures from 2D chest X-rays is an ill-posed inverse problem.
+              Traditional GAN-based approaches suffered from mode collapse, training instability, and
+              artifacts that could lead to clinical misinterpretation.
             </p>
 
             <h4>Approach</h4>
             <p>
-              Pioneered a Conditional Diffusion model architecture specifically designed for
-              X-ray-to-Aorta extraction. The model conditions on the input X-ray and iteratively
-              denoises to produce high-fidelity aortic segmentations. Additionally proposed LDM-based
-              volumetric reconstruction for full 3D geometry recovery.
+              Implemented a DDPM (Denoising Diffusion Probabilistic Model) architecture for conditional
+              image-to-image translation. The model learns the reverse diffusion process to iteratively
+              denoise and generate aortic segmentation masks conditioned on X-ray input via channel concatenation.
             </p>
-
-            <div class="placeholder">
-              <i class="fa-solid fa-diagram-project"></i>
-              <p>Architecture diagram coming soon</p>
-            </div>
 
             <h4>Technical Details</h4>
             <ul>
-              <li>Implemented custom conditioning mechanism for X-ray feature injection</li>
-              <li>Accelerated training via Distributed Data Parallel (DDP) across multiple GPUs</li>
-              <li>Used Gradient Accumulation to simulate large-batch learning on memory-constrained hardware</li>
-              <li>Proposed Latent Diffusion Model (LDM) variant for volumetric reconstruction</li>
+              <li>DDPM-based architecture with conditional channel concatenation (X-ray RGBA + noise)</li>
+              <li>U-Net backbone with self-attention, time embedding, and ResNet blocks</li>
+              <li>DDP training across 4x RTX 4090 GPUs with gradient accumulation</li>
+              <li>Hybrid loss: weighted MSE + perceptual (VGG) + SSIM + L1</li>
+              <li>DDIM fast sampling for inference (50 steps)</li>
             </ul>
 
             <div class="metrics">
               <h4>Results</h4>
               <div class="metric-item">
-                <span class="metric-value">Superior</span>
-                <span class="metric-label">Fidelity vs GANs</span>
+                <span class="metric-value">0.90</span>
+                <span class="metric-label">IoU Score</span>
               </div>
               <div class="metric-item">
-                <span class="metric-value">Reduced</span>
-                <span class="metric-label">Synthesis Artifacts</span>
+                <span class="metric-value">0.92</span>
+                <span class="metric-label">SSIM</span>
               </div>
             </div>
           </div>
@@ -164,24 +158,25 @@
 
             <h4>Problem</h4>
             <p>
-              Production deployment required processing thousands of X-ray studies efficiently across
-              heterogeneous hardware. Single-node inference created bottlenecks that prevented
-              scaling to clinical workloads.
+              Sequential model execution created bottlenecks; each analysis step had to complete
+              before the next could begin. Hospital deployments have heterogeneous hardware
+              (varying GPU counts, memory sizes), requiring adaptive resource allocation.
             </p>
 
             <h4>Approach</h4>
             <p>
-              Engineered a scalable inference pipeline using Ray Distributed computing framework.
-              Designed adaptive DAG scheduling to optimize task allocation across multi-node workstations
-              with varying GPU capabilities.
+              Built a DAG-based distributed inference system using Ray framework. Models execute
+              as independent actors with automatic task scheduling and zero-copy data sharing
+              via Apache Arrow-based Object Store.
             </p>
 
             <h4>Technical Implementation</h4>
             <ul>
-              <li>Implemented Ray actors for stateful model serving</li>
-              <li>Designed adaptive DAG scheduling based on hardware availability</li>
-              <li>Applied hardware-aware optimizations: TensorRT compilation, ONNX export, FP16 precision</li>
-              <li>Built auto-scaling mechanisms for dynamic workload handling</li>
+              <li>Ray actors for stateful model serving with GPU memory persistence</li>
+              <li>DAG scheduler with dependency resolution and parallel execution</li>
+              <li>Zero-copy data sharing between actors via Ray Object Store</li>
+              <li>Resource monitoring with automatic GPU/CPU allocation</li>
+              <li>Graceful degradation for hardware failures</li>
             </ul>
 
             <div class="metrics">
@@ -192,7 +187,7 @@
               </div>
               <div class="metric-item">
                 <span class="metric-value">2.8x</span>
-                <span class="metric-label">Faster Per-Case Inference</span>
+                <span class="metric-label">Per-Case Speedup</span>
               </div>
             </div>
           </div>
@@ -201,38 +196,39 @@
         <!-- Section 4: Nuitka -->
         <section id="nuitka" class="card">
           <div class="container">
-            <h3>Nuitka Compilation Pipeline</h3>
+            <h3>Refactoring &amp; Nuitka Deployment</h3>
 
             <h4>Problem</h4>
             <p>
-              On-premise deployment at hospital sites required complex Python environment setup,
-              creating significant installation overhead and potential dependency conflicts.
+              Hospital deployment required distributing deep learning inference code as standalone
+              executables without Python environment setup. IP protection was also critical
+              for commercial deployment.
             </p>
 
             <h4>Approach</h4>
             <p>
-              Built a Nuitka compilation pipeline to deploy deep learning models as standalone
-              executables. This eliminated the need for Python installation on target machines
-              and simplified the deployment process.
+              Major codebase refactoring to remove unnecessary abstractions, followed by Nuitka
+              compilation to produce standalone executables with bundled CUDA/PyTorch dependencies.
+              Applied model optimizations (TensorRT, ONNX, FP16) for inference acceleration.
             </p>
 
             <h4>Technical Details</h4>
             <ul>
-              <li>Refactored codebase for compilation compatibility</li>
-              <li>Configured Nuitka for PyTorch and CUDA library bundling</li>
-              <li>Created automated build scripts for cross-platform deployment</li>
-              <li>Implemented license protection mechanisms</li>
+              <li>Codebase refactoring: removed dead code, unified configurations, simplified architecture</li>
+              <li>Model optimization: TensorRT compilation, ONNX export, FP16 precision</li>
+              <li>Nuitka compilation with PyTorch/CUDA bundling for standalone deployment</li>
+              <li>CdsPyEncrypt integration for source code protection</li>
             </ul>
 
             <div class="metrics">
               <h4>Results</h4>
               <div class="metric-item">
-                <span class="metric-value">73%</span>
+                <span class="metric-value">76%</span>
                 <span class="metric-label">Codebase Reduction</span>
               </div>
               <div class="metric-item">
-                <span class="metric-value">Simplified</span>
-                <span class="metric-label">On-Premise Setup</span>
+                <span class="metric-value">Standalone</span>
+                <span class="metric-label">Executable Deployment</span>
               </div>
             </div>
           </div>
@@ -241,28 +237,42 @@
         <!-- Section 5: BioAge -->
         <section id="bioage" class="card">
           <div class="container">
-            <h3>BioAge Prediction Module</h3>
+            <h3>BioAge Prediction Module (R to C++)</h3>
 
             <h4>Problem</h4>
             <p>
-              Research-grade biological age prediction algorithms were implemented in R, making
-              integration with the production C++ pipeline challenging and introducing performance
-              overhead.
+              The biological age estimation algorithm was implemented in R for research. Production
+              deployment required: no R runtime dependency, sub-millisecond latency, thread safety,
+              and GPU pipeline integration with LibTorch.
             </p>
 
             <h4>Approach</h4>
             <p>
-              Ported the research-grade R algorithms to a C++ production environment, ensuring
-              numerical equivalence while achieving significant performance improvements.
+              Complete algorithm port from R to C++ using normative modeling approach.
+              The algorithm uses Mahalanobis distance to measure deviation from healthy reference
+              population, converting organ-level health distances to biological age estimates.
             </p>
 
             <h4>Technical Details</h4>
             <ul>
-              <li>Analyzed and documented the R algorithm implementation</li>
-              <li>Implemented equivalent C++ code with Eigen for linear algebra</li>
-              <li>Validated numerical accuracy against R reference implementation</li>
-              <li>Integrated with existing C++ inference pipeline</li>
+              <li>1,850+ lines of production C++ code with numerical equivalence to R</li>
+              <li>Normative modeling: Mahalanobis distance for deviation measurement</li>
+              <li>Zero external file dependencies via embedded statistical parameters</li>
+              <li>Banker's rounding (IEC 60559) for numerical fidelity with R</li>
+              <li>52 clinical output fields including risk scores and recommendations</li>
             </ul>
+
+            <div class="metrics">
+              <h4>Results</h4>
+              <div class="metric-item">
+                <span class="metric-value">150x</span>
+                <span class="metric-label">Faster than R</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">0</span>
+                <span class="metric-label">File Dependencies</span>
+              </div>
+            </div>
           </div>
         </section>
 

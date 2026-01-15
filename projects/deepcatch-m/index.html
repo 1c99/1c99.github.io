@@ -84,35 +84,34 @@
             <h4>Problem</h4>
             <p>
               Manual segmentation of organs in MRI scans is time-consuming and subject to
-              inter-observer variability. Automated segmentation enables consistent, reproducible
-              quantitative analysis at scale.
+              inter-observer variability. Need to compare multiple SOTA architectures for
+              optimal performance on medical imaging tasks.
             </p>
 
             <h4>Approach</h4>
             <p>
-              Trained and evaluated deep learning models for multi-organ segmentation on MRI,
-              targeting specific anatomical structures including subcutaneous fat (SF) and
-              abdominal visceral fat (AVF).
+              Implemented and evaluated multiple segmentation architectures (U-Net, U-Net++, nnU-Net)
+              through a unified model factory pattern, enabling systematic comparison and architecture search.
             </p>
 
-            <div class="placeholder">
-              <i class="fa-solid fa-image"></i>
-              <p>Segmentation examples coming soon</p>
-            </div>
+            <h4>Model Architectures</h4>
+            <ul>
+              <li><strong>U-Net:</strong> Baseline encoder-decoder with skip connections (~7.8M params)</li>
+              <li><strong>U-Net++:</strong> Dense nested skip pathways for better gradient flow (~9.2M params)</li>
+              <li><strong>nnU-Net:</strong> SOTA with residual blocks, instance norm, deep supervision (~31M params)</li>
+            </ul>
 
             <h4>Technical Details</h4>
             <ul>
-              <li>Developed segmentation models for multiple organ targets</li>
-              <li>Implemented comprehensive evaluation with quantitative metrics (Dice, IoU, Hausdorff distance)</li>
-              <li>Created validation pipelines for cross-dataset generalization testing</li>
-              <li>Optimized model architectures for inference efficiency</li>
+              <li>Multi-class Dice loss with deep supervision for auxiliary losses</li>
+              <li>Multi-GPU training with DataParallel and mixed precision (FP16)</li>
+              <li>Optimized data loading with caching and prefetching</li>
             </ul>
 
             <h4>Target Structures</h4>
             <ul>
               <li>Subcutaneous Fat (SF)</li>
               <li>Abdominal Visceral Fat (AVF)</li>
-              <li>Additional organ structures</li>
             </ul>
           </div>
         </section>
@@ -124,35 +123,45 @@
 
             <h4>Problem</h4>
             <p>
-              Reproducible machine learning experiments require systematic tracking of experiments,
-              model versions, and artifacts. Ad-hoc approaches lead to difficulty in comparing
-              results and deploying the best models.
+              Medical imaging ML requires strict reproducibility, audit trails for compliance,
+              and systematic model comparison. Ad-hoc workflows led to difficulty reproducing
+              results and deploying models.
             </p>
 
             <h4>Approach</h4>
             <p>
-              Built a reusable MLOps pipeline template that standardizes experiment tracking
-              and model weight management across the team's projects.
+              Built an end-to-end MLOps pipeline template with hybrid architecture: native GPU
+              training for performance, containerized serving for portability and reliability.
             </p>
 
             <h4>Pipeline Components</h4>
             <ul>
-              <li><strong>Experiment Tracking:</strong> MLFlow integration for logging metrics, parameters, and artifacts</li>
-              <li><strong>Model Registry:</strong> Centralized model version management with deployment status tracking</li>
-              <li><strong>Data Versioning:</strong> DVC integration for reproducible dataset management</li>
-              <li><strong>Config Management:</strong> Hydra-based configuration for experiment reproducibility</li>
-              <li><strong>Automated Reports:</strong> Generation of comparison reports across experiment runs</li>
+              <li><strong>Data Versioning (DVC):</strong> Git-like versioning for large medical datasets with deduplication</li>
+              <li><strong>Experiment Tracking (MLFlow + W&amp;B):</strong> Metrics, parameters, artifacts, and prediction visualization</li>
+              <li><strong>Hyperparameter Optimization (Ray Tune):</strong> ASHA scheduler with multi-GPU parallel trials</li>
+              <li><strong>Model Serving (FastAPI + Docker):</strong> REST API with caching, health checks, and monitoring</li>
+              <li><strong>Deployment (HuggingFace Hub):</strong> Automated model publishing with model cards</li>
             </ul>
+
+            <h4>Technical Stack</h4>
+            <div class="tech-stack">
+              <span class="tech-tag">MLFlow</span>
+              <span class="tech-tag">DVC</span>
+              <span class="tech-tag">Ray Tune</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Grafana</span>
+            </div>
 
             <div class="metrics">
               <h4>Impact</h4>
               <div class="metric-item">
-                <span class="metric-value">Improved</span>
-                <span class="metric-label">Deployment Efficiency</span>
+                <span class="metric-value">Full</span>
+                <span class="metric-label">Reproducibility</span>
               </div>
               <div class="metric-item">
-                <span class="metric-value">Standardized</span>
-                <span class="metric-label">Team Workflows</span>
+                <span class="metric-value">Automated</span>
+                <span class="metric-label">Train-to-Deploy</span>
               </div>
             </div>
           </div>
