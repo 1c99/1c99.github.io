@@ -243,35 +243,37 @@
             <div class="architecture-diagram">
               <div class="diagram-title">Module Dependency Graph &amp; DAG Scheduling</div>
               <pre class="ascii-diagram">
-                      ┌──────────────────────────────────────┐
-                      │           Input DICOM Image          │
-                      └──────────────────────────────────────┘
-                                       │
-       ┌───────────────────────────────┼───────────────────────────────┐
-       │                               │                               │
-       ▼                               ▼                               ▼
-┌─────────────┐                 ┌─────────────┐                 ┌─────────────┐
-│    Lung     │                 │    Heart    │                 │    Aorta    │
-│  (2048x2048)│                 │  (512x512)  │                 │  (512x512)  │
-└─────────────┘                 └─────────────┘                 └─────────────┘
-       │                               │                               │
- ┌─────┴─────┐                         │                               │
- │           │                         │                               │
- ▼           ▼                         ▼                               ▼
-┌────────┐ ┌────────┐           ┌─────────────┐                 ┌─────────────┐
-│ COVID  │ │ Vessel │           │     CTR     │◄────────────────│  Diameter   │
-└────────┘ └────────┘           │ (lung+heart)│                 └─────────────┘
- │           │                  └─────────────┘
- ▼           ▼                         │
-┌────────┐ ┌────────┐           ┌─────────────┐
-│   TB   │ │Periph- │           │  Volumetry  │
-└────────┘ │eral    │           └─────────────┘
-           └────────┘
+                         ┌──────────────────────────────────────┐
+                         │           Input DICOM Image          │
+                         └──────────────────────────────────────┘
+                                          │
+          ┌───────────────────────────────┼───────────────────────────────┐
+          │                               │                               │
+          ▼                               ▼                               ▼
+   ┌─────────────┐                 ┌─────────────┐                 ┌─────────────┐
+   │    Lung     │                 │    Heart    │                 │    Aorta    │
+   │  (2048x2048)│                 │  (512x512)  │                 │  (512x512)  │
+   └─────────────┘                 └─────────────┘                 └─────────────┘
+          │                               │                               │
+    ┌─────┴─────┐                         │                               │
+    │           │                         │                               │
+    ▼           ▼                         ▼                               ▼
+┌────────┐ ┌────────┐              ┌─────────────┐                 ┌─────────────┐
+│ COVID  │ │ Vessel │              │     CTR     │◄────────────────│  Diameter   │
+│        │ │        │              │ (requires   │    lung mask    │             │
+└────────┘ └────────┘              │ lung+heart) │                 └─────────────┘
+    │           │                  └─────────────┘
+    │           │                         │
+    ▼           ▼                         ▼
+┌────────┐ ┌────────┐              ┌─────────────┐
+│   TB   │ │Periph- │              │  Volumetry  │
+│        │ │ eral   │              │             │
+└────────┘ └────────┘              └─────────────┘
 
 EXECUTION LEVELS:
-  Level 0: [lung, heart, aorta, bone, ...]    ← Independent (parallel)
-  Level 1: [covid, vessel, tb, diameter]      ← Depend on Level 0
-  Level 2: [ctr, peripheral, volumetry]       ← Depend on Level 0/1
+  Level 0: [lung, heart, bone, airway, aorta, t12l1, laa]  ← Independent
+  Level 1: [covid, vessel, tb, bone_supp]                   ← Depend on Level 0
+  Level 2: [ctr, diameter, peripheral, volumetry]           ← Depend on Level 0/1
               </pre>
             </div>
 
