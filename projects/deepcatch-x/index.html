@@ -240,42 +240,8 @@
             </p>
 
             <!-- Module Dependency DAG Diagram -->
-            <div class="architecture-diagram">
-              <div class="diagram-title">Module Dependency Graph &amp; DAG Scheduling</div>
-
-              <!-- Input -->
-              <div class="dag-level">
-                <div class="dag-node input">Input DICOM</div>
-              </div>
-              <div class="dag-arrow">&darr;</div>
-
-              <!-- Level 0 -->
-              <div class="dag-level-label">Level 0: Independent (parallel)</div>
-              <div class="dag-level">
-                <div class="dag-node">Lung<span>2048&times;2048</span></div>
-                <div class="dag-node">Heart<span>512&times;512</span></div>
-                <div class="dag-node">Bone<span>512&times;512</span></div>
-                <div class="dag-node">Aorta<span>512&times;512</span></div>
-              </div>
-              <div class="dag-arrow">&darr;</div>
-
-              <!-- Level 1 -->
-              <div class="dag-level-label">Level 1: Depend on Level 0</div>
-              <div class="dag-level">
-                <div class="dag-node">COVID<span>&larr; lung</span></div>
-                <div class="dag-node">Vessel<span>&larr; lung</span></div>
-                <div class="dag-node">TB<span>&larr; lung</span></div>
-                <div class="dag-node">Diameter<span>&larr; aorta</span></div>
-              </div>
-              <div class="dag-arrow">&darr;</div>
-
-              <!-- Level 2 -->
-              <div class="dag-level-label">Level 2: Depend on Level 0/1</div>
-              <div class="dag-level">
-                <div class="dag-node">CTR<span>&larr; lung + heart</span></div>
-                <div class="dag-node">Peripheral<span>&larr; lung</span></div>
-                <div class="dag-node">Volumetry<span>&larr; lung + heart</span></div>
-              </div>
+            <div class="diagram-container">
+              <img src="assets/dag-scheduling.svg" alt="Module Dependency Graph showing DAG scheduling with Level 0 (Lung, Heart, Bone, Aorta), Level 1 (COVID, Vessel, TB, CTR, Diameter), and Level 2 (TB Screen, Peripheral, Volumetry)">
             </div>
 
             <h4>Technical Implementation</h4>
