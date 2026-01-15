@@ -239,38 +239,68 @@
               via Apache Arrow-based Object Store.
             </p>
 
-            <!-- Ray Architecture Diagram -->
+            <!-- Module Dependency DAG Diagram -->
             <div class="architecture-diagram">
-              <div class="diagram-title">Ray Distributed Architecture</div>
+              <div class="diagram-title">Adaptive DAG Scheduling with Module Dependencies</div>
+
+              <!-- Level 0 -->
               <div class="grid-diagram">
                 <div class="grid-box">
-                  <div class="box-icon"><i class="fa-solid fa-microchip"></i></div>
-                  <div class="box-title">Model A</div>
-                  <div class="box-detail">GPU 0</div>
+                  <div class="box-title">Lung</div>
+                  <div class="box-detail">Segmentation</div>
                 </div>
                 <div class="grid-box">
-                  <div class="box-icon"><i class="fa-solid fa-microchip"></i></div>
-                  <div class="box-title">Model B</div>
-                  <div class="box-detail">GPU 1</div>
+                  <div class="box-title">Heart</div>
+                  <div class="box-detail">Segmentation</div>
                 </div>
                 <div class="grid-box">
-                  <div class="box-icon"><i class="fa-solid fa-microchip"></i></div>
-                  <div class="box-title">Model C</div>
-                  <div class="box-detail">GPU 0</div>
+                  <div class="box-title">Bone</div>
+                  <div class="box-detail">Segmentation</div>
                 </div>
                 <div class="grid-box">
-                  <div class="box-icon"><i class="fa-solid fa-microchip"></i></div>
-                  <div class="box-title">Model D</div>
-                  <div class="box-detail">GPU 1</div>
+                  <div class="box-title">Aorta</div>
+                  <div class="box-detail">Segmentation</div>
                 </div>
               </div>
-              <div class="diagram-connector">&darr; Zero-Copy via Apache Arrow &darr;</div>
-              <div class="flow-diagram">
-                <div class="flow-box highlight">
-                  <div class="box-title">Ray Object Store</div>
-                  <div class="box-subtitle">Shared Memory</div>
+              <div class="diagram-connector">Level 0: Independent (parallel) &darr;</div>
+
+              <!-- Level 1 -->
+              <div class="grid-diagram">
+                <div class="grid-box">
+                  <div class="box-title">COVID</div>
+                  <div class="box-detail">&larr; Lung</div>
+                </div>
+                <div class="grid-box">
+                  <div class="box-title">Vessel</div>
+                  <div class="box-detail">&larr; Lung</div>
+                </div>
+                <div class="grid-box">
+                  <div class="box-title">TB</div>
+                  <div class="box-detail">&larr; Lung</div>
+                </div>
+                <div class="grid-box">
+                  <div class="box-title">Diameter</div>
+                  <div class="box-detail">&larr; Aorta</div>
                 </div>
               </div>
+              <div class="diagram-connector">Level 1: Depend on Level 0 &darr;</div>
+
+              <!-- Level 2 -->
+              <div class="grid-diagram">
+                <div class="grid-box">
+                  <div class="box-title">CTR</div>
+                  <div class="box-detail">&larr; Lung + Heart</div>
+                </div>
+                <div class="grid-box">
+                  <div class="box-title">Peripheral</div>
+                  <div class="box-detail">&larr; Lung</div>
+                </div>
+                <div class="grid-box">
+                  <div class="box-title">Volumetry</div>
+                  <div class="box-detail">&larr; Lung + Heart</div>
+                </div>
+              </div>
+              <div class="diagram-connector">Level 2: Depend on Level 0/1</div>
             </div>
 
             <h4>Technical Implementation</h4>
