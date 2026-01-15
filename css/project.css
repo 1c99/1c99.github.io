@@ -452,14 +452,19 @@ section.card li {
 
 /* ASCII Art Diagrams */
 .ascii-diagram {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.75em;
-  line-height: 1.2;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', 'Menlo', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
   overflow-x: auto;
   margin: 0;
-  padding: 0.5em;
+  padding: 1em;
   white-space: pre;
   color: #333;
+  background: #fafafa;
+  border-radius: 4px;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Responsive Adjustments */
