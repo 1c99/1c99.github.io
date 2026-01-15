@@ -204,6 +204,22 @@
               <li><strong>LatentDiffusion3D:</strong> Complete LDM integrating all components for end-to-end 2D&rarr;3D generation</li>
             </ul>
 
+            <!-- LDM Architecture Diagrams -->
+            <div class="diagram-container">
+              <img src="assets/ldm-high-level.svg" alt="LatentDiffusion3D High-Level Overview showing Input 2D Aorta through Projection2Dto3D, Time Embedding, UNet3DConditioned, VAE3D Decoder to Output 3D Volume">
+              <figcaption>High-Level Architecture Overview</figcaption>
+            </div>
+
+            <div class="diagram-container">
+              <img src="assets/ldm-inference-flow.svg" alt="LDM Inference Flow showing 2D Aorta and Random Noise going through iterative denoising to generate 3D Aorta Volume">
+              <figcaption>Inference Flow (Generation Process)</figcaption>
+            </div>
+
+            <div class="diagram-container">
+              <img src="assets/ldm-component-hierarchy.svg" alt="Component Hierarchy showing LatentDiffusion3DTrainer containing LatentDiffusion3D with VAE3D, Projection2Dto3D, TimeEmbedding, and UNet3DConditioned">
+              <figcaption>Component Hierarchy</figcaption>
+            </div>
+
             <h4>Ablation Studies (Stage 2)</h4>
             <ul>
               <li>VAE latent dimension: 64 / 128 / 256 / 512</li>
