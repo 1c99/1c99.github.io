@@ -241,66 +241,38 @@
 
             <!-- Module Dependency DAG Diagram -->
             <div class="architecture-diagram">
-              <div class="diagram-title">Adaptive DAG Scheduling with Module Dependencies</div>
+              <div class="diagram-title">Module Dependency Graph &amp; DAG Scheduling</div>
+              <pre class="ascii-diagram">
+                      ┌──────────────────────────────────────┐
+                      │           Input DICOM Image          │
+                      └──────────────────────────────────────┘
+                                       │
+       ┌───────────────────────────────┼───────────────────────────────┐
+       │                               │                               │
+       ▼                               ▼                               ▼
+┌─────────────┐                 ┌─────────────┐                 ┌─────────────┐
+│    Lung     │                 │    Heart    │                 │    Aorta    │
+│  (2048x2048)│                 │  (512x512)  │                 │  (512x512)  │
+└─────────────┘                 └─────────────┘                 └─────────────┘
+       │                               │                               │
+ ┌─────┴─────┐                         │                               │
+ │           │                         │                               │
+ ▼           ▼                         ▼                               ▼
+┌────────┐ ┌────────┐           ┌─────────────┐                 ┌─────────────┐
+│ COVID  │ │ Vessel │           │     CTR     │◄────────────────│  Diameter   │
+└────────┘ └────────┘           │ (lung+heart)│                 └─────────────┘
+ │           │                  └─────────────┘
+ ▼           ▼                         │
+┌────────┐ ┌────────┐           ┌─────────────┐
+│   TB   │ │Periph- │           │  Volumetry  │
+└────────┘ │eral    │           └─────────────┘
+           └────────┘
 
-              <!-- Level 0 -->
-              <div class="grid-diagram">
-                <div class="grid-box">
-                  <div class="box-title">Lung</div>
-                  <div class="box-detail">Segmentation</div>
-                </div>
-                <div class="grid-box">
-                  <div class="box-title">Heart</div>
-                  <div class="box-detail">Segmentation</div>
-                </div>
-                <div class="grid-box">
-                  <div class="box-title">Bone</div>
-                  <div class="box-detail">Segmentation</div>
-                </div>
-                <div class="grid-box">
-                  <div class="box-title">Aorta</div>
-                  <div class="box-detail">Segmentation</div>
-                </div>
-              </div>
-              <div class="diagram-connector">Level 0: Independent (parallel) &darr;</div>
-
-              <!-- Level 1 -->
-              <div class="grid-diagram">
-                <div class="grid-box">
-                  <div class="box-title">COVID</div>
-                  <div class="box-detail">&larr; Lung</div>
-                </div>
-                <div class="grid-box">
-                  <div class="box-title">Vessel</div>
-                  <div class="box-detail">&larr; Lung</div>
-                </div>
-                <div class="grid-box">
-                  <div class="box-title">TB</div>
-                  <div class="box-detail">&larr; Lung</div>
-                </div>
-                <div class="grid-box">
-                  <div class="box-title">Diameter</div>
-                  <div class="box-detail">&larr; Aorta</div>
-                </div>
-              </div>
-              <div class="diagram-connector">Level 1: Depend on Level 0 &darr;</div>
-
-              <!-- Level 2 -->
-              <div class="grid-diagram">
-                <div class="grid-box">
-                  <div class="box-title">CTR</div>
-                  <div class="box-detail">&larr; Lung + Heart</div>
-                </div>
-                <div class="grid-box">
-                  <div class="box-title">Peripheral</div>
-                  <div class="box-detail">&larr; Lung</div>
-                </div>
-                <div class="grid-box">
-                  <div class="box-title">Volumetry</div>
-                  <div class="box-detail">&larr; Lung + Heart</div>
-                </div>
-              </div>
-              <div class="diagram-connector">Level 2: Depend on Level 0/1</div>
+EXECUTION LEVELS:
+  Level 0: [lung, heart, aorta, bone, ...]    ← Independent (parallel)
+  Level 1: [covid, vessel, tb, diameter]      ← Depend on Level 0
+  Level 2: [ctr, peripheral, volumetry]       ← Depend on Level 0/1
+              </pre>
             </div>
 
             <h4>Technical Implementation</h4>

@@ -450,6 +450,18 @@ section.card li {
   font-size: 1.2em;
 }
 
+/* ASCII Art Diagrams */
+.ascii-diagram {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.75em;
+  line-height: 1.2;
+  overflow-x: auto;
+  margin: 0;
+  padding: 0.5em;
+  white-space: pre;
+  color: #333;
+}
+
 /* Responsive Adjustments */
 @media screen and (max-width: 980px) {
   body.project-page #main {
