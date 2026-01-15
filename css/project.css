@@ -450,21 +450,57 @@ section.card li {
   font-size: 1.2em;
 }
 
-/* ASCII Art Diagrams */
-.ascii-diagram {
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', 'Menlo', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
-  font-size: 12px;
-  line-height: 1.4;
-  overflow-x: auto;
-  margin: 0;
-  padding: 1em;
-  white-space: pre;
-  color: #333;
-  background: #fafafa;
-  border-radius: 4px;
-  letter-spacing: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* DAG Diagram Styles */
+.dag-level {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin: 0.5em 0;
+}
+
+.dag-node {
+  background: #fff;
+  border: 2px solid #a31f34;
+  border-radius: 6px;
+  padding: 0.6em 1em;
+  text-align: center;
+  min-width: 80px;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.dag-node.input {
+  background: #a31f34;
+  color: #fff;
+  min-width: 120px;
+}
+
+.dag-node span {
+  display: block;
+  font-size: 0.75em;
+  font-weight: 400;
+  color: #666;
+  margin-top: 0.25em;
+}
+
+.dag-node.input span {
+  color: rgba(255,255,255,0.8);
+}
+
+.dag-arrow {
+  text-align: center;
+  font-size: 1.2em;
+  color: #a31f34;
+  margin: 0.25em 0;
+}
+
+.dag-level-label {
+  text-align: center;
+  font-size: 0.8em;
+  color: #888;
+  margin: 0.75em 0 0.25em;
+  font-style: italic;
 }
 
 /* Responsive Adjustments */
