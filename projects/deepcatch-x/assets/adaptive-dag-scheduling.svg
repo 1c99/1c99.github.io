@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 580" style="background:#1e1e1e">
+  <style>
+    .box { fill: none; stroke: #888; stroke-width: 1.5; }
+    .box-fill { fill: #2d2d2d; stroke: #888; stroke-width: 1.5; }
+    .title-box { fill: none; stroke: #888; stroke-width: 2; }
+    .text { font-family: 'Courier New', monospace; fill: #ccc; font-size: 14px; }
+    .text-title { font-family: 'Courier New', monospace; fill: #ccc; font-size: 16px; font-weight: bold; }
+    .text-small { font-family: 'Courier New', monospace; fill: #888; font-size: 11px; }
+    .line { stroke: #888; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #888; }
+  </style>
+
+  <!-- Outer border -->
+  <rect x="20" y="20" width="760" height="540" rx="3" class="title-box"/>
+
+  <!-- Title -->
+  <text x="400" y="50" text-anchor="middle" class="text-title">Ray Optimized Architecture (Research-Grade)</text>
+  <line x1="40" y1="65" x2="760" y2="65" class="line"/>
+
+  <!-- Performance Profiler -->
+  <rect x="100" y="85" width="600" height="70" rx="3" class="box-fill"/>
+  <text x="400" y="110" text-anchor="middle" class="text">Performance Profiler</text>
+  <text x="130" y="132" class="text-small">* Historical execution time tracking   * Weighted averaging (recent runs weighted higher)</text>
+  <text x="130" y="147" class="text-small">* Image size normalization             * Persisted to .dcx_performance_cache.json</text>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="155" x2="400" y2="175" class="line"/>
+  <polygon points="400,185 395,175 405,175" class="arrow"/>
+
+  <!-- Dependency Graph Manager -->
+  <rect x="100" y="190" width="600" height="70" rx="3" class="box-fill"/>
+  <text x="400" y="215" text-anchor="middle" class="text">Dependency Graph Manager</text>
+  <text x="130" y="237" class="text-small">* DAG construction from module dependencies   * Execution level calculation</text>
+  <text x="130" y="252" class="text-small">* Parallel group identification</text>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="260" x2="400" y2="280" class="line"/>
+  <polygon points="400,290 395,280 405,280" class="arrow"/>
+
+  <!-- Adaptive Scheduler -->
+  <rect x="100" y="295" width="600" height="70" rx="3" class="box-fill"/>
+  <text x="400" y="320" text-anchor="middle" class="text">Adaptive Scheduler</text>
+  <text x="130" y="342" class="text-small">* Load-balanced task assignment          * Dynamic GPU fraction allocation</text>
+  <text x="130" y="357" class="text-small">* Execution time prediction integration</text>
+
+  <!-- Arrow down to workers -->
+  <line x1="400" y1="365" x2="400" y2="385" class="line"/>
+  <line x1="150" y1="385" x2="650" y2="385" class="line"/>
+  <line x1="150" y1="385" x2="150" y2="405" class="line"/>
+  <line x1="400" y1="385" x2="400" y2="405" class="line"/>
+  <line x1="650" y1="385" x2="650" y2="405" class="line"/>
+  <polygon points="150,415 145,405 155,405" class="arrow"/>
+  <polygon points="400,415 395,405 405,405" class="arrow"/>
+  <polygon points="650,415 645,405 655,405" class="arrow"/>
+
+  <!-- Worker Pool Level 0 -->
+  <rect x="60" y="420" width="180" height="90" rx="3" class="box-fill"/>
+  <text x="150" y="445" text-anchor="middle" class="text">Worker Pool</text>
+  <text x="150" y="465" text-anchor="middle" class="text-small">(Level 0)</text>
+  <text x="80" y="495" class="text-small">lung, heart,</text>
+  <text x="80" y="505" class="text-small">bone, aorta</text>
+
+  <!-- Arrow between level 0 and 1 -->
+  <line x1="240" y1="465" x2="295" y2="465" class="line"/>
+  <polygon points="305,465 295,460 295,470" class="arrow"/>
+
+  <!-- Worker Pool Level 1 -->
+  <rect x="310" y="420" width="180" height="90" rx="3" class="box-fill"/>
+  <text x="400" y="445" text-anchor="middle" class="text">Worker Pool</text>
+  <text x="400" y="465" text-anchor="middle" class="text-small">(Level 1)</text>
+  <text x="330" y="495" class="text-small">covid, vessel</text>
+  <text x="330" y="505" class="text-small">tb, bone_supp</text>
+
+  <!-- Arrow between level 1 and 2 -->
+  <line x1="490" y1="465" x2="545" y2="465" class="line"/>
+  <polygon points="555,465 545,460 545,470" class="arrow"/>
+
+  <!-- Worker Pool Level 2 -->
+  <rect x="560" y="420" width="180" height="90" rx="3" class="box-fill"/>
+  <text x="650" y="445" text-anchor="middle" class="text">Worker Pool</text>
+  <text x="650" y="465" text-anchor="middle" class="text-small">(Level 2)</text>
+  <text x="580" y="495" class="text-small">ctr, diameter</text>
+  <text x="580" y="505" class="text-small">peripheral</text>
+</svg>
