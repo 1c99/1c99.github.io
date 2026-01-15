@@ -58,10 +58,17 @@ a:hover {
 
 a.lowkey {
   border-bottom: none;
+  background: #f0f4f8;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: #4a76a8 !important;
+  transition: all 0.2s ease;
 }
 
 a.lowkey:hover {
-  color: #0000ff;
+  background: #4a76a8;
+  color: #fff !important;
 }
 
 a.salient-blue {
