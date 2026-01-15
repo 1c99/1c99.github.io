@@ -52,7 +52,8 @@
           <ul>
             <li><a href="#overview">Overview</a></li>
             <li><a href="#gtc">NVIDIA GTC 2025 Showcase</a></li>
-            <li><a href="#diffusion">Conditional Diffusion Model</a></li>
+            <li><a href="#diffusion">Stage 1: DDPM for 2D Aorta Extraction</a></li>
+            <li><a href="#ldm-3d">Stage 2: LDM for 3D Volumetric Reconstruction</a></li>
             <li><a href="#ray-pipeline">Ray Distributed Inference Pipeline</a></li>
             <li><a href="#nuitka">Refactoring &amp; Nuitka Deployment</a></li>
             <li><a href="#bioage">BioAge Prediction Module (R to C++)</a></li>
@@ -65,19 +66,23 @@
           <div class="container">
             <h3>Overview</h3>
             <p>
-              DeepCatch X is an AI-powered medical imaging platform that extracts 3D aortic structures
-              from 2D chest X-rays, enabling non-invasive screening for thoracic aortic diseases.
-              The project encompasses end-to-end development from research prototypes to production-ready
-              deployment, including novel deep learning architectures, distributed inference systems,
-              and regulatory compliance pipelines.
+              DeepCatch X is an AI-powered medical imaging platform that reconstructs 3D aortic structures
+              from single 2D chest X-rays, enabling non-invasive screening for thoracic aortic diseases.
+              The core contribution is a <strong>two-stage generative pipeline</strong>: Stage 1 uses DDPM for
+              conditional 2D aorta extraction, and Stage 2 uses a <strong>novel Latent Diffusion Model (LDM)
+              with custom 3D architectures</strong> for volumetric reconstruction from the 2D projection.
+            </p>
+            <p>
+              The project spans research (novel architectures, ablation studies) to production deployment
+              (distributed inference, standalone executables, regulatory compliance).
             </p>
             <div class="tech-stack">
               <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">DDPM</span>
+              <span class="tech-tag">LDM</span>
               <span class="tech-tag">Ray</span>
               <span class="tech-tag">TensorRT</span>
-              <span class="tech-tag">ONNX</span>
               <span class="tech-tag">C++</span>
-              <span class="tech-tag">Nuitka</span>
               <span class="tech-tag">DDP</span>
             </div>
           </div>
@@ -109,44 +114,87 @@
           </div>
         </section>
 
-        <!-- Section 2: Diffusion Model -->
+        <!-- Section 2: Stage 1 - DDPM -->
         <section id="diffusion" class="card">
           <div class="container">
-            <h3>Conditional Diffusion Model for X-ray-to-Aorta Extraction</h3>
+            <h3>Stage 1: DDPM for 2D Aorta Extraction</h3>
 
             <h4>Problem</h4>
             <p>
-              Extracting 3D aortic structures from 2D chest X-rays is an ill-posed inverse problem.
-              Traditional GAN-based approaches suffered from mode collapse, training instability, and
-              artifacts that could lead to clinical misinterpretation.
+              Traditional GAN-based approaches for X-ray to aorta extraction suffered from mode collapse,
+              training instability, and artifacts that could lead to clinical misinterpretation.
             </p>
 
             <h4>Approach</h4>
             <p>
-              Implemented a DDPM (Denoising Diffusion Probabilistic Model) architecture for conditional
-              image-to-image translation. The model learns the reverse diffusion process to iteratively
-              denoise and generate aortic segmentation masks conditioned on X-ray input via channel concatenation.
+              Implemented a DDPM (Denoising Diffusion Probabilistic Model) for conditional image-to-image
+              translation. The model learns the reverse diffusion process to generate 2D aortic projection
+              masks conditioned on X-ray input via channel concatenation.
             </p>
 
             <h4>Technical Details</h4>
             <ul>
-              <li>DDPM-based architecture with conditional channel concatenation (X-ray RGBA + noise)</li>
+              <li>Conditional channel concatenation (X-ray RGBA + noise)</li>
               <li>U-Net backbone with self-attention, time embedding, and ResNet blocks</li>
               <li>DDP training across 4x RTX 4090 GPUs with gradient accumulation</li>
               <li>Hybrid loss: weighted MSE + perceptual (VGG) + SSIM + L1</li>
               <li>DDIM fast sampling for inference (50 steps)</li>
             </ul>
 
-            <h4>Key Advantages over GANs</h4>
+            <h4>Ablation Studies</h4>
             <ul>
-              <li>Stable training without mode collapse</li>
-              <li>No adversarial training instability</li>
-              <li>Artifact-free synthesis for clinical reliability</li>
+              <li>Conditioning mechanism: concatenation vs. cross-attention vs. AdaIN</li>
+              <li>Attention placement: bottleneck-only vs. multi-scale</li>
+              <li>Noise schedule: linear vs. cosine vs. sigmoid</li>
+              <li>Network depth optimization</li>
             </ul>
           </div>
         </section>
 
-        <!-- Section 3: Ray Pipeline -->
+        <!-- Section 3: Stage 2 - 3D LDM -->
+        <section id="ldm-3d" class="card">
+          <div class="container">
+            <h3>Stage 2: LDM for 3D Volumetric Reconstruction</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Reconstructing 3D volumetric structures from a single 2D projection is a severely ill-posed
+              inverse problem. Direct 3D diffusion is computationally prohibitive (128&sup3; volumes require
+              ~48GB memory for training).
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Proposed a <strong>Latent Diffusion Model (LDM)</strong> that operates in compressed latent space,
+              with <strong>custom 3D architectures</strong> designed specifically for medical volumetric reconstruction.
+            </p>
+
+            <h4>Novel Architectures Proposed</h4>
+            <ul>
+              <li><strong>VAE3D:</strong> 3D Variational Autoencoder compressing 128&sup3; volumes to 256-dim latent space (16x compression per dimension)</li>
+              <li><strong>Projection2Dto3D:</strong> Novel network bridging 2D aorta features to 3D latent representation via hierarchical Conv2D &rarr; Linear &rarr; Conv3D projection</li>
+              <li><strong>UNet3DConditioned:</strong> 3D U-Net denoiser with InstanceNorm, LeakyReLU, and time conditioning</li>
+              <li><strong>SpatialTransformer3D:</strong> Self-attention over 3D volumetric spatial dimensions</li>
+              <li><strong>LatentDiffusion3D:</strong> Complete LDM integrating all components for end-to-end 2D&rarr;3D generation</li>
+            </ul>
+
+            <h4>Ablation Studies (Stage 2)</h4>
+            <ul>
+              <li>VAE latent dimension: 64 / 128 / 256 / 512</li>
+              <li>3D UNet depth optimization</li>
+              <li>3D attention placement strategies</li>
+              <li>2D&rarr;3D projection architecture comparison</li>
+            </ul>
+
+            <h4>Key Innovation</h4>
+            <p>
+              The <strong>Projection2Dto3D</strong> architecture addresses the core challenge of lifting 2D information
+              to 3D space, using a hierarchical approach that preserves spatial relationships while expanding dimensionality.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 4: Ray Pipeline -->
         <section id="ray-pipeline" class="card">
           <div class="container">
             <h3>Ray Distributed Inference Pipeline</h3>
