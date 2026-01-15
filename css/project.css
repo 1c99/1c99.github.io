@@ -289,6 +289,167 @@ section.card li {
   margin-top: 3em;
 }
 
+/* Architecture Diagrams */
+.architecture-diagram {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5em;
+  margin: 1.5em 0;
+  overflow-x: auto;
+}
+
+.diagram-title {
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1em;
+  font-size: 0.95em;
+}
+
+/* Flow Diagram (horizontal boxes with arrows) */
+.flow-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.flow-box {
+  background: #fff;
+  border: 2px solid #a31f34;
+  border-radius: 6px;
+  padding: 0.8em 1.2em;
+  text-align: center;
+  min-width: 120px;
+}
+
+.flow-box.highlight {
+  background: #a31f34;
+  color: #fff;
+}
+
+.flow-box .box-title {
+  font-weight: 600;
+  font-size: 0.95em;
+  margin-bottom: 0.25em;
+}
+
+.flow-box .box-subtitle {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.flow-box.highlight .box-subtitle {
+  color: rgba(255,255,255,0.8);
+}
+
+.flow-arrow {
+  font-size: 1.5em;
+  color: #a31f34;
+  padding: 0 0.3em;
+}
+
+/* Grid Diagram (for parallel components) */
+.grid-diagram {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1em;
+  margin: 1em 0;
+}
+
+.grid-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1em;
+  text-align: center;
+}
+
+.grid-box .box-icon {
+  font-size: 1.5em;
+  color: #a31f34;
+  margin-bottom: 0.5em;
+}
+
+.grid-box .box-title {
+  font-weight: 600;
+  font-size: 0.9em;
+  margin-bottom: 0.25em;
+}
+
+.grid-box .box-detail {
+  font-size: 0.8em;
+  color: #666;
+}
+
+/* Comparison Diagram (before/after) */
+.comparison-diagram {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+}
+
+.comparison-side {
+  background: #fff;
+  border-radius: 6px;
+  padding: 1em;
+}
+
+.comparison-side.before {
+  border: 2px solid #dc3545;
+}
+
+.comparison-side.after {
+  border: 2px solid #28a745;
+}
+
+.comparison-label {
+  font-weight: 700;
+  font-size: 0.9em;
+  margin-bottom: 0.75em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #eee;
+}
+
+.comparison-side.before .comparison-label {
+  color: #dc3545;
+}
+
+.comparison-side.after .comparison-label {
+  color: #28a745;
+}
+
+.comparison-stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4em 0;
+  font-size: 0.85em;
+  border-bottom: 1px dashed #eee;
+}
+
+.comparison-stat:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: #666;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Connector line for diagrams */
+.diagram-connector {
+  text-align: center;
+  padding: 0.5em 0;
+  color: #a31f34;
+  font-size: 1.2em;
+}
+
 /* Responsive Adjustments */
 @media screen and (max-width: 980px) {
   body.project-page #main {

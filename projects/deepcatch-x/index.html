@@ -85,6 +85,37 @@
               <span class="tech-tag">C++</span>
               <span class="tech-tag">DDP</span>
             </div>
+
+            <!-- Two-Stage Pipeline Diagram -->
+            <div class="architecture-diagram">
+              <div class="diagram-title">Two-Stage Generative Pipeline</div>
+              <div class="flow-diagram">
+                <div class="flow-box">
+                  <div class="box-title">X-ray Input</div>
+                  <div class="box-subtitle">2D Image</div>
+                </div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box highlight">
+                  <div class="box-title">Stage 1: DDPM</div>
+                  <div class="box-subtitle">2D Aorta Extraction</div>
+                </div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box">
+                  <div class="box-title">2D Aorta Mask</div>
+                  <div class="box-subtitle">Projection</div>
+                </div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box highlight">
+                  <div class="box-title">Stage 2: LDM</div>
+                  <div class="box-subtitle">3D Reconstruction</div>
+                </div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box">
+                  <div class="box-title">3D Aorta Volume</div>
+                  <div class="box-subtitle">128&sup3; Output</div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -208,6 +239,40 @@
               via Apache Arrow-based Object Store.
             </p>
 
+            <!-- Ray Architecture Diagram -->
+            <div class="architecture-diagram">
+              <div class="diagram-title">Ray Distributed Architecture</div>
+              <div class="grid-diagram">
+                <div class="grid-box">
+                  <div class="box-icon"><i class="fa-solid fa-microchip"></i></div>
+                  <div class="box-title">Model A</div>
+                  <div class="box-detail">GPU 0</div>
+                </div>
+                <div class="grid-box">
+                  <div class="box-icon"><i class="fa-solid fa-microchip"></i></div>
+                  <div class="box-title">Model B</div>
+                  <div class="box-detail">GPU 1</div>
+                </div>
+                <div class="grid-box">
+                  <div class="box-icon"><i class="fa-solid fa-microchip"></i></div>
+                  <div class="box-title">Model C</div>
+                  <div class="box-detail">GPU 0</div>
+                </div>
+                <div class="grid-box">
+                  <div class="box-icon"><i class="fa-solid fa-microchip"></i></div>
+                  <div class="box-title">Model D</div>
+                  <div class="box-detail">GPU 1</div>
+                </div>
+              </div>
+              <div class="diagram-connector">&darr; Zero-Copy via Apache Arrow &darr;</div>
+              <div class="flow-diagram">
+                <div class="flow-box highlight">
+                  <div class="box-title">Ray Object Store</div>
+                  <div class="box-subtitle">Shared Memory</div>
+                </div>
+              </div>
+            </div>
+
             <h4>Technical Implementation</h4>
             <ul>
               <li>Ray actors for stateful model serving with GPU memory persistence</li>
@@ -257,6 +322,51 @@
               <li>Nuitka compilation with PyTorch/CUDA bundling for standalone deployment</li>
               <li>CdsPyEncrypt integration for source code protection</li>
             </ul>
+
+            <!-- Before/After Comparison Diagram -->
+            <div class="architecture-diagram">
+              <div class="diagram-title">Codebase Refactoring Results</div>
+              <div class="comparison-diagram">
+                <div class="comparison-side before">
+                  <div class="comparison-label">Before</div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Total Files</span>
+                    <span class="stat-value">110</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Lines of Code</span>
+                    <span class="stat-value">34,266</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Duplicate Code</span>
+                    <span class="stat-value">47%</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Entry Points</span>
+                    <span class="stat-value">6</span>
+                  </div>
+                </div>
+                <div class="comparison-side after">
+                  <div class="comparison-label">After</div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Total Files</span>
+                    <span class="stat-value">15</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Lines of Code</span>
+                    <span class="stat-value">8,017</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Duplicate Code</span>
+                    <span class="stat-value">0%</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Entry Points</span>
+                    <span class="stat-value">1</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class="metrics">
               <h4>Results</h4>
