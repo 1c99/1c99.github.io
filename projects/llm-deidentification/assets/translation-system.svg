@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" style="background:#1e1e1e">
+  <style>
+    .box { fill: none; stroke: #888; stroke-width: 1.5; }
+    .box-fill { fill: #2d2d2d; stroke: #888; stroke-width: 1.5; }
+    .text { font-family: 'Courier New', monospace; fill: #ccc; font-size: 12px; }
+    .text-title { font-family: 'Courier New', monospace; fill: #ccc; font-size: 14px; font-weight: bold; }
+    .text-small { font-family: 'Courier New', monospace; fill: #888; font-size: 10px; }
+    .line { stroke: #888; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #888; }
+  </style>
+
+  <!-- Title -->
+  <rect x="40" y="20" width="620" height="35" rx="3" class="box-fill"/>
+  <text x="350" y="43" text-anchor="middle" class="text-title">Medical Text Translation System</text>
+
+  <!-- Three approaches -->
+  <rect x="60" y="80" width="180" height="70" rx="3" class="box-fill"/>
+  <text x="150" y="105" text-anchor="middle" class="text">Approach 1</text>
+  <text x="150" y="125" text-anchor="middle" class="text-small">Ollama + Ray</text>
+  <text x="150" y="140" text-anchor="middle" class="text-small">(Distributed)</text>
+
+  <rect x="260" y="80" width="180" height="70" rx="3" class="box-fill"/>
+  <text x="350" y="105" text-anchor="middle" class="text">Approach 2</text>
+  <text x="350" y="125" text-anchor="middle" class="text-small">Multi-Agent</text>
+  <text x="350" y="140" text-anchor="middle" class="text-small">Workflow</text>
+
+  <rect x="460" y="80" width="180" height="70" rx="3" class="box-fill"/>
+  <text x="550" y="105" text-anchor="middle" class="text">Approach 3</text>
+  <text x="550" y="125" text-anchor="middle" class="text-small">M2M100</text>
+  <text x="550" y="140" text-anchor="middle" class="text-small">+ Caching</text>
+
+  <!-- Arrows down -->
+  <line x1="150" y1="150" x2="150" y2="175" class="line"/>
+  <line x1="350" y1="150" x2="350" y2="175" class="line"/>
+  <line x1="550" y1="150" x2="550" y2="175" class="line"/>
+  <line x1="150" y1="175" x2="550" y2="175" class="line"/>
+  <line x1="350" y1="175" x2="350" y2="195" class="line"/>
+  <polygon points="350,205 345,195 355,195" class="arrow"/>
+
+  <!-- Input Processing -->
+  <rect x="100" y="210" width="500" height="45" rx="3" class="box-fill"/>
+  <text x="350" y="233" text-anchor="middle" class="text">Input Processing</text>
+  <text x="350" y="248" text-anchor="middle" class="text-small">CSV / JSON with HTML tag preservation</text>
+
+  <!-- Arrow down -->
+  <line x1="350" y1="255" x2="350" y2="275" class="line"/>
+  <polygon points="350,285 345,275 355,275" class="arrow"/>
+
+  <!-- Output -->
+  <text x="350" y="305" text-anchor="middle" class="text">Translated Content (5 languages)</text>
+</svg>

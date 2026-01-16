@@ -104,9 +104,23 @@
             <h4>Technical Pipeline</h4>
             <ul>
               <li><strong>Skin Segmentation:</strong> Deep learning model extracts facial surface from CT volume</li>
-              <li><strong>2D Landmark Detection:</strong> Facial landmark detection on rendered views</li>
+              <li><strong>2D Landmark Detection:</strong> MediaPipe FaceMesh for 468-point facial landmark detection</li>
               <li><strong>Ray Tracing:</strong> Projects 2D landmarks back to 3D surface via ray-mesh intersection</li>
               <li><strong>Anatomical Validation:</strong> Ensures detected landmarks are anatomically plausible</li>
+            </ul>
+
+            <!-- System Architecture Diagram -->
+            <div class="diagram-container">
+              <img src="assets/system-architecture.svg" alt="System Architecture showing Input Sources (CT DICOM, STL Mesh, iPad LiDAR) through Preprocessing to 2D Landmark Detection, 3D Registration Pipeline, and Visualization Engine">
+              <figcaption>System Architecture</figcaption>
+            </div>
+
+            <h4>Key Challenges Solved</h4>
+            <ul>
+              <li><strong>Coordinate System Alignment:</strong> Different devices (CT scanner, iPad LiDAR) use different coordinate systems</li>
+              <li><strong>Noise Handling:</strong> LiDAR point clouds contain outliers filtered via Z-score method</li>
+              <li><strong>Scale Differences:</strong> Medical STL files and LiDAR scans normalized to common scale</li>
+              <li><strong>Correspondence Problem:</strong> Automatic landmark matching between source and target</li>
             </ul>
           </div>
         </section>
@@ -131,11 +145,19 @@
 
             <h4>Technical Details</h4>
             <ul>
-              <li><strong>Initial Alignment (Kabsch):</strong> Computes optimal rigid transformation from landmark correspondences using SVD-based closed-form solution</li>
-              <li><strong>Refinement (ICP):</strong> Iterative Closest Point algorithm for fine registration with surface point clouds</li>
-              <li><strong>Outlier Rejection:</strong> RANSAC-based filtering for robust estimation</li>
-              <li><strong>iOS Integration:</strong> Collaborated with iOS developers to adapt algorithms for ARKit on mobile platforms</li>
+              <li><strong>Initial Alignment (Kabsch):</strong> SVD-based closed-form solution computing optimal rotation R and translation t that minimizes RMSD between point correspondences</li>
+              <li><strong>Refinement (ICP):</strong> Iterative Closest Point with point-to-plane distance metric for surface registration</li>
+              <li><strong>Outlier Rejection:</strong> Z-score based filtering (threshold=2.0) removes erroneous correspondences</li>
+              <li><strong>PnP Solver:</strong> 3D-to-2D projection using camera intrinsic matrix for AR overlay</li>
+              <li><strong>iOS Integration:</strong> Algorithms adapted for ARKit with real-time performance on iPad Pro</li>
             </ul>
+
+            <h4>Algorithm Pipeline</h4>
+            <p>
+              iPad LiDAR Scan &rarr; Point Cloud (CSV) &rarr; Outlier Removal &rarr;
+              3D Landmarks (ASC) &rarr; Kabsch Registration &rarr; ICP Refinement &rarr;
+              4x4 Transformation Matrix &rarr; Validated Alignment
+            </p>
 
             <div class="metrics">
               <h4>Results</h4>

@@ -95,13 +95,17 @@
               and Large Language Models to detect and anonymize PHI across different data types.
             </p>
 
-            <h4>Technical Pipeline</h4>
+            <h4>Two-Pronged Approach</h4>
             <ul>
-              <li><strong>Image PHI Detection:</strong> OCR extracts text from images; NER identifies PHI entities for pixel-level masking</li>
-              <li><strong>Metadata Anonymization:</strong> LLM-based parsing and anonymization of DICOM headers and document metadata</li>
-              <li><strong>Document Processing:</strong> PDF text extraction with layout-aware PHI detection</li>
-              <li><strong>Quality Assurance:</strong> Multi-stage validation to ensure no PHI leakage</li>
+              <li><strong>Metadata Anonymization:</strong> LLM parses DICOM headers to identify PHI fields (Patient Name, ID, Birth Date) and generates consistent anonymized mappings while preserving non-PHI metadata (Modality, dimensions)</li>
+              <li><strong>Burn-in Text Detection:</strong> OCR extracts all text regions with bounding boxes; LLM/NER classifies each as PHI or non-PHI; pixel-level black mask applied over PHI regions while preserving markers (L/R, PA)</li>
             </ul>
+
+            <!-- PHI Pipeline Diagram -->
+            <div class="diagram-container">
+              <img src="assets/phi-pipeline.svg" alt="PHI De-identification Pipeline showing two branches: Metadata through LLM Analysis to Anonymized Values, and Image Pixels through OCR and NER Detection to PHI masking">
+              <figcaption>Two-Pronged De-identification Pipeline</figcaption>
+            </div>
 
             <div class="metrics">
               <h4>Results</h4>
@@ -136,18 +140,30 @@
               quality checks to detect and correct hallucinations.
             </p>
 
-            <h4>Technical Architecture</h4>
+            <!-- Translation System Diagram -->
+            <div class="diagram-container">
+              <img src="assets/translation-system.svg" alt="Medical Text Translation System with three approaches: Ollama+Ray, Multi-Agent Workflow, and M2M100+Caching">
+              <figcaption>Translation System Architecture</figcaption>
+            </div>
+
+            <h4>Three Translation Approaches</h4>
             <ul>
-              <li><strong>Translation Memory (TM):</strong> Persistent database of approved translations; reduces API costs and ensures terminology consistency</li>
-              <li><strong>LLM Translation:</strong> Uses large language models for context-aware translation of new segments</li>
-              <li><strong>Consistency Checker:</strong> Statistical analysis to validate terminology usage across documents</li>
-              <li><strong>Hallucination Detection:</strong> Automated checks for numerical consistency, entity preservation, and semantic alignment</li>
-              <li><strong>Auto-Correction:</strong> Rule-based correction for detected issues before human review</li>
+              <li><strong>Approach 1 - Distributed Ollama + Ray:</strong> Load-balanced distribution across multiple Ollama endpoints with async I/O for high throughput</li>
+              <li><strong>Approach 2 - Multi-Agent Workflow:</strong> 4 specialized AI agents (Translator &rarr; Reviewer &rarr; Fixer &rarr; Supervisor) mimicking professional translation teams with glossary enforcement</li>
+              <li><strong>Approach 3 - M2M100 + Caching:</strong> Facebook's M2M100 model with SQLite translation cache and HTML-aware processing</li>
+            </ul>
+
+            <h4>Quality Assurance Features</h4>
+            <ul>
+              <li><strong>Translation Memory (TM):</strong> SQLite-based persistent cache reduces API costs and ensures terminology consistency</li>
+              <li><strong>Glossary Support:</strong> Domain-specific medical terminology enforcement (e.g., "aorta" &rarr; "&#22823;&#21205;&#33032;")</li>
+              <li><strong>Hallucination Detection:</strong> Statistical checks for numerical consistency, entity preservation, and semantic alignment</li>
+              <li><strong>HTML Preservation:</strong> Markup tags preserved during translation of structured content</li>
             </ul>
 
             <h4>Target Languages</h4>
             <ul>
-              <li>Korean (source) to English, Japanese, Chinese, Spanish, German</li>
+              <li>Korean (source) to English, Japanese, Chinese, Spanish, German (+ Arabic RTL support)</li>
             </ul>
 
             <div class="metrics">
