@@ -61,11 +61,18 @@
           <div class="container">
             <h3>Overview</h3>
             <p>
-              DeepCatch M is an AI-powered MRI analysis platform for automated segmentation of
-              multiple organ structures. The project focuses on accurate quantification of
-              anatomical features from MRI scans, supporting clinical decision-making and
-              research applications.
+              DeepCatch M is a production-grade MLOps pipeline for MRI segmentation, designed
+              for multi-organ analysis including Subcutaneous Fat (SF) and Abdominal Visceral Fat (AVF).
+              The project addresses the full ML lifecycle from data versioning to containerized deployment,
+              with strict reproducibility for clinical applications.
             </p>
+
+            <!-- MLOps Pipeline Diagram -->
+            <div class="diagram-container">
+              <img src="assets/mlops-pipeline.svg" alt="MLOps Pipeline showing Data (DVC) to Train (GPU) to Track (MLflow) to Deploy (Docker)">
+              <figcaption>End-to-End MLOps Pipeline</figcaption>
+            </div>
+
             <div class="tech-stack">
               <span class="tech-tag">PyTorch</span>
               <span class="tech-tag">MLFlow</span>
@@ -133,6 +140,12 @@
               Built an end-to-end MLOps pipeline template with hybrid architecture: native GPU
               training for performance, containerized serving for portability and reliability.
             </p>
+
+            <!-- Hybrid Architecture Diagram -->
+            <div class="diagram-container">
+              <img src="assets/hybrid-architecture.svg" alt="Hybrid Architecture showing Training Layer (Native GPU) and Serving Layer (Docker-based)">
+              <figcaption>Hybrid Architecture: Training vs Serving</figcaption>
+            </div>
 
             <h4>Pipeline Components</h4>
             <ul>
