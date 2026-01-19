@@ -71,6 +71,15 @@ a.lowkey:hover {
   color: #fff !important;
 }
 
+.coming-soon {
+  background: #f5f5f5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: #999;
+  font-weight: normal;
+}
+
 a.salient-blue {
   border-bottom: none;
   color: #0000ff;
