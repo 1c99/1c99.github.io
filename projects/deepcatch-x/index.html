@@ -54,6 +54,10 @@
             <li><a href="#gtc">NVIDIA GTC 2025 Showcase</a></li>
             <li><a href="#diffusion">Stage 1: DDPM for 2D Aorta Extraction</a></li>
             <li><a href="#ldm-3d">Stage 2: LDM for 3D Volumetric Reconstruction</a></li>
+            <li><a href="#dit">Advanced: Diffusion Transformer (DiT)</a></li>
+            <li><a href="#cross-attention">Cross-Attention Mechanisms</a></li>
+            <li><a href="#model-parallelism">Model Parallelism</a></li>
+            <li><a href="#medical-metrics">Advanced Medical Metrics</a></li>
             <li><a href="#ray-pipeline">Ray Distributed Inference Pipeline</a></li>
             <li><a href="#nuitka">Refactoring &amp; Nuitka Deployment</a></li>
             <li><a href="#bioage">BioAge Prediction Module (R to C++)</a></li>
@@ -233,6 +237,187 @@
               The <strong>Projection2Dto3D</strong> architecture addresses the core challenge of lifting 2D information
               to 3D space, using a hierarchical approach that preserves spatial relationships while expanding dimensionality.
             </p>
+          </div>
+        </section>
+
+        <!-- Section: Diffusion Transformer (DiT) -->
+        <section id="dit" class="card">
+          <div class="container">
+            <h3>Advanced: Diffusion Transformer (DiT)</h3>
+
+            <h4>Motivation</h4>
+            <p>
+              Beyond UNet-based diffusion, we implemented a <strong>Diffusion Transformer (DiT)</strong> architecture
+              for improved scalability and global attention mechanisms. Transformers can better capture long-range
+              dependencies in volumetric data compared to convolutional architectures.
+            </p>
+
+            <h4>Key Components</h4>
+            <ul>
+              <li><strong>Flash Attention 3D:</strong> Memory-efficient attention implementation for volumetric data, enabling O(N) memory instead of O(N&sup2;)</li>
+              <li><strong>Window Attention 3D:</strong> Local attention with relative position encoding for computational efficiency on large volumes</li>
+              <li><strong>3D Patch Embedding:</strong> Converts 3D volumes into sequences of patch tokens for transformer processing</li>
+              <li><strong>3D Positional Encoding:</strong> Sinusoidal encoding extended to three spatial dimensions (D, H, W)</li>
+            </ul>
+
+            <h4>DiT Block Architecture</h4>
+            <ul>
+              <li>LayerNorm &rarr; Self-Attention (Flash/Window) &rarr; Residual</li>
+              <li>LayerNorm &rarr; MLP (4x expansion) &rarr; Residual</li>
+              <li>Time embedding injection via adaptive projection</li>
+              <li>Optional multi-view cross-attention for 2D&rarr;3D conditioning</li>
+            </ul>
+
+            <h4>DiT3D Configuration</h4>
+            <ul>
+              <li>Input: 32&sup3; latent volume, patch size 2</li>
+              <li>Hidden dimension: 1024, Depth: 24 blocks</li>
+              <li>16 attention heads, MLP ratio 4.0</li>
+              <li>Supports multi-view conditioning (3 views)</li>
+            </ul>
+
+            <div class="tech-stack">
+              <span class="tech-tag">Transformer</span>
+              <span class="tech-tag">Flash Attention</span>
+              <span class="tech-tag">Window Attention</span>
+              <span class="tech-tag">3D Patches</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Cross-Attention Mechanisms -->
+        <section id="cross-attention" class="card">
+          <div class="container">
+            <h3>Cross-Attention Mechanisms</h3>
+
+            <h4>Challenge</h4>
+            <p>
+              Mapping 2D information to 3D space requires sophisticated attention mechanisms that can
+              relate 2D spatial features to 3D volumetric positions. Simple projection is insufficient
+              for capturing complex anatomical correspondences.
+            </p>
+
+            <h4>Enhanced Cross-Attention for 2D&rarr;3D</h4>
+            <ul>
+              <li><strong>Query:</strong> 3D volumetric features (what we want to generate)</li>
+              <li><strong>Key/Value:</strong> 2D projection features (conditioning information)</li>
+              <li>Adaptive Instance Normalization (AdaIN) for style transfer from 2D to 3D</li>
+              <li>Scaled dot-product attention with optional masking</li>
+            </ul>
+
+            <h4>Multi-View Cross-Attention</h4>
+            <p>
+              For improved 3D reconstruction, we implemented multi-view conditioning that fuses
+              information from multiple 2D projections:
+            </p>
+            <ul>
+              <li>Separate cross-attention modules for each view (frontal, lateral, oblique)</li>
+              <li>View-specific feature extraction preserves projection-specific information</li>
+              <li>Learned view combination via linear projection + LayerNorm + GELU</li>
+              <li>Handles missing views via attention masking</li>
+            </ul>
+
+            <h4>Benefits</h4>
+            <ul>
+              <li>Better handling of occluded structures visible in one view but not another</li>
+              <li>Improved depth estimation from multiple projection angles</li>
+              <li>More robust reconstruction when single-view information is ambiguous</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section: Model Parallelism -->
+        <section id="model-parallelism" class="card">
+          <div class="container">
+            <h3>Model Parallelism</h3>
+
+            <h4>Scaling Challenge</h4>
+            <p>
+              Large-scale 3D diffusion models with transformer architectures can exceed single-GPU memory.
+              We implemented advanced parallelism strategies for training models that don't fit on a single device.
+            </p>
+
+            <h4>Parallelism Strategies</h4>
+            <ul>
+              <li><strong>Pipeline Parallelism:</strong> Split model layers across GPUs, process microbatches in pipeline fashion</li>
+              <li><strong>Tensor Parallelism:</strong> Split individual layers (attention heads, MLP) across GPUs</li>
+              <li><strong>Hybrid PP+TP:</strong> Combine both for maximum scalability</li>
+            </ul>
+
+            <h4>Implementation Features</h4>
+            <ul>
+              <li>Configurable pipeline and tensor parallel sizes</li>
+              <li>Automatic process group initialization (NCCL backend)</li>
+              <li>Activation checkpointing for memory efficiency</li>
+              <li>Mixed precision (FP16) with loss scaling</li>
+              <li>CPU offloading for optimizer states</li>
+              <li>Memory and communication profiling</li>
+            </ul>
+
+            <h4>Configuration</h4>
+            <ul>
+              <li>Pipeline parallel size: configurable stages</li>
+              <li>Tensor parallel modes: 1D, 2D, or 3D sharding</li>
+              <li>Microbatch size tuning for pipeline efficiency</li>
+              <li>Gradient accumulation integration</li>
+            </ul>
+
+            <div class="tech-stack">
+              <span class="tech-tag">Pipeline Parallel</span>
+              <span class="tech-tag">Tensor Parallel</span>
+              <span class="tech-tag">NCCL</span>
+              <span class="tech-tag">Activation Checkpoint</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Advanced Medical Metrics -->
+        <section id="medical-metrics" class="card">
+          <div class="container">
+            <h3>Advanced Medical Metrics</h3>
+
+            <h4>Beyond Standard Metrics</h4>
+            <p>
+              Standard metrics (Dice, IoU) are insufficient for evaluating clinical utility of 3D medical
+              reconstructions. We implemented comprehensive metrics using <strong>MONAI</strong> and
+              <strong>SimpleITK</strong> for rigorous evaluation.
+            </p>
+
+            <h4>Surface-Based Metrics</h4>
+            <ul>
+              <li><strong>Surface Distance (Mean/Std):</strong> Average distance between predicted and ground truth surfaces</li>
+              <li><strong>Hausdorff Distance (95%):</strong> Maximum surface deviation, robust to outliers</li>
+              <li><strong>Surface Dice:</strong> Dice coefficient computed on surface voxels only</li>
+            </ul>
+
+            <h4>Volume-Based Metrics</h4>
+            <ul>
+              <li><strong>Volume Difference (mm&sup3;):</strong> Absolute difference in anatomical volume</li>
+              <li><strong>Volume Ratio:</strong> Predicted/target volume ratio</li>
+              <li><strong>Jaccard Coefficient:</strong> Intersection over union</li>
+              <li><strong>False Negative/Positive Error:</strong> Under/over-segmentation rates</li>
+            </ul>
+
+            <h4>Shape-Based Metrics</h4>
+            <ul>
+              <li><strong>Roundness:</strong> How spherical the structure is</li>
+              <li><strong>Elongation:</strong> Ratio of principal axes</li>
+              <li><strong>Flatness:</strong> 3D shape compactness measure</li>
+            </ul>
+
+            <h4>Clinical Relevance</h4>
+            <p>
+              These metrics directly relate to clinical measurements used in aortic disease diagnosis:
+              diameter measurements depend on surface accuracy, volume measurements for aneurysm sizing,
+              and shape metrics for detecting abnormal morphology.
+            </p>
+
+            <div class="tech-stack">
+              <span class="tech-tag">MONAI</span>
+              <span class="tech-tag">SimpleITK</span>
+              <span class="tech-tag">Surface Dice</span>
+              <span class="tech-tag">Hausdorff</span>
+            </div>
           </div>
         </section>
 
