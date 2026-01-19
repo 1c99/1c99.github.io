@@ -69,6 +69,38 @@
         <section id="overview">
           <div class="container">
             <h3>Overview</h3>
+
+            <!-- Highlights Box -->
+            <div class="highlights-box">
+              <h4>Key Highlights</h4>
+              <div class="highlights-grid">
+                <div class="highlight-item">
+                  <span class="highlight-value">6x</span>
+                  <span class="highlight-label">Batch Throughput</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">2.8x</span>
+                  <span class="highlight-label">Per-Case Speedup</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">73%</span>
+                  <span class="highlight-label">Codebase Reduction</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">150x</span>
+                  <span class="highlight-label">BioAge vs R</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">100TB+</span>
+                  <span class="highlight-label">Dataset Scale</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">GTC 2025</span>
+                  <span class="highlight-label">NVIDIA Showcase</span>
+                </div>
+              </div>
+            </div>
+
             <p>
               DeepCatch X is an AI-powered medical imaging platform that reconstructs 3D aortic structures
               from single 2D chest X-rays, enabling non-invasive screening for thoracic aortic diseases.
@@ -276,6 +308,12 @@
               <li>Supports multi-view conditioning (3 views)</li>
             </ul>
 
+            <!-- DiT Architecture Diagram -->
+            <div class="diagram-container">
+              <img src="assets/dit-architecture.svg" alt="Diffusion Transformer 3D architecture showing patch embedding, positional encoding, DiT blocks with Flash Attention, and output head">
+              <figcaption>DiT3D Architecture</figcaption>
+            </div>
+
             <div class="tech-stack">
               <span class="tech-tag">Transformer</span>
               <span class="tech-tag">Flash Attention</span>
@@ -323,6 +361,12 @@
               <li>Improved depth estimation from multiple projection angles</li>
               <li>More robust reconstruction when single-view information is ambiguous</li>
             </ul>
+
+            <!-- Cross-Attention Flow Diagram -->
+            <div class="diagram-container">
+              <img src="assets/cross-attention-flow.svg" alt="Multi-View Cross-Attention flow showing 2D views as Key/Value, 3D features as Query, separate cross-attention modules, and view combination">
+              <figcaption>Multi-View Cross-Attention Architecture</figcaption>
+            </div>
           </div>
         </section>
 
@@ -361,6 +405,12 @@
               <li>Microbatch size tuning for pipeline efficiency</li>
               <li>Gradient accumulation integration</li>
             </ul>
+
+            <!-- Model Parallelism Diagram -->
+            <div class="diagram-container">
+              <img src="assets/model-parallelism.svg" alt="Hybrid Model Parallelism showing Pipeline Parallel layer split across stages and Tensor Parallel head split within attention layers">
+              <figcaption>Hybrid Pipeline + Tensor Parallelism</figcaption>
+            </div>
 
             <div class="tech-stack">
               <span class="tech-tag">Pipeline Parallel</span>

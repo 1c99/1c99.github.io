@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 350" style="background:#1e1e1e">
+  <style>
+    .box { fill: none; stroke: #888; stroke-width: 1.5; }
+    .box-fill { fill: #2d2d2d; stroke: #888; stroke-width: 1.5; }
+    .box-highlight { fill: #3d4a3d; stroke: #6a9; stroke-width: 2; }
+    .text { font-family: 'Courier New', monospace; fill: #ccc; font-size: 12px; }
+    .text-title { font-family: 'Courier New', monospace; fill: #ccc; font-size: 14px; font-weight: bold; }
+    .text-small { font-family: 'Courier New', monospace; fill: #888; font-size: 10px; }
+    .line { stroke: #888; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #888; }
+  </style>
+
+  <!-- Title -->
+  <text x="350" y="25" text-anchor="middle" class="text-title">Diffusion Transformer 3D (DiT3D) Architecture</text>
+
+  <!-- Input -->
+  <rect x="40" y="50" width="100" height="50" rx="3" class="box-fill"/>
+  <text x="90" y="72" text-anchor="middle" class="text">3D Latent</text>
+  <text x="90" y="88" text-anchor="middle" class="text-small">(32³ volume)</text>
+
+  <!-- Arrow -->
+  <line x1="140" y1="75" x2="170" y2="75" class="line"/>
+  <polygon points="180,75 170,70 170,80" class="arrow"/>
+
+  <!-- Patch Embed -->
+  <rect x="180" y="50" width="100" height="50" rx="3" class="box-highlight"/>
+  <text x="230" y="72" text-anchor="middle" class="text">Patch Embed</text>
+  <text x="230" y="88" text-anchor="middle" class="text-small">3D → Tokens</text>
+
+  <!-- Arrow -->
+  <line x1="280" y1="75" x2="310" y2="75" class="line"/>
+  <polygon points="320,75 310,70 310,80" class="arrow"/>
+
+  <!-- Pos Encoding -->
+  <rect x="320" y="50" width="100" height="50" rx="3" class="box-fill"/>
+  <text x="370" y="72" text-anchor="middle" class="text">+ Pos Enc</text>
+  <text x="370" y="88" text-anchor="middle" class="text-small">3D Sinusoidal</text>
+
+  <!-- Arrow down -->
+  <line x1="370" y1="100" x2="370" y2="130" class="line"/>
+  <polygon points="370,140 365,130 375,130" class="arrow"/>
+
+  <!-- DiT Blocks -->
+  <rect x="180" y="145" width="380" height="120" rx="3" class="box-fill"/>
+  <text x="370" y="168" text-anchor="middle" class="text-title">DiT Block × 24</text>
+
+  <!-- Inside DiT Block -->
+  <rect x="200" y="180" width="100" height="35" rx="3" class="box-highlight"/>
+  <text x="250" y="195" text-anchor="middle" class="text-small">Flash Attn 3D</text>
+  <text x="250" y="208" text-anchor="middle" class="text-small">or Window Attn</text>
+
+  <line x1="300" y1="197" x2="330" y2="197" class="line"/>
+  <polygon points="340,197 330,192 330,202" class="arrow"/>
+
+  <rect x="340" y="180" width="80" height="35" rx="3" class="box-fill"/>
+  <text x="380" y="195" text-anchor="middle" class="text-small">MLP</text>
+  <text x="380" y="208" text-anchor="middle" class="text-small">(4x expand)</text>
+
+  <line x1="420" y1="197" x2="450" y2="197" class="line"/>
+  <polygon points="460,197 450,192 450,202" class="arrow"/>
+
+  <rect x="460" y="180" width="80" height="35" rx="3" class="box-fill"/>
+  <text x="500" y="195" text-anchor="middle" class="text-small">+ Time</text>
+  <text x="500" y="208" text-anchor="middle" class="text-small">Embedding</text>
+
+  <text x="370" y="250" text-anchor="middle" class="text-small">LayerNorm → Attention → Residual → LayerNorm → MLP → Residual</text>
+
+  <!-- Arrow down -->
+  <line x1="370" y1="265" x2="370" y2="285" class="line"/>
+  <polygon points="370,295 365,285 375,285" class="arrow"/>
+
+  <!-- Output Head -->
+  <rect x="290" y="300" width="160" height="40" rx="3" class="box-fill"/>
+  <text x="370" y="318" text-anchor="middle" class="text">Output Head</text>
+  <text x="370" y="332" text-anchor="middle" class="text-small">Predict Noise ε</text>
+
+  <!-- Time input -->
+  <rect x="560" y="145" width="100" height="40" rx="3" class="box-fill"/>
+  <text x="610" y="162" text-anchor="middle" class="text-small">Timestep t</text>
+  <text x="610" y="178" text-anchor="middle" class="text-small">Embedding</text>
+  <line x1="560" y1="165" x2="540" y2="197" class="line"/>
+  <polygon points="540,197 545,188 550,195" class="arrow"/>
+
+  <!-- 2D Condition -->
+  <rect x="560" y="200" width="100" height="40" rx="3" class="box-fill"/>
+  <text x="610" y="217" text-anchor="middle" class="text-small">2D Views</text>
+  <text x="610" y="233" text-anchor="middle" class="text-small">(Optional)</text>
+</svg>

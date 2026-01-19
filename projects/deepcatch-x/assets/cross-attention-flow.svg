@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" style="background:#1e1e1e">
+  <style>
+    .box { fill: none; stroke: #888; stroke-width: 1.5; }
+    .box-fill { fill: #2d2d2d; stroke: #888; stroke-width: 1.5; }
+    .box-2d { fill: #3d3d4a; stroke: #88a; stroke-width: 2; }
+    .box-3d { fill: #3d4a3d; stroke: #6a9; stroke-width: 2; }
+    .box-attn { fill: #4a3d3d; stroke: #a86; stroke-width: 2; }
+    .text { font-family: 'Courier New', monospace; fill: #ccc; font-size: 12px; }
+    .text-title { font-family: 'Courier New', monospace; fill: #ccc; font-size: 14px; font-weight: bold; }
+    .text-small { font-family: 'Courier New', monospace; fill: #888; font-size: 10px; }
+    .line { stroke: #888; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #888; }
+  </style>
+
+  <!-- Title -->
+  <text x="350" y="25" text-anchor="middle" class="text-title">Multi-View Cross-Attention for 2D → 3D</text>
+
+  <!-- 2D Views Input -->
+  <rect x="40" y="60" width="80" height="50" rx="3" class="box-2d"/>
+  <text x="80" y="82" text-anchor="middle" class="text-small">View 1</text>
+  <text x="80" y="98" text-anchor="middle" class="text-small">(Frontal)</text>
+
+  <rect x="40" y="120" width="80" height="50" rx="3" class="box-2d"/>
+  <text x="80" y="142" text-anchor="middle" class="text-small">View 2</text>
+  <text x="80" y="158" text-anchor="middle" class="text-small">(Lateral)</text>
+
+  <rect x="40" y="180" width="80" height="50" rx="3" class="box-2d"/>
+  <text x="80" y="202" text-anchor="middle" class="text-small">View 3</text>
+  <text x="80" y="218" text-anchor="middle" class="text-small">(Oblique)</text>
+
+  <text x="80" y="255" text-anchor="middle" class="text-small">Key/Value</text>
+
+  <!-- Arrows to cross-attention -->
+  <line x1="120" y1="85" x2="180" y2="120" class="line"/>
+  <line x1="120" y1="145" x2="180" y2="145" class="line"/>
+  <line x1="120" y1="205" x2="180" y2="170" class="line"/>
+
+  <!-- Cross-Attention blocks -->
+  <rect x="180" y="70" width="120" height="40" rx="3" class="box-attn"/>
+  <text x="240" y="88" text-anchor="middle" class="text-small">Cross-Attn 1</text>
+  <text x="240" y="102" text-anchor="middle" class="text-small">Q·K^T·V</text>
+
+  <rect x="180" y="125" width="120" height="40" rx="3" class="box-attn"/>
+  <text x="240" y="143" text-anchor="middle" class="text-small">Cross-Attn 2</text>
+  <text x="240" y="157" text-anchor="middle" class="text-small">Q·K^T·V</text>
+
+  <rect x="180" y="180" width="120" height="40" rx="3" class="box-attn"/>
+  <text x="240" y="198" text-anchor="middle" class="text-small">Cross-Attn 3</text>
+  <text x="240" y="212" text-anchor="middle" class="text-small">Q·K^T·V</text>
+
+  <!-- 3D Query input -->
+  <rect x="320" y="50" width="100" height="50" rx="3" class="box-3d"/>
+  <text x="370" y="72" text-anchor="middle" class="text">3D Features</text>
+  <text x="370" y="88" text-anchor="middle" class="text-small">(Query)</text>
+
+  <!-- Arrow from 3D to cross-attns -->
+  <line x1="320" y1="75" x2="300" y2="90" class="line"/>
+  <line x1="320" y1="75" x2="300" y2="145" class="line"/>
+  <line x1="320" y1="75" x2="300" y2="200" class="line"/>
+
+  <!-- Arrows from cross-attn to concat -->
+  <line x1="300" y1="90" x2="430" y2="145" class="line"/>
+  <line x1="300" y1="145" x2="430" y2="145" class="line"/>
+  <line x1="300" y1="200" x2="430" y2="145" class="line"/>
+
+  <!-- View Combine -->
+  <rect x="430" y="115" width="120" height="60" rx="3" class="box-fill"/>
+  <text x="490" y="138" text-anchor="middle" class="text">View Combine</text>
+  <text x="490" y="155" text-anchor="middle" class="text-small">Linear + LN</text>
+  <text x="490" y="168" text-anchor="middle" class="text-small">+ GELU</text>
+
+  <!-- Arrow to output -->
+  <line x1="550" y1="145" x2="580" y2="145" class="line"/>
+  <polygon points="590,145 580,140 580,150" class="arrow"/>
+
+  <!-- Output -->
+  <rect x="590" y="115" width="90" height="60" rx="3" class="box-3d"/>
+  <text x="635" y="140" text-anchor="middle" class="text">Enhanced</text>
+  <text x="635" y="158" text-anchor="middle" class="text">3D Features</text>
+
+  <!-- Legend -->
+  <rect x="40" y="270" width="15" height="15" class="box-2d"/>
+  <text x="60" y="282" class="text-small">2D Features</text>
+  <rect x="150" y="270" width="15" height="15" class="box-3d"/>
+  <text x="170" y="282" class="text-small">3D Features</text>
+  <rect x="270" y="270" width="15" height="15" class="box-attn"/>
+  <text x="290" y="282" class="text-small">Attention</text>
+</svg>
