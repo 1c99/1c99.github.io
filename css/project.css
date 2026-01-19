@@ -320,6 +320,87 @@ section.card li {
   border-bottom-color: #a31f34;
 }
 
+.toc-badge {
+  background: #6c757d;
+  color: #fff;
+  font-size: 0.7em;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  margin-left: 0.3em;
+  vertical-align: middle;
+}
+
+/* Proposed Badge */
+.badge-proposed {
+  background: #6c757d;
+  color: #fff;
+  font-size: 0.5em;
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-left: 0.5em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Proposed Note Box */
+.proposed-note {
+  background: #f8f9fa;
+  border-left: 4px solid #6c757d;
+  padding: 1em 1.5em;
+  margin: 1em 0 1.5em 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.proposed-note strong {
+  color: #6c757d;
+}
+
+/* Proposed Header Section */
+.proposed-header {
+  background: #f8f9fa;
+  border-top: 3px solid #6c757d;
+  padding: 2em 0;
+  margin: 3em auto 0;
+  max-width: 900px;
+  text-align: center;
+}
+
+.proposed-header h3 {
+  color: #6c757d;
+  margin: 0 0 0.5em 0;
+}
+
+.proposed-header p {
+  color: #666;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+/* Implemented Header Section */
+.implemented-header {
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+  border-top: 3px solid #4caf50;
+  padding: 2em 0;
+  margin: 3em auto 0;
+  max-width: 900px;
+  text-align: center;
+}
+
+.implemented-header h3 {
+  color: #2e7d32;
+  margin: 0 0 0.5em 0;
+}
+
+.implemented-header p {
+  color: #558b2f;
+  margin: 0;
+  font-size: 0.95em;
+}
+
 /* Placeholder Content */
 .placeholder {
   background: #fff9e6;

@@ -53,11 +53,11 @@
             <li><a href="#overview">Overview</a></li>
             <li><a href="#gtc">NVIDIA GTC 2025 Showcase</a></li>
             <li><a href="#diffusion">Stage 1: DDPM for 2D Aorta Extraction</a></li>
-            <li><a href="#ldm-3d">Stage 2: LDM for 3D Volumetric Reconstruction</a></li>
-            <li><a href="#dit">Advanced: Diffusion Transformer (DiT)</a></li>
-            <li><a href="#cross-attention">Cross-Attention Mechanisms</a></li>
-            <li><a href="#model-parallelism">Model Parallelism</a></li>
-            <li><a href="#medical-metrics">Advanced Medical Metrics</a></li>
+            <li><a href="#ldm-3d">Stage 2: LDM for 3D Reconstruction</a> <span class="toc-badge">Proposed</span></li>
+            <li><a href="#dit">Diffusion Transformer (DiT)</a> <span class="toc-badge">Proposed</span></li>
+            <li><a href="#cross-attention">Cross-Attention Mechanisms</a> <span class="toc-badge">Proposed</span></li>
+            <li><a href="#model-parallelism">Model Parallelism</a> <span class="toc-badge">Proposed</span></li>
+            <li><a href="#medical-metrics">Advanced Medical Metrics</a> <span class="toc-badge">Proposed</span></li>
             <li><a href="#ray-pipeline">Ray Distributed Inference Pipeline</a></li>
             <li><a href="#nuitka">Refactoring &amp; Nuitka Deployment</a></li>
             <li><a href="#bioage">BioAge Prediction Module (R to C++)</a></li>
@@ -102,15 +102,15 @@
             </div>
 
             <p>
-              DeepCatch X is an AI-powered medical imaging platform that reconstructs 3D aortic structures
-              from single 2D chest X-rays, enabling non-invasive screening for thoracic aortic diseases.
-              The core contribution is a <strong>two-stage generative pipeline</strong>: Stage 1 uses DDPM for
-              conditional 2D aorta extraction, and Stage 2 uses a <strong>novel Latent Diffusion Model (LDM)
-              with custom 3D architectures</strong> for volumetric reconstruction from the 2D projection.
+              DeepCatch X is an AI-powered medical imaging platform for aortic disease screening from chest X-rays.
+              The <strong>implemented system</strong> uses DDPM for conditional 2D aorta extraction from X-rays,
+              with a distributed Ray inference pipeline achieving 6x throughput improvement.
+              Additionally, a <strong>proposed Stage 2 architecture</strong> was designed for 3D volumetric
+              reconstruction using novel Latent Diffusion Models with custom 3D components.
             </p>
             <p>
-              The project spans research (novel architectures, ablation studies) to production deployment
-              (distributed inference, standalone executables, regulatory compliance).
+              The project spans from production deployment (distributed inference, standalone executables,
+              regulatory compliance) to forward-looking architectural research (3D LDM, DiT, model parallelism).
             </p>
             <div class="tech-stack">
               <span class="tech-tag">PyTorch</span>
@@ -213,10 +213,14 @@
           </div>
         </section>
 
-        <!-- Section 3: Stage 2 - 3D LDM -->
+        <!-- Section 3: Stage 2 - 3D LDM (Proposed) -->
         <section id="ldm-3d" class="card">
           <div class="container">
-            <h3>Stage 2: LDM for 3D Volumetric Reconstruction</h3>
+            <h3>Stage 2: LDM for 3D Volumetric Reconstruction <span class="badge-proposed">Proposed</span></h3>
+
+            <div class="proposed-note">
+              <strong>Note:</strong> This section describes architectural design and code implementation for a proposed 3D reconstruction pipeline. The architecture was fully designed and coded, but training was not conducted due to computational resource constraints. This represents forward-looking R&D work.
+            </div>
 
             <h4>Problem</h4>
             <p>
@@ -275,7 +279,7 @@
         <!-- Section: Diffusion Transformer (DiT) -->
         <section id="dit" class="card">
           <div class="container">
-            <h3>Advanced: Diffusion Transformer (DiT)</h3>
+            <h3>Diffusion Transformer (DiT) <span class="badge-proposed">Proposed</span></h3>
 
             <h4>Motivation</h4>
             <p>
@@ -326,7 +330,7 @@
         <!-- Section: Cross-Attention Mechanisms -->
         <section id="cross-attention" class="card">
           <div class="container">
-            <h3>Cross-Attention Mechanisms</h3>
+            <h3>Cross-Attention Mechanisms <span class="badge-proposed">Proposed</span></h3>
 
             <h4>Challenge</h4>
             <p>
@@ -373,7 +377,7 @@
         <!-- Section: Model Parallelism -->
         <section id="model-parallelism" class="card">
           <div class="container">
-            <h3>Model Parallelism</h3>
+            <h3>Model Parallelism <span class="badge-proposed">Proposed</span></h3>
 
             <h4>Scaling Challenge</h4>
             <p>
@@ -424,7 +428,7 @@
         <!-- Section: Advanced Medical Metrics -->
         <section id="medical-metrics" class="card">
           <div class="container">
-            <h3>Advanced Medical Metrics</h3>
+            <h3>Advanced Medical Metrics <span class="badge-proposed">Proposed</span></h3>
 
             <h4>Beyond Standard Metrics</h4>
             <p>
@@ -468,6 +472,16 @@
               <span class="tech-tag">Surface Dice</span>
               <span class="tech-tag">Hausdorff</span>
             </div>
+          </div>
+        </section>
+
+        <!-- Implemented Production Systems Header -->
+        <section id="production-systems" class="implemented-header">
+          <div class="container">
+            <h3>Implemented Production Systems</h3>
+            <p>
+              The following sections describe fully implemented and deployed systems currently in production use.
+            </p>
           </div>
         </section>
 
