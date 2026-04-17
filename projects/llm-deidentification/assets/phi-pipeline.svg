@@ -1,78 +1,88 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" style="background:#1e1e1e">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" style="background:#fff">
   <style>
-    .box { fill: none; stroke: #888; stroke-width: 1.5; }
-    .box-fill { fill: #2d2d2d; stroke: #888; stroke-width: 1.5; }
-    .text { font-family: 'Courier New', monospace; fill: #ccc; font-size: 12px; }
-    .text-title { font-family: 'Courier New', monospace; fill: #ccc; font-size: 14px; font-weight: bold; }
-    .text-small { font-family: 'Courier New', monospace; fill: #888; font-size: 10px; }
-    .line { stroke: #888; stroke-width: 1.5; fill: none; }
-    .arrow { fill: #888; }
+    .box-fill { fill: #fafafa; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-accent { fill: #fdf2f2; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-green { fill: #f0faf0; stroke: #c3e6c3; stroke-width: 1.5; }
+    .box-red { fill: #fdf2f2; stroke: #e9c4c4; stroke-width: 1.5; }
+    .text { font-family: 'Inter', -apple-system, sans-serif; fill: #37352f; font-size: 14px; font-weight: 500; }
+    .text-title { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 18px; font-weight: 700; }
+    .text-section { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 13px; font-weight: 600; }
+    .text-small { font-family: 'Inter', -apple-system, sans-serif; fill: #787774; font-size: 11px; font-weight: 400; }
+    .line { stroke: #d3d1cb; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #a31f34; }
   </style>
 
   <!-- Title -->
-  <rect x="40" y="20" width="620" height="35" rx="3" class="box-fill"/>
-  <text x="350" y="43" text-anchor="middle" class="text-title">DICOM X-Ray Image</text>
+  <text x="340" y="28" text-anchor="middle" class="text-title">PHI De-identification Pipeline</text>
+  <line x1="80" y1="42" x2="600" y2="42" class="line" stroke-dasharray="4,4"/>
+
+  <!-- DICOM X-Ray Image -->
+  <rect x="200" y="56" width="280" height="40" rx="10" class="box-accent"/>
+  <text x="340" y="82" text-anchor="middle" class="text">DICOM X-Ray Image</text>
 
   <!-- Two branches -->
-  <line x1="350" y1="55" x2="350" y2="75" class="line"/>
-  <line x1="180" y1="75" x2="520" y2="75" class="line"/>
-  <line x1="180" y1="75" x2="180" y2="95" class="line"/>
-  <line x1="520" y1="75" x2="520" y2="95" class="line"/>
+  <line x1="340" y1="96" x2="340" y2="114" class="line"/>
+  <line x1="170" y1="114" x2="510" y2="114" class="line"/>
+  <line x1="170" y1="114" x2="170" y2="130" class="line"/>
+  <line x1="510" y1="114" x2="510" y2="130" class="line"/>
+  <polygon points="170,138 164,128 176,128" class="arrow"/>
+  <polygon points="510,138 504,128 516,128" class="arrow"/>
 
-  <!-- Left branch: Metadata -->
-  <rect x="90" y="100" width="180" height="50" rx="3" class="box-fill"/>
-  <text x="180" y="123" text-anchor="middle" class="text">Metadata</text>
-  <text x="180" y="140" text-anchor="middle" class="text-small">(DICOM Header)</text>
+  <!-- Branch labels -->
+  <text x="170" y="126" text-anchor="middle" class="text-section">Metadata</text>
+  <text x="510" y="126" text-anchor="middle" class="text-section">Pixels</text>
 
-  <!-- Right branch: Image Pixels -->
-  <rect x="430" y="100" width="180" height="50" rx="3" class="box-fill"/>
-  <text x="520" y="123" text-anchor="middle" class="text">Image Pixels</text>
-  <text x="520" y="140" text-anchor="middle" class="text-small">(Burn-in Annotations)</text>
+  <!-- Left: Metadata / Right: Image Pixels -->
+  <rect x="85" y="142" width="170" height="48" rx="10" class="box-fill"/>
+  <text x="170" y="164" text-anchor="middle" class="text">Metadata</text>
+  <text x="170" y="182" text-anchor="middle" class="text-small">DICOM Header</text>
+
+  <rect x="425" y="142" width="170" height="48" rx="10" class="box-fill"/>
+  <text x="510" y="164" text-anchor="middle" class="text">Image Pixels</text>
+  <text x="510" y="182" text-anchor="middle" class="text-small">Burn-in Annotations</text>
 
   <!-- Arrows down -->
-  <line x1="180" y1="150" x2="180" y2="170" class="line"/>
-  <polygon points="180,180 175,170 185,170" class="arrow"/>
-  <line x1="520" y1="150" x2="520" y2="170" class="line"/>
-  <polygon points="520,180 515,170 525,170" class="arrow"/>
+  <line x1="170" y1="190" x2="170" y2="210" class="line"/>
+  <polygon points="170,218 164,208 176,208" class="arrow"/>
+  <line x1="510" y1="190" x2="510" y2="210" class="line"/>
+  <polygon points="510,218 504,208 516,208" class="arrow"/>
 
   <!-- LLM Analysis / OCR Extraction -->
-  <rect x="90" y="185" width="180" height="50" rx="3" class="box-fill"/>
-  <text x="180" y="208" text-anchor="middle" class="text">LLM Analysis</text>
-  <text x="180" y="225" text-anchor="middle" class="text-small">Identify PHI</text>
+  <rect x="85" y="222" width="170" height="48" rx="10" class="box-fill"/>
+  <text x="170" y="244" text-anchor="middle" class="text">LLM Analysis</text>
+  <text x="170" y="262" text-anchor="middle" class="text-small">Identify PHI fields</text>
 
-  <rect x="430" y="185" width="180" height="50" rx="3" class="box-fill"/>
-  <text x="520" y="208" text-anchor="middle" class="text">OCR Extraction</text>
-  <text x="520" y="225" text-anchor="middle" class="text-small">Extract text regions</text>
+  <rect x="425" y="222" width="170" height="48" rx="10" class="box-fill"/>
+  <text x="510" y="244" text-anchor="middle" class="text">OCR Extraction</text>
+  <text x="510" y="262" text-anchor="middle" class="text-small">Extract text regions</text>
 
   <!-- Arrows down -->
-  <line x1="180" y1="235" x2="180" y2="255" class="line"/>
-  <polygon points="180,265 175,255 185,255" class="arrow"/>
-  <line x1="520" y1="235" x2="520" y2="255" class="line"/>
-  <polygon points="520,265 515,255 525,255" class="arrow"/>
+  <line x1="170" y1="270" x2="170" y2="290" class="line"/>
+  <polygon points="170,298 164,288 176,288" class="arrow"/>
+  <line x1="510" y1="270" x2="510" y2="290" class="line"/>
+  <polygon points="510,298 504,288 516,288" class="arrow"/>
 
   <!-- Map to Anonymized / NER Detection -->
-  <rect x="90" y="270" width="180" height="50" rx="3" class="box-fill"/>
-  <text x="180" y="293" text-anchor="middle" class="text">Map to Anonymized</text>
-  <text x="180" y="310" text-anchor="middle" class="text-small">Values</text>
+  <rect x="85" y="302" width="170" height="48" rx="10" class="box-green"/>
+  <text x="170" y="324" text-anchor="middle" class="text">Anonymize</text>
+  <text x="170" y="342" text-anchor="middle" class="text-small" style="fill:#35a854">Consistent mappings</text>
 
-  <rect x="430" y="270" width="180" height="50" rx="3" class="box-fill"/>
-  <text x="520" y="293" text-anchor="middle" class="text">LLM / NER Detection</text>
-  <text x="520" y="310" text-anchor="middle" class="text-small">Is this text PHI?</text>
+  <rect x="425" y="302" width="170" height="48" rx="10" class="box-fill"/>
+  <text x="510" y="324" text-anchor="middle" class="text">LLM / NER Detection</text>
+  <text x="510" y="342" text-anchor="middle" class="text-small">Is this text PHI?</text>
 
   <!-- Arrow down from NER with split -->
-  <line x1="520" y1="320" x2="520" y2="340" class="line"/>
-  <line x1="460" y1="340" x2="580" y2="340" class="line"/>
-  <line x1="460" y1="340" x2="460" y2="360" class="line"/>
-  <line x1="580" y1="340" x2="580" y2="360" class="line"/>
-  <polygon points="460,370 455,360 465,360" class="arrow"/>
-  <polygon points="580,370 575,360 585,360" class="arrow"/>
+  <line x1="510" y1="350" x2="510" y2="366" class="line"/>
+  <line x1="460" y1="366" x2="560" y2="366" class="line"/>
+  <line x1="460" y1="366" x2="460" y2="378" class="line"/>
+  <line x1="560" y1="366" x2="560" y2="378" class="line"/>
+  <polygon points="460,386 454,376 466,376" class="arrow"/>
+  <polygon points="560,386 554,376 566,376" class="arrow"/>
 
   <!-- PHI Yes / No -->
-  <rect x="410" y="375" width="100" height="35" rx="3" class="box-fill"/>
-  <text x="460" y="393" text-anchor="middle" class="text">PHI: Yes</text>
-  <text x="460" y="406" text-anchor="middle" class="text-small">Black Mask</text>
+  <rect x="420" y="388" width="80" height="10" rx="5" fill="#a31f34" opacity="0.15"/>
+  <text x="460" y="397" text-anchor="middle" class="text-small" style="fill:#a31f34; font-weight:600">PHI → Mask</text>
 
-  <rect x="530" y="375" width="100" height="35" rx="3" class="box-fill"/>
-  <text x="580" y="393" text-anchor="middle" class="text">PHI: No</text>
-  <text x="580" y="406" text-anchor="middle" class="text-small">Leave as is</text>
+  <rect x="520" y="388" width="80" height="10" rx="5" fill="#35a854" opacity="0.15"/>
+  <text x="560" y="397" text-anchor="middle" class="text-small" style="fill:#35a854; font-weight:600">Keep as-is</text>
 </svg>

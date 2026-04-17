@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" style="background:#1e1e1e">
+  <style>
+    .box { fill: none; stroke: #888; stroke-width: 1.5; }
+    .box-fill { fill: #2d2d2d; stroke: #888; stroke-width: 1.5; }
+    .text { font-family: 'Courier New', monospace; fill: #ccc; font-size: 12px; }
+    .text-title { font-family: 'Courier New', monospace; fill: #ccc; font-size: 14px; font-weight: bold; }
+    .text-small { font-family: 'Courier New', monospace; fill: #888; font-size: 10px; }
+    .line { stroke: #888; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #888; }
+  </style>
+
+  <!-- Title -->
+  <rect x="40" y="20" width="620" height="35" rx="3" class="box-fill"/>
+  <text x="350" y="43" text-anchor="middle" class="text-title">DICOM X-Ray Image</text>
+
+  <!-- Two branches -->
+  <line x1="350" y1="55" x2="350" y2="75" class="line"/>
+  <line x1="180" y1="75" x2="520" y2="75" class="line"/>
+  <line x1="180" y1="75" x2="180" y2="95" class="line"/>
+  <line x1="520" y1="75" x2="520" y2="95" class="line"/>
+
+  <!-- Left branch: Metadata -->
+  <rect x="90" y="100" width="180" height="50" rx="3" class="box-fill"/>
+  <text x="180" y="123" text-anchor="middle" class="text">Metadata</text>
+  <text x="180" y="140" text-anchor="middle" class="text-small">(DICOM Header)</text>
+
+  <!-- Right branch: Image Pixels -->
+  <rect x="430" y="100" width="180" height="50" rx="3" class="box-fill"/>
+  <text x="520" y="123" text-anchor="middle" class="text">Image Pixels</text>
+  <text x="520" y="140" text-anchor="middle" class="text-small">(Burn-in Annotations)</text>
+
+  <!-- Arrows down -->
+  <line x1="180" y1="150" x2="180" y2="170" class="line"/>
+  <polygon points="180,180 175,170 185,170" class="arrow"/>
+  <line x1="520" y1="150" x2="520" y2="170" class="line"/>
+  <polygon points="520,180 515,170 525,170" class="arrow"/>
+
+  <!-- LLM Analysis / OCR Extraction -->
+  <rect x="90" y="185" width="180" height="50" rx="3" class="box-fill"/>
+  <text x="180" y="208" text-anchor="middle" class="text">LLM Analysis</text>
+  <text x="180" y="225" text-anchor="middle" class="text-small">Identify PHI</text>
+
+  <rect x="430" y="185" width="180" height="50" rx="3" class="box-fill"/>
+  <text x="520" y="208" text-anchor="middle" class="text">OCR Extraction</text>
+  <text x="520" y="225" text-anchor="middle" class="text-small">Extract text regions</text>
+
+  <!-- Arrows down -->
+  <line x1="180" y1="235" x2="180" y2="255" class="line"/>
+  <polygon points="180,265 175,255 185,255" class="arrow"/>
+  <line x1="520" y1="235" x2="520" y2="255" class="line"/>
+  <polygon points="520,265 515,255 525,255" class="arrow"/>
+
+  <!-- Map to Anonymized / NER Detection -->
+  <rect x="90" y="270" width="180" height="50" rx="3" class="box-fill"/>
+  <text x="180" y="293" text-anchor="middle" class="text">Map to Anonymized</text>
+  <text x="180" y="310" text-anchor="middle" class="text-small">Values</text>
+
+  <rect x="430" y="270" width="180" height="50" rx="3" class="box-fill"/>
+  <text x="520" y="293" text-anchor="middle" class="text">LLM / NER Detection</text>
+  <text x="520" y="310" text-anchor="middle" class="text-small">Is this text PHI?</text>
+
+  <!-- Arrow down from NER with split -->
+  <line x1="520" y1="320" x2="520" y2="340" class="line"/>
+  <line x1="460" y1="340" x2="580" y2="340" class="line"/>
+  <line x1="460" y1="340" x2="460" y2="360" class="line"/>
+  <line x1="580" y1="340" x2="580" y2="360" class="line"/>
+  <polygon points="460,370 455,360 465,360" class="arrow"/>
+  <polygon points="580,370 575,360 585,360" class="arrow"/>
+
+  <!-- PHI Yes / No -->
+  <rect x="410" y="375" width="100" height="35" rx="3" class="box-fill"/>
+  <text x="460" y="393" text-anchor="middle" class="text">PHI: Yes</text>
+  <text x="460" y="406" text-anchor="middle" class="text-small">Black Mask</text>
+
+  <rect x="530" y="375" width="100" height="35" rx="3" class="box-fill"/>
+  <text x="580" y="393" text-anchor="middle" class="text">PHI: No</text>
+  <text x="580" y="406" text-anchor="middle" class="text-small">Leave as is</text>
+</svg>

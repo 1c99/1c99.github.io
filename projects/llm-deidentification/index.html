@@ -1,190 +1,287 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <link rel="shortcut icon" href="../../images/logo.png" />
-    <title>LLM De-Identification & Translation - Wonchan Son</title>
-    <link rel="stylesheet" href="../../css/fa6-all.min.css" />
-    <link rel="stylesheet" href="../../css/fa6-local-fonts.css" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="LLM-based De-Identification System and Translation with Agentic Systems" />
-    <script src="../../js/jquery.min.js"></script>
-    <script src="../../js/skel.min.js"></script>
-    <script src="../../js/skel-layers.min.js"></script>
-    <script src="../../js/init.js"></script>
-    <noscript>
-      <link rel="stylesheet" href="../../css/skel.css" />
-      <link rel="stylesheet" href="../../css/style.css" />
-      <link rel="stylesheet" href="../../css/style-xlarge.css" />
-    </noscript>
-    <link rel="stylesheet" href="../../css/project.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM De-Identification &amp; Translation</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../css/notion.css" />
   </head>
 
-  <body class="project-page">
-    <div id="wrapper">
-      <div id="main">
-        <!-- Back Navigation -->
-        <section class="project-nav">
-          <div class="container">
-            <a href="../../index.html#experience">
-              <i class="fa-solid fa-arrow-left"></i> Back to Main
-            </a>
-          </div>
-        </section>
-
-        <!-- Project Header -->
-        <section id="project-header">
-          <div class="container">
-            <header class="major">
-              <h2>LLM-based De-Identification & Translation</h2>
-              <p>Agentic Systems for Medical Data Processing</p>
-            </header>
-            <p class="project-meta">
-              <i class="fa-solid fa-building"></i> Medical IP &nbsp;|&nbsp;
-              <i class="fa-solid fa-calendar"></i> Nov. 2023 &ndash; Present &nbsp;|&nbsp;
-              <i class="fa-solid fa-location-dot"></i> Seoul, South Korea
-            </p>
-          </div>
-        </section>
-
-        <!-- Table of Contents -->
-        <nav class="toc">
-          <h4>Contents</h4>
-          <ul>
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#deidentification">PHI De-Identification Pipeline</a></li>
-            <li><a href="#translation">Multilingual Translation System</a></li>
-          </ul>
-        </nav>
-
-        <!-- Overview -->
-        <section id="overview">
-          <div class="container">
-            <h3>Overview</h3>
-            <p>
-              Medical data processing requires strict compliance with privacy regulations (HIPAA, GDPR)
-              while enabling research and international collaboration. This project develops AI-powered
-              systems for automated de-identification of Protected Health Information (PHI) and
-              multilingual translation of medical documents with quality assurance.
-            </p>
-            <div class="tech-stack">
-              <span class="tech-tag">LLM</span>
-              <span class="tech-tag">OCR</span>
-              <span class="tech-tag">NER</span>
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Translation Memory</span>
-              <span class="tech-tag">Agentic Systems</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 1: De-Identification -->
-        <section id="deidentification" class="card">
-          <div class="container">
-            <h3>Multi-modal PHI De-Identification Pipeline</h3>
-
-            <h4>Problem</h4>
-            <p>
-              Medical images and documents contain Protected Health Information (PHI) embedded in
-              multiple modalities: burned-in text on images, DICOM metadata, PDF documents, and
-              handwritten annotations. Manual de-identification is time-consuming and error-prone.
-            </p>
-
-            <h4>Approach</h4>
-            <p>
-              Developed a comprehensive multi-modal pipeline that combines OCR, Named Entity Recognition,
-              and Large Language Models to detect and anonymize PHI across different data types.
-            </p>
-
-            <h4>Two-Pronged Approach</h4>
-            <ul>
-              <li><strong>Metadata Anonymization:</strong> LLM parses DICOM headers to identify PHI fields (Patient Name, ID, Birth Date) and generates consistent anonymized mappings while preserving non-PHI metadata (Modality, dimensions)</li>
-              <li><strong>Burn-in Text Detection:</strong> OCR extracts all text regions with bounding boxes; LLM/NER classifies each as PHI or non-PHI; pixel-level black mask applied over PHI regions while preserving markers (L/R, PA)</li>
-            </ul>
-
-            <!-- PHI Pipeline Diagram -->
-            <div class="diagram-container">
-              <img src="assets/phi-pipeline.svg" alt="PHI De-identification Pipeline showing two branches: Metadata through LLM Analysis to Anonymized Values, and Image Pixels through OCR and NER Detection to PHI masking">
-              <figcaption>Two-Pronged De-identification Pipeline</figcaption>
-            </div>
-
-            <div class="metrics">
-              <h4>Results</h4>
-              <div class="metric-item">
-                <span class="metric-value">98%</span>
-                <span class="metric-label">Detection Accuracy</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value">Multi-modal</span>
-                <span class="metric-label">Coverage</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 2: Translation -->
-        <section id="translation" class="card">
-          <div class="container">
-            <h3>Multilingual Translation System</h3>
-
-            <h4>Problem</h4>
-            <p>
-              International regulatory submissions and medical documentation require accurate translation
-              into multiple languages. Medical terminology must be consistent across documents, and
-              LLM-based translation can suffer from hallucinations that introduce dangerous inaccuracies.
-            </p>
-
-            <h4>Approach</h4>
-            <p>
-              Engineered a scalable multilingual translation pipeline from Korean to 5 target languages,
-              integrating Translation Memory for consistency and cost reduction, with statistical
-              quality checks to detect and correct hallucinations.
-            </p>
-
-            <!-- Translation System Diagram -->
-            <div class="diagram-container">
-              <img src="assets/translation-system.svg" alt="Medical Text Translation System with three approaches: Ollama+Ray, Multi-Agent Workflow, and M2M100+Caching">
-              <figcaption>Translation System Architecture</figcaption>
-            </div>
-
-            <h4>Three Translation Approaches</h4>
-            <ul>
-              <li><strong>Approach 1 - Distributed Ollama + Ray:</strong> Load-balanced distribution across multiple Ollama endpoints with async I/O for high throughput</li>
-              <li><strong>Approach 2 - Multi-Agent Workflow:</strong> 4 specialized AI agents (Translator &rarr; Reviewer &rarr; Fixer &rarr; Supervisor) mimicking professional translation teams with glossary enforcement</li>
-              <li><strong>Approach 3 - M2M100 + Caching:</strong> Facebook's M2M100 model with SQLite translation cache and HTML-aware processing</li>
-            </ul>
-
-            <h4>Quality Assurance Features</h4>
-            <ul>
-              <li><strong>Translation Memory (TM):</strong> SQLite-based persistent cache reduces API costs and ensures terminology consistency</li>
-              <li><strong>Glossary Support:</strong> Domain-specific medical terminology enforcement (e.g., "aorta" &rarr; "&#22823;&#21205;&#33032;")</li>
-              <li><strong>Hallucination Detection:</strong> Statistical checks for numerical consistency, entity preservation, and semantic alignment</li>
-              <li><strong>HTML Preservation:</strong> Markup tags preserved during translation of structured content</li>
-            </ul>
-
-            <h4>Target Languages</h4>
-            <ul>
-              <li>Korean (source) to English, Japanese, Chinese, Spanish, German (+ Arabic RTL support)</li>
-            </ul>
-
-            <div class="metrics">
-              <h4>Key Features</h4>
-              <div class="metric-item">
-                <span class="metric-value">5</span>
-                <span class="metric-label">Target Languages</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value">TM</span>
-                <span class="metric-label">Cost Reduction</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="project-footer">
-          <p>&copy; Wonchan Son | <a href="../../index.html">Back to Home</a></p>
-        </footer>
+  <body>
+    <!-- ════════════════════════════════════════════════════════
+         HERO
+         ════════════════════════════════════════════════════════ -->
+    <section class="hero">
+      <a class="back-link-hero" href="../../index.html#experience">&larr; Back to Portfolio</a>
+      <h1>LLM De-Identification &amp; Translation</h1>
+      <p class="subtitle">
+        Agentic Systems for Medical Data Processing
+      </p>
+      <div class="meta">
+        <span>Medical IP &middot; Seoul, South Korea</span>
+        <span>Nov 2023 &ndash; Present</span>
+        <span>HIPAA &amp; GDPR Compliant</span>
       </div>
+      <img
+        class="hero-image"
+        src="assets/llm-hero-medipbox.png"
+        alt="MEDIP Box — VR anatomy table for digital cadaver literacy, the product driving international market expansion and multilingual translation needs"
+      />
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════
+         OVERVIEW
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Overview</h2>
+        <p>
+          Medical data processing requires strict HIPAA/GDPR compliance while
+          enabling research and international collaboration. This project
+          develops two AI-powered systems: automated de-identification of
+          Protected Health Information (PHI) across multiple modalities, and
+          multilingual translation of medical documents with quality assurance.
+        </p>
+        <div class="tags">
+          <span class="tag">LLM</span>
+          <span class="tag">OCR</span>
+          <span class="tag">NER</span>
+          <span class="tag">Agentic Systems</span>
+          <span class="tag">Translation Memory</span>
+          <span class="tag">Ollama</span>
+          <span class="tag">Ray</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="impact-statement">
+      <em>98% PHI detection accuracy</em> across text, metadata, and
+      burned-in annotations
     </div>
+
+    <!-- ════════════════════════════════════════════════════════
+         METRICS BANNER
+         ════════════════════════════════════════════════════════ -->
+    <section class="metrics-banner">
+      <div class="metrics-grid cols-4">
+        <div class="metric-card">
+          <div class="number">98%</div>
+          <div class="label">PHI Detection</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">7+</div>
+          <div class="label">Target Languages</div>
+        </div>
+        <div class="metric-card">
+          <div class="number small">Multi</div>
+          <div class="label">Modal Coverage</div>
+        </div>
+        <div class="metric-card">
+          <div class="number small">TM</div>
+          <div class="label">Cost Reduction</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         PHI DE-IDENTIFICATION
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>PHI De-Identification Pipeline</h2>
+        <p>
+          Medical images and documents contain PHI embedded in multiple
+          modalities: burned-in text on images, DICOM metadata, PDF documents,
+          and handwritten annotations. Manual de-identification is
+          time-consuming and error-prone.
+        </p>
+
+        <h3>Two-Pronged Approach</h3>
+        <div class="two-prong">
+          <div class="prong-card">
+            <div class="prong-title">
+              <span class="icon">&#128196;</span> Metadata Anonymization
+            </div>
+            <div class="prong-desc">
+              LLM parses DICOM headers to identify PHI fields (Patient Name, ID,
+              Birth Date) and generates consistent anonymized mappings while
+              preserving non-PHI metadata.
+            </div>
+          </div>
+          <div class="prong-card">
+            <div class="prong-title">
+              <span class="icon">&#128444;&#65039;</span> Burn-in Text Detection
+            </div>
+            <div class="prong-desc">
+              OCR extracts text regions with bounding boxes. LLM/NER classifies
+              each as PHI or non-PHI. Pixel-level black mask applied over PHI
+              while preserving markers (L/R, PA).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="assets/phi-pipeline.svg"
+            alt="PHI De-identification Pipeline: Metadata branch through LLM to anonymized values, Image branch through OCR and NER to PHI masking"
+          />
+          <figcaption>
+            Two-Pronged De-identification Pipeline
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <div style="margin: 16px 0">
+          <span class="inline-metric">
+            <span class="val">98%</span>
+            <span class="lbl">detection accuracy</span>
+          </span>
+          <span class="inline-metric">
+            <span class="val">Multi-modal</span>
+            <span class="lbl">coverage</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         TRANSLATION SYSTEM
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Multilingual Translation System</h2>
+        <p>
+          International regulatory submissions require accurate, consistent
+          translation of medical documents. LLM-based translation can suffer
+          from hallucinations that introduce dangerous inaccuracies &mdash; so
+          quality assurance is built into every layer.
+        </p>
+
+        <div class="lang-pills">
+          <span class="lang-pill source">English</span>
+          <span class="lang-arrow">&rarr;</span>
+          <span class="lang-pill">Japanese</span>
+          <span class="lang-pill">Chinese</span>
+          <span class="lang-pill">Arabic</span>
+          <span class="lang-pill">Spanish</span>
+          <span class="lang-pill">French</span>
+          <span class="lang-pill">Portuguese</span>
+          <span class="lang-pill">Russian</span>
+        </div>
+
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="assets/llm-medipbox-features.png"
+            alt="MEDIP Box solution features: dissection guide, quiz mode, pregnancy animation, and multi-player mode — all requiring multilingual translation for international markets"
+          />
+          <figcaption>
+            MEDIP Box Product Features &mdash; Content Requiring Multilingual
+            Translation for International Markets
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <h3>Three Translation Approaches</h3>
+        <div class="approaches">
+          <div class="approach-card">
+            <div class="approach-num">1</div>
+            <div class="approach-content">
+              <div class="approach-title">
+                Distributed Ollama + Ray
+              </div>
+              <div class="approach-desc">
+                Load-balanced distribution across multiple Ollama endpoints with
+                async I/O for high throughput batch translation.
+              </div>
+            </div>
+          </div>
+          <div class="approach-card">
+            <div class="approach-num">2</div>
+            <div class="approach-content">
+              <div class="approach-title">Multi-Agent Workflow</div>
+              <div class="approach-desc">
+                4 specialized AI agents (Translator &rarr; Reviewer &rarr; Fixer
+                &rarr; Supervisor) mimicking professional translation teams with
+                glossary enforcement.
+              </div>
+            </div>
+          </div>
+          <div class="approach-card">
+            <div class="approach-num">3</div>
+            <div class="approach-content">
+              <div class="approach-title">M2M100 + Caching</div>
+              <div class="approach-desc">
+                Facebook&rsquo;s M2M100 model with SQLite translation cache and
+                HTML-aware processing for structured content.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="assets/translation-system.svg"
+            alt="Translation System Architecture: three approaches — Ollama+Ray, Multi-Agent Workflow, M2M100+Caching"
+          />
+          <figcaption>
+            Translation System Architecture &mdash; Three Approaches
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <h3>Quality Assurance</h3>
+        <div class="quality-grid">
+          <div class="quality-item">
+            <div class="q-title">Translation Memory</div>
+            <div class="q-desc">
+              SQLite-based persistent cache reduces API costs and ensures
+              terminology consistency across documents.
+            </div>
+          </div>
+          <div class="quality-item">
+            <div class="q-title">Medical Glossary</div>
+            <div class="q-desc">
+              Domain-specific terminology enforcement ensures correct
+              translations of anatomical and clinical terms.
+            </div>
+          </div>
+          <div class="quality-item">
+            <div class="q-title">Hallucination Detection</div>
+            <div class="q-desc">
+              Statistical checks for numerical consistency, entity preservation,
+              and semantic alignment.
+            </div>
+          </div>
+          <div class="quality-item">
+            <div class="q-title">HTML Preservation</div>
+            <div class="q-desc">
+              Markup tags preserved during translation of structured content for
+              direct use in submissions.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="../../js/notion.js"></script>
   </body>
 </html>
