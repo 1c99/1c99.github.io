@@ -1,67 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 520" style="background:#1e1e1e">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 480" style="background:#fff">
   <style>
-    .box { fill: none; stroke: #888; stroke-width: 1.5; }
-    .box-fill { fill: #2d2d2d; stroke: #888; stroke-width: 1.5; }
-    .title-box { fill: none; stroke: #888; stroke-width: 2; }
-    .text { font-family: 'Courier New', monospace; fill: #ccc; font-size: 13px; }
-    .text-title { font-family: 'Courier New', monospace; fill: #ccc; font-size: 15px; font-weight: bold; }
-    .text-small { font-family: 'Courier New', monospace; fill: #888; font-size: 10px; }
-    .line { stroke: #888; stroke-width: 1.5; fill: none; }
-    .arrow { fill: #888; }
+    .box-fill { fill: #fafafa; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-accent { fill: #fdf2f2; stroke: #e9e9e7; stroke-width: 1.5; }
+    .text { font-family: 'Inter', -apple-system, sans-serif; fill: #37352f; font-size: 14px; font-weight: 500; }
+    .text-title { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 18px; font-weight: 700; }
+    .text-small { font-family: 'Inter', -apple-system, sans-serif; fill: #787774; font-size: 11px; font-weight: 400; }
+    .line { stroke: #d3d1cb; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #a31f34; }
   </style>
 
-  <!-- Outer border -->
-  <rect x="20" y="20" width="710" height="480" rx="3" class="title-box"/>
-
   <!-- Title -->
-  <text x="375" y="48" text-anchor="middle" class="text-title">INFERENCE FLOW (generate_3d_sample)</text>
-  <line x1="40" y1="60" x2="710" y2="60" class="line"/>
+  <text x="350" y="32" text-anchor="middle" class="text-title">Inference Flow</text>
+  <line x1="100" y1="46" x2="600" y2="46" class="line" stroke-dasharray="4,4"/>
 
   <!-- Input boxes side by side -->
-  <rect x="100" y="80" width="150" height="45" rx="3" class="box-fill"/>
-  <text x="175" y="100" text-anchor="middle" class="text">2D Aorta</text>
-  <text x="175" y="117" text-anchor="middle" class="text-small">(from Stage 1)</text>
+  <rect x="80" y="66" width="180" height="50" rx="10" class="box-accent"/>
+  <text x="170" y="90" text-anchor="middle" class="text">2D Aorta</text>
+  <text x="170" y="108" text-anchor="middle" class="text-small">from Stage 1</text>
 
-  <rect x="500" y="80" width="150" height="45" rx="3" class="box-fill"/>
-  <text x="575" y="100" text-anchor="middle" class="text">Random Noise</text>
-  <text x="575" y="117" text-anchor="middle" class="text-small">z_T ~ N(0,I)</text>
+  <rect x="440" y="66" width="180" height="50" rx="10" class="box-accent"/>
+  <text x="530" y="90" text-anchor="middle" class="text">Random Noise</text>
+  <text x="530" y="108" text-anchor="middle" class="text-small">z_T ~ N(0, I)</text>
 
-  <!-- Arrows down -->
-  <line x1="175" y1="125" x2="175" y2="155" class="line"/>
-  <polygon points="175,165 170,155 180,155" class="arrow"/>
+  <!-- Arrow from left input -->
+  <line x1="170" y1="116" x2="170" y2="148" class="line"/>
+  <polygon points="170,156 164,146 176,146" class="arrow"/>
 
   <!-- Projection2Dto3D -->
-  <rect x="100" y="170" width="150" height="40" rx="3" class="box-fill"/>
-  <text x="175" y="195" text-anchor="middle" class="text">Projection2Dto3D</text>
+  <rect x="80" y="160" width="180" height="44" rx="10" class="box-fill"/>
+  <text x="170" y="188" text-anchor="middle" class="text">Projection2Dto3D</text>
 
   <!-- Lines merging -->
-  <line x1="175" y1="210" x2="175" y2="230" class="line"/>
-  <line x1="575" y1="125" x2="575" y2="230" class="line"/>
-  <line x1="175" y1="230" x2="375" y2="230" class="line"/>
-  <line x1="575" y1="230" x2="375" y2="230" class="line"/>
-  <line x1="375" y1="230" x2="375" y2="250" class="line"/>
-  <polygon points="375,260 370,250 380,250" class="arrow"/>
+  <line x1="170" y1="204" x2="170" y2="224" class="line"/>
+  <line x1="530" y1="116" x2="530" y2="224" class="line"/>
+  <line x1="170" y1="224" x2="350" y2="224" class="line"/>
+  <line x1="530" y1="224" x2="350" y2="224" class="line"/>
+  <line x1="350" y1="224" x2="350" y2="244" class="line"/>
+  <polygon points="350,252 344,242 356,242" class="arrow"/>
 
   <!-- Iterative Denoising Box -->
-  <rect x="100" y="265" width="550" height="100" rx="3" class="box-fill"/>
-  <text x="375" y="290" text-anchor="middle" class="text">Iterative Denoising (T=1000 -> t=0)</text>
-  <text x="130" y="320" class="text-small">for t in [T, T-1, ..., 1, 0]:</text>
-  <text x="150" y="340" class="text-small">e_theta = UNet3DConditioned(z_t, t, condition)</text>
-  <text x="150" y="355" class="text-small">z_{t-1} = denoise_step(z_t, e_theta, t)</text>
+  <rect x="80" y="256" width="540" height="90" rx="10" class="box-fill"/>
+  <text x="350" y="284" text-anchor="middle" class="text">Iterative Denoising (T = 1000 → t = 0)</text>
+  <text x="350" y="308" text-anchor="middle" class="text-small">for t in [T, T−1, …, 1, 0]:</text>
+  <text x="350" y="326" text-anchor="middle" class="text-small">e_theta = UNet3DConditioned(z_t, t, condition)   →   z_(t−1) = denoise_step(z_t, e_theta, t)</text>
 
   <!-- Arrow -->
-  <line x1="375" y1="365" x2="375" y2="385" class="line"/>
-  <polygon points="375,395 370,385 380,385" class="arrow"/>
+  <line x1="350" y1="346" x2="350" y2="370" class="line"/>
+  <polygon points="350,378 344,368 356,368" class="arrow"/>
 
   <!-- Denoised Latent -->
-  <text x="375" y="408" text-anchor="middle" class="text">Denoised Latent z_0</text>
+  <text x="350" y="396" text-anchor="middle" class="text" style="font-weight:600; fill:#a31f34">Denoised Latent z₀</text>
 
   <!-- Arrow -->
-  <line x1="375" y1="415" x2="375" y2="430" class="line"/>
-  <polygon points="375,440 370,430 380,430" class="arrow"/>
+  <line x1="350" y1="406" x2="350" y2="424" class="line"/>
+  <polygon points="350,432 344,422 356,422" class="arrow"/>
 
   <!-- VAE3D Decoder -->
-  <rect x="150" y="445" width="450" height="40" rx="3" class="box-fill"/>
-  <text x="375" y="460" text-anchor="middle" class="text">VAE3D Decoder</text>
-  <text x="375" y="478" text-anchor="middle" class="text-small">z_0 -> Linear -> Reshape(256,8,8,8) -> ConvT3d layers -> Tanh</text>
+  <rect x="120" y="436" width="460" height="40" rx="10" class="box-fill"/>
+  <text x="350" y="462" text-anchor="middle" class="text">VAE3D Decoder  ·  z₀ → Linear → Reshape (256,8,8,8) → ConvT3d → Tanh</text>
 </svg>

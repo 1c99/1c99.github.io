@@ -1,108 +1,158 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" style="background:#1e1e1e">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 510" style="background:#fff">
   <style>
-    .box { fill: none; stroke: #888; stroke-width: 1.5; }
-    .text { font-family: 'Courier New', monospace; fill: #ccc; font-size: 14px; }
-    .text-small { font-family: 'Courier New', monospace; fill: #888; font-size: 11px; }
-    .line { stroke: #888; stroke-width: 1.5; fill: none; }
-    .arrow { fill: #888; }
+    .box-input { fill: #fdf2f2; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-l0 { fill: #fafafa; stroke: #a31f34; stroke-width: 1.5; }
+    .box-l1 { fill: #fafafa; stroke: #d4a574; stroke-width: 1.5; }
+    .box-l2 { fill: #fafafa; stroke: #787774; stroke-width: 1.5; }
+    .text { font-family: 'Inter', -apple-system, sans-serif; fill: #37352f; font-size: 13px; font-weight: 500; }
+    .text-title { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 16px; font-weight: 700; }
+    .text-small { font-family: 'Inter', -apple-system, sans-serif; fill: #787774; font-size: 10px; font-weight: 400; }
+    .text-dep { font-family: 'Inter', -apple-system, sans-serif; fill: #9b9a97; font-size: 9px; font-weight: 400; }
+    .text-label { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 11px; font-weight: 600; }
+    .text-level { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; }
+    .line { stroke: #d3d1cb; stroke-width: 1.5; fill: none; }
+    .line-skip { stroke: #d3d1cb; stroke-width: 1.5; fill: none; stroke-dasharray: 5,3; }
+    .arrow { fill: #a31f34; }
   </style>
 
+  <!-- Title -->
+  <text x="480" y="24" text-anchor="middle" class="text-title">Module Dependency DAG</text>
+
   <!-- Input DICOM Image -->
-  <rect x="275" y="20" width="250" height="40" rx="3" class="box"/>
-  <text x="400" y="46" text-anchor="middle" class="text">Input DICOM Image</text>
+  <rect x="380" y="38" width="200" height="34" rx="8" class="box-input"/>
+  <text x="480" y="60" text-anchor="middle" class="text">Input DICOM Image</text>
 
-  <!-- Vertical line from Input -->
-  <line x1="400" y1="60" x2="400" y2="85" class="line"/>
+  <!-- Fan-out from Input to L0 -->
+  <line x1="480" y1="72" x2="480" y2="84" class="line"/>
+  <line x1="109" y1="84" x2="851" y2="84" class="line"/>
+  <line x1="109" y1="84" x2="109" y2="100" class="line"/>
+  <line x1="215" y1="84" x2="215" y2="100" class="line"/>
+  <line x1="321" y1="84" x2="321" y2="100" class="line"/>
+  <line x1="427" y1="84" x2="427" y2="100" class="line"/>
+  <line x1="533" y1="84" x2="533" y2="100" class="line"/>
+  <line x1="639" y1="84" x2="639" y2="100" class="line"/>
+  <line x1="745" y1="84" x2="745" y2="100" class="line"/>
+  <line x1="851" y1="84" x2="851" y2="100" class="line"/>
+  <polygon points="109,108 103,98 115,98" class="arrow"/>
+  <polygon points="215,108 209,98 221,98" class="arrow"/>
+  <polygon points="321,108 315,98 327,98" class="arrow"/>
+  <polygon points="427,108 421,98 433,98" class="arrow"/>
+  <polygon points="533,108 527,98 539,98" class="arrow"/>
+  <polygon points="639,108 633,98 645,98" class="arrow"/>
+  <polygon points="745,108 739,98 751,98" class="arrow"/>
+  <polygon points="851,108 845,98 857,98" class="arrow"/>
 
-  <!-- Horizontal branching line -->
-  <line x1="100" y1="85" x2="700" y2="85" class="line"/>
+  <!-- L0 label -->
+  <text x="18" y="132" class="text-level">L0</text>
 
-  <!-- Vertical lines down to Level 0 -->
-  <line x1="100" y1="85" x2="100" y2="105" class="line"/>
-  <line x1="400" y1="85" x2="400" y2="105" class="line"/>
-  <line x1="700" y1="85" x2="700" y2="105" class="line"/>
+  <!-- Level 0: 8 independent segmentation modules (GPU) -->
+  <rect x="70" y="108" width="78" height="40" rx="8" class="box-l0"/>
+  <text x="109" y="133" text-anchor="middle" class="text">Lung</text>
 
-  <!-- Arrows to Level 0 -->
-  <polygon points="100,115 95,105 105,105" class="arrow"/>
-  <polygon points="400,115 395,105 405,105" class="arrow"/>
-  <polygon points="700,115 695,105 705,105" class="arrow"/>
+  <rect x="176" y="108" width="78" height="40" rx="8" class="box-l0"/>
+  <text x="215" y="133" text-anchor="middle" class="text">Heart</text>
 
-  <!-- Level 0: Lung, Heart, Aorta -->
-  <rect x="25" y="120" width="150" height="50" rx="3" class="box"/>
-  <text x="100" y="143" text-anchor="middle" class="text">Lung</text>
-  <text x="100" y="160" text-anchor="middle" class="text-small">(2048x2048)</text>
+  <rect x="282" y="108" width="78" height="40" rx="8" class="box-l0"/>
+  <text x="321" y="133" text-anchor="middle" class="text">Bone</text>
 
-  <rect x="325" y="120" width="150" height="50" rx="3" class="box"/>
-  <text x="400" y="143" text-anchor="middle" class="text">Heart</text>
-  <text x="400" y="160" text-anchor="middle" class="text-small">(512x512)</text>
+  <rect x="388" y="108" width="78" height="40" rx="8" class="box-l0"/>
+  <text x="427" y="123" text-anchor="middle" class="text" style="font-size:11px">Bone</text>
+  <text x="427" y="137" text-anchor="middle" class="text" style="font-size:11px">Supp</text>
 
-  <rect x="625" y="120" width="150" height="50" rx="3" class="box"/>
-  <text x="700" y="143" text-anchor="middle" class="text">Aorta</text>
-  <text x="700" y="160" text-anchor="middle" class="text-small">(512x512)</text>
+  <rect x="494" y="108" width="78" height="40" rx="8" class="box-l0"/>
+  <text x="533" y="133" text-anchor="middle" class="text">Airway</text>
 
-  <!-- Lines from Lung to COVID/Vessel -->
-  <line x1="100" y1="170" x2="100" y2="195" class="line"/>
-  <line x1="60" y1="195" x2="140" y2="195" class="line"/>
-  <line x1="60" y1="195" x2="60" y2="215" class="line"/>
-  <line x1="140" y1="195" x2="140" y2="215" class="line"/>
-  <polygon points="60,225 55,215 65,215" class="arrow"/>
-  <polygon points="140,225 135,215 145,215" class="arrow"/>
+  <rect x="600" y="108" width="78" height="40" rx="8" class="box-l0"/>
+  <text x="639" y="133" text-anchor="middle" class="text">Aorta</text>
 
-  <!-- Line from Heart to CTR -->
-  <line x1="400" y1="170" x2="400" y2="225" class="line"/>
-  <polygon points="400,235 395,225 405,225" class="arrow"/>
+  <rect x="706" y="108" width="78" height="40" rx="8" class="box-l0"/>
+  <text x="745" y="133" text-anchor="middle" class="text" style="font-size:11px">T12-L1</text>
 
-  <!-- Line from Aorta to Diameter -->
-  <line x1="700" y1="170" x2="700" y2="225" class="line"/>
-  <polygon points="700,235 695,225 705,225" class="arrow"/>
+  <rect x="812" y="108" width="78" height="40" rx="8" class="box-l0"/>
+  <text x="851" y="133" text-anchor="middle" class="text">LAA</text>
 
-  <!-- Level 1: COVID, Vessel -->
-  <rect x="20" y="230" width="80" height="40" rx="3" class="box"/>
-  <text x="60" y="255" text-anchor="middle" class="text">COVID</text>
+  <!-- ─── L0 → L1 Arrows ─── -->
 
-  <rect x="110" y="230" width="80" height="40" rx="3" class="box"/>
-  <text x="150" y="255" text-anchor="middle" class="text">Vessel</text>
+  <!-- Lung (109) fans to COVID (80), Vessel (160), TB (240) -->
+  <line x1="109" y1="148" x2="109" y2="172" class="line"/>
+  <line x1="80" y1="172" x2="240" y2="172" class="line"/>
+  <line x1="80" y1="172" x2="80" y2="210" class="line"/>
+  <line x1="160" y1="172" x2="160" y2="210" class="line"/>
+  <line x1="240" y1="172" x2="240" y2="210" class="line"/>
+  <polygon points="80,218 74,208 86,208" class="arrow"/>
+  <polygon points="160,218 154,208 166,208" class="arrow"/>
+  <polygon points="240,218 234,208 246,208" class="arrow"/>
 
-  <!-- CTR box -->
-  <rect x="320" y="240" width="160" height="60" rx="3" class="box"/>
-  <text x="400" y="265" text-anchor="middle" class="text">CTR</text>
-  <text x="400" y="282" text-anchor="middle" class="text-small">(requires lung+heart)</text>
+  <!-- L1 label -->
+  <text x="18" y="240" class="text-level">L1</text>
 
-  <!-- Diameter box -->
-  <rect x="625" y="240" width="150" height="40" rx="3" class="box"/>
-  <text x="700" y="265" text-anchor="middle" class="text">Diameter</text>
+  <!-- Level 1: 3 detection modules (GPU, need lung mask) -->
+  <rect x="47" y="218" width="66" height="36" rx="7" class="box-l1"/>
+  <text x="80" y="241" text-anchor="middle" class="text" style="font-size:12px">COVID</text>
 
-  <!-- Arrow from Diameter to CTR with label -->
-  <line x1="625" y1="260" x2="490" y2="260" class="line"/>
-  <polygon points="490,260 500,255 500,265" class="arrow"/>
-  <text x="557" y="250" text-anchor="middle" class="text-small">lung mask</text>
+  <rect x="127" y="218" width="66" height="36" rx="7" class="box-l1"/>
+  <text x="160" y="241" text-anchor="middle" class="text" style="font-size:12px">Vessel</text>
 
-  <!-- Lines from COVID to TB -->
-  <line x1="60" y1="270" x2="60" y2="310" class="line"/>
-  <polygon points="60,320 55,310 65,310" class="arrow"/>
+  <rect x="207" y="218" width="66" height="36" rx="7" class="box-l1"/>
+  <text x="240" y="241" text-anchor="middle" class="text" style="font-size:12px">TB</text>
 
-  <!-- Lines from Vessel to Peripheral -->
-  <line x1="150" y1="270" x2="150" y2="310" class="line"/>
-  <polygon points="150,320 145,310 155,310" class="arrow"/>
+  <!-- Aorta (639) fans to Asc (599), Desc (679) -->
+  <line x1="639" y1="148" x2="639" y2="172" class="line"/>
+  <line x1="599" y1="172" x2="679" y2="172" class="line"/>
+  <line x1="599" y1="172" x2="599" y2="210" class="line"/>
+  <line x1="679" y1="172" x2="679" y2="210" class="line"/>
+  <polygon points="599,218 593,208 605,208" class="arrow"/>
+  <polygon points="679,218 673,208 685,208" class="arrow"/>
 
-  <!-- Line from CTR to Volumetry -->
-  <line x1="400" y1="300" x2="400" y2="330" class="line"/>
-  <polygon points="400,340 395,330 405,330" class="arrow"/>
+  <rect x="566" y="218" width="66" height="36" rx="7" class="box-l1"/>
+  <text x="599" y="241" text-anchor="middle" class="text" style="font-size:12px">Asc</text>
 
-  <!-- Level 2: TB, Peripheral, Volumetry -->
-  <rect x="20" y="325" width="80" height="40" rx="3" class="box"/>
-  <text x="60" y="350" text-anchor="middle" class="text">TB</text>
+  <rect x="646" y="218" width="66" height="36" rx="7" class="box-l1"/>
+  <text x="679" y="241" text-anchor="middle" class="text" style="font-size:12px">Desc</text>
 
-  <rect x="110" y="325" width="80" height="40" rx="3" class="box"/>
-  <text x="150" y="342" text-anchor="middle" class="text">Periph-</text>
-  <text x="150" y="358" text-anchor="middle" class="text">eral</text>
+  <!-- Asc (599) + Desc (679) → Diameter (639) -->
+  <line x1="599" y1="254" x2="599" y2="278" class="line"/>
+  <line x1="679" y1="254" x2="679" y2="278" class="line"/>
+  <line x1="599" y1="278" x2="679" y2="278" class="line"/>
+  <line x1="639" y1="278" x2="639" y2="316" class="line"/>
+  <polygon points="639,324 633,314 645,314" class="arrow"/>
 
-  <rect x="320" y="345" width="160" height="40" rx="3" class="box"/>
-  <text x="400" y="370" text-anchor="middle" class="text">Volumetry</text>
+  <!-- ─── L0 → L2 Skip Arrows (dashed, skip L1) ─── -->
 
-  <!-- Execution Levels Text -->
-  <text x="40" y="420" class="text">EXECUTION LEVELS:</text>
-  <text x="60" y="445" class="text-small">Level 0: [lung, heart, bone, airway, aorta, t12l1, laa]  ← Independent</text>
-  <text x="60" y="467" class="text-small">Level 1: [covid, vessel, tb, bone_supp]                   ← Depend on Level 0</text>
-  <text x="60" y="489" class="text-small">Level 2: [ctr, diameter, peripheral, volumetry]           ← Depend on Level 0/1</text>
+  <!-- Lung → Peripheral: from Lung bottom, route left edge down to Peripheral -->
+  <path d="M 90,148 L 90,156 L 36,156 L 36,345 L 56,345" class="line-skip"/>
+  <polygon points="64,345 54,339 54,351" class="arrow"/>
+
+  <!-- Lung + Heart → CTR: merge from both bottoms, route right of L1 down to CTR -->
+  <path d="M 130,148 L 130,164 L 162,164" class="line-skip"/>
+  <path d="M 200,148 L 200,164 L 162,164" class="line-skip"/>
+  <path d="M 162,164 L 280,164 L 280,345 L 257,345" class="line-skip"/>
+  <polygon points="257,345 267,339 267,351" class="arrow"/>
+
+
+  <!-- L2 label -->
+  <text x="18" y="348" class="text-level">L2</text>
+
+  <!-- Level 2: 3 measurement modules (CPU, post-processing) -->
+  <rect x="61" y="324" width="86" height="42" rx="7" class="box-l2"/>
+  <text x="104" y="343" text-anchor="middle" class="text" style="font-size:12px">Peripheral</text>
+
+  <rect x="171" y="324" width="86" height="42" rx="7" class="box-l2"/>
+  <text x="214" y="343" text-anchor="middle" class="text" style="font-size:12px">CTR</text>
+
+  <rect x="596" y="324" width="86" height="42" rx="7" class="box-l2"/>
+  <text x="639" y="343" text-anchor="middle" class="text" style="font-size:12px">Diameter</text>
+
+  <!-- ─── Legend ─── -->
+  <line x1="50" y1="394" x2="910" y2="394" class="line" stroke-dasharray="4,4"/>
+  <text x="50" y="416" class="text-label">Execution Levels</text>
+
+  <rect x="50" y="428" width="12" height="12" rx="3" fill="#fafafa" stroke="#a31f34" stroke-width="1.5"/>
+  <text x="70" y="439" class="text-small">Level 0: lung, heart, bone, bone_supp, airway, aorta, t12-l1, laa — Independent segmentation, GPU (8 modules)</text>
+
+  <rect x="50" y="448" width="12" height="12" rx="3" fill="#fafafa" stroke="#d4a574" stroke-width="1.5"/>
+  <text x="70" y="459" class="text-small">Level 1: covid, vessel, tb, asc, desc — Depend on L0 masks, GPU (5 modules)</text>
+
+  <rect x="50" y="468" width="12" height="12" rx="3" fill="#fafafa" stroke="#787774" stroke-width="1.5"/>
+  <text x="70" y="479" class="text-small">Level 2: peripheral, ctr, diameter — Post-processing measurement, CPU (3 modules)</text>
 </svg>

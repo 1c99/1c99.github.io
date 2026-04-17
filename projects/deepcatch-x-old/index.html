@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="../../images/logo.png" />
+    <title>DeepCatch X - Wonchan Son</title>
+    <link rel="stylesheet" href="../../css/fa6-all.min.css" />
+    <link rel="stylesheet" href="../../css/fa6-local-fonts.css" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="DeepCatch X: AI-Powered X-ray Analysis Platform for Aortic Disease Detection" />
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/skel.min.js"></script>
+    <script src="../../js/skel-layers.min.js"></script>
+    <script src="../../js/init.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="../../css/skel.css" />
+      <link rel="stylesheet" href="../../css/style.css" />
+      <link rel="stylesheet" href="../../css/style-xlarge.css" />
+    </noscript>
+    <link rel="stylesheet" href="../../css/project.css" />
+  </head>
+
+  <body class="project-page">
+    <div id="wrapper">
+      <div id="main">
+        <!-- Back Navigation -->
+        <section class="project-nav">
+          <div class="container">
+            <a href="../../index.html#experience">
+              <i class="fa-solid fa-arrow-left"></i> Back to Main
+            </a>
+          </div>
+        </section>
+
+        <!-- Project Header -->
+        <section id="project-header">
+          <div class="container">
+            <header class="major">
+              <h2>DeepCatch X</h2>
+              <p>AI-Powered X-ray Analysis Platform</p>
+            </header>
+            <p class="project-meta">
+              <i class="fa-solid fa-building"></i> Medical IP &nbsp;|&nbsp;
+              <i class="fa-solid fa-calendar"></i> Nov. 2023 &ndash; Present &nbsp;|&nbsp;
+              <i class="fa-solid fa-location-dot"></i> Seoul, South Korea
+            </p>
+          </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#gtc">NVIDIA GTC 2025 Showcase</a></li>
+            <li><a href="#diffusion">Stage 1: DDPM for 2D Aorta Extraction</a></li>
+            <li><a href="#ldm-3d">Stage 2: LDM for 3D Reconstruction</a> <span class="toc-badge">Proposed</span></li>
+            <li><a href="#dit">Diffusion Transformer (DiT)</a> <span class="toc-badge">Proposed</span></li>
+            <li><a href="#cross-attention">Cross-Attention Mechanisms</a> <span class="toc-badge">Proposed</span></li>
+            <li><a href="#model-parallelism">Model Parallelism</a> <span class="toc-badge">Proposed</span></li>
+            <li><a href="#medical-metrics">Advanced Medical Metrics</a> <span class="toc-badge">Proposed</span></li>
+            <li><a href="#ray-pipeline">Ray Distributed Inference Pipeline</a></li>
+            <li><a href="#nuitka">Refactoring &amp; Nuitka Deployment</a></li>
+            <li><a href="#bioage">BioAge Prediction Module (R to C++)</a></li>
+            <li><a href="#dataset">Dataset Acquisition</a></li>
+          </ul>
+        </nav>
+
+        <!-- Overview -->
+        <section id="overview">
+          <div class="container">
+            <h3>Overview</h3>
+
+            <!-- Highlights Box -->
+            <div class="highlights-box">
+              <h4>Key Highlights</h4>
+              <div class="highlights-grid">
+                <div class="highlight-item">
+                  <span class="highlight-value">6x</span>
+                  <span class="highlight-label">Batch Throughput</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">2.8x</span>
+                  <span class="highlight-label">Per-Case Speedup</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">73%</span>
+                  <span class="highlight-label">Codebase Reduction</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">150x</span>
+                  <span class="highlight-label">BioAge vs R</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">100TB+</span>
+                  <span class="highlight-label">Dataset Scale</span>
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-value">GTC 2025</span>
+                  <span class="highlight-label">NVIDIA Showcase</span>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              DeepCatch X is an AI-powered medical imaging platform for aortic disease screening from chest X-rays.
+              The <strong>implemented system</strong> uses DDPM for conditional 2D aorta extraction from X-rays,
+              with a distributed Ray inference pipeline achieving 6x throughput improvement.
+              Additionally, a <strong>proposed Stage 2 architecture</strong> was designed for 3D volumetric
+              reconstruction using novel Latent Diffusion Models with custom 3D components.
+            </p>
+            <p>
+              The project spans from production deployment (distributed inference, standalone executables,
+              regulatory compliance) to forward-looking architectural research (3D LDM, DiT, model parallelism).
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">DDPM</span>
+              <span class="tech-tag">LDM</span>
+              <span class="tech-tag">Ray</span>
+              <span class="tech-tag">TensorRT</span>
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">DDP</span>
+            </div>
+
+            <!-- Two-Stage Pipeline Diagram -->
+            <div class="architecture-diagram">
+              <div class="diagram-title">Two-Stage Generative Pipeline</div>
+              <div class="flow-diagram">
+                <div class="flow-box">
+                  <div class="box-title">X-ray Input</div>
+                  <div class="box-subtitle">2D Image</div>
+                </div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box highlight">
+                  <div class="box-title">Stage 1: DDPM</div>
+                  <div class="box-subtitle">2D Aorta Extraction</div>
+                </div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box">
+                  <div class="box-title">2D Aorta Mask</div>
+                  <div class="box-subtitle">Projection</div>
+                </div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box highlight">
+                  <div class="box-title">Stage 2: LDM</div>
+                  <div class="box-subtitle">3D Reconstruction</div>
+                </div>
+                <span class="flow-arrow">&rarr;</span>
+                <div class="flow-box">
+                  <div class="box-title">3D Aorta Volume</div>
+                  <div class="box-subtitle">128&sup3; Output</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 1: NVIDIA GTC -->
+        <section id="gtc" class="card">
+          <div class="container">
+            <h3>NVIDIA GTC 2025 Showcase</h3>
+
+            <h4>Background</h4>
+            <p>
+              Showcased DeepCatch X at NVIDIA GTC 2025 in San Jose, demonstrating novel generative AI
+              applications in medical imaging to a global audience of researchers, engineers, and
+              healthcare professionals.
+            </p>
+
+            <h4>Key Demonstrations</h4>
+            <ul>
+              <li>Real-time X-ray to 3D aorta extraction pipeline</li>
+              <li>AI-powered quantitative measurements for aortic aneurysm detection</li>
+              <li>Integration with clinical workflows</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 2: Stage 1 - DDPM -->
+        <section id="diffusion" class="card">
+          <div class="container">
+            <h3>Stage 1: DDPM for 2D Aorta Extraction</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Traditional GAN-based approaches for X-ray to aorta extraction suffered from mode collapse,
+              training instability, and artifacts that could lead to clinical misinterpretation.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Implemented a DDPM (Denoising Diffusion Probabilistic Model) for conditional image-to-image
+              translation. The model learns the reverse diffusion process to generate 2D aortic projection
+              masks conditioned on X-ray input via channel concatenation.
+            </p>
+
+            <h4>Technical Details</h4>
+            <ul>
+              <li>Conditional channel concatenation (X-ray RGBA + noise)</li>
+              <li>U-Net backbone with self-attention, time embedding, and ResNet blocks</li>
+              <li>DDP training across 4x RTX 4090 GPUs with gradient accumulation</li>
+              <li>Hybrid loss: weighted MSE + perceptual (VGG) + SSIM + L1</li>
+              <li>DDIM fast sampling for inference (50 steps)</li>
+            </ul>
+
+            <h4>Ablation Studies</h4>
+            <ul>
+              <li>Conditioning mechanism: concatenation vs. cross-attention vs. AdaIN</li>
+              <li>Attention placement: bottleneck-only vs. multi-scale</li>
+              <li>Noise schedule: linear vs. cosine vs. sigmoid</li>
+              <li>Network depth optimization</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 3: Stage 2 - 3D LDM (Proposed) -->
+        <section id="ldm-3d" class="card">
+          <div class="container">
+            <h3>Stage 2: LDM for 3D Volumetric Reconstruction <span class="badge-proposed">Proposed</span></h3>
+
+            <div class="proposed-note">
+              <strong>Note:</strong> This section describes architectural design and code implementation for a proposed 3D reconstruction pipeline. The architecture was fully designed and coded, but training was not conducted due to computational resource constraints. This represents forward-looking R&D work.
+            </div>
+
+            <h4>Problem</h4>
+            <p>
+              Reconstructing 3D volumetric structures from a single 2D projection is a severely ill-posed
+              inverse problem. Direct 3D diffusion is computationally prohibitive (128&sup3; volumes require
+              ~48GB memory for training).
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Proposed a <strong>Latent Diffusion Model (LDM)</strong> that operates in compressed latent space,
+              with <strong>custom 3D architectures</strong> designed specifically for medical volumetric reconstruction.
+            </p>
+
+            <h4>Novel Architectures Proposed</h4>
+            <ul>
+              <li><strong>VAE3D:</strong> 3D Variational Autoencoder compressing 128&sup3; volumes to 256-dim latent space (16x compression per dimension)</li>
+              <li><strong>Projection2Dto3D:</strong> Novel network bridging 2D aorta features to 3D latent representation via hierarchical Conv2D &rarr; Linear &rarr; Conv3D projection</li>
+              <li><strong>UNet3DConditioned:</strong> 3D U-Net denoiser with InstanceNorm, LeakyReLU, and time conditioning</li>
+              <li><strong>SpatialTransformer3D:</strong> Self-attention over 3D volumetric spatial dimensions</li>
+              <li><strong>LatentDiffusion3D:</strong> Complete LDM integrating all components for end-to-end 2D&rarr;3D generation</li>
+            </ul>
+
+            <!-- LDM Architecture Diagrams -->
+            <div class="diagram-container">
+              <img src="assets/ldm-high-level.svg" alt="LatentDiffusion3D High-Level Overview showing Input 2D Aorta through Projection2Dto3D, Time Embedding, UNet3DConditioned, VAE3D Decoder to Output 3D Volume">
+              <figcaption>High-Level Architecture Overview</figcaption>
+            </div>
+
+            <div class="diagram-container">
+              <img src="assets/ldm-inference-flow.svg" alt="LDM Inference Flow showing 2D Aorta and Random Noise going through iterative denoising to generate 3D Aorta Volume">
+              <figcaption>Inference Flow (Generation Process)</figcaption>
+            </div>
+
+            <div class="diagram-container">
+              <img src="assets/ldm-component-hierarchy.svg" alt="Component Hierarchy showing LatentDiffusion3DTrainer containing LatentDiffusion3D with VAE3D, Projection2Dto3D, TimeEmbedding, and UNet3DConditioned">
+              <figcaption>Component Hierarchy</figcaption>
+            </div>
+
+            <h4>Ablation Studies (Stage 2)</h4>
+            <ul>
+              <li>VAE latent dimension: 64 / 128 / 256 / 512</li>
+              <li>3D UNet depth optimization</li>
+              <li>3D attention placement strategies</li>
+              <li>2D&rarr;3D projection architecture comparison</li>
+            </ul>
+
+            <h4>Key Innovation</h4>
+            <p>
+              The <strong>Projection2Dto3D</strong> architecture addresses the core challenge of lifting 2D information
+              to 3D space, using a hierarchical approach that preserves spatial relationships while expanding dimensionality.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section: Diffusion Transformer (DiT) -->
+        <section id="dit" class="card">
+          <div class="container">
+            <h3>Diffusion Transformer (DiT) <span class="badge-proposed">Proposed</span></h3>
+
+            <h4>Motivation</h4>
+            <p>
+              Beyond UNet-based diffusion, we implemented a <strong>Diffusion Transformer (DiT)</strong> architecture
+              for improved scalability and global attention mechanisms. Transformers can better capture long-range
+              dependencies in volumetric data compared to convolutional architectures.
+            </p>
+
+            <h4>Key Components</h4>
+            <ul>
+              <li><strong>Flash Attention 3D:</strong> Memory-efficient attention implementation for volumetric data, enabling O(N) memory instead of O(N&sup2;)</li>
+              <li><strong>Window Attention 3D:</strong> Local attention with relative position encoding for computational efficiency on large volumes</li>
+              <li><strong>3D Patch Embedding:</strong> Converts 3D volumes into sequences of patch tokens for transformer processing</li>
+              <li><strong>3D Positional Encoding:</strong> Sinusoidal encoding extended to three spatial dimensions (D, H, W)</li>
+            </ul>
+
+            <h4>DiT Block Architecture</h4>
+            <ul>
+              <li>LayerNorm &rarr; Self-Attention (Flash/Window) &rarr; Residual</li>
+              <li>LayerNorm &rarr; MLP (4x expansion) &rarr; Residual</li>
+              <li>Time embedding injection via adaptive projection</li>
+              <li>Optional multi-view cross-attention for 2D&rarr;3D conditioning</li>
+            </ul>
+
+            <h4>DiT3D Configuration</h4>
+            <ul>
+              <li>Input: 32&sup3; latent volume, patch size 2</li>
+              <li>Hidden dimension: 1024, Depth: 24 blocks</li>
+              <li>16 attention heads, MLP ratio 4.0</li>
+              <li>Supports multi-view conditioning (3 views)</li>
+            </ul>
+
+            <!-- DiT Architecture Diagram -->
+            <div class="diagram-container">
+              <img src="assets/dit-architecture.svg" alt="Diffusion Transformer 3D architecture showing patch embedding, positional encoding, DiT blocks with Flash Attention, and output head">
+              <figcaption>DiT3D Architecture</figcaption>
+            </div>
+
+            <div class="tech-stack">
+              <span class="tech-tag">Transformer</span>
+              <span class="tech-tag">Flash Attention</span>
+              <span class="tech-tag">Window Attention</span>
+              <span class="tech-tag">3D Patches</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Cross-Attention Mechanisms -->
+        <section id="cross-attention" class="card">
+          <div class="container">
+            <h3>Cross-Attention Mechanisms <span class="badge-proposed">Proposed</span></h3>
+
+            <h4>Challenge</h4>
+            <p>
+              Mapping 2D information to 3D space requires sophisticated attention mechanisms that can
+              relate 2D spatial features to 3D volumetric positions. Simple projection is insufficient
+              for capturing complex anatomical correspondences.
+            </p>
+
+            <h4>Enhanced Cross-Attention for 2D&rarr;3D</h4>
+            <ul>
+              <li><strong>Query:</strong> 3D volumetric features (what we want to generate)</li>
+              <li><strong>Key/Value:</strong> 2D projection features (conditioning information)</li>
+              <li>Adaptive Instance Normalization (AdaIN) for style transfer from 2D to 3D</li>
+              <li>Scaled dot-product attention with optional masking</li>
+            </ul>
+
+            <h4>Multi-View Cross-Attention</h4>
+            <p>
+              For improved 3D reconstruction, we implemented multi-view conditioning that fuses
+              information from multiple 2D projections:
+            </p>
+            <ul>
+              <li>Separate cross-attention modules for each view (frontal, lateral, oblique)</li>
+              <li>View-specific feature extraction preserves projection-specific information</li>
+              <li>Learned view combination via linear projection + LayerNorm + GELU</li>
+              <li>Handles missing views via attention masking</li>
+            </ul>
+
+            <h4>Benefits</h4>
+            <ul>
+              <li>Better handling of occluded structures visible in one view but not another</li>
+              <li>Improved depth estimation from multiple projection angles</li>
+              <li>More robust reconstruction when single-view information is ambiguous</li>
+            </ul>
+
+            <!-- Cross-Attention Flow Diagram -->
+            <div class="diagram-container">
+              <img src="assets/cross-attention-flow.svg" alt="Multi-View Cross-Attention flow showing 2D views as Key/Value, 3D features as Query, separate cross-attention modules, and view combination">
+              <figcaption>Multi-View Cross-Attention Architecture</figcaption>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Model Parallelism -->
+        <section id="model-parallelism" class="card">
+          <div class="container">
+            <h3>Model Parallelism <span class="badge-proposed">Proposed</span></h3>
+
+            <h4>Scaling Challenge</h4>
+            <p>
+              Large-scale 3D diffusion models with transformer architectures can exceed single-GPU memory.
+              We implemented advanced parallelism strategies for training models that don't fit on a single device.
+            </p>
+
+            <h4>Parallelism Strategies</h4>
+            <ul>
+              <li><strong>Pipeline Parallelism:</strong> Split model layers across GPUs, process microbatches in pipeline fashion</li>
+              <li><strong>Tensor Parallelism:</strong> Split individual layers (attention heads, MLP) across GPUs</li>
+              <li><strong>Hybrid PP+TP:</strong> Combine both for maximum scalability</li>
+            </ul>
+
+            <h4>Implementation Features</h4>
+            <ul>
+              <li>Configurable pipeline and tensor parallel sizes</li>
+              <li>Automatic process group initialization (NCCL backend)</li>
+              <li>Activation checkpointing for memory efficiency</li>
+              <li>Mixed precision (FP16) with loss scaling</li>
+              <li>CPU offloading for optimizer states</li>
+              <li>Memory and communication profiling</li>
+            </ul>
+
+            <h4>Configuration</h4>
+            <ul>
+              <li>Pipeline parallel size: configurable stages</li>
+              <li>Tensor parallel modes: 1D, 2D, or 3D sharding</li>
+              <li>Microbatch size tuning for pipeline efficiency</li>
+              <li>Gradient accumulation integration</li>
+            </ul>
+
+            <!-- Model Parallelism Diagram -->
+            <div class="diagram-container">
+              <img src="assets/model-parallelism.svg" alt="Hybrid Model Parallelism showing Pipeline Parallel layer split across stages and Tensor Parallel head split within attention layers">
+              <figcaption>Hybrid Pipeline + Tensor Parallelism</figcaption>
+            </div>
+
+            <div class="tech-stack">
+              <span class="tech-tag">Pipeline Parallel</span>
+              <span class="tech-tag">Tensor Parallel</span>
+              <span class="tech-tag">NCCL</span>
+              <span class="tech-tag">Activation Checkpoint</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Advanced Medical Metrics -->
+        <section id="medical-metrics" class="card">
+          <div class="container">
+            <h3>Advanced Medical Metrics <span class="badge-proposed">Proposed</span></h3>
+
+            <h4>Beyond Standard Metrics</h4>
+            <p>
+              Standard metrics (Dice, IoU) are insufficient for evaluating clinical utility of 3D medical
+              reconstructions. We implemented comprehensive metrics using <strong>MONAI</strong> and
+              <strong>SimpleITK</strong> for rigorous evaluation.
+            </p>
+
+            <h4>Surface-Based Metrics</h4>
+            <ul>
+              <li><strong>Surface Distance (Mean/Std):</strong> Average distance between predicted and ground truth surfaces</li>
+              <li><strong>Hausdorff Distance (95%):</strong> Maximum surface deviation, robust to outliers</li>
+              <li><strong>Surface Dice:</strong> Dice coefficient computed on surface voxels only</li>
+            </ul>
+
+            <h4>Volume-Based Metrics</h4>
+            <ul>
+              <li><strong>Volume Difference (mm&sup3;):</strong> Absolute difference in anatomical volume</li>
+              <li><strong>Volume Ratio:</strong> Predicted/target volume ratio</li>
+              <li><strong>Jaccard Coefficient:</strong> Intersection over union</li>
+              <li><strong>False Negative/Positive Error:</strong> Under/over-segmentation rates</li>
+            </ul>
+
+            <h4>Shape-Based Metrics</h4>
+            <ul>
+              <li><strong>Roundness:</strong> How spherical the structure is</li>
+              <li><strong>Elongation:</strong> Ratio of principal axes</li>
+              <li><strong>Flatness:</strong> 3D shape compactness measure</li>
+            </ul>
+
+            <h4>Clinical Relevance</h4>
+            <p>
+              These metrics directly relate to clinical measurements used in aortic disease diagnosis:
+              diameter measurements depend on surface accuracy, volume measurements for aneurysm sizing,
+              and shape metrics for detecting abnormal morphology.
+            </p>
+
+            <div class="tech-stack">
+              <span class="tech-tag">MONAI</span>
+              <span class="tech-tag">SimpleITK</span>
+              <span class="tech-tag">Surface Dice</span>
+              <span class="tech-tag">Hausdorff</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Implemented Production Systems Header -->
+        <section id="production-systems" class="implemented-header">
+          <div class="container">
+            <h3>Implemented Production Systems</h3>
+            <p>
+              The following sections describe fully implemented and deployed systems currently in production use.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 4: Ray Pipeline -->
+        <section id="ray-pipeline" class="card">
+          <div class="container">
+            <h3>Ray Distributed Inference Pipeline</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Sequential model execution created bottlenecks; each analysis step had to complete
+              before the next could begin. Hospital deployments have heterogeneous hardware
+              (varying GPU counts, memory sizes), requiring adaptive resource allocation.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Built a DAG-based distributed inference system using Ray framework. Models execute
+              as independent actors with automatic task scheduling and zero-copy data sharing
+              via Apache Arrow-based Object Store.
+            </p>
+
+            <!-- Module Dependency DAG Diagram -->
+            <div class="diagram-container">
+              <img src="assets/dag-scheduling.svg" alt="Module Dependency Graph showing DAG scheduling with Level 0 (Lung, Heart, Bone, Aorta), Level 1 (COVID, Vessel, TB, CTR, Diameter), and Level 2 (TB Screen, Peripheral, Volumetry)">
+              <figcaption>Module Dependency Graph</figcaption>
+            </div>
+
+            <!-- Ray Distributed Architecture Diagram -->
+            <div class="diagram-container">
+              <img src="assets/ray-distributed.svg" alt="Ray Distributed Architecture with Head Node coordinating Workers with fractional GPU allocation and model caching">
+              <figcaption>Ray Distributed Architecture</figcaption>
+            </div>
+
+            <!-- Adaptive DAG Scheduling Diagram -->
+            <div class="diagram-container">
+              <img src="assets/adaptive-dag-scheduling.svg" alt="Adaptive DAG Scheduling with Performance Profiler, Dependency Graph Manager, and Adaptive Scheduler coordinating Worker Pools across execution levels">
+              <figcaption>Adaptive DAG Scheduling (Tier 3)</figcaption>
+            </div>
+
+            <h4>Technical Implementation</h4>
+            <ul>
+              <li>Ray actors for stateful model serving with GPU memory persistence</li>
+              <li>DAG scheduler with dependency resolution and parallel execution</li>
+              <li>Zero-copy data sharing between actors via Ray Object Store</li>
+              <li>Resource monitoring with automatic GPU/CPU allocation</li>
+              <li>Graceful degradation for hardware failures</li>
+            </ul>
+
+            <div class="metrics">
+              <h4>Results</h4>
+              <div class="metric-item">
+                <span class="metric-value">6x</span>
+                <span class="metric-label">Batch Throughput</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">2.8x</span>
+                <span class="metric-label">Per-Case Speedup</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 4: Nuitka -->
+        <section id="nuitka" class="card">
+          <div class="container">
+            <h3>Refactoring &amp; Nuitka Deployment</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Hospital deployment required distributing deep learning inference code as standalone
+              executables without Python environment setup. IP protection was also critical
+              for commercial deployment.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Major codebase refactoring to remove unnecessary abstractions, followed by Nuitka
+              compilation to produce standalone executables with bundled CUDA/PyTorch dependencies.
+              Applied model optimizations (TensorRT, ONNX, FP16) for inference acceleration.
+            </p>
+
+            <h4>Technical Details</h4>
+            <ul>
+              <li>Codebase refactoring: removed dead code, unified configurations, simplified architecture</li>
+              <li>Model optimization: TensorRT compilation, ONNX export, FP16 precision</li>
+              <li>Nuitka compilation with PyTorch/CUDA bundling for standalone deployment</li>
+              <li>CdsPyEncrypt integration for source code protection</li>
+            </ul>
+
+            <!-- Before/After Comparison Diagram -->
+            <div class="architecture-diagram">
+              <div class="diagram-title">Codebase Refactoring Results</div>
+              <div class="comparison-diagram">
+                <div class="comparison-side before">
+                  <div class="comparison-label">Before</div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Total Files</span>
+                    <span class="stat-value">110</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Lines of Code</span>
+                    <span class="stat-value">34,266</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Duplicate Code</span>
+                    <span class="stat-value">47%</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Entry Points</span>
+                    <span class="stat-value">6</span>
+                  </div>
+                </div>
+                <div class="comparison-side after">
+                  <div class="comparison-label">After</div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Total Files</span>
+                    <span class="stat-value">15</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Lines of Code</span>
+                    <span class="stat-value">8,017</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Duplicate Code</span>
+                    <span class="stat-value">0%</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Entry Points</span>
+                    <span class="stat-value">1</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="metrics">
+              <h4>Results</h4>
+              <div class="metric-item">
+                <span class="metric-value">73%</span>
+                <span class="metric-label">Codebase Reduction</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">Standalone</span>
+                <span class="metric-label">Executable Deployment</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: BioAge -->
+        <section id="bioage" class="card">
+          <div class="container">
+            <h3>BioAge Prediction Module (R to C++)</h3>
+
+            <h4>Problem</h4>
+            <p>
+              The biological age estimation algorithm was implemented in R for research. Production
+              deployment required: no R runtime dependency, sub-millisecond latency, thread safety,
+              and GPU pipeline integration with LibTorch.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Complete algorithm port from R to C++ using normative modeling approach.
+              The algorithm uses Mahalanobis distance to measure deviation from healthy reference
+              population, converting organ-level health distances to biological age estimates.
+            </p>
+
+            <h4>Technical Details</h4>
+            <ul>
+              <li>1,850+ lines of production C++ code with numerical equivalence to R</li>
+              <li>Normative modeling: Mahalanobis distance for deviation measurement</li>
+              <li>Zero external file dependencies via embedded statistical parameters</li>
+              <li>Banker's rounding (IEC 60559) for numerical fidelity with R</li>
+              <li>52 clinical output fields including risk scores and recommendations</li>
+            </ul>
+
+            <div class="metrics">
+              <h4>Results</h4>
+              <div class="metric-item">
+                <span class="metric-value">150x</span>
+                <span class="metric-label">Faster than R</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">0</span>
+                <span class="metric-label">File Dependencies</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 6: Dataset -->
+        <section id="dataset" class="card">
+          <div class="container">
+            <h3>Dataset Acquisition</h3>
+
+            <h4>Challenge</h4>
+            <p>
+              FDA and MFDS regulatory submissions require extensive clinical validation on
+              diverse, representative datasets. Acquiring and managing medical imaging data
+              at scale presents unique logistical and compliance challenges.
+            </p>
+
+            <h4>Contributions</h4>
+            <ul>
+              <li>Directed end-to-end acquisition of massive-scale medical datasets (100TB+)</li>
+              <li>Coordinated with multiple hospital partners for data collection</li>
+              <li>Established data governance and de-identification pipelines</li>
+              <li>Managed storage infrastructure and data versioning</li>
+              <li>Prepared documentation for regulatory submissions</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="project-footer">
+          <p>&copy; Wonchan Son | <a href="../../index.html">Back to Home</a></p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

@@ -36,15 +36,24 @@
     <!-- ════════════════════════════════════════════════════════
          OVERVIEW
          ════════════════════════════════════════════════════════ -->
-    <section class="section print-break-before">
+    <section class="section">
       <div class="text-col">
         <h2>Overview</h2>
         <p>
-          DeepCatch X is a medical imaging platform that extracts
-          clinical measurements from standard chest X-rays that
-          traditionally require CT scans, using generative AI.
+          DeepCatch X is a medical imaging platform that screens for aortic
+          disease from standard chest X-rays. The production system uses
+          conditional diffusion models for 2D aorta extraction, then
+          derives 3D diameter measurements from the generated projections.
           A distributed Ray inference pipeline achieves 100x daily
           throughput improvement.
+        </p>
+        <p>
+          Key production achievements include processing 2.3M+ chest
+          radiographs, a 76% codebase reduction, an R-to-C++ BioAge port,
+          and Nuitka-compiled standalone deployment. Beyond what&rsquo;s
+          deployed, the project includes a proposed Stage 2 architecture
+          for 3D volumetric reconstruction using custom Latent Diffusion
+          Models.
         </p>
         <div class="tags">
           <span class="tag">PyTorch</span>
@@ -68,7 +77,7 @@
          METRICS BANNER
          ════════════════════════════════════════════════════════ -->
     <section class="metrics-banner">
-      <div class="metrics-grid cols-5">
+      <div class="metrics-grid">
         <div class="metric-card">
           <div class="number">100x</div>
           <div class="label">Daily Throughput</div>
@@ -82,12 +91,58 @@
           <div class="label">Code Reduction</div>
         </div>
         <div class="metric-card">
-          <div class="number">2.3M+</div>
-          <div class="label">CRs Processed</div>
-        </div>
-        <div class="metric-card">
           <div class="number">100TB+</div>
           <div class="label">Dataset Scale</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">1st</div>
+          <div class="label">Diffusion in Aorta</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">GTC 2025</div>
+          <div class="label">NVIDIA Showcase</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">DHA 2024</div>
+          <div class="label">Digital Health Awards</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         IMPLEMENTED vs PROPOSED
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>What&rsquo;s Built vs. What&rsquo;s Designed</h2>
+        <p>
+          This project spans production deployment and forward-looking research.
+          Everything below is clearly marked.
+        </p>
+        <div class="status-callout">
+          <div class="status-col">
+            <h4><span class="dot dot-green"></span> Implemented</h4>
+            <ul>
+              <li>Conditional diffusion for 2D aorta extraction</li>
+              <li>Ray distributed inference pipeline</li>
+              <li>Codebase refactoring &amp; Nuitka deployment</li>
+              <li>BioAge R &rarr; C++ port</li>
+              <li>100TB+ dataset acquisition</li>
+              <li>NVIDIA GTC 2025 showcase</li>
+            </ul>
+          </div>
+          <div class="status-col">
+            <h4><span class="dot dot-gray"></span> Proposed</h4>
+            <ul>
+              <li>3D LDM volumetric reconstruction</li>
+              <li>Diffusion Transformer (DiT) backbone</li>
+              <li>Multi-view cross-attention</li>
+              <li>Pipeline + tensor model parallelism</li>
+              <li>Advanced medical metrics (MONAI)</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -100,6 +155,21 @@
     <section class="section">
       <div class="text-col">
         <h2>Data Acquisition &amp; Management</h2>
+        <p>
+          Building a clinical-grade aortic disease detector required assembling
+          one of the largest paired X-ray/CT datasets in this domain &mdash;
+          100TB+ across domestic hospital partnerships and international
+          data vendors.
+        </p>
+
+        <h3>Domestic Partnerships</h3>
+        <p>
+          Primary training data came from Seoul National University Hospital
+          (n=50,000) and the National Lung Screening Trial (n=13,895). External
+          validation used three independent hospital cohorts (n=16,544) with
+          strict exclusion criteria for interreader discrepancy, incomplete
+          aorta coverage, and CT quality issues.
+        </p>
       </div>
 
       <div class="wide-col">
@@ -120,22 +190,67 @@
         <h3>International Data Vendors</h3>
         <p>
           Supplementary datasets were sourced from international medical data
-          platforms to meet project requirements: demographic diversity
-          (ethnicity, sex, height/weight), scan conditions (slice
-          thickness, chest coverage), and clinical balance
-          (normal vs. disease):
+          platforms to increase pathological diversity:
+          <a href="https://gradienthealth.io/">Gradient Health</a>,
+          <a href="https://www.segmed.ai/">Segmed</a>, and
+          <a href="https://www.withprotege.ai/">Protege</a>.
         </p>
-        <div style="display: flex; align-items: center; gap: 40px; margin-top: 12px; flex-wrap: wrap">
-          <img src="../../images/logos/gradient-health.svg" alt="Gradient Health" style="height: 32px; opacity: 0.7"/>
-          <span style="display: flex; align-items: center; gap: 6px; opacity: 0.7">
-            <img src="../../images/logos/segmed.png" alt="Segmed" style="height: 32px; border-radius: 4px"/>
-            <span style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; color: #37352f">Segmed</span>
-          </span>
-          <img src="../../images/logos/protege.svg" alt="Protege" style="height: 32px; opacity: 0.7"/>
-        </div>
 
+        <h3>Production Scale</h3>
+        <p>
+          Beyond the research dataset, the deployed Ray inference pipeline has
+          processed 2.3M+ chest radiographs (CR) in production &mdash;
+          running all 14 segmentation and measurement modules per case.
+          The original sequential code processed 2&ndash;3K cases/day;
+          the optimized pipeline achieves 200&ndash;300K cases/day.
+        </p>
+
+        <h3>Data Augmentation</h3>
+        <p>
+          Multi-organ segmentation masks (lung, bone, aorta, airway, heart)
+          enabled targeted augmentation strategies, generating diverse
+          training variations while preserving anatomical consistency.
+        </p>
       </div>
 
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="assets/dcx-data-augmentation.png"
+            alt="Grid of augmented chest X-ray training data showing varied orientations and organ-specific segmentation masks"
+            style="max-width: 70%; display: block; margin: 0 auto"
+          />
+          <figcaption>
+            Augmented Training Data &mdash; Multi-Organ Segmentation Masks
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <div style="margin: 16px 0">
+          <span class="inline-metric">
+            <span class="val">2.3M+</span>
+            <span class="lbl">CRs processed</span>
+          </span>
+          <span class="inline-metric">
+            <span class="val">300K/day</span>
+            <span class="lbl">vs 3K/day original</span>
+          </span>
+          <span class="inline-metric">
+            <span class="val">100TB+</span>
+            <span class="lbl">total dataset</span>
+          </span>
+          <span class="inline-metric">
+            <span class="val">80K+</span>
+            <span class="lbl">training cases</span>
+          </span>
+          <span class="inline-metric">
+            <span class="val">16.5K</span>
+            <span class="lbl">external validation</span>
+          </span>
+        </div>
+      </div>
     </section>
 
     <hr class="divider" />
@@ -147,21 +262,10 @@
       <div class="text-col">
         <h2>Research Innovation</h2>
         <p>
-          The core research contribution is a conditional diffusion model
-          that extracts 2D aorta projections from X-rays. A 3D volumetric
-          extension via Latent Diffusion with a 3D VAE, Flash Attention,
-          and window attention for local context is proposed and
-          implemented.
-        </p>
-      </div>
-
-      <div class="text-col">
-        <p>
-          Training uses a ConcatConditionedUNet with noise prediction
-          objective (MSE loss), conditioned on X-ray input via channel
-          concatenation. 4-GPU DDP training (NCCL) with gradient
-          accumulation (effective batch size 512), mixed precision
-          (FP16 + GradScaler), and cosine LR schedule with warmup.
+          The core research contribution is a two-stage generative pipeline:
+          Stage 1 extracts 2D aorta projections from X-rays using conditional
+          Diffusion, and the proposed Stage 2 reconstructs 3D volumes from those
+          projections using a custom Latent Diffusion Model.
         </p>
       </div>
 
@@ -180,21 +284,33 @@
         </figure>
       </div>
 
+      <div class="text-col">
+        <h3>
+          Latent Diffusion for 3D Reconstruction
+          <span class="badge badge-proposed">Proposed</span>
+        </h3>
+        <p>
+          Direct 3D diffusion on 128&sup3; volumes is memory-prohibitive (~48GB
+          for training). The LDM approach compresses volumes to a 256-dim latent
+          space via a 3D VAE, then runs diffusion in that compact space. A novel
+          Projection2Dto3D network bridges 2D features to 3D latent
+          representations. The denoiser supports both a UNet3D backbone and a
+          Diffusion Transformer (DiT) alternative with 3D patch embeddings,
+          Flash Attention, and window attention for local context.
+        </p>
+      </div>
+
       <div class="wide-col">
-        <figure class="content-image-wrap">
+        <figure class="diagram">
           <img
-            class="content-image"
-            src="assets/dcx-data-augmentation.png"
-            style="max-width: 60%; display: block; margin: 0 auto"
-            alt="Data augmentation grid: synthetic X-ray variations across chest, spine, aorta, heart, and lung segmentations"
+            src="assets/ldm-high-level.svg?v=4"
+            alt="LatentDiffusion3D high-level architecture: Input 2D Aorta through Projection2Dto3D, UNet3DConditioned denoiser, VAE3D Decoder to 3D Volume"
           />
           <figcaption>
-            Data Augmentation &mdash; Synthetic Training Samples Across Organ
-            Segmentations
+            LatentDiffusion3D &mdash; High-Level Architecture
           </figcaption>
         </figure>
       </div>
-
     </section>
 
     <hr class="divider" />
@@ -206,59 +322,57 @@
       <div class="text-col">
         <h2>Inference Optimization</h2>
         <p>
-          Hospital datasets arrive on physical SSDs &mdash; terabytes of
-          DICOM files with no API endpoint. The Ray-based pipeline
-          orchestrates 14 modules as a DAG of independent actors with
-          automatic scheduling and zero-copy data sharing.
+          Processing large-scale datasets delivered on-site via SSD/HDD
+          requires high throughput across heterogeneous hardware. The
+          Ray-based pipeline orchestrates 14 modules as a DAG of
+          independent actors with automatic scheduling and zero-copy data
+          sharing.
         </p>
+
+        <div style="margin: 24px 0">
+          <span class="inline-metric">
+            <span class="val">100x</span>
+            <span class="lbl">daily throughput</span>
+          </span>
+          <span class="inline-metric">
+            <span class="val">300K/day</span>
+            <span class="lbl">vs 3K/day original</span>
+          </span>
+          <span class="inline-metric">
+            <span class="val">2.8x</span>
+            <span class="lbl">per-case speedup</span>
+          </span>
+        </div>
       </div>
 
       <div class="wide-col">
         <figure class="diagram">
           <img
-            src="assets/dag-scheduling.svg?v=5"
-            alt="Module dependency DAG: Level 0 independent GPU segmentation (Lung, Heart, Bone, Bone Supp, Airway, Aorta, T12-L1, LAA), Level 1 lung-dependent GPU detection (COVID, Vessel, TB), Level 2 CPU post-processing (Peripheral, CTR, Diameter)"
+            src="assets/ray-distributed.svg?v=4"
+            alt="Batch Mode: Ray Head Node distributes 1 module per worker, each processing all files with model cached in VRAM. 3-phase scheduling: Phase 1 independent GPU modules, Phase 2 lung-dependent GPU modules, Phase 3 CPU post-processing."
           />
           <figcaption>
-            Module Dependency DAG &mdash; Parallel Execution Levels
+            Batch Mode &mdash; 1 Module per Worker, All Files
           </figcaption>
         </figure>
 
         <figure class="diagram">
           <img
-            src="assets/ray-distributed.svg?v=5"
-            alt="Batch Mode: Ray Head Node distributes modules per worker via affinity, each processing all files with models cached in VRAM. 3-phase scheduling."
-          />
-        </figure>
-
-        <figure class="diagram">
-          <img
-            src="assets/ray-pipeline.svg?v=5"
-            alt="Split-Pool Pipeline: files split into mini-batches, GPU worker pool runs aorta segmentation in parallel, masks flow to CPU worker pool for diameter measurement. Async stage overlap."
-          />
-        </figure>
-      </div>
-
-      <div class="text-col print-break-before">
-        <h3>Large-Scale Processing</h3>
-        <p>
-          Beyond scheduling, the system includes layers of
-          hardening that enable reliable processing of 2.3M+ files across
-          multi-day runs: adaptive weight management with two loading
-          strategies, memory-bounded workers with automatic respawn, and
-          crash-safe persistence via SQLite state tracking and atomic writes.
-        </p>
-      </div>
-
-      <div class="wide-col">
-        <figure class="diagram">
-          <img
-            src="assets/production-architecture.svg?v=1"
-            alt="Production architecture: AdaptiveScheduler with dependency graph, performance profiler, and resource manager; SharedWeightsManager with eager and level-based strategies via Ray Object Store; Worker lifecycle with RSS monitoring and straggler detection; Data integrity with SQLite StateDB, atomic writes, and backpressure control"
+            src="assets/ray-pipeline.svg?v=4"
+            alt="Split-Pool Pipeline: files split into mini-batches, GPU worker pool runs aorta segmentation in parallel, masks flow to CPU worker pool for diameter measurement and temp file cleanup. GPU never waits for CPU."
           />
           <figcaption>
-            Large-Scale Processing &mdash; Scheduler, Memory, and Persistence
-            Layers
+            Split-Pool Pipeline &mdash; GPU + CPU Worker Pools
+          </figcaption>
+        </figure>
+
+        <figure class="diagram">
+          <img
+            src="assets/dag-scheduling.svg?v=4"
+            alt="Module dependency DAG: Level 0 independent GPU segmentation (Lung, Heart, Bone, Bone Supp, Airway, Aorta, T12-L1, LAA), Level 1 lung-dependent GPU detection (COVID, Vessel, TB), Level 2 CPU post-processing (Peripheral, CTR, Diameter)"
+          />
+          <figcaption>
+            Module Dependency DAG &mdash; Parallel Execution Levels
           </figcaption>
         </figure>
       </div>
@@ -334,10 +448,10 @@
         <p>
           The platform estimates biological age from chest X-ray biomarkers,
           outputting 52 clinical fields including risk scores and life
-          expectancy. The original R algorithm was ported to
+          expectancy. The original R algorithm was ported to 1,850+ lines of
           production C++ and compiled into a shared binary for integration into the
           deployment pipeline. Achieves numerical equivalence to the
-          original R implementation. Deployed across check-up centers.
+          original R implementation.
         </p>
       </div>
 

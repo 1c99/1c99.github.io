@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" style="background:#fff">
+  <style>
+    .box { fill: #fafafa; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-accent { fill: #fdf2f2; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-inner { fill: #fff; stroke: #d3d1cb; stroke-width: 1; }
+    .text { font-family: 'Inter', -apple-system, sans-serif; fill: #37352f; font-size: 13px; font-weight: 500; }
+    .text-title { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 16px; font-weight: 700; }
+    .text-small { font-family: 'Inter', -apple-system, sans-serif; fill: #787774; font-size: 10px; font-weight: 400; }
+    .text-label { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 11px; font-weight: 600; }
+    .text-white { font-family: 'Inter', -apple-system, sans-serif; fill: #fff; font-size: 10px; font-weight: 600; }
+    .text-code { font-family: 'Source Code Pro', monospace; fill: #37352f; font-size: 10px; font-weight: 500; }
+    .line { stroke: #d3d1cb; stroke-width: 1.5; fill: none; }
+    .line-flow { stroke: #a31f34; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #a31f34; }
+    .arrow-gray { fill: #d3d1cb; }
+    .badge { fill: #a31f34; }
+  </style>
+
+  <!-- Title -->
+  <text x="380" y="24" text-anchor="middle" class="text-title">DDP Training Pipeline — 4-GPU, Mixed Precision</text>
+  <line x1="60" y1="36" x2="700" y2="36" class="line" stroke-dasharray="4,4"/>
+
+  <!-- ═══ Layer 1: torchrun / 4 GPUs ═══ -->
+  <rect x="60" y="48" width="640" height="90" rx="10" class="box-accent"/>
+  <text x="80" y="66" class="text-label">torchrun --nproc_per_node=4</text>
+
+  <rect x="80" y="76" width="135" height="50" rx="6" class="box-inner"/>
+  <rect x="92" y="80" width="50" height="16" rx="3" class="badge"/>
+  <text x="117" y="92" text-anchor="middle" class="text-white" style="font-size:8px">GPU 0</text>
+  <text x="147" y="100" text-anchor="middle" class="text-small">rank 0 · bs=4</text>
+  <text x="147" y="118" text-anchor="middle" class="text-code">ConcatCondUNet</text>
+
+  <rect x="235" y="76" width="135" height="50" rx="6" class="box-inner"/>
+  <rect x="247" y="80" width="50" height="16" rx="3" class="badge"/>
+  <text x="272" y="92" text-anchor="middle" class="text-white" style="font-size:8px">GPU 1</text>
+  <text x="302" y="100" text-anchor="middle" class="text-small">rank 1 · bs=4</text>
+  <text x="302" y="118" text-anchor="middle" class="text-code">ConcatCondUNet</text>
+
+  <rect x="390" y="76" width="135" height="50" rx="6" class="box-inner"/>
+  <rect x="402" y="80" width="50" height="16" rx="3" class="badge"/>
+  <text x="427" y="92" text-anchor="middle" class="text-white" style="font-size:8px">GPU 2</text>
+  <text x="457" y="100" text-anchor="middle" class="text-small">rank 2 · bs=4</text>
+  <text x="457" y="118" text-anchor="middle" class="text-code">ConcatCondUNet</text>
+
+  <rect x="545" y="76" width="135" height="50" rx="6" class="box-inner"/>
+  <rect x="557" y="80" width="50" height="16" rx="3" class="badge"/>
+  <text x="582" y="92" text-anchor="middle" class="text-white" style="font-size:8px">GPU 3</text>
+  <text x="612" y="100" text-anchor="middle" class="text-small">rank 3 · bs=4</text>
+  <text x="612" y="118" text-anchor="middle" class="text-code">ConcatCondUNet</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="380" y1="138" x2="380" y2="158" class="line-flow"/>
+  <polygon points="380,166 374,156 386,156" class="arrow"/>
+
+  <!-- ═══ Layer 2: Per-Step (accumulation) ═══ -->
+  <rect x="60" y="166" width="640" height="60" rx="10" class="box-accent"/>
+  <text x="80" y="186" class="text-label">Per Step (×32 accumulation)</text>
+  <text x="380" y="212" text-anchor="middle" class="text-code">autocast(fp16) → forward → loss / 32 → scaler.scale(loss).backward()</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="380" y1="226" x2="380" y2="246" class="line-flow"/>
+  <polygon points="380,254 374,244 386,244" class="arrow"/>
+
+  <!-- ═══ Layer 3: Optimizer Step ═══ -->
+  <rect x="60" y="254" width="640" height="60" rx="10" class="box-accent"/>
+  <text x="80" y="274" class="text-label">Every 32 Steps — NCCL all_reduce</text>
+  <text x="380" y="300" text-anchor="middle" class="text-code">unscale → clip_grad_norm(1.0) → scaler.step(optimizer) → cosine_lr.step()</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="380" y1="314" x2="380" y2="334" class="line-flow"/>
+  <polygon points="380,342 374,332 386,332" class="arrow"/>
+
+  <!-- ═══ Layer 4: Result ═══ -->
+  <rect x="160" y="342" width="440" height="36" rx="8" class="box"/>
+  <text x="380" y="365" text-anchor="middle" class="text">Effective Batch Size: 4 GPU × 4 bs × 32 accum = 512</text>
+
+  <!-- Bottom annotation -->
+  <text x="380" y="400" text-anchor="middle" class="text-small">AdamW (lr=1e-4, warmup 1000 steps) · GradScaler (dynamic loss scaling) · cudnn.benchmark</text>
+</svg>

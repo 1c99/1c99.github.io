@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" style="background:#fff">
+  <style>
+    .box { fill: #fafafa; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-accent { fill: #fdf2f2; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-model { fill: #fafafa; stroke: #a31f34; stroke-width: 1.5; }
+    .box-loss { fill: #fdf2f2; stroke: #a31f34; stroke-width: 1.5; }
+    .text { font-family: 'Inter', -apple-system, sans-serif; fill: #37352f; font-size: 13px; font-weight: 500; }
+    .text-title { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 16px; font-weight: 700; }
+    .text-small { font-family: 'Inter', -apple-system, sans-serif; fill: #787774; font-size: 10px; font-weight: 400; }
+    .text-code { font-family: 'Source Code Pro', monospace; fill: #37352f; font-size: 10px; font-weight: 500; }
+    .line { stroke: #d3d1cb; stroke-width: 1.5; fill: none; }
+    .line-flow { stroke: #a31f34; stroke-width: 1.5; fill: none; }
+    .line-ref { stroke: #a31f34; stroke-width: 1; fill: none; stroke-dasharray: 5,3; opacity: 0.5; }
+    .arrow { fill: #a31f34; }
+    .arrow-gray { fill: #d3d1cb; }
+  </style>
+
+  <!-- Title -->
+  <text x="380" y="24" text-anchor="middle" class="text-title">Conditional DDPM Training — X-ray → Aorta</text>
+  <line x1="60" y1="36" x2="700" y2="36" class="line" stroke-dasharray="4,4"/>
+
+  <!-- ═══ Inputs ═══ -->
+
+  <!-- X-ray (condition) — left -->
+  <rect x="120" y="52" width="180" height="48" rx="8" class="box-accent"/>
+  <text x="210" y="74" text-anchor="middle" class="text">X-ray</text>
+  <text x="210" y="92" text-anchor="middle" class="text-small">condition · 512×512</text>
+
+  <!-- Aorta GT (target) — right -->
+  <rect x="460" y="52" width="180" height="48" rx="8" class="box-accent"/>
+  <text x="550" y="74" text-anchor="middle" class="text">Aorta GT</text>
+  <text x="550" y="92" text-anchor="middle" class="text-small">target · 512×512</text>
+
+  <!-- Aorta GT → Forward Diffusion -->
+  <line x1="550" y1="100" x2="550" y2="124" class="line-flow"/>
+  <polygon points="550,132 544,122 556,122" class="arrow"/>
+
+  <!-- ═══ Forward Diffusion ═══ -->
+  <rect x="440" y="132" width="220" height="52" rx="8" class="box"/>
+  <text x="550" y="154" text-anchor="middle" class="text" style="font-size:12px">Forward Diffusion</text>
+  <text x="550" y="172" text-anchor="middle" class="text-code">x_t = √ᾱ_t · x₀ + √(1-ᾱ_t) · ε</text>
+
+  <!-- Noise & timestep annotation -->
+  <text x="550" y="198" text-anchor="middle" class="text-small">ε ~ N(0, I) · t ~ U(0, 1000) · cosine schedule</text>
+
+  <!-- Noisy aorta → concat -->
+  <line x1="550" y1="184" x2="550" y2="218" class="line-flow"/>
+  <line x1="550" y1="218" x2="420" y2="218" class="line-flow"/>
+  <polygon points="420,218 430,212 430,224" class="arrow"/>
+
+  <!-- X-ray → concat -->
+  <line x1="210" y1="100" x2="210" y2="218" class="line"/>
+  <line x1="210" y1="218" x2="340" y2="218" class="line"/>
+  <polygon points="340,218 330,212 330,224" class="arrow-gray"/>
+
+  <!-- ═══ Concat ═══ -->
+  <rect x="340" y="206" width="80" height="24" rx="5" fill="#fff" stroke="#a31f34" stroke-width="1"/>
+  <text x="380" y="222" text-anchor="middle" class="text-code" style="font-size:9px">concat(ch)</text>
+
+  <!-- Concat → UNet -->
+  <line x1="380" y1="230" x2="380" y2="256" class="line-flow"/>
+  <polygon points="380,264 374,254 386,254" class="arrow"/>
+
+  <!-- ═══ Model ═══ -->
+  <rect x="230" y="264" width="300" height="46" rx="10" class="box-model"/>
+  <text x="380" y="286" text-anchor="middle" class="text" style="font-weight:600">ConcatConditionedUNet(x_t, t, x_ray)</text>
+  <text x="380" y="302" text-anchor="middle" class="text-small">7 blocks · channels (32→512) · attention at deep layers</text>
+
+  <!-- UNet → predicted noise -->
+  <line x1="380" y1="310" x2="380" y2="340" class="line-flow"/>
+  <polygon points="380,348 374,338 386,338" class="arrow"/>
+  <text x="440" y="336" class="text-small" style="font-weight:600; fill:#37352f">ε_θ (predicted)</text>
+
+  <!-- ═══ Loss ═══ -->
+  <rect x="280" y="348" width="200" height="40" rx="8" class="box-loss"/>
+  <text x="380" y="368" text-anchor="middle" class="text" style="font-weight:600">L = ‖ε − ε_θ‖²</text>
+  <text x="380" y="382" text-anchor="middle" class="text-small">noise prediction objective</text>
+
+  <!-- Reference line: original noise ε to loss -->
+  <path d="M 660,154 L 680,154 L 680,368 L 480,368" class="line-ref"/>
+  <polygon points="480,368 490,362 490,374" class="arrow" style="opacity:0.4"/>
+  <text x="690" y="158" class="text-small" style="fill:#a31f34; font-weight:500">ε</text>
+
+  <!-- Bottom annotation -->
+  <text x="380" y="418" text-anchor="middle" class="text-small">Inference: denoise from x_T ~ N(0, I) for 100 steps, conditioned on X-ray → clean aorta mask</text>
+</svg>
