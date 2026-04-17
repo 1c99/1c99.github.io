@@ -1,81 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 480" style="background:#1e1e1e">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 450" style="background:#fff">
   <style>
-    .box { fill: none; stroke: #888; stroke-width: 1.5; }
-    .box-fill { fill: #2d2d2d; stroke: #888; stroke-width: 1.5; }
-    .text { font-family: 'Courier New', monospace; fill: #ccc; font-size: 12px; }
-    .text-title { font-family: 'Courier New', monospace; fill: #ccc; font-size: 14px; font-weight: bold; }
-    .text-small { font-family: 'Courier New', monospace; fill: #888; font-size: 10px; }
-    .line { stroke: #888; stroke-width: 1.5; fill: none; }
-    .arrow { fill: #888; }
+    .box-fill { fill: #fafafa; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-accent { fill: #fdf2f2; stroke: #e9e9e7; stroke-width: 1.5; }
+    .text { font-family: 'Inter', -apple-system, sans-serif; fill: #37352f; font-size: 14px; font-weight: 500; }
+    .text-title { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 15px; font-weight: 700; }
+    .text-small { font-family: 'Inter', -apple-system, sans-serif; fill: #787774; font-size: 11px; font-weight: 400; }
+    .text-label { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 12px; font-weight: 600; }
+    .line { stroke: #d3d1cb; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #a31f34; }
   </style>
 
   <!-- Input Sources -->
-  <rect x="40" y="20" width="670" height="55" rx="3" class="box-fill"/>
-  <text x="375" y="40" text-anchor="middle" class="text-title">INPUT SOURCES</text>
-  <text x="120" y="60" text-anchor="middle" class="text-small">CT DICOM</text>
-  <text x="280" y="60" text-anchor="middle" class="text-small">STL Mesh</text>
-  <text x="440" y="60" text-anchor="middle" class="text-small">ASC/CSV</text>
-  <text x="600" y="60" text-anchor="middle" class="text-small">iPad LiDAR</text>
+  <rect x="40" y="16" width="640" height="60" rx="12" class="box-accent"/>
+  <text x="360" y="38" text-anchor="middle" class="text-title">Input Sources</text>
+  <text x="130" y="60" text-anchor="middle" class="text-small">CT DICOM</text>
+  <text x="290" y="60" text-anchor="middle" class="text-small">STL Mesh</text>
+  <text x="440" y="60" text-anchor="middle" class="text-small">ASC / CSV</text>
+  <text x="590" y="60" text-anchor="middle" class="text-small">iPad LiDAR</text>
 
   <!-- Arrows down -->
-  <line x1="120" y1="75" x2="120" y2="95" class="line"/>
-  <line x1="280" y1="75" x2="280" y2="95" class="line"/>
-  <line x1="440" y1="75" x2="440" y2="95" class="line"/>
-  <line x1="600" y1="75" x2="600" y2="95" class="line"/>
-  <line x1="120" y1="95" x2="600" y2="95" class="line"/>
-  <line x1="375" y1="95" x2="375" y2="115" class="line"/>
-  <polygon points="375,125 370,115 380,115" class="arrow"/>
+  <line x1="130" y1="76" x2="130" y2="94" class="line"/>
+  <line x1="290" y1="76" x2="290" y2="94" class="line"/>
+  <line x1="440" y1="76" x2="440" y2="94" class="line"/>
+  <line x1="590" y1="76" x2="590" y2="94" class="line"/>
+  <line x1="130" y1="94" x2="590" y2="94" class="line"/>
+  <line x1="360" y1="94" x2="360" y2="112" class="line"/>
+  <polygon points="360,120 354,110 366,110" class="arrow"/>
 
   <!-- Preprocessing -->
-  <rect x="100" y="130" width="550" height="70" rx="3" class="box-fill"/>
-  <text x="375" y="150" text-anchor="middle" class="text-title">PREPROCESSING</text>
-  <text x="130" y="175" class="text-small">* DICOM decompression</text>
-  <text x="130" y="190" class="text-small">* NIfTI conversion</text>
-  <text x="380" y="175" class="text-small">* Coordinate normalization</text>
-  <text x="380" y="190" class="text-small">* Outlier removal (Z-score)</text>
+  <rect x="80" y="124" width="560" height="68" rx="12" class="box-fill"/>
+  <text x="360" y="148" text-anchor="middle" class="text-title">Preprocessing</text>
+  <text x="140" y="172" class="text-small">DICOM decompression · NIfTI conversion</text>
+  <text x="400" y="172" class="text-small">Coordinate normalization · Outlier removal (Z-score)</text>
 
   <!-- Arrow down branching -->
-  <line x1="375" y1="200" x2="375" y2="220" class="line"/>
-  <line x1="150" y1="220" x2="600" y2="220" class="line"/>
-  <line x1="150" y1="220" x2="150" y2="240" class="line"/>
-  <line x1="375" y1="220" x2="375" y2="240" class="line"/>
-  <line x1="600" y1="220" x2="600" y2="240" class="line"/>
-  <polygon points="150,250 145,240 155,240" class="arrow"/>
-  <polygon points="375,250 370,240 380,240" class="arrow"/>
-  <polygon points="600,250 595,240 605,240" class="arrow"/>
+  <line x1="360" y1="192" x2="360" y2="210" class="line"/>
+  <line x1="140" y1="210" x2="580" y2="210" class="line"/>
+  <line x1="140" y1="210" x2="140" y2="228" class="line"/>
+  <line x1="360" y1="210" x2="360" y2="228" class="line"/>
+  <line x1="580" y1="210" x2="580" y2="228" class="line"/>
+  <polygon points="140,236 134,226 146,226" class="arrow"/>
+  <polygon points="360,236 354,226 366,226" class="arrow"/>
+  <polygon points="580,236 574,226 586,226" class="arrow"/>
 
   <!-- Three processing boxes -->
-  <rect x="60" y="255" width="180" height="85" rx="3" class="box-fill"/>
-  <text x="150" y="280" text-anchor="middle" class="text">2D Landmark</text>
-  <text x="150" y="295" text-anchor="middle" class="text">Detection</text>
-  <text x="80" y="320" class="text-small">* MediaPipe</text>
-  <text x="80" y="333" class="text-small">* FaceMesh</text>
+  <rect x="50" y="240" width="180" height="80" rx="10" class="box-fill"/>
+  <text x="140" y="268" text-anchor="middle" class="text">2D Landmark</text>
+  <text x="140" y="286" text-anchor="middle" class="text">Detection</text>
+  <text x="140" y="308" text-anchor="middle" class="text-label">MediaPipe · FaceMesh</text>
 
-  <rect x="285" y="255" width="180" height="85" rx="3" class="box-fill"/>
-  <text x="375" y="280" text-anchor="middle" class="text">3D Registration</text>
-  <text x="375" y="295" text-anchor="middle" class="text">Pipeline</text>
-  <text x="305" y="320" class="text-small">* Kabsch</text>
-  <text x="305" y="333" class="text-small">* ICP</text>
+  <rect x="270" y="240" width="180" height="80" rx="10" class="box-fill"/>
+  <text x="360" y="268" text-anchor="middle" class="text">3D Registration</text>
+  <text x="360" y="286" text-anchor="middle" class="text">Pipeline</text>
+  <text x="360" y="308" text-anchor="middle" class="text-label">Kabsch · ICP</text>
 
-  <rect x="510" y="255" width="180" height="85" rx="3" class="box-fill"/>
-  <text x="600" y="280" text-anchor="middle" class="text">Visualization</text>
-  <text x="600" y="295" text-anchor="middle" class="text">Engine</text>
-  <text x="530" y="320" class="text-small">* PyVista</text>
-  <text x="530" y="333" class="text-small">* Plotly</text>
+  <rect x="490" y="240" width="180" height="80" rx="10" class="box-fill"/>
+  <text x="580" y="268" text-anchor="middle" class="text">Visualization</text>
+  <text x="580" y="286" text-anchor="middle" class="text">Engine</text>
+  <text x="580" y="308" text-anchor="middle" class="text-label">PyVista · Plotly</text>
 
   <!-- Arrows down merging -->
-  <line x1="150" y1="340" x2="150" y2="360" class="line"/>
-  <line x1="375" y1="340" x2="375" y2="360" class="line"/>
-  <line x1="600" y1="340" x2="600" y2="360" class="line"/>
-  <line x1="150" y1="360" x2="600" y2="360" class="line"/>
-  <line x1="375" y1="360" x2="375" y2="380" class="line"/>
-  <polygon points="375,390 370,380 380,380" class="arrow"/>
+  <line x1="140" y1="320" x2="140" y2="340" class="line"/>
+  <line x1="360" y1="320" x2="360" y2="340" class="line"/>
+  <line x1="580" y1="320" x2="580" y2="340" class="line"/>
+  <line x1="140" y1="340" x2="580" y2="340" class="line"/>
+  <line x1="360" y1="340" x2="360" y2="358" class="line"/>
+  <polygon points="360,366 354,356 366,356" class="arrow"/>
 
   <!-- Outputs -->
-  <rect x="100" y="395" width="550" height="70" rx="3" class="box-fill"/>
-  <text x="375" y="415" text-anchor="middle" class="text-title">OUTPUTS</text>
-  <text x="130" y="440" class="text-small">* 4x4 Transformation Matrices</text>
-  <text x="130" y="455" class="text-small">* Aligned Point Clouds</text>
-  <text x="420" y="440" class="text-small">* Registration Error Metrics</text>
-  <text x="420" y="455" class="text-small">* Interactive 3D Visualizations</text>
+  <rect x="80" y="370" width="560" height="64" rx="12" class="box-accent"/>
+  <text x="360" y="394" text-anchor="middle" class="text-title">Outputs</text>
+  <text x="200" y="418" text-anchor="middle" class="text-small">4×4 Transformation Matrices · Aligned Point Clouds</text>
+  <text x="520" y="418" text-anchor="middle" class="text-small">Registration Error Metrics · Interactive 3D Views</text>
 </svg>

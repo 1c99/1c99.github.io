@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 540" style="background:#fff">
+  <style>
+    .box-accent { fill: #fdf2f2; stroke: #e9e9e7; stroke-width: 1.5; }
+    .box-green { fill: #f0faf0; stroke: #c3e6c3; stroke-width: 1.5; }
+    .box-reg { fill: #fff; stroke: #a31f34; stroke-width: 1.5; }
+    .box-inner { fill: #fff; stroke: #d3d1cb; stroke-width: 1; }
+    .box-detail { fill: #fff; stroke: #d3d1cb; stroke-width: 1; stroke-dasharray: 4,3; }
+    .box-input { fill: #fff; stroke: #a31f34; stroke-width: 1; stroke-dasharray: 5,3; }
+    .text { font-family: 'Inter', -apple-system, sans-serif; fill: #37352f; font-size: 13px; font-weight: 500; }
+    .text-title { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 16px; font-weight: 700; }
+    .text-small { font-family: 'Inter', -apple-system, sans-serif; fill: #787774; font-size: 10px; font-weight: 400; }
+    .text-time { font-family: 'Inter', -apple-system, sans-serif; fill: #a31f34; font-size: 10px; font-weight: 700; }
+    .text-white { font-family: 'Inter', -apple-system, sans-serif; fill: #fff; font-size: 10px; font-weight: 600; }
+    .line { stroke: #d3d1cb; stroke-width: 1.5; fill: none; }
+    .line-flow { stroke: #a31f34; stroke-width: 1.5; fill: none; }
+    .arrow { fill: #a31f34; }
+    .badge { fill: #a31f34; }
+  </style>
+
+  <!-- Title -->
+  <text x="380" y="24" text-anchor="middle" class="text-title">EVD Clinical Workflow</text>
+  <line x1="60" y1="36" x2="700" y2="36" class="line" stroke-dasharray="4,4"/>
+
+  <!-- ═══ Preoperative Phase ═══ -->
+  <rect x="60" y="48" width="640" height="140" rx="10" class="box-accent"/>
+  <rect x="72" y="52" width="100" height="18" rx="4" class="badge"/>
+  <text x="122" y="65" text-anchor="middle" class="text-white">Preoperative</text>
+
+  <!-- Row 1: Main pipeline -->
+
+  <!-- CT Scan -->
+  <rect x="100" y="78" width="150" height="44" rx="6" class="box-inner"/>
+  <text x="175" y="98" text-anchor="middle" class="text" style="font-size:11px">Patient CT Scan</text>
+  <text x="175" y="112" text-anchor="middle" class="text-small">DICOM volume</text>
+
+  <line x1="250" y1="100" x2="278" y2="100" class="line-flow"/>
+  <polygon points="286,100 276,94 276,106" class="arrow"/>
+
+  <!-- Skin Segmentation -->
+  <rect x="288" y="78" width="150" height="44" rx="6" class="box-inner"/>
+  <text x="363" y="98" text-anchor="middle" class="text" style="font-size:11px">Skin Segmentation</text>
+  <text x="363" y="112" text-anchor="middle" class="text-time">~2 min</text>
+
+  <line x1="438" y1="100" x2="466" y2="100" class="line-flow"/>
+  <polygon points="474,100 464,94 464,106" class="arrow"/>
+
+  <!-- 3D FaceLandmarks -->
+  <rect x="476" y="78" width="165" height="44" rx="6" class="box-inner"/>
+  <text x="558" y="98" text-anchor="middle" class="text" style="font-size:11px">3D FaceLandmarks</text>
+  <text x="558" y="112" text-anchor="middle" class="text-time">~10s · 468 pts</text>
+
+  <!-- Row 2: Landmark extraction sub-pipeline -->
+  <text x="380" y="136" text-anchor="middle" class="text-small" style="font-weight:600; text-transform:uppercase; letter-spacing:0.05em">Landmark Extraction Detail</text>
+
+  <!-- 2D Detection -->
+  <rect x="165" y="142" width="130" height="34" rx="5" class="box-detail"/>
+  <text x="230" y="158" text-anchor="middle" class="text" style="font-size:10px; font-weight:600">2D Detection</text>
+  <text x="230" y="170" text-anchor="middle" class="text-small">MediaPipe 468-pt</text>
+
+  <line x1="295" y1="159" x2="307" y2="159" class="line-flow"/>
+  <polygon points="315,159 305,153 305,165" class="arrow"/>
+
+  <!-- Ray Trace -->
+  <rect x="315" y="142" width="130" height="34" rx="5" class="box-detail"/>
+  <text x="380" y="158" text-anchor="middle" class="text" style="font-size:10px; font-weight:600">Ray Trace</text>
+  <text x="380" y="170" text-anchor="middle" class="text-small">to mesh surface</text>
+
+  <line x1="445" y1="159" x2="457" y2="159" class="line-flow"/>
+  <polygon points="465,159 455,153 455,165" class="arrow"/>
+
+  <!-- Verification -->
+  <rect x="465" y="142" width="130" height="34" rx="5" class="box-detail"/>
+  <text x="530" y="158" text-anchor="middle" class="text" style="font-size:10px; font-weight:600">Verification</text>
+  <text x="530" y="170" text-anchor="middle" class="text-small">Blender 3D</text>
+
+  <!-- ═══ Phase Connector: Preop → Intraop ═══ -->
+  <line x1="380" y1="188" x2="380" y2="210" class="line-flow" stroke-dasharray="6,4"/>
+  <text x="394" y="203" class="text-small" style="fill:#a31f34; font-weight:600">preop landmarks</text>
+  <polygon points="380,218 374,208 386,208" class="arrow"/>
+
+  <!-- ═══ Intraoperative Phase ═══ -->
+  <rect x="60" y="218" width="640" height="314" rx="10" class="box-accent"/>
+  <rect x="72" y="222" width="160" height="18" rx="4" class="badge"/>
+  <text x="152" y="235" text-anchor="middle" class="text-white">Intraoperative (OR)</text>
+
+  <!-- Row 1: Centered intraop pipeline -->
+
+  <!-- 2D FaceLandmarks (detected first) -->
+  <rect x="140" y="256" width="135" height="44" rx="6" class="box-inner"/>
+  <text x="207" y="276" text-anchor="middle" class="text" style="font-size:11px">2D FaceLandmarks</text>
+  <text x="207" y="290" text-anchor="middle" class="text-small">MediaPipe 468-pt</text>
+
+  <line x1="275" y1="278" x2="303" y2="278" class="line-flow"/>
+  <polygon points="311,278 301,272 301,284" class="arrow"/>
+
+  <!-- iPad TrueDepth / LiDAR -->
+  <rect x="313" y="256" width="135" height="44" rx="6" class="box-inner"/>
+  <text x="380" y="276" text-anchor="middle" class="text" style="font-size:11px">iPad TrueDepth</text>
+  <text x="380" y="290" text-anchor="middle" class="text-small">LiDAR depth · 468 pts</text>
+
+  <line x1="448" y1="278" x2="476" y2="278" class="line-flow"/>
+  <polygon points="484,278 474,272 474,284" class="arrow"/>
+
+  <!-- Outlier Removal -->
+  <rect x="486" y="256" width="130" height="44" rx="6" class="box-inner"/>
+  <text x="551" y="276" text-anchor="middle" class="text" style="font-size:11px">Outlier Removal</text>
+  <text x="551" y="290" text-anchor="middle" class="text-small">Z-score filtering</text>
+
+  <!-- ═══ Source & Target Coordinate Boxes ═══ -->
+
+  <!-- Source Coordinates (dotted box) -->
+  <rect x="200" y="322" width="150" height="36" rx="6" class="box-input"/>
+  <text x="275" y="339" text-anchor="middle" class="text" style="font-size:10px; font-weight:600; fill:#a31f34">Source Coordinates</text>
+  <text x="275" y="351" text-anchor="middle" class="text-small">preop 3D landmarks</text>
+
+  <!-- Target Coordinates (dotted box) -->
+  <rect x="410" y="322" width="150" height="36" rx="6" class="box-input"/>
+  <text x="485" y="339" text-anchor="middle" class="text" style="font-size:10px; font-weight:600; fill:#a31f34">Target Coordinates</text>
+  <text x="485" y="351" text-anchor="middle" class="text-small">intraop landmarks</text>
+
+  <!-- Source → Registration -->
+  <line x1="275" y1="358" x2="275" y2="382" class="line-flow"/>
+  <polygon points="275,390 269,380 281,380" class="arrow"/>
+
+  <!-- Target → Registration -->
+  <line x1="485" y1="358" x2="485" y2="382" class="line-flow"/>
+  <polygon points="485,390 479,380 491,380" class="arrow"/>
+
+  <!-- ═══ Registration Block ═══ -->
+  <rect x="190" y="390" width="380" height="56" rx="8" class="box-reg"/>
+
+  <!-- Kabsch -->
+  <rect x="210" y="398" width="140" height="18" rx="4" fill="#fdf2f2" stroke="none"/>
+  <text x="280" y="411" text-anchor="middle" class="text" style="font-size:10px; font-weight:600">Kabsch (SVD)</text>
+  <text x="280" y="436" text-anchor="middle" class="text-small">coarse alignment</text>
+
+  <line x1="354" y1="407" x2="388" y2="407" class="line-flow"/>
+  <polygon points="396,407 386,401 386,413" class="arrow"/>
+
+  <!-- ICP -->
+  <rect x="398" y="398" width="150" height="18" rx="4" fill="#fdf2f2" stroke="none"/>
+  <text x="473" y="411" text-anchor="middle" class="text" style="font-size:10px; font-weight:600">ICP Refinement</text>
+  <text x="473" y="436" text-anchor="middle" class="text-small">point-to-plane</text>
+
+  <!-- ~1 sec badge -->
+  <rect x="206" y="428" width="50" height="16" rx="4" class="box-green"/>
+  <text x="231" y="440" text-anchor="middle" class="text-small" style="font-weight:600; fill:#35a854">~1 sec</text>
+
+  <!-- Arrow to transform -->
+  <line x1="380" y1="446" x2="380" y2="466" class="line-flow"/>
+  <polygon points="380,474 374,464 386,464" class="arrow"/>
+
+  <!-- 4×4 Transform -->
+  <rect x="290" y="474" width="180" height="28" rx="6" fill="#fff" stroke="#a31f34" stroke-width="1.5"/>
+  <text x="380" y="492" text-anchor="middle" class="text" style="font-size:11px; font-weight:600">4×4 Transform Matrix</text>
+
+  <!-- Arrow to AR nav -->
+  <line x1="380" y1="502" x2="380" y2="512" class="line-flow"/>
+  <polygon points="380,520 374,510 386,510" class="arrow"/>
+
+  <!-- AR Navigation -->
+  <rect x="270" y="520" width="220" height="10" rx="5" class="box-green"/>
+  <text x="380" y="529" text-anchor="middle" class="text" style="font-size:9px; font-weight:600; fill:#35a854">AR-Guided EVD Navigation</text>
+</svg>
