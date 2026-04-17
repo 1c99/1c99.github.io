@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="../../images/logo.png" />
+    <title>DeepCatch M - Wonchan Son</title>
+    <link rel="stylesheet" href="../../css/fa6-all.min.css" />
+    <link rel="stylesheet" href="../../css/fa6-local-fonts.css" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="DeepCatch M: Multi-organ MRI Segmentation Platform" />
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/skel.min.js"></script>
+    <script src="../../js/skel-layers.min.js"></script>
+    <script src="../../js/init.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="../../css/skel.css" />
+      <link rel="stylesheet" href="../../css/style.css" />
+      <link rel="stylesheet" href="../../css/style-xlarge.css" />
+    </noscript>
+    <link rel="stylesheet" href="../../css/project.css" />
+  </head>
+
+  <body class="project-page">
+    <div id="wrapper">
+      <div id="main">
+        <!-- Back Navigation -->
+        <section class="project-nav">
+          <div class="container">
+            <a href="../../index.html#experience">
+              <i class="fa-solid fa-arrow-left"></i> Back to Main
+            </a>
+          </div>
+        </section>
+
+        <!-- Project Header -->
+        <section id="project-header">
+          <div class="container">
+            <header class="major">
+              <h2>DeepCatch M</h2>
+              <p>Multi-organ MRI Segmentation Platform</p>
+            </header>
+            <p class="project-meta">
+              <i class="fa-solid fa-building"></i> Medical IP &nbsp;|&nbsp;
+              <i class="fa-solid fa-calendar"></i> Nov. 2023 &ndash; Present &nbsp;|&nbsp;
+              <i class="fa-solid fa-location-dot"></i> Seoul, South Korea
+            </p>
+          </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#segmentation">Multi-organ MRI Segmentation</a></li>
+            <li><a href="#mlops">MLOps Pipeline</a></li>
+          </ul>
+        </nav>
+
+        <!-- Overview -->
+        <section id="overview">
+          <div class="container">
+            <h3>Overview</h3>
+            <p>
+              DeepCatch M is a production-grade MLOps pipeline for MRI segmentation, designed
+              for multi-organ analysis including Subcutaneous Fat (SF) and Abdominal Visceral Fat (AVF).
+              The project addresses the full ML lifecycle from data versioning to containerized deployment,
+              with strict reproducibility for clinical applications.
+            </p>
+
+            <!-- MLOps Pipeline Diagram -->
+            <div class="diagram-container">
+              <img src="assets/mlops-pipeline.svg" alt="MLOps Pipeline showing Data (DVC) to Train (GPU) to Track (MLflow) to Deploy (Docker)">
+              <figcaption>End-to-End MLOps Pipeline</figcaption>
+            </div>
+
+            <div class="tech-stack">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">MLFlow</span>
+              <span class="tech-tag">DVC</span>
+              <span class="tech-tag">Medical Imaging</span>
+              <span class="tech-tag">Segmentation</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 1: Segmentation -->
+        <section id="segmentation" class="card">
+          <div class="container">
+            <h3>Multi-organ MRI Segmentation Models</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Manual segmentation of organs in MRI scans is time-consuming and subject to
+              inter-observer variability. Need to compare multiple SOTA architectures for
+              optimal performance on medical imaging tasks.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Implemented and evaluated multiple segmentation architectures (U-Net, U-Net++, nnU-Net)
+              through a unified model factory pattern, enabling systematic comparison and architecture search.
+            </p>
+
+            <h4>Model Architectures</h4>
+            <ul>
+              <li><strong>U-Net:</strong> Baseline encoder-decoder with skip connections (~7.8M params)</li>
+              <li><strong>U-Net++:</strong> Dense nested skip pathways for better gradient flow (~9.2M params)</li>
+              <li><strong>nnU-Net:</strong> SOTA with residual blocks, instance norm, deep supervision (~31M params)</li>
+            </ul>
+
+            <h4>Technical Details</h4>
+            <ul>
+              <li>Multi-class Dice loss with deep supervision for auxiliary losses</li>
+              <li>Multi-GPU training with DataParallel and mixed precision (FP16)</li>
+              <li>Optimized data loading with caching and prefetching</li>
+            </ul>
+
+            <h4>Target Structures</h4>
+            <ul>
+              <li>Subcutaneous Fat (SF)</li>
+              <li>Abdominal Visceral Fat (AVF)</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 2: MLOps -->
+        <section id="mlops" class="card">
+          <div class="container">
+            <h3>MLOps Pipeline Template</h3>
+
+            <h4>Problem</h4>
+            <p>
+              Medical imaging ML requires strict reproducibility, audit trails for compliance,
+              and systematic model comparison. Ad-hoc workflows led to difficulty reproducing
+              results and deploying models.
+            </p>
+
+            <h4>Approach</h4>
+            <p>
+              Built an end-to-end MLOps pipeline template with hybrid architecture: native GPU
+              training for performance, containerized serving for portability and reliability.
+            </p>
+
+            <!-- Hybrid Architecture Diagram -->
+            <div class="diagram-container">
+              <img src="assets/hybrid-architecture.svg" alt="Hybrid Architecture showing Training Layer (Native GPU) and Serving Layer (Docker-based)">
+              <figcaption>Hybrid Architecture: Training vs Serving</figcaption>
+            </div>
+
+            <h4>Pipeline Components</h4>
+            <ul>
+              <li><strong>Data Versioning (DVC):</strong> Git-like versioning for large medical datasets with deduplication</li>
+              <li><strong>Experiment Tracking (MLFlow + W&amp;B):</strong> Metrics, parameters, artifacts, and prediction visualization</li>
+              <li><strong>Hyperparameter Optimization (Ray Tune):</strong> ASHA scheduler with multi-GPU parallel trials</li>
+              <li><strong>Model Serving (FastAPI + Docker):</strong> REST API with caching, health checks, and monitoring</li>
+              <li><strong>Deployment (HuggingFace Hub):</strong> Automated model publishing with model cards</li>
+            </ul>
+
+            <h4>Technical Stack</h4>
+            <div class="tech-stack">
+              <span class="tech-tag">MLFlow</span>
+              <span class="tech-tag">DVC</span>
+              <span class="tech-tag">Ray Tune</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Grafana</span>
+            </div>
+
+            <div class="metrics">
+              <h4>Impact</h4>
+              <div class="metric-item">
+                <span class="metric-value">Full</span>
+                <span class="metric-label">Reproducibility</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">Automated</span>
+                <span class="metric-label">Train-to-Deploy</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="project-footer">
+          <p>&copy; Wonchan Son | <a href="../../index.html">Back to Home</a></p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
