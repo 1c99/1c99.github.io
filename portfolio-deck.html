@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wonchan Son - Portfolio Seminar</title>
+    <link rel="shortcut icon" href="images/logo.png" />
+
+    <!-- reveal.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css"
+      id="theme"
+    />
+
+    <!-- Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Source+Code+Pro:wght@400;600&display=swap"
+    />
+
+    <style>
+      /* ===== Theme ===== */
+      :root {
+        --r-background-color: #fff;
+        --r-main-font: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+        --r-main-font-size: 28px;
+        --r-main-color: #555;
+        --r-heading-font: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+        --r-heading-color: #333;
+        --r-heading-font-weight: 700;
+        --r-heading-text-transform: none;
+        --r-heading-letter-spacing: -0.02em;
+        --r-link-color: #a31f34;
+        --r-link-color-hover: #7a1628;
+        --r-selection-background-color: rgba(163, 31, 52, 0.2);
+        --red: #a31f34;
+        --red-dark: #7a1628;
+        --blue: #4a76a8;
+        --green: #28a745;
+        --gray: #666;
+      }
+
+      .reveal { font-weight: 400; }
+
+      .reveal h1, .reveal h2, .reveal h3 {
+        text-transform: none;
+        letter-spacing: -0.02em;
+      }
+
+      .reveal h1 { font-size: 2.2em; font-weight: 900; color: #333; }
+      .reveal h2 { font-size: 1.6em; color: var(--red); margin-bottom: 0.6em; }
+      .reveal h3 { font-size: 1.05em; color: #333; margin-bottom: 0.3em; }
+
+      .reveal p, .reveal li {
+        font-size: 0.72em;
+        line-height: 1.5;
+        color: #555;
+      }
+
+      .reveal ul { margin-left: 1.2em; }
+      .reveal li { margin-bottom: 0.3em; }
+      .reveal strong, .reveal b { color: #222; font-weight: 700; }
+      .reveal a { color: var(--red); }
+      .reveal section { text-align: left; }
+
+      /* ===== Layouts ===== */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5em;
+        align-items: start;
+        width: 100%;
+      }
+
+      .two-col-60-40 {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 1.5em;
+        align-items: start;
+        width: 100%;
+      }
+
+      .center { text-align: center; }
+
+      /* ===== Section Divider ===== */
+      .section-divider {
+        text-align: center;
+      }
+
+      .section-divider h2 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 0.2em;
+      }
+
+      .section-divider .section-theme {
+        font-size: 0.85em;
+        color: var(--red);
+        font-style: italic;
+        font-weight: 300;
+      }
+
+      .section-divider .section-number {
+        font-size: 0.6em;
+        color: #ccc;
+        font-family: 'Source Code Pro', monospace;
+        margin-bottom: 0.5em;
+      }
+
+      /* ===== Title Slide ===== */
+      .title-slide { text-align: center; }
+
+      .title-slide .avatar {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--red);
+        margin-bottom: 0.5em;
+      }
+
+      .title-slide h1 { margin-bottom: 0.1em; }
+
+      .title-slide .subtitle {
+        font-size: 1.1em;
+        color: var(--gray);
+        font-weight: 300;
+        margin-bottom: 0.3em;
+      }
+
+      .title-slide .education {
+        font-size: 0.65em;
+        color: #888;
+        margin-bottom: 0.8em;
+        line-height: 1.6;
+      }
+
+      .title-links {
+        display: flex;
+        gap: 1em;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .title-links a {
+        background: #f0f4f8;
+        padding: 0.3em 0.9em;
+        border-radius: 6px;
+        color: var(--blue) !important;
+        font-size: 0.6em;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+
+      .title-links a:hover {
+        background: var(--blue);
+        color: #fff !important;
+      }
+
+      /* ===== Highlights Box ===== */
+      .highlights-box {
+        background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+        border-radius: 10px;
+        padding: 0.8em 1.2em;
+        color: #fff;
+        margin: 0.5em 0;
+      }
+
+      .highlights-box h3 {
+        color: #fff !important;
+        font-size: 0.6em !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.9;
+        margin-bottom: 0.6em;
+      }
+
+      .highlights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.8em;
+      }
+
+      .highlight-item { text-align: center; }
+
+      .highlight-value {
+        display: block;
+        font-size: 1.5em;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .highlight-label {
+        display: block;
+        font-size: 0.5em;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 0.15em;
+      }
+
+      /* ===== Metrics ===== */
+      .metrics {
+        background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+        border-left: 4px solid var(--red);
+        padding: 0.6em 0.9em;
+        margin: 0.6em 0;
+        border-radius: 0 6px 6px 0;
+      }
+
+      .metrics h3 {
+        color: var(--red) !important;
+        font-size: 0.55em !important;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        margin-bottom: 0.4em;
+      }
+
+      .metrics-row {
+        display: flex;
+        gap: 1.5em;
+        flex-wrap: wrap;
+      }
+
+      .metric-value {
+        font-size: 1.3em;
+        font-weight: 700;
+        color: var(--red);
+        line-height: 1.2;
+      }
+
+      .metric-label { font-size: 0.5em; color: var(--gray); }
+
+      /* ===== Tech Tags ===== */
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3em;
+        margin: 0.4em 0;
+      }
+
+      .tech-tag {
+        background: #f5f5f5;
+        color: #555;
+        padding: 0.15em 0.5em;
+        border-radius: 4px;
+        font-size: 0.55em;
+        font-family: 'Source Code Pro', monospace;
+      }
+
+      /* ===== Diagrams ===== */
+      .diagram-container {
+        text-align: center;
+        margin: 0.5em 0;
+      }
+
+      .diagram-container img {
+        max-width: 100%;
+        max-height: 340px;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .diagram-container figcaption {
+        color: #999;
+        font-size: 0.5em;
+        margin-top: 0.4em;
+        font-style: italic;
+      }
+
+      /* ===== Comparison ===== */
+      .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+        margin: 0.5em 0;
+      }
+
+      .comparison-side {
+        background: #fff;
+        border-radius: 6px;
+        padding: 0.7em 0.9em;
+      }
+
+      .comparison-side.before { border: 2px solid #dc3545; }
+      .comparison-side.after { border: 2px solid var(--green); }
+
+      .comparison-label {
+        font-weight: 700;
+        font-size: 0.7em;
+        margin-bottom: 0.4em;
+        padding-bottom: 0.3em;
+        border-bottom: 1px solid #eee;
+      }
+
+      .comparison-side.before .comparison-label { color: #dc3545; }
+      .comparison-side.after .comparison-label { color: var(--green); }
+
+      .comparison-stat {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.25em 0;
+        font-size: 0.65em;
+        border-bottom: 1px dashed #eee;
+      }
+
+      .comparison-stat:last-child { border-bottom: none; }
+      .stat-label { color: var(--gray); }
+      .stat-value { font-weight: 600; color: #333; }
+
+      /* ===== Project List ===== */
+      .project-list {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .project-list li {
+        padding: 0.35em 0;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.5em;
+      }
+
+      .project-list li:last-child { border-bottom: none; }
+
+      .project-name { font-weight: 700; color: #333; white-space: nowrap; }
+
+      .project-desc {
+        color: var(--gray);
+        font-size: 0.85em;
+        text-align: right;
+      }
+
+      /* ===== Stack Grid ===== */
+      .stack-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8em;
+      }
+
+      .stack-category h3 {
+        color: var(--red) !important;
+        font-size: 0.7em !important;
+        margin-bottom: 0.3em;
+        padding-bottom: 0.2em;
+        border-bottom: 2px solid #f4f4f4;
+      }
+
+      /* ===== Impact Grid ===== */
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.6em;
+        margin: 0.5em 0;
+      }
+
+      .impact-item {
+        background: #f8f9fa;
+        border-left: 3px solid var(--red);
+        padding: 0.5em 0.6em;
+        border-radius: 0 6px 6px 0;
+        text-align: left;
+      }
+
+      .impact-item .metric-value { font-size: 1em; }
+      .impact-item .metric-label { font-size: 0.42em; }
+
+      /* ===== GTC Banner ===== */
+      .gtc-banner {
+        max-width: 100%;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 0.5em;
+      }
+
+      /* ===== Vendor Logos ===== */
+      .vendor-logos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2em;
+        margin: 0.6em 0;
+        padding: 0.6em 1em;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+
+      .vendor-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+      }
+
+      .vendor-logo img {
+        max-height: 36px;
+        max-width: 140px;
+        object-fit: contain;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+
+      .vendor-logo.icon-logo img {
+        max-height: 32px;
+        max-width: 32px;
+        border-radius: 6px !important;
+      }
+
+      .vendor-logo span {
+        font-size: 0.6em;
+        font-weight: 600;
+        color: #333;
+        margin-left: 0.4em;
+      }
+
+      /* ===== Contact ===== */
+      .contact-grid {
+        display: flex;
+        gap: 1em;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 0.8em;
+      }
+
+      .contact-item {
+        background: #f8f9fa;
+        padding: 0.5em 1em;
+        border-radius: 8px;
+        font-size: 0.65em;
+        color: #333;
+        min-width: 140px;
+        text-align: center;
+      }
+
+      .contact-item strong {
+        display: block;
+        font-size: 0.75em;
+        color: var(--red);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        margin-bottom: 0.15em;
+      }
+
+      /* ===== Goal Cards ===== */
+      .goal-card {
+        background: #f8f9fa;
+        border-left: 4px solid var(--red);
+        border-radius: 0 8px 8px 0;
+        padding: 0.6em 0.9em;
+        margin-bottom: 0.5em;
+        font-size: 0.72em;
+        line-height: 1.5;
+        color: #555;
+      }
+
+      /* ===== Narrative Box ===== */
+      .narrative-box {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 0.7em 1em;
+        margin-top: 0.6em;
+      }
+
+      .narrative-box p {
+        font-size: 0.65em;
+        margin-bottom: 0.3em;
+      }
+
+      .narrative-box p:last-child { margin-bottom: 0; }
+
+      /* ===== Takeaway Box ===== */
+      .takeaway {
+        background: linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%);
+        border: 2px solid var(--red);
+        border-radius: 8px;
+        padding: 0.6em 1em;
+        margin-top: 0.6em;
+        text-align: center;
+      }
+
+      .takeaway p {
+        font-size: 0.75em;
+        font-style: italic;
+        color: var(--red);
+        font-weight: 600;
+        margin: 0;
+      }
+
+      /* ===== Print ===== */
+      @media print {
+        .reveal .slides section {
+          page-break-after: always;
+          page-break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- ============================================================ -->
+        <!-- INTRO                                                        -->
+        <!-- ============================================================ -->
+
+        <!-- 1. Title -->
+        <section class="title-slide">
+          <img src="images/avatars/profile.jpg" alt="Wonchan Son" class="avatar" />
+          <h1>Wonchan Son</h1>
+          <div class="subtitle">AI Research Engineer</div>
+          <div class="education">
+            M.Res. Data Science, Imperial College London<br />
+            B.Eng. Biomedical Systems, University of Warwick
+          </div>
+          <div class="title-links">
+            <a href="https://github.com/1c99" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/wonchanson" target="_blank">LinkedIn</a>
+            <a href="https://1c99.github.io" target="_blank">Portfolio</a>
+          </div>
+          <aside class="notes">
+            Quick intro. Bridge between research and production.
+          </aside>
+        </section>
+
+        <!-- 2. Overview -->
+        <section>
+          <h2>Overview</h2>
+          <p>
+            AI Research Engineer at <b>Medical IP</b> &mdash; bridging academic research
+            and industrial engineering across five production projects.
+          </p>
+          <ul class="project-list">
+            <li>
+              <span class="project-name">DeepCatch X</span>
+              <span class="project-desc">Diffusion, Ray pipeline, BioAge, refactoring</span>
+            </li>
+            <li>
+              <span class="project-name">EVD Navigation</span>
+              <span class="project-desc">3D landmarks, Kabsch+ICP, 2 patents</span>
+            </li>
+            <li>
+              <span class="project-name">LLM De-ID &amp; Translation</span>
+              <span class="project-desc">98% PHI detection, multi-agent</span>
+            </li>
+            <li>
+              <span class="project-name">DeepCatch M</span>
+              <span class="project-desc">MRI segmentation + MLOps</span>
+            </li>
+          </ul>
+          <div class="highlights-box">
+            <h3>Aggregate Impact</h3>
+            <div class="highlights-grid">
+              <div class="highlight-item">
+                <span class="highlight-value">6x</span>
+                <span class="highlight-label">Batch Throughput</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-value">150x</span>
+                <span class="highlight-label">BioAge Speedup</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-value">73%</span>
+                <span class="highlight-label">Code Reduction</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-value">98%</span>
+                <span class="highlight-label">PHI Detection</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-value">GTC</span>
+                <span class="highlight-label">NVIDIA 2025</span>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            4 projects, all shipped. Today I'll walk through each one.
+            4 blocks, ~6-7 min each.
+          </aside>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- BLOCK 1: FROM GANS TO DIFFUSION                             -->
+        <!-- ============================================================ -->
+
+        <!-- 3. Section Divider -->
+        <section class="section-divider">
+          <div class="section-number">01 / 04</div>
+          <h2>DeepCatch X</h2>
+          <div class="section-theme">"Choosing the right architecture matters more than tuning the wrong one"</div>
+          <aside class="notes">
+            Transition: Let's start with the core AI research.
+          </aside>
+        </section>
+
+        <!-- 4. Problem + Why GANs Failed -->
+        <section>
+          <h2>The Problem: X-ray Aorta Extraction</h2>
+          <div class="two-col">
+            <div>
+              <h3>Clinical Need</h3>
+              <p>
+                Aortic disease screening from chest X-rays requires extracting
+                the aorta structure. The initial approach used GANs.
+              </p>
+              <h3>Why GANs Failed</h3>
+              <ul>
+                <li><b>Mode collapse:</b> generator produces limited variations</li>
+                <li><b>Training instability:</b> adversarial dynamics are fragile</li>
+                <li><b>Artifacts:</b> hallucinated structures that could cause clinical misinterpretation</li>
+              </ul>
+              <h3>The Pivot</h3>
+              <p>
+                Diffusion models learn a stable denoising process &mdash;
+                no adversarial training, better sample diversity, and
+                controllable generation quality.
+              </p>
+            </div>
+            <div>
+              <div class="diagram-container">
+                <img
+                  src="projects/deepcatch-x/assets/ldm-high-level.svg"
+                  alt="LDM Architecture"
+                />
+                <figcaption>Two-Stage Generative Pipeline</figcaption>
+              </div>
+              <div class="tech-stack">
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">DDPM</span>
+                <span class="tech-tag">LDM</span>
+                <span class="tech-tag">DDP</span>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Explain the clinical context first. Then why GANs were the default.
+            The artifacts issue is key — in medical imaging, a hallucinated
+            structure could lead to misdiagnosis.
+          </aside>
+        </section>
+
+        <!-- 5. DDPM Architecture + Training -->
+        <section>
+          <h2>DDPM: Architecture &amp; Training</h2>
+          <div class="two-col">
+            <div>
+              <h3>Stage 1: Conditional DDPM</h3>
+              <ul>
+                <li>Conditional channel concatenation (X-ray RGBA + noise)</li>
+                <li>U-Net backbone with self-attention, time embedding, ResNet blocks</li>
+                <li>Hybrid loss: weighted MSE + perceptual (VGG) + SSIM + L1</li>
+                <li>DDIM fast sampling for inference (50 steps)</li>
+              </ul>
+              <h3>Training at Scale</h3>
+              <ul>
+                <li>DDP across 4x RTX 4090 GPUs</li>
+                <li>Gradient accumulation for effective large batch size</li>
+                <li>Ablation studies: conditioning mechanism, attention placement, noise schedule</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Stage 2: Proposed LDM</h3>
+              <p>
+                Proposed <b>Latent Diffusion Model</b> for 3D volumetric
+                reconstruction. Operates in compressed latent space (16x
+                compression per dimension).
+              </p>
+              <ul>
+                <li><b>VAE3D:</b> 128&sup3; volumes &rarr; 256-dim latent</li>
+                <li><b>Projection2Dto3D:</b> novel 2D&rarr;3D bridge network</li>
+                <li><b>UNet3DConditioned:</b> 3D denoiser with time conditioning</li>
+              </ul>
+              <p>
+                Architecture fully designed and coded; training pending
+                compute resources.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            Go deeper on the architecture. Explain channel concatenation vs
+            cross-attention vs AdaIN — you ran ablations. The proposed LDM
+            shows forward thinking.
+          </aside>
+        </section>
+
+        <!-- 6. GTC + Takeaway -->
+        <section>
+          <h2>GTC 2025 &amp; Takeaway</h2>
+          <div class="two-col">
+            <div>
+              <h3>NVIDIA GTC 2025 Showcase</h3>
+              <p>
+                Showcased DeepCatch X at NVIDIA GTC 2025 in San Jose,
+                demonstrating novel generative AI applications in medical
+                imaging to a global audience of researchers, engineers,
+                and healthcare professionals.
+              </p>
+              <img
+                src="images/banners/gtc_banner.png"
+                alt="NVIDIA GTC 2025"
+                class="gtc-banner"
+                style="max-height: 140px"
+              />
+            </div>
+            <div>
+              <h3>Results</h3>
+              <ul>
+                <li>Superior fidelity to GANs for aorta extraction</li>
+                <li>Stable training with no mode collapse</li>
+                <li>Clinically usable output quality</li>
+                <li>Real-time inference via DDIM (50 steps)</li>
+              </ul>
+              <div class="takeaway">
+                <p>
+                  "Picking the right model family matters more<br />
+                  than tuning the wrong one."
+                </p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            The GTC showcase validates the work externally. End with the
+            takeaway: the pivot from GANs to diffusion was the key decision.
+          </aside>
+        </section>
+
+        <!-- 7. Ray Pipeline -->
+        <section>
+          <h2>Ray Distributed Inference Pipeline</h2>
+          <div class="two-col">
+            <div>
+              <h3>Problem</h3>
+              <p>
+                14 AI modules with complex DAG dependencies. Sequential
+                execution wastes GPU cycles. Hospitals have heterogeneous
+                hardware.
+              </p>
+              <h3>Solution</h3>
+              <ul>
+                <li>Ray actors with GPU memory persistence</li>
+                <li>DAG scheduler with dependency resolution + parallel execution</li>
+                <li>Zero-copy data sharing via Apache Arrow Object Store</li>
+                <li>Hardware-aware: TensorRT, ONNX, FP16</li>
+              </ul>
+              <div class="metrics">
+                <h3>Results</h3>
+                <div class="metrics-row">
+                  <div class="metric-item">
+                    <span class="metric-value">6x</span>
+                    <span class="metric-label">Batch Throughput</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-value">2.8x</span>
+                    <span class="metric-label">Per-Case Speedup</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="diagram-container">
+                <img
+                  src="projects/deepcatch-x/assets/dag-scheduling.svg"
+                  alt="Module Dependency DAG"
+                />
+                <figcaption>Module Dependency Graph</figcaption>
+              </div>
+              <div class="diagram-container">
+                <img
+                  src="projects/deepcatch-x/assets/ray-distributed.svg"
+                  alt="Ray Distributed Architecture"
+                  style="max-height: 180px"
+                />
+                <figcaption>Ray Distributed Architecture</figcaption>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Walk through the DAG diagram. Explain why actors (stateful, GPU
+            memory persists) vs tasks. Zero-copy is key for large medical images.
+          </aside>
+        </section>
+
+        <!-- 8. Refactoring + Nuitka -->
+        <section>
+          <h2>Refactoring &amp; Deployment</h2>
+          <div class="two-col">
+            <div>
+              <h3>Codebase Refactoring</h3>
+              <div class="comparison">
+                <div class="comparison-side before">
+                  <div class="comparison-label">Before</div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Files</span>
+                    <span class="stat-value">110</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">LOC</span>
+                    <span class="stat-value">34,266</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Duplication</span>
+                    <span class="stat-value">47%</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Entry Points</span>
+                    <span class="stat-value">6</span>
+                  </div>
+                </div>
+                <div class="comparison-side after">
+                  <div class="comparison-label">After</div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Files</span>
+                    <span class="stat-value">15</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">LOC</span>
+                    <span class="stat-value">8,017</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Duplication</span>
+                    <span class="stat-value">0%</span>
+                  </div>
+                  <div class="comparison-stat">
+                    <span class="stat-label">Entry Points</span>
+                    <span class="stat-value">1</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3>Nuitka: Python &rarr; Executable</h3>
+              <p>
+                Hospitals need standalone executables &mdash; no Python, no IT
+                support. Nuitka compiles Python + PyTorch + CUDA into a single
+                binary.
+              </p>
+              <ul>
+                <li>Refactoring was a prerequisite for compilation</li>
+                <li>CdsPyEncrypt for IP protection</li>
+                <li>Model optimization: TensorRT, ONNX, FP16</li>
+              </ul>
+              <div class="metrics">
+                <h3>Results</h3>
+                <div class="metrics-row">
+                  <div class="metric-item">
+                    <span class="metric-value">73%</span>
+                    <span class="metric-label">Code Reduction</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-value">8.2&rarr;1.4s</span>
+                    <span class="metric-label">Startup Time</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            The refactoring story: 47% of the code was duplicated. Unified 6
+            entry points into 1. This made Nuitka possible. Bus factor was 1
+            for the old deployment process.
+          </aside>
+        </section>
+
+        <!-- 9. BioAge -->
+        <section>
+          <h2>BioAge: R &rarr; C++</h2>
+          <div class="two-col">
+            <div>
+              <h3>Challenge</h3>
+              <p>
+                Biological age estimation algorithm in R. Production needs:
+                no R runtime, sub-ms latency, thread safety, LibTorch integration.
+              </p>
+              <h3>The Hard Part</h3>
+              <ul>
+                <li><b>Normative modeling:</b> Mahalanobis distance from healthy reference population</li>
+                <li><b>Banker's rounding (IEC 60559):</b> R uses "round half to even" &mdash; C++ doesn't by default</li>
+                <li>All statistical parameters embedded as compile-time constants</li>
+                <li>1,850+ lines of production C++</li>
+              </ul>
+            </div>
+            <div>
+              <div class="metrics">
+                <h3>Results</h3>
+                <div class="metrics-row">
+                  <div class="metric-item">
+                    <span class="metric-value">150x</span>
+                    <span class="metric-label">Faster than R</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-value">0</span>
+                    <span class="metric-label">File Dependencies</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-value">52</span>
+                    <span class="metric-label">Clinical Fields</span>
+                  </div>
+                </div>
+              </div>
+              <h3>Output</h3>
+              <ul>
+                <li>Biological age per organ</li>
+                <li>Deviation scores, percentile rankings</li>
+                <li>Risk categories + recommendations</li>
+              </ul>
+              <div class="tech-stack">
+                <span class="tech-tag">C++</span>
+                <span class="tech-tag">LibTorch</span>
+                <span class="tech-tag">Mahalanobis</span>
+                <span class="tech-tag">IEC 60559</span>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            The Banker's rounding story is great for interviews. Explain:
+            R rounds 0.5 to even (0.5→0, 1.5→2, 2.5→2). C++ rounds 0.5 up.
+            Had to match exactly for regulatory compliance.
+          </aside>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- BLOCK 2: 1.8MM FROM THE BRAIN                                -->
+        <!-- ============================================================ -->
+
+        <!-- 12. Section Divider -->
+        <section class="section-divider">
+          <div class="section-number">02 / 04</div>
+          <h2>1.8mm From the Brain</h2>
+          <div class="section-theme">"Classical algorithms + deep learning is more powerful than either alone"</div>
+          <aside class="notes">
+            Transition: Completely different project. Neurosurgery.
+            Explain what EVD is briefly.
+          </aside>
+        </section>
+
+        <!-- 13. EVD Pipeline -->
+        <section>
+          <h2>3D Face Landmarks &amp; AR Registration</h2>
+          <div class="two-col">
+            <div>
+              <h3>EVD Surgical Navigation</h3>
+              <p>
+                External Ventricular Drainage &mdash; a critical neurosurgical
+                procedure requiring precise catheter placement. Millimeters
+                matter.
+              </p>
+              <h3>Pipeline</h3>
+              <ul>
+                <li><b>CT &rarr; Skin Segmentation</b> (deep learning)</li>
+                <li><b>2D Landmark Detection</b> (MediaPipe, 468 points)</li>
+                <li><b>Ray Tracing</b> to project 2D &rarr; 3D surface</li>
+                <li><b>Kabsch:</b> SVD-based closed-form rotation + translation</li>
+                <li><b>ICP:</b> Point-to-plane iterative refinement</li>
+                <li><b>iOS ARKit</b> for real-time iPad Pro overlay</li>
+              </ul>
+            </div>
+            <div>
+              <div class="diagram-container">
+                <img
+                  src="projects/evd-navigation/assets/system-architecture.svg"
+                  alt="System Architecture"
+                />
+                <figcaption>System Architecture</figcaption>
+              </div>
+              <div class="tech-stack">
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">ICP</span>
+                <span class="tech-tag">Kabsch</span>
+                <span class="tech-tag">ARKit</span>
+                <span class="tech-tag">LiDAR</span>
+                <span class="tech-tag">MediaPipe</span>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Explain what EVD is for non-medical audience. The key insight:
+            markerless registration (no stickers on patient's face).
+            Deep learning for detection, classical algorithms for registration.
+          </aside>
+        </section>
+
+        <!-- 14. EVD Results -->
+        <section>
+          <h2>EVD: Results &amp; Impact</h2>
+          <div class="two-col">
+            <div>
+              <h3>Key Challenges Solved</h3>
+              <ul>
+                <li><b>Coordinate alignment:</b> CT scanner vs. iPad LiDAR use different systems</li>
+                <li><b>Noise handling:</b> LiDAR point clouds filtered via Z-score</li>
+                <li><b>Scale differences:</b> Medical STL + LiDAR scans normalized</li>
+                <li><b>Cross-platform:</b> Algorithms adapted for ARKit (iOS) with real-time performance</li>
+              </ul>
+              <div class="metrics">
+                <h3>Results</h3>
+                <div class="metrics-row">
+                  <div class="metric-item">
+                    <span class="metric-value">1.8 mm</span>
+                    <span class="metric-label">FRE (ISO Compliant)</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-value">MFDS</span>
+                    <span class="metric-label">Regulatory Filing</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-value">2</span>
+                    <span class="metric-label">Patents Filed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3>Patents</h3>
+              <ul>
+                <li>AR auto registration method (10-2025-0107691)</li>
+                <li>AR manual registration method (10-2025-0107692)</li>
+              </ul>
+              <h3>Collaboration</h3>
+              <p>
+                Developed the algorithms in Python, then collaborated with iOS
+                developers to adapt and optimize for mobile AR platforms.
+              </p>
+              <div class="takeaway">
+                <p>
+                  "Classical algorithms + deep learning<br />
+                  is more powerful than either alone."
+                </p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            1.8mm FRE meets ISO standards for surgical navigation.
+            Two patents show the novelty. Cross-platform collaboration
+            shows communication skills.
+          </aside>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- BLOCK 3: LLMS NEED GUARDRAILS                               -->
+        <!-- ============================================================ -->
+
+        <!-- 15. Section Divider -->
+        <section class="section-divider">
+          <div class="section-number">03 / 04</div>
+          <h2>LLMs Need Guardrails</h2>
+          <div class="section-theme">"LLMs are powerful but need engineered guardrails in safety-critical domains"</div>
+          <aside class="notes">
+            Transition: Now something completely different — NLP and LLMs.
+          </aside>
+        </section>
+
+        <!-- 16. De-ID Pipeline -->
+        <section>
+          <h2>Multi-modal PHI De-Identification</h2>
+          <div class="two-col">
+            <div>
+              <h3>The Problem</h3>
+              <p>
+                Medical data has PHI everywhere &mdash; DICOM metadata,
+                burned-in text on images, handwritten annotations.
+                One miss = HIPAA violation.
+              </p>
+              <h3>Two-Pronged Approach</h3>
+              <ul>
+                <li>
+                  <b>Metadata:</b> LLM parses DICOM headers &rarr;
+                  identifies PHI fields &rarr; generates anonymized mappings
+                </li>
+                <li>
+                  <b>Burn-in text:</b> OCR extracts regions &rarr;
+                  NER classifies PHI vs. non-PHI &rarr;
+                  pixel-level black mask over PHI
+                </li>
+              </ul>
+              <div class="metrics">
+                <h3>Results</h3>
+                <div class="metrics-row">
+                  <div class="metric-item">
+                    <span class="metric-value">98%</span>
+                    <span class="metric-label">Detection Accuracy</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-value">Multi-modal</span>
+                    <span class="metric-label">Coverage</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="diagram-container">
+                <img
+                  src="projects/llm-deidentification/assets/phi-pipeline.svg"
+                  alt="PHI Pipeline"
+                />
+                <figcaption>Two-Pronged De-identification Pipeline</figcaption>
+              </div>
+              <div class="tech-stack">
+                <span class="tech-tag">LLM</span>
+                <span class="tech-tag">OCR</span>
+                <span class="tech-tag">NER</span>
+                <span class="tech-tag">DICOM</span>
+                <span class="tech-tag">HIPAA</span>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Explain why this is hard: PHI is embedded in multiple modalities.
+            Burned-in text on images can't be removed from metadata alone.
+            The two-pronged approach covers both attack surfaces.
+          </aside>
+        </section>
+
+        <!-- 17. Translation + Takeaway -->
+        <section>
+          <h2>Multi-Agent Translation System</h2>
+          <div class="two-col">
+            <div>
+              <h3>Multilingual Pipeline</h3>
+              <p>
+                Korean &rarr; 5 target languages for international regulatory
+                submissions. Medical terminology must be consistent across
+                documents.
+              </p>
+              <h3>Multi-Agent Workflow</h3>
+              <ul>
+                <li><b>Translator:</b> Initial translation with domain context</li>
+                <li><b>Reviewer:</b> Quality check against glossary</li>
+                <li><b>Fixer:</b> Corrects terminology and consistency issues</li>
+                <li><b>Supervisor:</b> Final validation and approval</li>
+              </ul>
+              <h3>Quality Guardrails</h3>
+              <ul>
+                <li><b>Translation Memory</b> (SQLite) for consistency + cost reduction</li>
+                <li><b>Hallucination detection:</b> statistical checks for numerical consistency, entity preservation</li>
+              </ul>
+            </div>
+            <div>
+              <div class="metrics">
+                <h3>Scope</h3>
+                <div class="metrics-row">
+                  <div class="metric-item">
+                    <span class="metric-value">5</span>
+                    <span class="metric-label">Target Languages</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-value">TM</span>
+                    <span class="metric-label">Cost Reduction</span>
+                  </div>
+                </div>
+              </div>
+              <div class="takeaway">
+                <p>
+                  "LLMs are powerful but need engineered guardrails<br />
+                  in safety-critical domains."
+                </p>
+              </div>
+              <div class="tech-stack">
+                <span class="tech-tag">Agentic Systems</span>
+                <span class="tech-tag">Translation Memory</span>
+                <span class="tech-tag">Glossary</span>
+                <span class="tech-tag">Ollama</span>
+                <span class="tech-tag">Ray</span>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            The multi-agent workflow mimics a professional translation team.
+            Hallucination detection is the key: LLMs can change numbers,
+            drop entities, or add information not in the source.
+          </aside>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- BLOCK 4: REPRODUCIBILITY IS NOT OPTIONAL                    -->
+        <!-- ============================================================ -->
+
+        <!-- 18. Section Divider -->
+        <section class="section-divider">
+          <div class="section-number">04 / 04</div>
+          <h2>Reproducibility Is Not Optional</h2>
+          <div class="section-theme">"The experiment you can't reproduce is the experiment that didn't happen"</div>
+          <aside class="notes">
+            Transition: Last project. MLOps for medical imaging.
+            Reproducibility isn't a nice-to-have — it's a regulatory requirement.
+          </aside>
+        </section>
+
+        <!-- 19. MLOps Pipeline -->
+        <section>
+          <h2>DeepCatch M: MLOps Pipeline</h2>
+          <div class="two-col">
+            <div>
+              <h3>Problem</h3>
+              <p>
+                Medical imaging ML requires strict reproducibility and audit
+                trails for regulatory compliance. Ad-hoc workflows meant:
+                can't reproduce results, can't deploy reliably, can't pass
+                regulatory review.
+              </p>
+              <h3>Pipeline Architecture</h3>
+              <ul>
+                <li><b>DVC:</b> Git-like versioning for large medical datasets</li>
+                <li><b>MLFlow + W&amp;B:</b> Experiment tracking (metrics, params, artifacts)</li>
+                <li><b>Ray Tune:</b> ASHA scheduler for hyperparameter optimization</li>
+                <li><b>FastAPI + Docker:</b> REST API serving with health checks</li>
+                <li><b>HuggingFace Hub:</b> Automated model publishing with model cards</li>
+              </ul>
+            </div>
+            <div>
+              <div class="diagram-container">
+                <img
+                  src="projects/deepcatch-m/assets/mlops-pipeline.svg"
+                  alt="MLOps Pipeline"
+                />
+                <figcaption>Data &rarr; Train &rarr; Track &rarr; Deploy</figcaption>
+              </div>
+              <div class="tech-stack">
+                <span class="tech-tag">MLFlow</span>
+                <span class="tech-tag">DVC</span>
+                <span class="tech-tag">Ray Tune</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">Grafana</span>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Emphasize: this isn't just setting up tools. The architecture
+            decision was hybrid: native GPU for training (performance),
+            Docker for serving (portability). This template is now reused
+            across projects.
+          </aside>
+        </section>
+
+        <!-- 20. Model Comparison + Takeaway -->
+        <section>
+          <h2>Systematic Model Comparison</h2>
+          <div class="two-col">
+            <div>
+              <h3>Architecture Search</h3>
+              <p>
+                The pipeline enabled systematic comparison of segmentation
+                architectures for multi-organ MRI (Subcutaneous Fat,
+                Abdominal Visceral Fat):
+              </p>
+              <ul>
+                <li><b>U-Net:</b> Baseline encoder-decoder (~7.8M params)</li>
+                <li><b>U-Net++:</b> Dense nested skip pathways (~9.2M params)</li>
+                <li><b>nnU-Net:</b> SOTA with residual blocks, instance norm, deep supervision (~31M params)</li>
+              </ul>
+              <h3>Key Design Decision</h3>
+              <p>
+                <b>Hybrid architecture:</b> Native GPU training for performance,
+                Docker-based serving for portability and reliability.
+              </p>
+            </div>
+            <div>
+              <h3>What the Pipeline Enables</h3>
+              <ul>
+                <li>Full experiment reproducibility with one command</li>
+                <li>Automated train-to-deploy with audit trail</li>
+                <li>Systematic hyperparameter search (ASHA scheduler)</li>
+                <li>Model versioning and rollback</li>
+                <li>Monitoring and alerting (Grafana)</li>
+              </ul>
+              <div class="takeaway">
+                <p>
+                  "In regulated industries, the experiment you can't<br />
+                  reproduce is the experiment that didn't happen."
+                </p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            The pipeline made model comparison trivial — run 3 architectures,
+            compare on same data split, same metrics, tracked automatically.
+            Without MLOps this would be ad-hoc and error-prone.
+          </aside>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- OUTRO                                                        -->
+        <!-- ============================================================ -->
+
+        <!-- 21. Impact Summary -->
+        <section>
+          <h2>Impact Summary</h2>
+          <div class="impact-grid">
+            <div class="impact-item">
+              <span class="metric-value">6x</span>
+              <span class="metric-label">Batch Throughput</span>
+            </div>
+            <div class="impact-item">
+              <span class="metric-value">150x</span>
+              <span class="metric-label">BioAge vs R</span>
+            </div>
+            <div class="impact-item">
+              <span class="metric-value">73%</span>
+              <span class="metric-label">Code Reduction</span>
+            </div>
+            <div class="impact-item">
+              <span class="metric-value">98%</span>
+              <span class="metric-label">PHI Detection</span>
+            </div>
+            <div class="impact-item">
+              <span class="metric-value">1.8 mm</span>
+              <span class="metric-label">FRE (ISO)</span>
+            </div>
+            <div class="impact-item">
+              <span class="metric-value">GTC</span>
+              <span class="metric-label">NVIDIA 2025</span>
+            </div>
+            <div class="impact-item">
+              <span class="metric-value">2</span>
+              <span class="metric-label">Patents</span>
+            </div>
+            <div class="impact-item">
+              <span class="metric-value">1</span>
+              <span class="metric-label">PLOS Pub</span>
+            </div>
+          </div>
+          <div class="narrative-box">
+            <p>
+              <b>Consistent pattern:</b> Identifying ambiguous problems,
+              designing principled solutions, and delivering measurable
+              production impact.
+            </p>
+            <p>
+              Every project ships &mdash; research prototypes become production
+              systems with regulatory compliance and documented results.
+            </p>
+          </div>
+          <aside class="notes">
+            Recap all numbers. The pattern: ambiguous problem, principled
+            solution, production impact. Every single project went to production.
+          </aside>
+        </section>
+
+        <!-- 22. What I'm Looking For -->
+        <section>
+          <h2>What I'm Looking For</h2>
+          <div class="goal-card">
+            <b>Challenging problems</b> at the intersection of AI research and
+            production engineering &mdash; where rigorous methodology meets
+            real-world impact
+          </div>
+          <div class="goal-card">
+            <b>End-to-end ownership</b> from problem definition through
+            deployment &mdash; I thrive when I can see ideas through to
+            production
+          </div>
+          <div class="goal-card">
+            <b>Teams that value both depth and breadth</b> &mdash; where strong
+            engineering foundations enable innovative research, and vice versa
+          </div>
+          <div class="goal-card">
+            <b>Global-scale impact</b> &mdash; applying AI/ML to problems that
+            matter, whether in healthcare, science, or technology infrastructure
+          </div>
+          <aside class="notes">
+            Tailor this to the company. Adjust bullets for the role.
+          </aside>
+        </section>
+
+        <!-- 23. Contact -->
+        <section class="center">
+          <img
+            src="images/avatars/profile.jpg"
+            alt="Wonchan Son"
+            style="
+              width: 110px; height: 110px; border-radius: 50%;
+              object-fit: cover; border: 4px solid #a31f34;
+              margin-bottom: 0.5em;
+            "
+          />
+          <h1>Thank You</h1>
+          <p style="font-size: 0.8em; color: #666; margin-bottom: 0.8em">
+            Let's build something impactful together.
+          </p>
+          <div class="contact-grid">
+            <div class="contact-item">
+              <strong>Email</strong>
+              wonchan.son99@gmail.com
+            </div>
+            <div class="contact-item">
+              <strong>GitHub</strong>
+              github.com/1c99
+            </div>
+            <div class="contact-item">
+              <strong>LinkedIn</strong>
+              linkedin.com/in/wonchanson
+            </div>
+            <div class="contact-item">
+              <strong>Portfolio</strong>
+              1c99.github.io
+            </div>
+          </div>
+          <aside class="notes">Thank them. Open for questions.</aside>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- reveal.js -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: 'c/t',
+        showSlideNumber: 'all',
+        progress: true,
+        center: true,
+        transition: 'slide',
+        transitionSpeed: 'default',
+        width: 1200,
+        height: 700,
+        margin: 0.06,
+        minScale: 0.2,
+        maxScale: 1.5,
+        pdfSeparateFragments: false,
+      });
+    </script>
+  </body>
+</html>
