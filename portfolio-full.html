@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wonchan Son — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/notion.css" />
+<style>:root{
+  --bg:#0a0a0d; --bg2:#101016; --surface:#15151d; --surface2:#1a1a23; --line:#26262f;
+  --txt:#ededf2; --muted:#9a9aa5; --faint:#5a5a66;
+  --accent:#ff3b54; --accent-soft:#ff6b80; --accent-deep:#a31f34;
+  --disp:"Bricolage Grotesque",sans-serif; --dbody:"Hanken Grotesk",sans-serif; --mono:"JetBrains Mono",monospace;
+}
+*{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+html{scroll-behavior:smooth;}
+body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3vw,30px); }
+
+/* ════ dark chapter title cards (card-per-section layout) ════ */
+.chapter{
+  position:relative; display:block;
+  max-width:1080px; margin:0 auto clamp(14px,2vw,24px);
+  padding:clamp(32px,4.4vw,58px); overflow:hidden; border-radius:24px;
+  background:var(--surface); border:1px solid var(--line);
+  color:var(--txt); font-family:var(--dbody);
+}
+.chapter.cover{ padding:clamp(46px,6vw,84px) clamp(32px,4.4vw,58px); }
+.chapter *{box-sizing:border-box;}
+.chapter .wrap{width:100%;max-width:1120px;margin:0 auto;position:relative;z-index:3;}
+.chapter .glow{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(60vw 60vw at 78% 18%,rgba(255,59,84,.10),transparent 60%),radial-gradient(50vw 50vw at 12% 88%,rgba(163,31,52,.10),transparent 60%);}
+.chapter .watermark{position:absolute;z-index:1;font-family:var(--disp);font-weight:800;color:#fff;opacity:.025;line-height:.8;letter-spacing:-.04em;user-select:none;pointer-events:none;}
+.chapter .watermark.tr{top:-1.6rem;right:-.5rem;font-size:clamp(6rem,15vw,13rem);}
+.chapter .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s);}
+.chapter.active .reveal{opacity:1;transform:none;}
+.chapter .eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px;margin-bottom:clamp(18px,3vw,34px);}
+.chapter .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);}
+.chapter .accent{color:var(--accent);}
+.chapter .name{font-family:var(--disp);font-weight:800;font-size:clamp(3.4rem,12vw,10rem);line-height:.92;letter-spacing:-.04em;margin-bottom:clamp(20px,3vw,34px);}
+.chapter .tag{display:block;background:none !important;padding:0 !important;border:0 !important;border-radius:0 !important;font-size:clamp(1.05rem,2.1vw,1.6rem);color:#c9c9d2;max-width:720px;line-height:1.5;margin-bottom:clamp(28px,4vw,48px);}
+.chapter .tag b{color:#fff;}
+.chapter .meta{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:clamp(28px,4vw,44px);letter-spacing:.04em;}
+.chapter .chips{display:flex;flex-wrap:wrap;gap:12px;}
+.chapter.closing .chips{justify-content:center;}
+.chapter .chip{font-family:var(--mono);font-size:.82rem;color:var(--txt);text-decoration:none;padding:10px 18px;border:1px solid var(--line);border-radius:100px;background:rgba(255,255,255,.02);transition:.25s;}
+.chapter .chip:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.chapter .h-title{font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,6.5vw,5.4rem);line-height:.96;letter-spacing:-.035em;margin-bottom:clamp(14px,2vw,24px);}
+.chapter .h-sub{font-size:clamp(1rem,1.7vw,1.35rem);color:#bfbfca;max-width:760px;line-height:1.5;margin-bottom:clamp(28px,3.5vw,46px);}
+.chapter .h-sub b{color:#fff;}
+.chapter .metrics{display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,64px);margin-bottom:clamp(26px,3.5vw,44px);}
+.chapter .metric .num{font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1;letter-spacing:-.03em;color:#fff;}
+.chapter .metric .num small{font-size:.5em;color:var(--accent);font-weight:700;}
+.chapter .metric .mlabel{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:10px;letter-spacing:.04em;max-width:180px;}
+.chapter .scrollfor{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;}
+.chapter .scrollfor span{animation:bob 1.8s ease-in-out infinite;font-size:1.1rem;}
+.chapter .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:920px;margin-bottom:clamp(26px,3vw,40px);}
+.chapter .edu-card{border:1px solid var(--line);border-radius:16px;padding:clamp(22px,2.5vw,32px);background:var(--surface);}
+.chapter .edu-card .deg{font-family:var(--disp);font-weight:700;font-size:clamp(1.2rem,2vw,1.55rem);line-height:1.15;margin-bottom:10px;}
+.chapter .edu-card .school{color:var(--accent);font-weight:600;margin-bottom:4px;}
+.chapter .edu-card .when{font-family:var(--mono);font-size:.76rem;color:var(--muted);}
+.chapter .skills-line{font-family:var(--mono);font-size:.82rem;color:var(--muted);line-height:2;max-width:920px;}
+.chapter .skills-line b{color:var(--txt);font-weight:500;}
+/* outline / contents card grid */
+.chapter .ogrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px);max-width:980px;margin-top:clamp(20px,3vw,34px);}
+.chapter .ocard{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,2.6vw,32px);transition:.25s;}
+.chapter .ocard:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-3px);box-shadow:0 14px 36px -16px rgba(255,59,84,.5);}
+.chapter .onum{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;color:var(--accent);margin-bottom:12px;}
+.chapter .otitle{font-family:var(--disp);font-weight:700;font-size:clamp(1.35rem,2.5vw,2rem);color:#fff;letter-spacing:-.02em;line-height:1.05;margin-bottom:8px;}
+.chapter .osub{font-size:.92rem;color:var(--muted);margin-bottom:18px;line-height:1.4;}
+.chapter .ochips{display:flex;flex-wrap:wrap;gap:8px;}
+.chapter .ochip{font-family:var(--mono);font-size:.72rem;color:#d2d2db;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:5px 10px;}
+.chapter .ochip small{color:var(--accent);}
+@media (max-width:720px){ .chapter .ogrid{grid-template-columns:1fr;} }
+
+.chapter.closing{text-align:center;}
+.chapter.closing .wrap{display:flex;flex-direction:column;align-items:center;}
+.chapter .big{font-family:var(--disp);font-weight:800;font-size:clamp(2.6rem,8vw,6.5rem);line-height:.98;letter-spacing:-.04em;margin-bottom:clamp(26px,4vw,44px);}
+.chapter .hint{position:absolute;left:50%;bottom:clamp(22px,4vh,44px);transform:translateX(-50%);font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:8px;}
+.chapter .hint span{animation:bob 1.8s ease-in-out infinite;font-size:1.1rem;}
+@keyframes bob{0%,100%{transform:translateY(0);opacity:.5;}50%{transform:translateY(6px);opacity:1;}}
+
+/* ════ DARK project content (override notion.css light theme) ════ */
+.proj-content{ background:transparent; color:#c6c6d0; font-family:var(--dbody); max-width:1080px; margin:0 auto; padding:0; }
+.proj-content .section{
+  background:var(--surface) !important; border:1px solid var(--line);
+  border-radius:20px; padding:clamp(24px,3.2vw,42px) !important;
+  margin:0 0 clamp(14px,2vw,24px) !important; max-width:100%;
+}
+.proj-content .text-col,.proj-content .wide-col{ max-width:100% !important; padding-left:0 !important; padding-right:0 !important; margin:0 auto; }
+.proj-content :is(h1,h2,h3,h4,h5,h6){ color:#fff !important; }
+.proj-content :is(p,li,td,th,div,small,label){ color:#c2c2cd; }
+.proj-content span:not([class]){ color:#c6c6d0 !important; }  /* beat inline dark colors (e.g. vendor labels) */
+.proj-content a{ color:var(--accent-soft); }
+.proj-content .hero{ display:none !important; }
+.proj-content hr,.proj-content .divider{ border-color:var(--line) !important; background:var(--line) !important; }
+
+/* cards & surfaces → dark */
+.proj-content :is(.prong-card,.card,.quality-item,.approach-card,.comparison-box,.metric-card,
+.challenge-card,.status-col,.flow-step,.pipeline-step,.two-prong,.dag-node,.code-block){
+  background:var(--surface) !important; border-color:var(--line) !important; color:#c2c2cd !important; box-shadow:none !important;
+}
+.proj-content :is(.comparison-box.after){ background:#13201a !important; }
+.proj-content :is(.comparison-box.before){ background:var(--surface) !important; }
+.proj-content :is(.tag,.tech-tag,.lang-pill,.ptag,.badge){ background:var(--surface2) !important; color:#b6b6c1 !important; border-color:var(--line) !important; }
+.proj-content .lang-pill.source{ background:var(--accent-deep) !important; color:#fff !important; }
+.proj-content :is(.metric-card .number,.inline-metric .val,.metric .num,.q-title,.stat-value){ color:var(--accent-soft) !important; }
+.proj-content :is(.label,.lbl,.mlabel,.q-desc,figcaption){ color:var(--muted) !important; }
+.proj-content .model-table th{ color:var(--muted) !important; border-color:var(--line) !important; }
+.proj-content .model-table td{ border-color:#202028 !important; }
+.proj-content .model-table .highlight-row td{ background:#20151a !important; }
+
+/* callouts / highlight boxes → dark red-tinted (no light islands) */
+.proj-content :is(.impact-statement,.highlights-box,.flow-box.highlight,.proposed-note,.highlights-grid){
+  background:#1b1418 !important; border-color:var(--accent-deep) !important; color:#dcdce4 !important;
+  background-image:none !important;
+}
+.proj-content :is(.impact-statement em,.highlight-value,.highlights-box .num){ color:var(--accent-soft) !important; font-style:normal; }
+.proj-content .highlight-item{ background:var(--surface) !important; border-color:var(--line) !important; }
+.proj-content :is(.highlight-label,.proposed-note){ color:var(--muted) !important; }
+.proj-content .badge-proposed{ background:var(--surface2) !important; color:var(--muted) !important; }
+
+/* class-specific dark text that beats the generic override → force light */
+.proj-content :is(.prong-card .prong-desc,.challenge-card .desc,.approach-content .approach-desc,
+.status-col li,.flow-step,.dag-node,.comparison-row .stat-label){ color:#c2c2cd !important; }
+.proj-content :is(.comparison-box .heading,.inline-metric .lbl,.pipeline-step .step-tool,
+.metric-card .label,.pipeline-slide-title,.pipeline-slide-label,.pipeline-slide-sublabel){ color:var(--muted) !important; }
+
+/* vendor logos are light-bg lockups → uniform white chips, equal height */
+.proj-content img[src*="logos/gradient-health"],
+.proj-content img[src*="logos/protege"]{
+  background:#fff !important; height:24px !important; padding:10px 14px !important; border-radius:8px !important; opacity:1 !important; box-sizing:content-box !important;
+}
+.proj-content span:has(img[src*="logos/segmed"]){
+  background:#fff !important; height:44px !important; box-sizing:border-box !important;
+  display:inline-flex !important; align-items:center !important; gap:7px !important;
+  padding:0 14px !important; border-radius:8px !important; opacity:1 !important;
+}
+.proj-content span:has(img[src*="logos/segmed"]) img{ height:22px !important; }
+.proj-content span:has(img[src*="logos/segmed"]) span{ color:#37352f !important; font-size:14px !important; }
+
+/* diagrams: white-bg SVGs become clean white cards floating on dark */
+.proj-content figure :is(img,svg){ max-width:100% !important; height:auto !important; background:#fff; border-radius:12px; }
+.proj-content .content-image{ border:1px solid var(--line); border-radius:12px; }
+.proj-content :is(.diagram,figure){ background:transparent !important; }
+
+/* ════ fixed UI (screen) ════ */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:200;box-shadow:0 0 12px var(--accent);}
+.dots{position:fixed;right:clamp(14px,2.4vw,30px);top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:13px;}
+.dots button{width:11px;height:11px;border-radius:50%;border:1.5px solid rgba(160,160,170,.5);cursor:pointer;background:transparent;padding:0;transition:.3s;}
+.dots button.on{background:var(--accent);border-color:var(--accent);box-shadow:0 0 12px var(--accent);transform:scale(1.25);}
+.toolbar{position:fixed;top:16px;right:60px;z-index:200;}
+.toolbar button{font-family:var(--mono);font-size:.76rem;background:var(--accent);color:#11070a;border:0;padding:11px 18px;border-radius:8px;cursor:pointer;font-weight:700;}
+
+@media (max-width:720px){
+  .chapter .edu-grid{grid-template-columns:1fr;}
+  .chapter .metrics{gap:22px 34px;}
+  .dots{display:none;}
+}
+@media (prefers-reduced-motion:reduce){
+  .chapter .reveal{transition:none;opacity:1;transform:none;}
+  .chapter .hint span,.chapter .scrollfor span{animation:none;}
+}
+
+/* ════ PDF export (dark, paginated) ════ */
+@media print{
+  @page{ size:A4; margin:0; }
+  .no-print,.dots,.progress,.toolbar,.chapter .hint,.chapter .scrollfor{ display:none !important; }
+  body{ background:var(--bg) !important; padding:8mm !important; }
+  /* each card stays whole across page breaks */
+  .chapter{ max-width:100% !important; margin:0 auto 6mm !important; padding:12mm !important; break-inside:avoid; }
+  .chapter.cover{ padding:16mm 12mm !important; }
+  .proj-content{ max-width:100% !important; padding:0 !important; }
+  .proj-content .section{ margin:0 0 6mm !important; padding:9mm !important; break-inside:avoid; }
+  .proj-content figure,.proj-content .diagram,.proj-content .card,.proj-content .prong-card,
+  .proj-content .quality-item,.proj-content .approach-card,.proj-content .comparison-box,
+  .proj-content .metric-card,.proj-content table,.proj-content .two-prong,.proj-content article{ break-inside:avoid; }
+  .proj-content .fade-in{ opacity:1 !important; transform:none !important; }
+  .chapter .reveal{ opacity:1 !important; transform:none !important; }
+}
+</style>
+</head>
+<body>
+<div class="toolbar no-print"><button onclick="window.print()">⤓ Save as PDF</button></div>
+<div class="progress" id="progress"></div>
+
+  <section class="chapter cover">
+    <div class="glow"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal"><span class="dot"></span>Portfolio · 2026</div>
+      <h1 class="name reveal" style="--d:.05s">Wonchan<br><span class="accent">Son</span></h1>
+      <p class="tag reveal" style="--d:.15s">AI Research Engineer. From medical-imaging AI to <b>Physical AI</b> — generative diffusion, 3D spatial perception, and LLM/VLM systems, taken from research to deployment.</p>
+      <div class="chips reveal" style="--d:.25s">
+        <a class="chip" href="mailto:wonchan.son99@gmail.com">✉ wonchan.son99@gmail.com</a>
+        <a class="chip" href="https://github.com/1c99" target="_blank">GitHub ↗</a>
+        <a class="chip" href="https://www.linkedin.com/in/1c99" target="_blank">LinkedIn ↗</a>
+        <a class="chip" href="https://1c99.github.io/" target="_blank">Classic portfolio ↗</a>
+      </div>
+      <div class="meta reveal" style="--d:.35s">Medical IP · Seoul, South Korea · Technical Research Personnel</div>
+    </div>
+    <div class="hint">scroll <span>↓</span></div>
+  </section>
+  <section class="chapter">
+    <div class="glow"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal"><span class="dot"></span>Profile · Education</div>
+      <h2 class="h-title reveal" style="--d:.05s">Who I am</h2>
+      <p class="h-sub reveal" style="--d:.12s">2+ years at Medical IP bridging academic research and production engineering — realizing theoretical ideas into deployed systems. Now bringing this applied-research foundation to Physical AI and robot intelligence.</p>
+      <div class="edu-grid reveal" style="--d:.2s">
+        <div class="edu-card"><div class="deg">M.Res. Biomedical Research <span style="color:#8c8c98;font-weight:400;font-size:.85em">(Data Science)</span></div><div class="school">Imperial College London</div><div class="when">Oct 2021 – Sep 2022 · London, UK</div></div>
+        <div class="edu-card"><div class="deg">B.Eng. Biomedical Systems Engineering</div><div class="school">University of Warwick</div><div class="when">Oct 2018 – Jun 2021 · Coventry, UK</div></div>
+      </div>
+      <div class="skills-line reveal" style="--d:.28s"><b>Python · C++ · CUDA</b> &nbsp;/&nbsp; PyTorch · Diffusers · Ray &nbsp;/&nbsp; Open3D · ICP · 6-DoF · point clouds &nbsp;/&nbsp; TensorRT · ONNX · Docker &nbsp;/&nbsp; LangGraph · OCR/NER · RAG &nbsp;/&nbsp; W&amp;B · MLflow · DVC</div>
+    </div>
+  </section>
+  <section class="chapter" id="proj-deepcatch-x">
+    <div class="glow"></div><div class="watermark tr">01</div>
+    <div class="wrap">
+      <div class="eyebrow reveal"><span class="dot"></span>Project 01 · Generative Medical Imaging</div>
+      <h2 class="h-title reveal" style="--d:.05s">DeepCatch&nbsp;X</h2>
+      <p class="h-sub reveal" style="--d:.12s">Diffusion-based organ extraction &amp; clinical quantification from chest X-ray — exhibited at <b>NVIDIA GTC 2025</b>.</p>
+      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">0.97</div><div class="mlabel">Dice — X-ray → aorta</div></div><div class="metric"><div class="num">0.93<small> vs 0.31</small></div><div class="mlabel">sensitivity vs radiologists</div></div><div class="metric"><div class="num">100<small>×</small></div><div class="mlabel">daily throughput</div></div><div class="metric"><div class="num">2.3<small>M+</small></div><div class="mlabel">cases processed</div></div></div>
+      <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
+    </div>
+  </section><div class="proj-content">
+
+    <!-- ════════════════════════════════════════════════════════
+         OVERVIEW
+         ════════════════════════════════════════════════════════ -->
+    <section class="section print-break-before">
+      <div class="text-col">
+        <h2>Overview</h2>
+        <p>
+          DeepCatch X is a medical imaging platform that extracts
+          clinical measurements from standard chest X-rays that
+          traditionally require CT scans, using generative AI.
+          A distributed Ray inference pipeline achieves 100x daily
+          throughput improvement.
+        </p>
+        <div class="tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">Conditional DDPM</span>
+          <span class="tag">LDM</span>
+          <span class="tag">VLM</span>
+          <span class="tag">Ray</span>
+          <span class="tag">TensorRT</span>
+          <span class="tag">ONNX</span>
+          <span class="tag">FP16</span>
+          <span class="tag">DDP</span>
+          <span class="tag">C++</span>
+          <span class="tag">Nuitka</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="impact-statement">
+      <em>Outperformed radiologists</em> on aortic dilation
+      detection (Sensitivity 0.93 vs 0.31) &mdash; presented at NVIDIA GTC 2025
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════
+         METRICS BANNER
+         ════════════════════════════════════════════════════════ -->
+    <section class="metrics-banner">
+      <div class="metrics-grid cols-5">
+        <div class="metric-card">
+          <div class="number">100x</div>
+          <div class="label">Daily Throughput</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">2.8x</div>
+          <div class="label">Per-Case Speedup</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">76%</div>
+          <div class="label">Code Reduction</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">2.3M+</div>
+          <div class="label">CRs Processed</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">100TB+</div>
+          <div class="label">Dataset Scale</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         DATA ACQUISITION
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Data Acquisition &amp; Management</h2>
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-x/assets/dcx-data-consort.png"
+            alt="CONSORT flow diagram: SNUH (n=50,000) + NLST (n=13,895) for training, three external hospitals (n=16,544) for validation, with 467 exclusions for quality control"
+          />
+          <figcaption>
+            Dataset CONSORT Flow &mdash; Training, Internal &amp; External
+            Validation Splits
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <h3>International Data Vendors</h3>
+        <p>
+          Supplementary datasets were sourced from international medical data
+          platforms to meet project requirements: demographic diversity
+          (ethnicity, sex, height/weight), scan conditions (slice
+          thickness, chest coverage), and clinical balance
+          (normal vs. disease). End-to-end acquisition of 100TB+ supported
+          FDA / MFDS regulatory submissions, requiring rigorous documentation
+          of dataset provenance and balance.
+        </p>
+        <div style="display: flex; align-items: center; gap: 40px; margin-top: 12px; flex-wrap: wrap">
+          <img src="images/logos/gradient-health.svg" alt="Gradient Health" style="height: 32px; opacity: 0.7"/>
+          <span style="display: flex; align-items: center; gap: 6px; opacity: 0.7">
+            <img src="images/logos/segmed.png" alt="Segmed" style="height: 32px; border-radius: 4px"/>
+            <span style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; color: #37352f">Segmed</span>
+          </span>
+          <img src="images/logos/protege.svg" alt="Protege" style="height: 32px; opacity: 0.7"/>
+        </div>
+
+      </div>
+
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         PILLAR 1: RESEARCH INNOVATION
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Research Innovation</h2>
+        <p>
+          The core research contribution is a conditional diffusion model
+          that extracts 2D aorta projections from X-rays. A 3D volumetric
+          extension via Latent Diffusion with a 3D VAE, Flash Attention,
+          and window attention for local context is proposed.
+        </p>
+      </div>
+
+      <div class="text-col">
+        <p>
+          Training uses a ConcatConditionedUNet with noise prediction
+          objective (MSE loss), conditioned on X-ray input via channel
+          concatenation. 4-GPU DDP training (NCCL) with gradient
+          accumulation (effective batch size 512), mixed precision
+          (FP16 + GradScaler), and cosine LR schedule with warmup.
+        </p>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="projects/deepcatch-x/assets/ddpm-concept-unified.svg?v=2"
+            alt="Two-stage conditional diffusion architecture: Stage 1 (implemented) takes X-ray and noisy aorta into a conditional UNet_2D with iterative T-step denoising, producing a 2D aorta mask at Dice 0.97; Stage 2 (proposed) projects the 2D mask to 3D, encodes via VAE_3D, denoises via UNet_3D with flash + window attention, decodes to a 3D aortic volume for diameter measurement."
+          />
+          <figcaption>
+            Two-Stage Diffusion Architecture &mdash; Conditional 2D DDPM (Implemented) and 3D Latent Diffusion Extension (Proposed)
+          </figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         PILLAR 2: INFERENCE OPTIMIZATION
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Inference Optimization</h2>
+        <p>
+          Hospital datasets arrive on physical SSDs &mdash; terabytes of
+          DICOM files with no API endpoint. The Ray-based pipeline
+          orchestrates 14 modules as a DAG of independent actors with
+          automatic scheduling and zero-copy data sharing. A VLM-driven
+          pre-filter inspects incoming DICOMs and routes only valid PA-view
+          chest X-rays into the pipeline, eliminating wasted compute on
+          incompatible studies.
+        </p>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="projects/deepcatch-x/assets/dag-scheduling.svg?v=5"
+            alt="Module dependency DAG: Level 0 independent GPU segmentation (Lung, Heart, Bone, Bone Supp, Airway, Aorta, T12-L1, LAA), Level 1 lung-dependent GPU detection (COVID, Vessel, TB), Level 2 CPU post-processing (Peripheral, CTR, Diameter)"
+          />
+          <figcaption>
+            Module Dependency DAG &mdash; Parallel Execution Levels
+          </figcaption>
+        </figure>
+
+        <figure class="diagram">
+          <img
+            src="projects/deepcatch-x/assets/ray-distributed.svg?v=5"
+            alt="Batch Mode: Ray Head Node distributes modules per worker via affinity, each processing all files with models cached in VRAM. 3-phase scheduling."
+          />
+        </figure>
+
+        <figure class="diagram">
+          <img
+            src="projects/deepcatch-x/assets/ray-pipeline.svg?v=5"
+            alt="Split-Pool Pipeline: files split into mini-batches, GPU worker pool runs aorta segmentation in parallel, masks flow to CPU worker pool for diameter measurement. Async stage overlap."
+          />
+        </figure>
+      </div>
+
+      <div class="text-col print-break-before">
+        <h3>Large-Scale Processing</h3>
+        <p>
+          Beyond scheduling, the system includes layers of
+          hardening that enable reliable processing of 2.3M+ files across
+          multi-day runs: adaptive weight management with two loading
+          strategies, memory-bounded workers with automatic respawn, and
+          crash-safe persistence via SQLite state tracking and atomic writes.
+        </p>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="projects/deepcatch-x/assets/production-architecture.svg?v=1"
+            alt="Production architecture: AdaptiveScheduler with dependency graph, performance profiler, and resource manager; SharedWeightsManager with eager and level-based strategies via Ray Object Store; Worker lifecycle with RSS monitoring and straggler detection; Data integrity with SQLite StateDB, atomic writes, and backpressure control"
+          />
+          <figcaption>
+            Large-Scale Processing &mdash; Scheduler, Memory, and Persistence
+            Layers
+          </figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         PILLAR 3: PRODUCTION ENGINEERING
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Production Engineering</h2>
+        <p>
+          Shipping deep learning to hospitals means standalone executables, no
+          Python runtime, and IP-protected binaries. A major refactoring effort
+          eliminated dead code and unified the architecture before Nuitka
+          compilation.
+        </p>
+
+        <h3>Codebase Refactoring</h3>
+        <div class="comparison">
+          <div class="comparison-box before">
+            <div class="heading">Before</div>
+            <div class="comparison-row">
+              <span class="stat-label">Files</span>
+              <span class="stat-value">110</span>
+            </div>
+            <div class="comparison-row">
+              <span class="stat-label">Lines of Code</span>
+              <span class="stat-value">34,266</span>
+            </div>
+            <div class="comparison-row">
+              <span class="stat-label">Entry Points</span>
+              <span class="stat-value">6</span>
+            </div>
+          </div>
+          <div class="comparison-box after">
+            <div class="heading">After</div>
+            <div class="comparison-row">
+              <span class="stat-label">Files</span>
+              <span class="stat-value">15</span>
+            </div>
+            <div class="comparison-row">
+              <span class="stat-label">Lines of Code</span>
+              <span class="stat-value">8,017</span>
+            </div>
+            <div class="comparison-row">
+              <span class="stat-label">Entry Points</span>
+              <span class="stat-value">1</span>
+            </div>
+          </div>
+        </div>
+
+        <h3>Nuitka Deployment</h3>
+        <p>
+          Compiled to standalone executables with bundled CUDA/PyTorch
+          dependencies via Nuitka. Model inference accelerated with TensorRT
+          compilation, ONNX export, and FP16 precision. Source-code encryption
+          for IP protection in commercial deployments.
+        </p>
+
+        <h3>BioAge: R to C++</h3>
+        <p>
+          The platform estimates biological age from chest X-ray biomarkers,
+          outputting 52 clinical fields including risk scores and life
+          expectancy. The original R algorithm was ported to
+          production C++ and compiled into a shared binary for integration into the
+          deployment pipeline. Achieves numerical equivalence to the
+          original R implementation. Deployed across check-up centers.
+        </p>
+      </div>
+
+    </section>
+
+    </div>
+  <section class="chapter" id="proj-evd-navigation">
+    <div class="glow"></div><div class="watermark tr">02</div>
+    <div class="wrap">
+      <div class="eyebrow reveal"><span class="dot"></span>Project 02 · 3D Spatial Perception &nbsp;—&nbsp; the bridge to robotics</div>
+      <h2 class="h-title reveal" style="--d:.05s">AR Surgical Registration</h2>
+      <p class="h-sub reveal" style="--d:.12s">Real-time surgical navigation — preoperative CT registered to an intraoperative iPad Pro LiDAR point cloud.</p>
+      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">1.8<small>mm</small></div><div class="mlabel">FRE registration error</div></div><div class="metric"><div class="num">6-DoF</div><div class="mlabel">real-time pose estimation</div></div><div class="metric"><div class="num">On-device</div><div class="mlabel">iOS / iPad LiDAR</div></div></div>
+      <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
+    </div>
+  </section><div class="proj-content">
+
+    <!-- ════════════════════════════════════════════════════════
+         OVERVIEW
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Overview</h2>
+        <p>
+          External Ventricular Drainage (EVD) is a critical neurosurgical
+          procedure requiring precise catheter placement. This system uses
+          AR-assisted navigation to register preoperative CT scans to the
+          patient&rsquo;s actual anatomy in real-time, helping surgeons
+          accurately position the drainage catheter.
+        </p>
+        <div class="tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">ICP</span>
+          <span class="tag">6-DoF Pose Estimation</span>
+          <span class="tag">Open3D</span>
+          <span class="tag">Point Cloud Processing</span>
+          <span class="tag">Real-Time</span>
+          <span class="tag">On-Device</span>
+          <span class="tag">ARKit</span>
+          <span class="tag">iOS</span>
+          <span class="tag">MediaPipe</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════
+         METRICS BANNER
+         ════════════════════════════════════════════════════════ -->
+    <section class="metrics-banner">
+      <div class="metrics-grid cols-4">
+        <div class="metric-card">
+          <div class="number">1.8mm</div>
+          <div class="label">Registration Error</div>
+        </div>
+        <div class="metric-card">
+          <div class="number small">Real-Time</div>
+          <div class="label">6-DoF Registration</div>
+        </div>
+        <div class="metric-card">
+          <div class="number small">MFDS</div>
+          <div class="label">In Clinical Trials</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">2</div>
+          <div class="label">Patents Filed</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         3D LANDMARK EXTRACTION
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>3D Facial Landmark Extraction</h2>
+        <p>
+          The FaceLandmark approach originated from a related 3D medical
+          visualization project, where I handled visualization, quality
+          assurance, and data management for CT-reconstructed head meshes.
+          Working with these 3D models led to developing a markerless landmark
+          extraction pipeline that was later integrated into the EVD navigation
+          system.
+        </p>
+      </div>
+
+      <div class="text-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/evd-navigation/assets/evd-ct-overlay.png"
+            alt="CT skull overlay with semi-transparent skin showing bone structure and landmark registration from 8 viewing angles"
+          />
+          <figcaption>
+            CT-to-Surface Overlay &mdash; Skull Structure with Landmark
+            Registration
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <p>
+          Building on this experience, I led the development of a markerless
+          pipeline that automatically identifies anatomical landmarks from head
+          CT scans, combining 2D facial landmark detection with ray tracing for
+          3D reconstruction. In the OR, a two-stage 6-DoF pose estimation
+          aligns preoperative landmarks to the live patient: Kabsch (SVD) for
+          coarse alignment, then ICP (point-to-plane) for sub-millimeter
+          refinement. The entire pipeline runs in real-time on an iPad Pro,
+          co-developed with iOS engineers for intraoperative deployment.
+        </p>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="projects/evd-navigation/assets/evd-workflow.svg"
+            alt="EVD Clinical Workflow: Preoperative (CT Scan → Skin Segmentation → 3D FaceLandmarks) and Intraoperative (iPad LiDAR → 2D FaceLandmarks → Kabsch + ICP Registration → AR-Guided EVD Navigation)"
+          />
+          <figcaption>
+            EVD Clinical Workflow &mdash; Preoperative to Intraoperative
+          </figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         ISO PHANTOM VALIDATION
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>ISO Phantom Validation</h2>
+        <p>
+          Accuracy was validated against an ISO-defined phantom model with
+          physically measured ground truth coordinates. The ground truth
+          required precise manual measurement of landmark positions on the
+          phantom &mdash; a painstaking process repeated across multiple trials
+          for statistical significance. The system achieved FRE &lt; 2mm on
+          100% of test cases, meeting the regulatory threshold for MFDS
+          submission.
+        </p>
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image chart-image"
+            src="projects/evd-navigation/assets/evd-registration-error.png"
+            alt="Registration Error Distribution boxplot: X, Y, Z, Euclidean, and FRE components all below 2mm threshold"
+          />
+          <figcaption>
+            Registration Error Distribution &mdash; All Components Below 2mm
+            Threshold
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         KEY CHALLENGES
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Key Challenges Solved</h2>
+        <div class="challenges">
+          <div class="challenge-card">
+            <div class="title">Coordinate Alignment</div>
+            <div class="desc">
+              CT scanner and iPad LiDAR use different coordinate systems &mdash;
+              unified into a common reference frame.
+            </div>
+          </div>
+          <div class="challenge-card">
+            <div class="title">LiDAR Noise</div>
+            <div class="desc">
+              Statistical outlier removal (k-NN distance threshold) for clean
+              point cloud reconstruction.
+            </div>
+          </div>
+          <div class="challenge-card">
+            <div class="title">Scale Differences</div>
+            <div class="desc">
+              Medical STL files and LiDAR scans normalized to a common scale for
+              accurate overlay.
+            </div>
+          </div>
+          <div class="challenge-card">
+            <div class="title">Correspondence</div>
+            <div class="desc">
+              Automatic landmark matching between source CT and target patient
+              anatomy.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div>
+  <section class="chapter" id="proj-llm-deidentification">
+    <div class="glow"></div><div class="watermark tr">03</div>
+    <div class="wrap">
+      <div class="eyebrow reveal"><span class="dot"></span>Project 03 · LLM / Agentic Systems</div>
+      <h2 class="h-title reveal" style="--d:.05s">De-ID &amp; Translation</h2>
+      <p class="h-sub reveal" style="--d:.12s">Compliance-grade medical NLP — automated PHI de-identification and a multi-agent translation pipeline.</p>
+      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">98<small>%</small></div><div class="mlabel">PHI detection accuracy</div></div><div class="metric"><div class="num">KR→7</div><div class="mlabel">languages translated</div></div><div class="metric"><div class="num">4</div><div class="mlabel">role agents per loop</div></div></div>
+      <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
+    </div>
+  </section><div class="proj-content">
+
+    <!-- ════════════════════════════════════════════════════════
+         PHI DE-IDENTIFICATION
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>PHI De-Identification Pipeline</h2>
+        <p>
+          Medical data needs strict HIPAA/GDPR compliance to be shared for
+          research and collaboration &mdash; but Protected Health Information
+          (PHI) hides across many modalities: burned-in text on images, DICOM
+          metadata, PDFs, and handwritten annotations. This system removes it
+          automatically, where manual de-identification is slow and error-prone.
+        </p>
+        <div class="tags">
+          <span class="tag">98% detection</span>
+          <span class="tag">LLM</span>
+          <span class="tag">OCR</span>
+          <span class="tag">NER</span>
+          <span class="tag">DICOM</span>
+        </div>
+
+        <h3>Two-Pronged Approach</h3>
+        <div class="two-prong">
+          <div class="prong-card">
+            <div class="prong-title">
+              <span class="icon">&#128196;</span> Metadata Anonymization
+            </div>
+            <div class="prong-desc">
+              LLM parses DICOM headers to identify PHI fields (Patient Name, ID,
+              Birth Date) and generates consistent anonymized mappings while
+              preserving non-PHI metadata.
+            </div>
+          </div>
+          <div class="prong-card">
+            <div class="prong-title">
+              <span class="icon">&#128444;&#65039;</span> Burn-in Text Detection
+            </div>
+            <div class="prong-desc">
+              OCR extracts text regions with bounding boxes. LLM/NER classifies
+              each as PHI or non-PHI. Pixel-level black mask applied over PHI
+              while preserving markers (L/R, PA).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="projects/llm-deidentification/assets/phi-pipeline.svg"
+            alt="PHI De-identification Pipeline: Metadata branch through LLM to anonymized values, Image branch through OCR and NER to PHI masking"
+          />
+          <figcaption>
+            Two-Pronged De-identification Pipeline
+          </figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         TRANSLATION SYSTEM
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Multilingual Translation System</h2>
+        <p>
+          Four role-specialized models &mdash; Translator, Reviewer, Fixer, and
+          Supervisor &mdash; draft, review, correct, and sign off each
+          translation, with an independent terminology check guarding clinical
+          terms. Translating the product&rsquo;s content opened it to new
+          international markets.
+        </p>
+        <div class="tags">
+          <span class="tag">KR &rarr; 7 languages</span>
+          <span class="tag">Multi-Agent</span>
+          <span class="tag">Agentic Systems</span>
+          <span class="tag">Translation Memory</span>
+        </div>
+
+        <div class="lang-pills">
+          <span class="lang-pill source">Korean</span>
+          <span class="lang-arrow">&rarr;</span>
+          <span class="lang-pill">Japanese</span>
+          <span class="lang-pill">Chinese</span>
+          <span class="lang-pill">Arabic</span>
+          <span class="lang-pill">Spanish</span>
+          <span class="lang-pill">French</span>
+          <span class="lang-pill">Portuguese</span>
+          <span class="lang-pill">Russian</span>
+        </div>
+
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/llm-deidentification/assets/llm-medipbox-features.png"
+            alt="MEDIP Box solution features: dissection guide, quiz mode, pregnancy animation, and multi-player mode — all requiring multilingual translation for international markets"
+          />
+          <figcaption>
+            MEDIP Box Product Features &mdash; Content Requiring Multilingual
+            Translation for International Markets
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="projects/llm-deidentification/assets/translation-pipeline.svg"
+            alt="Multi-agent medical translation: Translator, Reviewer, Fixer and Supervisor models (one per GPU, via Ollama + Ray) in a verification loop, with an independent terminology gate that watches clinical terms. Runs on-device."
+          />
+          <figcaption>
+            Multi-agent verification loop &mdash; translator, reviewer, fixer and
+            supervisor, gated by an independent terminology check.
+          </figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    </div>
+  <section class="chapter" id="proj-deepcatch-m">
+    <div class="glow"></div><div class="watermark tr">04</div>
+    <div class="wrap">
+      <div class="eyebrow reveal"><span class="dot"></span>Project 04 · MLOps</div>
+      <h2 class="h-title reveal" style="--d:.05s">DeepCatch&nbsp;M</h2>
+      <p class="h-sub reveal" style="--d:.12s">Multi-organ MRI body-composition segmentation, served through a reproducible MLOps pipeline.</p>
+      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">~0.9</div><div class="mlabel">Dice — SAT &amp; VAT</div></div><div class="metric"><div class="num">2</div><div class="mlabel">architectures (U-Net · nnU-Net)</div></div><div class="metric"><div class="num">3</div><div class="mlabel">tracked: W&amp;B · MLflow · DVC</div></div></div>
+      <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
+    </div>
+  </section><div class="proj-content">
+
+    <!-- ════════════════════════════════════════════════════════
+         OVERVIEW
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Overview</h2>
+        <p>
+          DeepCatch M is an end-to-end MLOps pipeline for MRI segmentation
+          covering the full ML lifecycle &mdash; data versioning, GPU training,
+          experiment tracking, hyperparameter search, and containerized
+          serving. Applied internally to SAT (subcutaneous adipose tissue) and
+          VAT (visceral adipose tissue) segmentation at Medical IP. The public
+          template uses BraTS brain-tumour data as a shareable demonstration of
+          the same pipeline.
+        </p>
+        <div class="tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">MLFlow</span>
+          <span class="tag">DVC</span>
+          <span class="tag">Ray Tune</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Prometheus</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="impact-statement">
+      <em>End-to-end reproducible ML pipeline</em> from data versioning
+      to containerized deployment
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════
+         METRICS BANNER
+         ════════════════════════════════════════════════════════ -->
+    <section class="metrics-banner">
+      <div class="metrics-grid cols-4">
+        <div class="metric-card">
+          <div class="number">0.90</div>
+          <div class="label">Whole-Tumor Dice</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">2</div>
+          <div class="label">Architectures (factory)</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">Full</div>
+          <div class="label">Reproducibility</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">Auto</div>
+          <div class="label">Train-to-Deploy</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         MLOps PIPELINE
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>End-to-End MLOps Pipeline</h2>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="projects/deepcatch-m/assets/mlops-workflow.svg"
+            alt="Continuous MLOps cycle: data versioning (DVC), training (PyTorch), tracking (W&B/MLflow), tuning (Ray Tune), packaging (Docker), and serving — with a model factory comparing U-Net and nnU-Net, and a monitor-to-retrain loop"
+          />
+          <figcaption>
+            Continuous MLOps Cycle &mdash; Versioning &rarr; Training &rarr;
+            Tracking &rarr; Tuning &rarr; Packaging &rarr; Serving, with a model
+            factory (U-Net / nnU-Net) and monitored retraining
+          </figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         SERVING CONSOLE
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Serving Console</h2>
+      </div>
+
+      <div class="text-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-m/assets/dcm-serving-2d.png"
+            alt="NeuroSeg inference console: 2D slice segmentation of a BraTS case showing input FLAIR, ground truth, and model prediction overlays, with per-class tumour volumes and per-slice whole-tumor Dice"
+          />
+          <figcaption>
+            Serving Console &mdash; interactive 2D inference (input / ground
+            truth / prediction) with per-class volumes and per-slice
+            whole-tumor Dice
+          </figcaption>
+        </figure>
+
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-m/assets/dcm-serving-3d.png"
+            alt="NeuroSeg inference console: interactive 3D tumour surface reconstruction inside a translucent brain, with per-class toggles, full-volume whole-tumor Dice, and NIfTI / STL export"
+          />
+          <figcaption>
+            Serving Console &mdash; interactive 3D tumour reconstruction (STL
+            surface mesh in translucent brain context) with NIfTI / STL export
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         EXPERIMENT TRACKING
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Experiment Tracking</h2>
+      </div>
+
+      <div class="text-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-m/assets/dcm-wandb-comparison.png"
+            alt="Weights & Biases dashboard comparing nnU-Net and U-Net training runs: whole-tumor Dice climbing to ~0.90, validation/train Dice and loss curves, and the cosine learning-rate schedule"
+          />
+          <figcaption>
+            W&amp;B Experiment Tracking &mdash; nnU-Net vs. U-Net, whole-tumor
+            Dice to ~0.90, with cosine LR schedule &amp; logged predictions
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    </div>
+  <section class="chapter closing">
+    <div class="glow"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal" style="justify-content:center"><span class="dot"></span>Let's talk</div>
+      <h2 class="big reveal" style="--d:.08s">Toward <span class="accent">Physical AI</span><br>&amp; robot intelligence.</h2>
+      <div class="chips reveal" style="--d:.2s" style2="justify-content:center">
+        <a class="chip" href="mailto:wonchan.son99@gmail.com">✉ wonchan.son99@gmail.com</a>
+        <a class="chip" href="https://github.com/1c99" target="_blank">GitHub ↗</a>
+        <a class="chip" href="https://www.linkedin.com/in/1c99" target="_blank">LinkedIn ↗</a>
+        <a class="chip" href="https://1c99.github.io/" target="_blank">Classic portfolio ↗</a>
+      </div>
+    </div>
+  </section>
+<nav class="dots" id="dots"></nav>
+<script src="js/notion.js"></script>
+<script>// chapter reveal + dot-nav for the long combined portfolio
+const chapters = [...document.querySelectorAll(".chapter")];
+const dotsWrap = document.getElementById("dots");
+const progress = document.getElementById("progress");
+
+// labels for the dot nav (one per chapter)
+const labels = ["Home", "Profile", "DeepCatch X", "EVD", "De-ID / Translation", "DeepCatch M", "Contact"];
+chapters.forEach((c, i) => {
+  const b = document.createElement("button");
+  b.title = labels[i] || "Section " + (i + 1);
+  b.addEventListener("click", () => c.scrollIntoView({ behavior: "smooth" }));
+  dotsWrap.appendChild(b);
+});
+const dots = [...dotsWrap.children];
+
+// reveal chapters as they enter
+const io = new IntersectionObserver(
+  (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("active"); }),
+  { threshold: 0.4 }
+);
+chapters.forEach((c) => io.observe(c));
+chapters[0].classList.add("active");
+
+// highlight nearest chapter dot + progress bar
+function onScroll() {
+  const y = window.scrollY + window.innerHeight * 0.5;
+  let idx = 0;
+  chapters.forEach((c, i) => { if (c.offsetTop <= y) idx = i; });
+  dots.forEach((d, i) => d.classList.toggle("on", i === idx));
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+window.addEventListener("resize", onScroll);
+onScroll();
+</script>
+</body>
+</html>

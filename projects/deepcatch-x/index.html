@@ -19,7 +19,7 @@
       <a class="back-link-hero" href="../../index.html#experience">&larr; Back to Portfolio</a>
       <h1>DeepCatch X</h1>
       <p class="subtitle">
-        AI-Powered X-ray Analysis Platform for Aortic Disease Detection
+        AI Platform for Clinical Measurement Extraction from Chest X-rays
       </p>
       <div class="meta">
         <span>Medical IP &middot; Seoul, South Korea</span>
@@ -48,12 +48,15 @@
         </p>
         <div class="tags">
           <span class="tag">PyTorch</span>
-          <span class="tag">Diffusion</span>
+          <span class="tag">Conditional DDPM</span>
           <span class="tag">LDM</span>
+          <span class="tag">VLM</span>
           <span class="tag">Ray</span>
           <span class="tag">TensorRT</span>
-          <span class="tag">C++</span>
+          <span class="tag">ONNX</span>
+          <span class="tag">FP16</span>
           <span class="tag">DDP</span>
+          <span class="tag">C++</span>
           <span class="tag">Nuitka</span>
         </div>
       </div>
@@ -61,7 +64,7 @@
 
     <div class="impact-statement">
       <em>Outperformed radiologists</em> on aortic dilation
-      detection &mdash; presented at NVIDIA GTC 2025
+      detection (Sensitivity 0.93 vs 0.31) &mdash; presented at NVIDIA GTC 2025
     </div>
 
     <!-- ════════════════════════════════════════════════════════
@@ -123,7 +126,9 @@
           platforms to meet project requirements: demographic diversity
           (ethnicity, sex, height/weight), scan conditions (slice
           thickness, chest coverage), and clinical balance
-          (normal vs. disease):
+          (normal vs. disease). End-to-end acquisition of 100TB+ supported
+          FDA / MFDS regulatory submissions, requiring rigorous documentation
+          of dataset provenance and balance.
         </p>
         <div style="display: flex; align-items: center; gap: 40px; margin-top: 12px; flex-wrap: wrap">
           <img src="../../images/logos/gradient-health.svg" alt="Gradient Health" style="height: 32px; opacity: 0.7"/>
@@ -150,8 +155,7 @@
           The core research contribution is a conditional diffusion model
           that extracts 2D aorta projections from X-rays. A 3D volumetric
           extension via Latent Diffusion with a 3D VAE, Flash Attention,
-          and window attention for local context is proposed and
-          implemented.
+          and window attention for local context is proposed.
         </p>
       </div>
 
@@ -166,31 +170,13 @@
       </div>
 
       <div class="wide-col">
-        <figure class="content-image-wrap">
+        <figure class="diagram">
           <img
-            class="content-image"
-            src="assets/dcx-ddpm-results.png"
-            alt="Diffusion training results: input X-ray, true aorta ground truth, and generated aorta with Dice score 0.97"
-            style="max-width: 70%; display: block; margin: 0 auto"
+            src="assets/ddpm-concept-unified.svg?v=2"
+            alt="Two-stage conditional diffusion architecture: Stage 1 (implemented) takes X-ray and noisy aorta into a conditional UNet_2D with iterative T-step denoising, producing a 2D aorta mask at Dice 0.97; Stage 2 (proposed) projects the 2D mask to 3D, encodes via VAE_3D, denoises via UNet_3D with flash + window attention, decodes to a 3D aortic volume for diameter measurement."
           />
           <figcaption>
-            Diffusion Training Results &mdash; X-ray &rarr; True Aorta &rarr;
-            Generated Aorta (Dice 0.97)
-          </figcaption>
-        </figure>
-      </div>
-
-      <div class="wide-col">
-        <figure class="content-image-wrap">
-          <img
-            class="content-image"
-            src="assets/dcx-data-augmentation.png"
-            style="max-width: 60%; display: block; margin: 0 auto"
-            alt="Data augmentation grid: synthetic X-ray variations across chest, spine, aorta, heart, and lung segmentations"
-          />
-          <figcaption>
-            Data Augmentation &mdash; Synthetic Training Samples Across Organ
-            Segmentations
+            Two-Stage Diffusion Architecture &mdash; Conditional 2D DDPM (Implemented) and 3D Latent Diffusion Extension (Proposed)
           </figcaption>
         </figure>
       </div>
@@ -209,7 +195,10 @@
           Hospital datasets arrive on physical SSDs &mdash; terabytes of
           DICOM files with no API endpoint. The Ray-based pipeline
           orchestrates 14 modules as a DAG of independent actors with
-          automatic scheduling and zero-copy data sharing.
+          automatic scheduling and zero-copy data sharing. A VLM-driven
+          pre-filter inspects incoming DICOMs and routes only valid PA-view
+          chest X-rays into the pipeline, eliminating wasted compute on
+          incompatible studies.
         </p>
       </div>
 
@@ -293,10 +282,6 @@
               <span class="stat-value">34,266</span>
             </div>
             <div class="comparison-row">
-              <span class="stat-label">Duplicate Code</span>
-              <span class="stat-value">47%</span>
-            </div>
-            <div class="comparison-row">
               <span class="stat-label">Entry Points</span>
               <span class="stat-value">6</span>
             </div>
@@ -312,10 +297,6 @@
               <span class="stat-value">8,017</span>
             </div>
             <div class="comparison-row">
-              <span class="stat-label">Duplicate Code</span>
-              <span class="stat-value">0%</span>
-            </div>
-            <div class="comparison-row">
               <span class="stat-label">Entry Points</span>
               <span class="stat-value">1</span>
             </div>
@@ -326,8 +307,8 @@
         <p>
           Compiled to standalone executables with bundled CUDA/PyTorch
           dependencies via Nuitka. Model inference accelerated with TensorRT
-          compilation, ONNX export, and FP16 precision. CdsPyEncrypt for source
-          code protection in commercial deployments.
+          compilation, ONNX export, and FP16 precision. Source-code encryption
+          for IP protection in commercial deployments.
         </p>
 
         <h3>BioAge: R to C++</h3>

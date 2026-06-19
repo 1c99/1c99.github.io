@@ -18,7 +18,7 @@
     <section class="hero">
       <a class="back-link-hero" href="../../index.html#experience">&larr; Back to Portfolio</a>
       <h1>3D FaceLandmark &amp; AR Registration</h1>
-      <p class="subtitle">EVD Surgical Navigation System</p>
+      <p class="subtitle">EVD Surgical Navigation &mdash; Real-Time 3D Registration &amp; 6-DoF Pose Estimation</p>
       <div class="meta">
         <span>Medical IP &middot; Seoul, South Korea</span>
         <span>Nov 2023 &ndash; Present</span>
@@ -57,7 +57,11 @@
           <span class="tag">PyTorch</span>
           <span class="tag">Computer Vision</span>
           <span class="tag">ICP</span>
-          <span class="tag">Kabsch</span>
+          <span class="tag">6-DoF Pose Estimation</span>
+          <span class="tag">Open3D</span>
+          <span class="tag">Point Cloud Processing</span>
+          <span class="tag">Real-Time</span>
+          <span class="tag">On-Device</span>
           <span class="tag">ARKit</span>
           <span class="tag">iOS</span>
           <span class="tag">MediaPipe</span>
@@ -75,12 +79,12 @@
           <div class="label">Registration Error</div>
         </div>
         <div class="metric-card">
-          <div class="number small">ISO</div>
-          <div class="label">Standards Compliant</div>
+          <div class="number small">Real-Time</div>
+          <div class="label">6-DoF Registration</div>
         </div>
         <div class="metric-card">
           <div class="number small">MFDS</div>
-          <div class="label">Filing Prepared</div>
+          <div class="label">In Clinical Trials</div>
         </div>
         <div class="metric-card">
           <div class="number">2</div>
@@ -126,9 +130,11 @@
           Building on this experience, I led the development of a markerless
           pipeline that automatically identifies anatomical landmarks from head
           CT scans, combining 2D facial landmark detection with ray tracing for
-          3D reconstruction. In the OR, a two-stage registration aligns
-          preoperative landmarks to the live patient: Kabsch (SVD) for coarse
-          alignment, then ICP (point-to-plane) for sub-millimeter refinement.
+          3D reconstruction. In the OR, a two-stage 6-DoF pose estimation
+          aligns preoperative landmarks to the live patient: Kabsch (SVD) for
+          coarse alignment, then ICP (point-to-plane) for sub-millimeter
+          refinement. The entire pipeline runs in real-time on an iPad Pro,
+          co-developed with iOS engineers for intraoperative deployment.
         </p>
       </div>
 
@@ -199,8 +205,8 @@
           <div class="challenge-card">
             <div class="title">LiDAR Noise</div>
             <div class="desc">
-              Point cloud outliers filtered via Z-score method (threshold 2.0)
-              for clean surface reconstruction.
+              Statistical outlier removal (k-NN distance threshold) for clean
+              point cloud reconstruction.
             </div>
           </div>
           <div class="challenge-card">

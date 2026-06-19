@@ -655,15 +655,15 @@ a:hover {
 .lang-pills {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
   margin: 20px 0;
 }
 
 .lang-pill {
-  padding: 6px 14px;
+  padding: 5px 11px;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 500;
   background: #f1f1ef;
   color: #37352f;

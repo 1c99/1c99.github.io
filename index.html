@@ -52,6 +52,7 @@
             <li><a href="#patents">Patents</a></li>
             <li><a href="#presentations">Presentations</a></li>
             <li><a href="#skills">Skills</a></li>
+            <li><a href="#learning">Learning</a></li>
           </ul>
         </nav>
         <footer>
@@ -66,7 +67,7 @@
             </li>
             <li>
               <a
-                href="https://www.linkedin.com/in/wonchanson"
+                href="https://www.linkedin.com/in/1c99"
                 target="_blank"
                 class="icon fa-linkedin"
                 ><span class="label">LinkedIn</span></a
@@ -86,17 +87,22 @@
               <p>Wonchan Son</p>
             </header>
             <p>
-              AI Research Engineer at <b>Medical IP</b>, currently serving as Technical Research Personnel
-              (Military Alternative Service). Bridging the gap between academic research and industrial
-              engineering, I specialize in proactively defining ambiguous problems and realizing theoretical
-              ideas into working prototypes. I am now seeking to apply this expertise to solve novel challenges
-              that deliver scalable impact to the real world.
+              AI Research Engineer with 2+ years at <b>Medical IP</b>, currently serving as Technical Research
+              Personnel (Military Alternative Service). I specialize in <b>generative diffusion modeling</b>,
+              <b>3D spatial registration</b>, and <b>LLM/VLM-driven data pipelines</b> &mdash; backed by scalable
+              Ray-distributed inference, TensorRT optimization, and on-premise deployment. I led the acquisition of
+              100TB+ medical imaging datasets for FDA/MFDS regulatory submissions and exhibited at NVIDIA GTC 2025.
+              I am now seeking to bring this applied-research foundation to <b>Physical AI and robot intelligence</b>.
             </p>
 
             <p>
               <a class="button unclickable icon fa-envelope small"
                 >wonchan.son99 <w>at</w> gmail <w>dot</w> com
               </a>
+              &ensp;
+              <a class="button small icon fa-play" href="portfolio-full.html"
+                >&ensp;View Portfolio Deck</a
+              >
             </p>
 
             <h4>Education</h4>
@@ -133,30 +139,31 @@
 
             <h5>DeepCatch X (X-ray) <a class="lowkey" href="projects/deepcatch-x/">[details]</a></h5>
             <ul>
-              <li>Showcased DeepCatch X at <b>NVIDIA GTC 2025</b>, demonstrating novel generative AI applications in medical imaging to a global audience.</li>
-              <li>Pioneered a <b>Conditional Diffusion model</b> for X-ray-to-Aorta extraction achieving superior fidelity to GANs; proposed LDM-based volumetric reconstruction; accelerated training via DDP and Gradient Accumulation.</li>
-              <li>Engineered a scalable inference pipeline using <b>Ray Distributed</b> across multi-node workstations; achieved 6x batch throughput and 2.8x faster per-case inference via adaptive DAG scheduling and hardware-aware optimizations (TensorRT, ONNX, FP16).</li>
-              <li>Reduced codebase size by 73% via refactoring and built a <b>Nuitka compilation pipeline</b> to deploy models as standalone executables.</li>
-              <li>Implemented a BioAge prediction module by porting research-grade R algorithms to a <b>C++ production environment</b>.</li>
-              <li>Directed the end-to-end acquisition of massive-scale medical datasets (100TB+) for FDA/MFDS regulatory submissions.</li>
+              <li>Presented DeepCatch X at <b>NVIDIA GTC 2025</b> (exhibitor), demonstrating diffusion-based organ extraction and clinical quantification from CXR.</li>
+              <li>Developed a <b>Conditional DDPM</b> for X-ray-to-aorta extraction (<b>Dice = 0.97</b>, outperforming the GAN baseline) that <b>outperformed radiologists</b> on aortic-dilation detection (Sensitivity 0.93 vs 0.31); trained on 4-GPU DDP with FP16 mixed precision. Proposed a 3D Latent Diffusion extension with VAE3D for volumetric reconstruction.</li>
+              <li>Engineered a <b>Ray-distributed inference pipeline</b> (14-module DAG of actors) with a VLM-driven PA-view pre-filter; achieved <b>100x daily throughput</b> and 2.8x per-case speedup via adaptive scheduling, shared memory, and TensorRT / ONNX / FP16 optimization. Applied to <b>2.3M+ cases</b>.</li>
+              <li>Built a CI/CD-driven on-premise deployment pipeline for collaborative hospital research &mdash; reduced production codebase by 76% in LoC and compiled into source-encrypted standalone executables.</li>
+              <li>Ported the BioAge pipeline from research-grade R to production <b>C++</b> with numerical equivalence; deployed across check-up centers.</li>
+              <li>Led end-to-end acquisition of <b>100TB+</b> medical datasets through multiple data vendors for FDA / MFDS regulatory submissions.</li>
             </ul>
 
             <h5>3D FaceLandmark and AR Registration for EVD Surgical Navigation <a class="lowkey" href="projects/evd-navigation/">[details]</a></h5>
             <ul>
-              <li>Built a 3D facial landmark extraction pipeline from head CTs using segmentation model, 2D detection, and ray tracing.</li>
-              <li>Implemented and optimized real-time surgical registration (<b>Kabsch + ICP</b>) achieving FRE 1.8 mm (ISO standards compliant) for MFDS regulatory filing, and collaborated with iOS developers to adapt algorithms for mobile AR platforms.</li>
+              <li>Built a <b>3D spatial perception pipeline</b> from volumetric CT &mdash; patient-specific skin-surface segmentation, 2D landmark detection, and ray tracing to lift 2D landmarks into 3D reference points.</li>
+              <li>Implemented real-time <b>6-DoF pose estimation</b> between preoperative CT landmarks and an intraoperative iPad Pro LiDAR point cloud using statistical outlier removal (k-NN) followed by <b>Kabsch + ICP</b>; achieved <b>FRE = 1.8 mm</b>, supporting MFDS regulatory documentation.</li>
+              <li>Co-developed with iOS engineers to deploy the full registration pipeline <b>on-device</b> for real-time operating-room use.</li>
             </ul>
 
             <h5>LLM-based De-Identification System and Translation with Agentic Systems <a class="lowkey" href="projects/llm-deidentification/">[details]</a></h5>
             <ul>
               <li>Developed a multi-modal PHI de-identification pipeline achieving <b>98% accuracy</b>; leveraged OCR + NER for pixel-level masking and LLM for metadata anonymization.</li>
-              <li>Engineered a scalable multilingual translation pipeline (7+ languages, incl. RTL Arabic) integrating a persistent Translation Memory (TM) for cost reduction and a statistical consistency checker to validate terminology and auto-correct hallucinations.</li>
+              <li>Engineered a scalable multilingual translation pipeline (<b>KR &rarr; 7 languages</b>) with agentic orchestration; a persistent Translation Memory for cost reduction and a statistical consistency checker to validate terminology and auto-correct LLM hallucinations.</li>
             </ul>
 
             <h5>DeepCatch M (MRI) <a class="lowkey" href="projects/deepcatch-m/">[details]</a></h5>
             <ul>
-              <li>Trained and evaluated multi-organ MRI segmentation models (e.g., SF, AVF) with comprehensive quantitative metrics.</li>
-              <li>Built an <b>MLOps pipeline template</b> for experiment tracking and model weight management, improving deployment efficiency.</li>
+              <li>Trained multi-organ MRI segmentation models (<b>SAT, VAT</b>) achieving <b>Dice &asymp; 0.9</b> on held-out validation.</li>
+              <li>Designed and built a reproducible <b>MLOps pipeline</b> integrating W&amp;B, MLflow, and DVC for experiment tracking, model-weight management, and dataset versioning.</li>
             </ul>
           </div>
         </section>
@@ -325,16 +332,28 @@
             <table class="invisible">
               <tbody class="invisible">
                 <tr class="invisible">
-                  <td style="width: 200px;"><b>Programming Languages</b></td>
-                  <td>Python, C++, Linux, MATLAB</td>
+                  <td style="width: 220px;"><b>Programming Languages</b></td>
+                  <td>Python, C++, CUDA</td>
                 </tr>
                 <tr class="invisible">
-                  <td><b>Frameworks</b></td>
-                  <td>PyTorch, Scikit-Learn, HuggingFace, MLFlow, Ray</td>
+                  <td><b>ML / DL Frameworks</b></td>
+                  <td>PyTorch, HuggingFace (Diffusers), Ray</td>
                 </tr>
                 <tr class="invisible">
-                  <td><b>Tools</b></td>
-                  <td>Git, Docker</td>
+                  <td><b>3D / Vision / Geometry</b></td>
+                  <td>Open3D, ICP, 6-DoF pose estimation, ray tracing, mesh &amp; point cloud processing</td>
+                </tr>
+                <tr class="invisible">
+                  <td><b>Inference &amp; Deployment</b></td>
+                  <td>TensorRT, ONNX, Nuitka, Docker</td>
+                </tr>
+                <tr class="invisible">
+                  <td><b>LLM / Agentic Systems</b></td>
+                  <td>LangChain, LangGraph, OCR/NER pipelines, RAG</td>
+                </tr>
+                <tr class="invisible">
+                  <td><b>MLOps</b></td>
+                  <td>W&amp;B, MLflow, DVC</td>
                 </tr>
                 <tr class="invisible">
                   <td><b>Languages</b></td>
@@ -342,6 +361,73 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <!-- Extra Learning -->
+        <section id="learning">
+          <div class="container">
+            <header class="major">
+              <h3>Extra Learning</h3>
+            </header>
+            <div class="table-wrapper">
+              <div class="features">
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>Humanoid Locomotion Control via NVIDIA Isaac Sim &amp; Reinforcement Learning</b>
+                    <br />
+                    Fast Campus
+                    <br />
+                    <span style="color: #888;">2026 (in progress) | Online</span>
+                  </div>
+                </article>
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>SLAM for Robotics &amp; 3D Computer Vision</b>
+                    <br />
+                    Fast Campus
+                    <br />
+                    <span style="color: #888;">2026 (in progress) | Online</span>
+                  </div>
+                </article>
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>Computer Vision Project with NPU</b>
+                    <br />
+                    Furiosa AI &amp; Fast Campus
+                    <br />
+                    <span style="color: #888;">May 2025 | Seoul, Korea</span>
+                  </div>
+                </article>
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>Computer Vision Signature</b>
+                    <br />
+                    Fast Campus
+                    <br />
+                    <span style="color: #888;">Jan 2025 | Seoul, Korea</span>
+                  </div>
+                </article>
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>OpenLLM Leaderboard and LLM Fine-tuning</b>
+                    <br />
+                    Upstage &amp; Fast Campus
+                    <br />
+                    <span style="color: #888;">Apr 2024 | Seoul, Korea</span>
+                  </div>
+                </article>
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>MLOps for ML Services</b>
+                    <br />
+                    Fast Campus
+                    <br />
+                    <span style="color: #888;">Mar 2024 | Seoul, Korea</span>
+                  </div>
+                </article>
+              </div>
+            </div>
           </div>
         </section>
       </div>

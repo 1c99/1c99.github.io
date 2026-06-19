@@ -34,73 +34,25 @@
     </section>
 
     <!-- ════════════════════════════════════════════════════════
-         OVERVIEW
-         ════════════════════════════════════════════════════════ -->
-    <section class="section">
-      <div class="text-col">
-        <h2>Overview</h2>
-        <p>
-          Medical data processing requires strict HIPAA/GDPR compliance while
-          enabling research and international collaboration. This project
-          develops two AI-powered systems: automated de-identification of
-          Protected Health Information (PHI) across multiple modalities, and
-          multilingual translation of medical documents with quality assurance.
-        </p>
-        <div class="tags">
-          <span class="tag">LLM</span>
-          <span class="tag">OCR</span>
-          <span class="tag">NER</span>
-          <span class="tag">Agentic Systems</span>
-          <span class="tag">Translation Memory</span>
-          <span class="tag">Ollama</span>
-          <span class="tag">Ray</span>
-        </div>
-      </div>
-    </section>
-
-    <div class="impact-statement">
-      <em>98% PHI detection accuracy</em> across text, metadata, and
-      burned-in annotations
-    </div>
-
-    <!-- ════════════════════════════════════════════════════════
-         METRICS BANNER
-         ════════════════════════════════════════════════════════ -->
-    <section class="metrics-banner">
-      <div class="metrics-grid cols-4">
-        <div class="metric-card">
-          <div class="number">98%</div>
-          <div class="label">PHI Detection</div>
-        </div>
-        <div class="metric-card">
-          <div class="number">7+</div>
-          <div class="label">Target Languages</div>
-        </div>
-        <div class="metric-card">
-          <div class="number small">Multi</div>
-          <div class="label">Modal Coverage</div>
-        </div>
-        <div class="metric-card">
-          <div class="number small">TM</div>
-          <div class="label">Cost Reduction</div>
-        </div>
-      </div>
-    </section>
-
-    <hr class="divider" />
-
-    <!-- ════════════════════════════════════════════════════════
          PHI DE-IDENTIFICATION
          ════════════════════════════════════════════════════════ -->
     <section class="section">
       <div class="text-col">
         <h2>PHI De-Identification Pipeline</h2>
         <p>
-          Medical images and documents contain PHI embedded in multiple
-          modalities: burned-in text on images, DICOM metadata, PDF documents,
-          and handwritten annotations. Manual de-identification is
-          time-consuming and error-prone.
+          Medical data needs strict HIPAA/GDPR compliance to be shared for
+          research and collaboration &mdash; but Protected Health Information
+          (PHI) hides across many modalities: burned-in text on images, DICOM
+          metadata, PDFs, and handwritten annotations. This system removes it
+          automatically, where manual de-identification is slow and error-prone.
         </p>
+        <div class="tags">
+          <span class="tag">98% detection</span>
+          <span class="tag">LLM</span>
+          <span class="tag">OCR</span>
+          <span class="tag">NER</span>
+          <span class="tag">DICOM</span>
+        </div>
 
         <h3>Two-Pronged Approach</h3>
         <div class="two-prong">
@@ -139,18 +91,6 @@
         </figure>
       </div>
 
-      <div class="text-col">
-        <div style="margin: 16px 0">
-          <span class="inline-metric">
-            <span class="val">98%</span>
-            <span class="lbl">detection accuracy</span>
-          </span>
-          <span class="inline-metric">
-            <span class="val">Multi-modal</span>
-            <span class="lbl">coverage</span>
-          </span>
-        </div>
-      </div>
     </section>
 
     <hr class="divider" />
@@ -162,14 +102,21 @@
       <div class="text-col">
         <h2>Multilingual Translation System</h2>
         <p>
-          International regulatory submissions require accurate, consistent
-          translation of medical documents. LLM-based translation can suffer
-          from hallucinations that introduce dangerous inaccuracies &mdash; so
-          quality assurance is built into every layer.
+          Four role-specialized models &mdash; Translator, Reviewer, Fixer, and
+          Supervisor &mdash; draft, review, correct, and sign off each
+          translation, with an independent terminology check guarding clinical
+          terms. Translating the product&rsquo;s content opened it to new
+          international markets.
         </p>
+        <div class="tags">
+          <span class="tag">KR &rarr; 7 languages</span>
+          <span class="tag">Multi-Agent</span>
+          <span class="tag">Agentic Systems</span>
+          <span class="tag">Translation Memory</span>
+        </div>
 
         <div class="lang-pills">
-          <span class="lang-pill source">English</span>
+          <span class="lang-pill source">Korean</span>
           <span class="lang-arrow">&rarr;</span>
           <span class="lang-pill">Japanese</span>
           <span class="lang-pill">Chinese</span>
@@ -196,90 +143,19 @@
         </figure>
       </div>
 
-      <div class="text-col">
-        <h3>Three Translation Approaches</h3>
-        <div class="approaches">
-          <div class="approach-card">
-            <div class="approach-num">1</div>
-            <div class="approach-content">
-              <div class="approach-title">
-                Distributed Ollama + Ray
-              </div>
-              <div class="approach-desc">
-                Load-balanced distribution across multiple Ollama endpoints with
-                async I/O for high throughput batch translation.
-              </div>
-            </div>
-          </div>
-          <div class="approach-card">
-            <div class="approach-num">2</div>
-            <div class="approach-content">
-              <div class="approach-title">Multi-Agent Workflow</div>
-              <div class="approach-desc">
-                4 specialized AI agents (Translator &rarr; Reviewer &rarr; Fixer
-                &rarr; Supervisor) mimicking professional translation teams with
-                glossary enforcement.
-              </div>
-            </div>
-          </div>
-          <div class="approach-card">
-            <div class="approach-num">3</div>
-            <div class="approach-content">
-              <div class="approach-title">M2M100 + Caching</div>
-              <div class="approach-desc">
-                Facebook&rsquo;s M2M100 model with SQLite translation cache and
-                HTML-aware processing for structured content.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="wide-col">
         <figure class="diagram">
           <img
-            src="assets/translation-system.svg"
-            alt="Translation System Architecture: three approaches — Ollama+Ray, Multi-Agent Workflow, M2M100+Caching"
+            src="assets/translation-pipeline.svg"
+            alt="Multi-agent medical translation: Translator, Reviewer, Fixer and Supervisor models (one per GPU, via Ollama + Ray) in a verification loop, with an independent terminology gate that watches clinical terms. Runs on-device."
           />
           <figcaption>
-            Translation System Architecture &mdash; Three Approaches
+            Multi-agent verification loop &mdash; translator, reviewer, fixer and
+            supervisor, gated by an independent terminology check.
           </figcaption>
         </figure>
       </div>
 
-      <div class="text-col">
-        <h3>Quality Assurance</h3>
-        <div class="quality-grid">
-          <div class="quality-item">
-            <div class="q-title">Translation Memory</div>
-            <div class="q-desc">
-              SQLite-based persistent cache reduces API costs and ensures
-              terminology consistency across documents.
-            </div>
-          </div>
-          <div class="quality-item">
-            <div class="q-title">Medical Glossary</div>
-            <div class="q-desc">
-              Domain-specific terminology enforcement ensures correct
-              translations of anatomical and clinical terms.
-            </div>
-          </div>
-          <div class="quality-item">
-            <div class="q-title">Hallucination Detection</div>
-            <div class="q-desc">
-              Statistical checks for numerical consistency, entity preservation,
-              and semantic alignment.
-            </div>
-          </div>
-          <div class="quality-item">
-            <div class="q-title">HTML Preservation</div>
-            <div class="q-desc">
-              Markup tags preserved during translation of structured content for
-              direct use in submissions.
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <script src="../../js/notion.js"></script>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 590" style="background:#fff">
+  <defs>
+    <style>
+      .title{font-family:Inter,sans-serif;fill:#1a1a1a;font-size:19px;font-weight:700;}
+      .subtitle{font-family:Inter,sans-serif;fill:#666;font-size:12px;}
+      .sn{font-family:Inter,sans-serif;fill:#b9b9b9;font-size:10px;font-weight:700;letter-spacing:1px;text-anchor:middle;}
+      .snl{font-family:Inter,sans-serif;fill:#8a8a8a;font-size:10px;font-weight:700;letter-spacing:1px;text-anchor:middle;}
+      .nm{font-family:Inter,sans-serif;fill:#1a1a1a;font-size:13.5px;font-weight:700;text-anchor:middle;}
+      .nml{font-family:Inter,sans-serif;fill:#fff;font-size:13.5px;font-weight:700;text-anchor:middle;}
+      .tc{font-family:Inter,sans-serif;fill:#a31f34;font-size:11px;font-weight:700;text-anchor:middle;}
+      .tcl{font-family:Inter,sans-serif;fill:#ffd9df;font-size:11px;font-weight:700;text-anchor:middle;}
+      .node{fill:#fafafa;stroke:#1a1a1a;stroke-width:1.3;}
+      .nodeA{fill:#fff;stroke:#a31f34;stroke-width:2;}
+      .nodeD{fill:#1a1a1a;}
+      .ring{stroke:#e4e4e4;stroke-width:2;fill:none;}
+      .seg{stroke:#1a1a1a;stroke-width:1.7;fill:none;}
+      .bd{fill:#a31f34;} .bw{font-family:Inter,sans-serif;fill:#fff;font-size:8.5px;font-weight:700;letter-spacing:.5px;text-anchor:middle;}
+      .mfc{font-family:Inter,sans-serif;fill:#999;font-size:9.5px;font-weight:600;letter-spacing:.5px;text-anchor:middle;}
+      .mfl{font-family:Inter,sans-serif;fill:#1a1a1a;font-size:10.5px;font-weight:700;text-anchor:middle;}
+      .mfm{font-family:Inter,sans-serif;fill:#a31f34;font-size:10px;font-weight:700;text-anchor:middle;}
+      .mfb{fill:#fff;stroke:#c9c9c9;stroke-width:1.1;}
+      .cap{font-family:Inter,sans-serif;fill:#666;font-size:11.5px;font-style:italic;text-anchor:middle;}
+    </style>
+    <marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a1a1a"/></marker>
+  </defs>
+  <text x="450" y="32" class="title" text-anchor="middle">Continuous MLOps Cycle</text>
+  <text x="450" y="52" class="subtitle" text-anchor="middle">BraTS MRI tumour segmentation · data versioning → training → serving, with monitored retraining</text>
+
+  <!-- cycle ring -->
+  <circle cx="450" cy="310" r="178" class="ring"/>
+  <!-- clockwise flow arrows in node gaps -->
+  <path d="M528,150 A178 178 0 0 1 549.5,162.4" class="seg" marker-end="url(#ah)"/>
+  <path d="M627.6,297.6 A178 178 0 0 1 627.6,322.4" class="seg" marker-end="url(#ah)"/>
+  <path d="M549.5,457.6 A178 178 0 0 1 528,470" class="seg" marker-end="url(#ah)"/>
+  <path d="M372,470 A178 178 0 0 1 350.5,457.6" class="seg" marker-end="url(#ah)"/>
+  <path d="M272.4,322.4 A178 178 0 0 1 272.4,297.6" class="seg" marker-end="url(#ah)"/>
+  <path d="M350.5,162.4 A178 178 0 0 1 372,150" class="seg" marker-end="url(#ah)"/>
+
+  <!-- 1 DATA (top) -->
+  <rect x="380" y="100" width="140" height="64" rx="10" class="node"/>
+  <text x="450" y="121" class="sn">01 · DATA</text><text x="450" y="139" class="nm">Versioning</text><text x="450" y="156" class="tc">DVC · 484 vols</text>
+  <!-- 2 TRAIN (upper-right, dark) -->
+  <rect x="534" y="189" width="140" height="64" rx="10" class="nodeD"/>
+  <text x="604" y="210" class="snl">02 · TRAIN</text><text x="604" y="228" class="nml">PyTorch</text><text x="604" y="245" class="tcl">Dice + weighted CE</text>
+  <!-- 3 TRACK (lower-right, accent) -->
+  <rect x="534" y="367" width="140" height="64" rx="10" class="nodeA"/>
+  <rect x="628" y="357" width="48" height="16" rx="3" class="bd"/><text x="652" y="369" class="bw">DEMO</text>
+  <text x="604" y="388" class="sn">03 · TRACK</text><text x="604" y="406" class="nm">Experiments</text><text x="604" y="423" class="tc">W&amp;B · MLflow</text>
+  <!-- 4 TUNE (bottom) -->
+  <rect x="380" y="456" width="140" height="64" rx="10" class="node"/>
+  <text x="450" y="477" class="sn">04 · TUNE</text><text x="450" y="495" class="nm">HPO search</text><text x="450" y="512" class="tc">Ray Tune</text>
+  <!-- 5 PACKAGE (lower-left) -->
+  <rect x="226" y="367" width="140" height="64" rx="10" class="node"/>
+  <text x="296" y="388" class="sn">05 · PACKAGE</text><text x="296" y="406" class="nm">Containerize</text><text x="296" y="423" class="tc">Docker</text>
+  <!-- 6 SERVE (upper-left, accent) -->
+  <rect x="226" y="189" width="140" height="64" rx="10" class="nodeA"/>
+  <rect x="224" y="179" width="48" height="16" rx="3" class="bd"/><text x="248" y="191" class="bw">DEMO</text>
+  <text x="296" y="210" class="sn">06 · SERVE</text><text x="296" y="228" class="nm">API + UI</text><text x="296" y="245" class="tc">FastAPI · Streamlit</text>
+
+  <!-- center hub: model factory -->
+  <text x="450" y="280" class="mfc">▲ MODEL FACTORY</text>
+  <rect x="360" y="290" width="84" height="42" rx="6" class="mfb"/>
+  <text x="402" y="308" class="mfl">U-Net · 31M</text><text x="402" y="323" class="mfm">WT 0.900</text>
+  <rect x="452" y="290" width="84" height="42" rx="6" class="mfb" style="stroke:#a31f34;stroke-width:1.6"/>
+  <text x="494" y="308" class="mfl">nnU-Net · 7.8M</text><text x="494" y="323" class="mfm">WT 0.902</text>
+  <text x="450" y="352" class="mfc" style="fill:#a31f34">monitor → version → retrain</text>
+
+  <text x="450" y="576" class="cap">Implemented end-to-end and architected to deploy in-house behind VPN / SSO for clinical use.</text>
+</svg>

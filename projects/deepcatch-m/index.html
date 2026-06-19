@@ -19,7 +19,7 @@
       <a class="back-link-hero" href="../../index.html#experience">&larr; Back to Portfolio</a>
       <h1>DeepCatch M</h1>
       <p class="subtitle">
-        Multi-organ MRI Segmentation &amp; MLOps Pipeline
+        End-to-End MLOps Pipeline for MRI Segmentation
       </p>
       <div class="meta">
         <span>Medical IP &middot; Seoul, South Korea</span>
@@ -39,11 +39,13 @@
       <div class="text-col">
         <h2>Overview</h2>
         <p>
-          DeepCatch M is a production-grade MLOps pipeline for MRI segmentation,
-          targeting multi-organ analysis including Subcutaneous Fat and Abdominal
-          Visceral Fat. The project addresses the full ML lifecycle &mdash; from
-          data versioning to containerized deployment &mdash; with strict
-          reproducibility for clinical applications.
+          DeepCatch M is an end-to-end MLOps pipeline for MRI segmentation
+          covering the full ML lifecycle &mdash; data versioning, GPU training,
+          experiment tracking, hyperparameter search, and containerized
+          serving. Applied internally to SAT (subcutaneous adipose tissue) and
+          VAT (visceral adipose tissue) segmentation at Medical IP. The public
+          template uses BraTS brain-tumour data as a shareable demonstration of
+          the same pipeline.
         </p>
         <div class="tags">
           <span class="tag">PyTorch</span>
@@ -52,7 +54,7 @@
           <span class="tag">Ray Tune</span>
           <span class="tag">FastAPI</span>
           <span class="tag">Docker</span>
-          <span class="tag">Grafana</span>
+          <span class="tag">Prometheus</span>
         </div>
       </div>
     </section>
@@ -66,10 +68,14 @@
          METRICS BANNER
          ════════════════════════════════════════════════════════ -->
     <section class="metrics-banner">
-      <div class="metrics-grid">
+      <div class="metrics-grid cols-4">
         <div class="metric-card">
-          <div class="number">3</div>
-          <div class="label">Model Architectures</div>
+          <div class="number">0.90</div>
+          <div class="label">Whole-Tumor Dice</div>
+        </div>
+        <div class="metric-card">
+          <div class="number">2</div>
+          <div class="label">Architectures (factory)</div>
         </div>
         <div class="metric-card">
           <div class="number">Full</div>
@@ -90,144 +96,82 @@
     <section class="section">
       <div class="text-col">
         <h2>End-to-End MLOps Pipeline</h2>
-        <p>
-          Medical imaging ML requires strict reproducibility, audit trails for
-          compliance, and systematic model comparison. This pipeline template
-          uses a hybrid architecture: native GPU training for performance,
-          containerized serving for portability.
-        </p>
-
-        <div class="pipeline">
-          <div class="pipeline-step">
-            <div class="icon">&#128451;</div>
-            <div class="step-title">Version</div>
-            <div class="step-tool">DVC</div>
-          </div>
-          <div class="pipeline-step">
-            <div class="icon">&#9881;&#65039;</div>
-            <div class="step-title">Train</div>
-            <div class="step-tool">Multi-GPU</div>
-          </div>
-          <div class="pipeline-step">
-            <div class="icon">&#128200;</div>
-            <div class="step-title">Track</div>
-            <div class="step-tool">MLFlow</div>
-          </div>
-          <div class="pipeline-step">
-            <div class="icon">&#128230;</div>
-            <div class="step-title">Deploy</div>
-            <div class="step-tool">Docker</div>
-          </div>
-        </div>
       </div>
 
       <div class="wide-col">
         <figure class="diagram">
           <img
-            src="assets/mlops-pipeline.svg"
-            alt="End-to-End MLOps Pipeline: Data (DVC) to Train (GPU) to Track (MLflow) to Deploy (Docker)"
-          />
-          <figcaption>MLOps Pipeline &mdash; Data Versioning to Deployment</figcaption>
-        </figure>
-
-        <figure class="diagram">
-          <img
-            src="assets/hybrid-architecture.svg"
-            alt="Hybrid Architecture: native GPU training layer and Docker-based serving layer"
+            src="assets/mlops-workflow.svg"
+            alt="Continuous MLOps cycle: data versioning (DVC), training (PyTorch), tracking (W&B/MLflow), tuning (Ray Tune), packaging (Docker), and serving — with a model factory comparing U-Net and nnU-Net, and a monitor-to-retrain loop"
           />
           <figcaption>
-            Hybrid Architecture &mdash; Training vs. Serving Layers
+            Continuous MLOps Cycle &mdash; Versioning &rarr; Training &rarr;
+            Tracking &rarr; Tuning &rarr; Packaging &rarr; Serving, with a model
+            factory (U-Net / nnU-Net) and monitored retraining
           </figcaption>
         </figure>
       </div>
 
-      <div class="wide-col">
-        <figure class="content-image-wrap">
-          <img
-            class="content-image"
-            src="assets/dcm-wandb-dashboard.png"
-            alt="Weights & Biases dashboard showing 43 training runs with loss curves, GPU metrics, and experiment tracking"
-          />
-          <figcaption>
-            W&amp;B Dashboard &mdash; 43 Runs with Loss Curves &amp; GPU Metrics
-          </figcaption>
-        </figure>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ════════════════════════════════════════════════════════
+         SERVING CONSOLE
+         ════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="text-col">
+        <h2>Serving Console</h2>
       </div>
 
       <div class="text-col">
-        <h3>Pipeline Components</h3>
-        <p>
-          DVC handles Git-like versioning for large medical datasets with
-          deduplication. MLFlow + W&amp;B track metrics, parameters, and
-          artifacts. Ray Tune runs hyperparameter search with ASHA scheduling
-          across multiple GPUs. FastAPI + Docker serves models with caching,
-          health checks, and Grafana monitoring.
-        </p>
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="assets/dcm-serving-2d.png"
+            alt="NeuroSeg inference console: 2D slice segmentation of a BraTS case showing input FLAIR, ground truth, and model prediction overlays, with per-class tumour volumes and per-slice whole-tumor Dice"
+          />
+          <figcaption>
+            Serving Console &mdash; interactive 2D inference (input / ground
+            truth / prediction) with per-class volumes and per-slice
+            whole-tumor Dice
+          </figcaption>
+        </figure>
+
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="assets/dcm-serving-3d.png"
+            alt="NeuroSeg inference console: interactive 3D tumour surface reconstruction inside a translucent brain, with per-class toggles, full-volume whole-tumor Dice, and NIfTI / STL export"
+          />
+          <figcaption>
+            Serving Console &mdash; interactive 3D tumour reconstruction (STL
+            surface mesh in translucent brain context) with NIfTI / STL export
+          </figcaption>
+        </figure>
       </div>
     </section>
 
     <hr class="divider" />
 
     <!-- ════════════════════════════════════════════════════════
-         SEGMENTATION MODELS
+         EXPERIMENT TRACKING
          ════════════════════════════════════════════════════════ -->
     <section class="section">
       <div class="text-col">
-        <h2>Segmentation Models</h2>
-        <p>
-          Compared multiple SOTA architectures through a unified model factory
-          pattern, enabling systematic architecture search for optimal
-          performance on Subcutaneous Fat and Abdominal Visceral Fat
-          segmentation.
-        </p>
-
-        <div class="table-scroll-wrapper">
-        <table class="model-table">
-          <thead>
-            <tr>
-              <th>Architecture</th>
-              <th>Key Feature</th>
-              <th>Params</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>U-Net</td>
-              <td>Baseline encoder-decoder with skip connections</td>
-              <td>~7.8M</td>
-            </tr>
-            <tr>
-              <td>U-Net++</td>
-              <td>Dense nested skip pathways for better gradient flow</td>
-              <td>~9.2M</td>
-            </tr>
-            <tr class="highlight-row">
-              <td>nnU-Net</td>
-              <td>Residual blocks, instance norm, deep supervision</td>
-              <td>~31M</td>
-            </tr>
-          </tbody>
-        </table>
-        </div>
-
-        <h3>Training Details</h3>
-        <p>
-          Multi-class Dice loss with deep supervision for auxiliary losses.
-          Multi-GPU training with DataParallel and mixed precision (FP16).
-          Optimized data loading with caching and prefetching for large MRI
-          volumes.
-        </p>
+        <h2>Experiment Tracking</h2>
       </div>
 
-      <div class="wide-col">
+      <div class="text-col">
         <figure class="content-image-wrap">
           <img
             class="content-image"
-            src="assets/dcm-streamlit-ui.png"
-            alt="Streamlit web UI for MRI Brain Tumor Segmentation showing input MRI and segmentation results"
+            src="assets/dcm-wandb-comparison.png"
+            alt="Weights & Biases dashboard comparing nnU-Net and U-Net training runs: whole-tumor Dice climbing to ~0.90, validation/train Dice and loss curves, and the cosine learning-rate schedule"
           />
           <figcaption>
-            Streamlit Serving Layer &mdash; MRI Brain Tumor Segmentation UI
+            W&amp;B Experiment Tracking &mdash; nnU-Net vs. U-Net, whole-tumor
+            Dice to ~0.90, with cosine LR schedule &amp; logged predictions
           </figcaption>
         </figure>
       </div>

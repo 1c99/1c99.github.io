@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 460" style="background:#fff">
+  <defs>
+    <style>
+      .title       { font-family: Inter, sans-serif; fill: #1a1a1a; font-size: 19px; font-weight: 700; letter-spacing: -0.2px; }
+      .subtitle    { font-family: Inter, sans-serif; fill: #666;    font-size: 12.5px; font-weight: 400; }
+      .stage-title { font-family: Inter, sans-serif; fill: #1a1a1a; font-size: 14px; font-weight: 700; letter-spacing: 0.2px; }
+      .lbl         { font-family: Inter, sans-serif; fill: #1a1a1a; font-size: 13.5px; font-weight: 600; }
+      .lbl-light   { font-family: Inter, sans-serif; fill: #fff;    font-size: 14px; font-weight: 600; }
+      .sub         { font-family: Inter, sans-serif; fill: #666;    font-size: 11px; font-weight: 400; }
+      .sub-light   { font-family: Inter, sans-serif; fill: #bdbdbd; font-size: 11px; font-weight: 400; }
+      .metric      { font-family: Inter, sans-serif; fill: #a31f34; font-size: 14px; font-weight: 700; }
+      .caption     { font-family: Inter, sans-serif; fill: #666;    font-size: 12px; font-style: italic; text-anchor: middle; }
+      .badge-impl  { fill: #a31f34; }
+      .badge-prop  { fill: #fff; stroke: #b0b0b0; stroke-width: 1.2; }
+      .badge-w     { font-family: Inter, sans-serif; fill: #fff;    font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; }
+      .badge-g     { font-family: Inter, sans-serif; fill: #707070; font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; }
+      .box-input   { fill: #f6f6f6; stroke: #1a1a1a; stroke-width: 1.2; }
+      .box-output  { fill: #fff;    stroke: #a31f34; stroke-width: 1.8; }
+      .box-model   { fill: #1a1a1a; stroke: none; }
+      .box-prop    { fill: #fff;    stroke: #9a9a9a; stroke-width: 1.3; stroke-dasharray: 5,3; }
+      .arr         { stroke: #1a1a1a; stroke-width: 1.5; fill: none; }
+      .arr-loop    { stroke: #888;    stroke-width: 1.2; fill: none; stroke-dasharray: 3,3; }
+      .arrowhead   { fill: #1a1a1a; }
+      .arrowhead-g { fill: #888; }
+      .divider     { stroke: #dcdcdc; stroke-width: 1; stroke-dasharray: 5,5; }
+    </style>
+  </defs>
+
+  <!-- ─────────── HEADER ─────────── -->
+  <text x="590" y="36" class="title" text-anchor="middle">Two-Stage Conditional Diffusion</text>
+  <text x="590" y="56" class="subtitle" text-anchor="middle">X-ray  →  2D Aorta  →  3D Volume</text>
+
+  <!-- divider -->
+  <line x1="590" y1="92" x2="590" y2="395" class="divider"/>
+
+  <!-- ═══════════════════ STAGE 1 · 2D DDPM (Implemented) ═══════════════════ -->
+  <text x="290" y="115" class="stage-title" text-anchor="middle">Stage 1  ·  2D Diffusion</text>
+  <rect x="235" y="125" width="110" height="22" rx="11" class="badge-impl"/>
+  <text x="290" y="140" class="badge-w" text-anchor="middle">IMPLEMENTED</text>
+
+  <!-- inputs -->
+  <rect x="40"  y="205" width="115" height="60" rx="8" class="box-input"/>
+  <text x="97" y="231" class="lbl" text-anchor="middle">X-ray</text>
+  <text x="97" y="249" class="sub" text-anchor="middle">input image</text>
+
+  <rect x="40"  y="290" width="115" height="60" rx="8" class="box-input"/>
+  <text x="97" y="316" class="lbl" text-anchor="middle">Noise</text>
+  <text x="97" y="334" class="sub" text-anchor="middle">starting point</text>
+
+  <!-- merge arrows into UNet -->
+  <path d="M 155 235 C 195 235, 200 270, 220 270" class="arr"/>
+  <path d="M 155 320 C 195 320, 200 285, 220 285" class="arr"/>
+  <polygon points="222,275 213,271 213,279" class="arrowhead"/>
+
+  <!-- UNet model -->
+  <rect x="225" y="240" width="170" height="80" rx="10" class="box-model"/>
+  <text x="310" y="270" class="lbl-light" text-anchor="middle">Conditional UNet</text>
+  <text x="310" y="290" class="sub-light" text-anchor="middle">denoises step by step</text>
+  <text x="310" y="307" class="sub-light" text-anchor="middle" style="font-size:10px">guided by the X-ray</text>
+
+  <!-- iterative loop badge -->
+  <path d="M 395 258 C 425 250, 425 308, 395 300" class="arr-loop"/>
+  <polygon points="397,300 388,298 392,306" class="arrowhead-g"/>
+  <text x="432" y="284" class="sub" style="font-size:10.5px">iterative</text>
+
+  <!-- arrow to output -->
+  <path d="M 395 280 L 440 280" class="arr"/>
+  <polygon points="442,280 432,276 432,284" class="arrowhead"/>
+
+  <!-- output -->
+  <rect x="445" y="240" width="115" height="80" rx="8" class="box-output"/>
+  <text x="502" y="270" class="lbl" text-anchor="middle">2D Aorta</text>
+  <text x="502" y="288" class="sub" text-anchor="middle">mask</text>
+  <text x="502" y="308" class="metric" text-anchor="middle">Dice 0.97</text>
+
+  <!-- ═══════════════════ CROSS-STAGE ARROW ═══════════════════ -->
+  <path d="M 565 280 C 600 280, 600 280, 645 280" class="arr"/>
+  <polygon points="647,280 637,276 637,284" class="arrowhead"/>
+
+  <!-- ═══════════════════ STAGE 2 · 3D LDM (Proposed) ═══════════════════ -->
+  <text x="900" y="115" class="stage-title" text-anchor="middle">Stage 2  ·  3D Latent Diffusion</text>
+  <rect x="845" y="125" width="110" height="22" rx="11" class="badge-prop"/>
+  <text x="900" y="140" class="badge-g" text-anchor="middle">PROPOSED</text>
+
+  <!-- input -->
+  <rect x="650" y="240" width="110" height="80" rx="8" class="box-input"/>
+  <text x="705" y="270" class="lbl" text-anchor="middle">2D Aorta</text>
+  <text x="705" y="288" class="sub" text-anchor="middle">from Stage 1</text>
+  <text x="705" y="305" class="sub" text-anchor="middle">→ 3D projection</text>
+
+  <!-- arrow -->
+  <path d="M 760 280 L 800 280" class="arr"/>
+  <polygon points="802,280 792,276 792,284" class="arrowhead"/>
+
+  <!-- 3D Latent Diffusion block -->
+  <rect x="805" y="240" width="200" height="80" rx="10" class="box-prop"/>
+  <text x="905" y="265" class="lbl" text-anchor="middle">3D Latent Diffusion</text>
+  <text x="905" y="284" class="sub" text-anchor="middle">encode  →  denoise  →  decode</text>
+  <text x="905" y="303" class="sub" text-anchor="middle" style="font-size:10px">via 3D VAE + UNet</text>
+
+  <!-- iterative loop badge -->
+  <path d="M 1005 258 C 1035 250, 1035 308, 1005 300" class="arr-loop"/>
+  <polygon points="1007,300 998,298 1002,306" class="arrowhead-g"/>
+  <text x="1042" y="284" class="sub" style="font-size:10.5px">iterative</text>
+
+  <!-- arrow down to volume -->
+  <path d="M 905 320 L 905 350" class="arr"/>
+  <polygon points="905,352 901,343 909,343" class="arrowhead"/>
+
+  <!-- 3D volume output -->
+  <rect x="810" y="355" width="190" height="55" rx="8" class="box-prop"/>
+  <text x="905" y="378" class="lbl" text-anchor="middle">3D Aortic Volume</text>
+  <text x="905" y="395" class="sub" text-anchor="middle">→ diameter measurement</text>
+
+  <!-- ─────────── FOOTER CAPTION ─────────── -->
+  <text x="590" y="438" class="caption">a generative model that learns to remove noise — conditioned on the X-ray — to reveal anatomy</text>
+</svg>
