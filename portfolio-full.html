@@ -163,30 +163,20 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   .chapter .hint span,.chapter .scrollfor span{animation:none;}
 }
 
-/* ════ PDF export (dark, paginated) ════ */
+/* ════ PDF export (continuous — one tall page, identical to the on-screen scroll) ════ */
 @media print{
-  @page{ size:A4; margin:0; }
-  .no-print,.dots,.progress,.toolbar,.chapter .hint,.chapter .scrollfor{ display:none !important; }
-  body{ background:var(--bg) !important; padding:8mm !important; }
-  /* each card stays whole across page breaks */
-  .chapter{ max-width:100% !important; margin:0 auto 6mm !important; padding:12mm !important; break-inside:avoid; }
-  .chapter.cover{ padding:16mm 12mm !important; }
-  .proj-content{ max-width:100% !important; padding:0 !important; }
-  .proj-content .section{ margin:0 0 6mm !important; padding:9mm !important; break-inside:avoid; }
-  .proj-content figure,.proj-content .diagram,.proj-content .card,.proj-content .prong-card,
-  .proj-content .quality-item,.proj-content .approach-card,.proj-content .comparison-box,
-  .proj-content .metric-card,.proj-content table,.proj-content .two-prong,.proj-content article{ break-inside:avoid; }
-  .proj-content .fade-in{ opacity:1 !important; transform:none !important; }
-  .chapter .reveal{ opacity:1 !important; transform:none !important; }
-  /* each project starts on a fresh page; its title card acts as a section divider */
-  .chapter[id^="proj-"]{ break-before:page !important; }
-  /* honor the author-intended breaks (class was previously undefined / dead) */
-  .print-break-before{ break-before:page !important; }
+  /* @page size is set dynamically in JS to the exact content width × height,
+     producing a single continuous page with no breaks or gaps (matches the web). */
+  @page{ margin:0; }
+  /* hide only fixed/out-of-flow chrome — does not affect the page layout/height */
+  .no-print,.dots,.progress,.toolbar,.chapter .hint{ display:none !important; }
+  /* reveal-on-scroll elements would otherwise stay invisible below the fold */
+  .chapter .reveal,.proj-content .fade-in{ opacity:1 !important; transform:none !important; }
 }
 </style>
 </head>
 <body>
-<div class="toolbar no-print"><button onclick="window.print()">⤓ Save as PDF</button></div>
+<div class="toolbar no-print"><button onclick="exportPdf()">⤓ Save as PDF</button></div>
 <div class="progress" id="progress"></div>
 
   <section class="chapter cover">
@@ -1070,7 +1060,29 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   </section>
 <nav class="dots" id="dots"></nav>
 <script src="js/notion.js"></script>
-<script>// chapter reveal + dot-nav for the long combined portfolio
+<script>// PDF export: size the print page to the exact content (one continuous page = the web scroll).
+// Height is measured in SCREEN context (cached on load/resize) — measuring during the print
+// event can report a wrong value, so we use the cached screen measurement for both paths.
+let __pdfW = 0, __pdfH = 0;
+function _measurePdf() {
+  __pdfW = document.documentElement.clientWidth;
+  __pdfH = document.body.scrollHeight;
+}
+function _setPdfPageSize() {
+  if (!__pdfH) _measurePdf();
+  let s = document.getElementById("dynPageSize");
+  if (!s) { s = document.createElement("style"); s.id = "dynPageSize"; document.head.appendChild(s); }
+  // cap under Chrome's ~200in (≈19200px) single-page limit, small buffer to avoid a spill page
+  const h = Math.min(__pdfH + 24, 18000);
+  s.textContent = "@media print{@page{size:" + __pdfW + "px " + h + "px;margin:0;}}";
+}
+function exportPdf() { _measurePdf(); _setPdfPageSize(); window.print(); }
+window.addEventListener("load", _measurePdf);
+window.addEventListener("resize", _measurePdf);
+// also cover Ctrl/Cmd+P (manual print)
+window.addEventListener("beforeprint", _setPdfPageSize);
+
+// chapter reveal + dot-nav for the long combined portfolio
 const chapters = [...document.querySelectorAll(".chapter")];
 const dotsWrap = document.getElementById("dots");
 const progress = document.getElementById("progress");
