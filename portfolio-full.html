@@ -184,6 +184,13 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
     max-height:150mm !important; width:auto !important; max-width:100% !important;
     object-fit:contain; margin-left:auto; margin-right:auto;
   }
+  /* targeted pagination control */
+  .pdf-page-start{ break-before:page !important; }      /* force this block to start a fresh page */
+  /* De-ID project: tighter so it packs onto fewer, fuller pages */
+  #content-llm .section{ margin:0 0 4mm !important; }
+  #content-llm figure img,#content-llm .content-image,#content-llm .diagram img{ max-height:118mm !important; }
+  /* EVD Key Challenges: 2-column challenge cards so the section reads compactly */
+  .pdf-challenges .challenges{ display:grid !important; grid-template-columns:1fr 1fr !important; gap:4mm !important; }
 }
 </style>
 </head>
@@ -672,9 +679,10 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
     <hr class="divider" />
 
     <!-- ════════════════════════════════════════════════════════
-         ISO PHANTOM VALIDATION
+         ISO PHANTOM VALIDATION  (Key Challenges merged into same card so they
+         stay together on one PDF page)
          ════════════════════════════════════════════════════════ -->
-    <section class="section">
+    <section class="section pdf-iso">
       <div class="text-col">
         <h2>ISO Phantom Validation</h2>
         <p>
@@ -708,7 +716,7 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
     <!-- ════════════════════════════════════════════════════════
          KEY CHALLENGES
          ════════════════════════════════════════════════════════ -->
-    <section class="section">
+    <section class="section pdf-challenges">
       <div class="text-col">
         <h2>Key Challenges Solved</h2>
         <div class="challenges">
@@ -745,7 +753,7 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
     </section>
 
     </div>
-  <section class="chapter" id="proj-llm-deidentification">
+  <section class="chapter pdf-page-start" id="proj-llm-deidentification">
     <div class="glow"></div><div class="watermark tr">03</div>
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Project 03 · LLM / Agentic Systems</div>
@@ -754,7 +762,7 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
       <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">98<small>%</small></div><div class="mlabel">PHI detection accuracy</div></div><div class="metric"><div class="num">KR→7</div><div class="mlabel">languages translated</div></div><div class="metric"><div class="num">4</div><div class="mlabel">role agents per loop</div></div></div>
       <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
     </div>
-  </section><div class="proj-content">
+  </section><div class="proj-content" id="content-llm">
     <!-- hero / title figure -->
     <section class="section">
       <div class="wide-col">
