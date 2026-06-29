@@ -163,15 +163,22 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   .chapter .hint span,.chapter .scrollfor span{animation:none;}
 }
 
-/* ════ PDF export (continuous — one tall page, identical to the on-screen scroll) ════ */
+/* ════ PDF export (clean, compact A4 — deterministic, prints the same everywhere) ════ */
 @media print{
-  /* @page size is set dynamically in JS to the exact content width × height,
-     producing a single continuous page with no breaks or gaps (matches the web). */
-  @page{ margin:0; }
-  /* hide only fixed/out-of-flow chrome — does not affect the page layout/height */
-  .no-print,.dots,.progress,.toolbar,.chapter .hint{ display:none !important; }
+  @page{ size:A4; margin:10mm; }
+  /* hide on-screen-only chrome */
+  .no-print,.dots,.progress,.toolbar,.chapter .hint,.chapter .scrollfor{ display:none !important; }
   /* reveal-on-scroll elements would otherwise stay invisible below the fold */
   .chapter .reveal,.proj-content .fade-in{ opacity:1 !important; transform:none !important; }
+  /* full-width cards on the page, content flows to fill pages (compact, minimal whitespace) */
+  .chapter,.proj-content{ max-width:100% !important; margin:0 0 6mm !important; }
+  .proj-content .section{ margin:0 0 6mm !important; }
+  /* never split a figure, image, card, metric or table across a page break */
+  .chapter,
+  figure,.proj-content .diagram,.proj-content .card,.proj-content .prong-card,
+  .proj-content .quality-item,.proj-content .approach-card,.proj-content .comparison-box,
+  .proj-content .metric-card,.metrics-banner,.proj-content table,.proj-content .two-prong,
+  .proj-content article,.impact-statement,.highlights-box{ break-inside:avoid; }
 }
 </style>
 </head>
@@ -1060,26 +1067,8 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   </section>
 <nav class="dots" id="dots"></nav>
 <script src="js/notion.js"></script>
-<script>// PDF export: size the print page to the exact content → one continuous page = the web scroll.
-// IMPORTANT: measure ONLY in screen context, synchronously, right before printing. The print
-// dialog fires resize/beforeprint events that re-measure in a print context reporting a bogus
-// inflated height — so we deliberately do NOT listen to those events (that caused 14 tall pages).
-function _applyPageSize() {
-  const w = document.documentElement.clientWidth;
-  // +24 buffer so a sub-pixel reflow doesn't spill to a 2nd page; cap under Chrome's ~200in limit
-  const h = Math.min(document.body.scrollHeight + 24, 18000);
-  let s = document.getElementById("dynPageSize");
-  if (!s) { s = document.createElement("style"); s.id = "dynPageSize"; document.head.appendChild(s); }
-  s.textContent = "@media print{@page{size:" + w + "px " + h + "px;margin:0;}}";
-}
-function exportPdf() { _applyPageSize(); window.print(); }
-// Initial size: measure AFTER web fonts settle — at the `load` event fonts may still be
-// swapping, which reflows text and inflates scrollHeight (caused a 14-page export).
-function _scheduleInitialSize() {
-  const run = () => requestAnimationFrame(_applyPageSize);
-  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(run); } else { run(); }
-}
-window.addEventListener("load", _scheduleInitialSize);
+<script>// PDF export: clean compact A4 via the browser's native print → Save as PDF (deterministic).
+function exportPdf() { window.print(); }
 
 // chapter reveal + dot-nav for the long combined portfolio
 const chapters = [...document.querySelectorAll(".chapter")];
