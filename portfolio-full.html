@@ -179,6 +179,11 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   .proj-content .quality-item,.proj-content .approach-card,.proj-content .comparison-box,
   .proj-content .metric-card,.metrics-banner,.proj-content table,.proj-content .two-prong,
   .proj-content article,.impact-statement,.highlights-box{ break-inside:avoid; }
+  /* cap figure height so an oversized image can't dominate a page */
+  .proj-content figure img,.proj-content .content-image,.proj-content .diagram img{
+    max-height:150mm !important; width:auto !important; max-width:100% !important;
+    object-fit:contain; margin-left:auto; margin-right:auto;
+  }
 }
 </style>
 </head>
