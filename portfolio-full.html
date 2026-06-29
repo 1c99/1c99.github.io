@@ -178,6 +178,10 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   .proj-content .metric-card,.proj-content table,.proj-content .two-prong,.proj-content article{ break-inside:avoid; }
   .proj-content .fade-in{ opacity:1 !important; transform:none !important; }
   .chapter .reveal{ opacity:1 !important; transform:none !important; }
+  /* each project starts on a fresh page; its title card acts as a section divider */
+  .chapter[id^="proj-"]{ break-before:page !important; }
+  /* honor the author-intended breaks (class was previously undefined / dead) */
+  .print-break-before{ break-before:page !important; }
 }
 </style>
 </head>
