@@ -1060,27 +1060,26 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   </section>
 <nav class="dots" id="dots"></nav>
 <script src="js/notion.js"></script>
-<script>// PDF export: size the print page to the exact content (one continuous page = the web scroll).
-// Height is measured in SCREEN context (cached on load/resize) — measuring during the print
-// event can report a wrong value, so we use the cached screen measurement for both paths.
-let __pdfW = 0, __pdfH = 0;
-function _measurePdf() {
-  __pdfW = document.documentElement.clientWidth;
-  __pdfH = document.body.scrollHeight;
-}
-function _setPdfPageSize() {
-  if (!__pdfH) _measurePdf();
+<script>// PDF export: size the print page to the exact content → one continuous page = the web scroll.
+// IMPORTANT: measure ONLY in screen context, synchronously, right before printing. The print
+// dialog fires resize/beforeprint events that re-measure in a print context reporting a bogus
+// inflated height — so we deliberately do NOT listen to those events (that caused 14 tall pages).
+function _applyPageSize() {
+  const w = document.documentElement.clientWidth;
+  // +24 buffer so a sub-pixel reflow doesn't spill to a 2nd page; cap under Chrome's ~200in limit
+  const h = Math.min(document.body.scrollHeight + 24, 18000);
   let s = document.getElementById("dynPageSize");
   if (!s) { s = document.createElement("style"); s.id = "dynPageSize"; document.head.appendChild(s); }
-  // cap under Chrome's ~200in (≈19200px) single-page limit, small buffer to avoid a spill page
-  const h = Math.min(__pdfH + 24, 18000);
-  s.textContent = "@media print{@page{size:" + __pdfW + "px " + h + "px;margin:0;}}";
+  s.textContent = "@media print{@page{size:" + w + "px " + h + "px;margin:0;}}";
 }
-function exportPdf() { _measurePdf(); _setPdfPageSize(); window.print(); }
-window.addEventListener("load", _measurePdf);
-window.addEventListener("resize", _measurePdf);
-// also cover Ctrl/Cmd+P (manual print)
-window.addEventListener("beforeprint", _setPdfPageSize);
+function exportPdf() { _applyPageSize(); window.print(); }
+// Initial size: measure AFTER web fonts settle — at the `load` event fonts may still be
+// swapping, which reflows text and inflates scrollHeight (caused a 14-page export).
+function _scheduleInitialSize() {
+  const run = () => requestAnimationFrame(_applyPageSize);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(run); } else { run(); }
+}
+window.addEventListener("load", _scheduleInitialSize);
 
 // chapter reveal + dot-nav for the long combined portfolio
 const chapters = [...document.querySelectorAll(".chapter")];
