@@ -15,7 +15,7 @@
   </style>
 
   <!-- Title -->
-  <text x="380" y="24" text-anchor="middle" class="text-title">Batch Mode — Module Affinity, All Files</text>
+  <text x="380" y="24" text-anchor="middle" class="text-title">Batch Mode — Batched Module Scheduling, All Files</text>
   <line x1="60" y1="36" x2="700" y2="36" class="line" stroke-dasharray="4,4"/>
 
   <!-- Ray Head Node -->
@@ -61,7 +61,7 @@
   <text x="640" y="196" text-anchor="middle" class="text-code">File₁ File₂ ... Fileₙ</text>
   <text x="640" y="212" text-anchor="middle" class="text-small">all files, batch_size = N</text>
 
-  <text x="380" y="242" text-anchor="middle" class="text-small">Module affinity: greedy longest-first → 2-3 models per worker, all cached in VRAM</text>
+  <text x="380" y="242" text-anchor="middle" class="text-small">Greedy longest-first load balancing → per-module batch tasks across workers · models cached in memory</text>
 
   <!-- 3-Phase Flow -->
   <line x1="60" y1="256" x2="700" y2="256" class="line" stroke-dasharray="4,4"/>

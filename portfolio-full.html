@@ -423,15 +423,20 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
             alt="Module dependency DAG: Level 0 independent GPU segmentation (Lung, Heart, Bone, Bone Supp, Airway, Aorta, T12-L1, LAA), Level 1 lung-dependent GPU detection (COVID, Vessel, TB), Level 2 CPU post-processing (Peripheral, CTR, Diameter)"
           />
           <figcaption>
-            Module Dependency DAG &mdash; Parallel Execution Levels
+            Module Dependency DAG &mdash; which modules can run in parallel
+            (the foundation for all scheduling below)
           </figcaption>
         </figure>
 
         <figure class="diagram">
           <img
-            src="projects/deepcatch-x/assets/ray-distributed.svg?v=5"
-            alt="Batch Mode: Ray Head Node distributes modules per worker via affinity, each processing all files with models cached in VRAM. 3-phase scheduling."
+            src="projects/deepcatch-x/assets/ray-distributed.svg?v=6"
+            alt="Batch Mode: Ray head node distributes per-module batch tasks across workers (models cached in memory), phased by DAG level for high throughput."
           />
+          <figcaption>
+            Batch Mode &mdash; <b>maximize throughput</b>: run all modules across
+            millions of cases, batched and spread across workers
+          </figcaption>
         </figure>
 
         <figure class="diagram">
@@ -439,6 +444,10 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
             src="projects/deepcatch-x/assets/ray-pipeline.svg?v=5"
             alt="Split-Pool Pipeline: files split into mini-batches, GPU worker pool runs aorta segmentation in parallel, masks flow to CPU worker pool for diameter measurement. Async stage overlap."
           />
+          <figcaption>
+            Split-Pool Pipeline &mdash; <b>minimize latency</b>: overlap GPU
+            (aorta) and CPU (diameter) so the GPU never idles
+          </figcaption>
         </figure>
       </div>
 
@@ -449,19 +458,20 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
           hardening that enable reliable processing of 2.3M+ files across
           multi-day runs: adaptive weight management with two loading
           strategies, memory-bounded workers with automatic respawn, and
-          crash-safe persistence via SQLite state tracking and atomic writes.
+          crash-safe persistence via CSV state logs and atomic writes.
         </p>
       </div>
 
       <div class="wide-col">
         <figure class="diagram">
           <img
-            src="projects/deepcatch-x/assets/production-architecture.svg?v=1"
-            alt="Production architecture: AdaptiveScheduler with dependency graph, performance profiler, and resource manager; SharedWeightsManager with eager and level-based strategies via Ray Object Store; Worker lifecycle with RSS monitoring and straggler detection; Data integrity with SQLite StateDB, atomic writes, and backpressure control"
+            src="projects/deepcatch-x/assets/production-architecture.svg?v=2"
+            alt="Production architecture: AdaptiveScheduler with dependency graph, performance profiler, and resource manager; per-worker model caching with eager and level-based loading strategies; Worker lifecycle with RSS monitoring and straggler detection; Data integrity with CSV state logs, atomic writes, and backpressure control"
           />
           <figcaption>
-            Large-Scale Processing &mdash; Scheduler, Memory, and Persistence
-            Layers
+            Large-Scale Processing &mdash; <b>survive multi-day runs</b>:
+            memory-bounded worker restart, straggler handling, and resumable
+            crash-safe persistence
           </figcaption>
         </figure>
       </div>

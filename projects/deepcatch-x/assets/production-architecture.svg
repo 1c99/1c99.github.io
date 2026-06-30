@@ -35,16 +35,16 @@
   <text x="587" y="94" text-anchor="middle" class="text" style="font-size:11px">Resource Manager</text>
   <text x="587" y="108" text-anchor="middle" class="text-small">fractional GPU allocation</text>
 
-  <text x="380" y="144" text-anchor="middle" class="text-small" style="font-weight:500">Module Affinity: greedy longest-first assignment across workers</text>
+  <text x="380" y="144" text-anchor="middle" class="text-small" style="font-weight:500">Greedy longest-first task assignment across workers</text>
 
   <!-- Arrow 1→2 -->
   <line x1="380" y1="154" x2="380" y2="170" class="line-flow"/>
   <polygon points="380,178 374,168 386,168" class="arrow"/>
 
-  <!-- ═══ Layer 2: SharedWeightsManager ═══ -->
+  <!-- ═══ Layer 2: Model Cache Manager ═══ -->
   <rect x="60" y="178" width="640" height="96" rx="10" class="box-accent"/>
   <rect x="72" y="182" width="152" height="18" rx="4" class="badge"/>
-  <text x="148" y="195" text-anchor="middle" class="text-white">SharedWeightsManager</text>
+  <text x="148" y="195" text-anchor="middle" class="text-white">Model Cache Manager</text>
 
   <rect x="80" y="206" width="295" height="38" rx="6" class="box-inner"/>
   <text x="227" y="222" text-anchor="middle" class="text" style="font-size:11px; font-weight:600">EAGER</text>
@@ -54,7 +54,7 @@
   <text x="537" y="222" text-anchor="middle" class="text" style="font-size:11px; font-weight:600">LEVEL_BASED</text>
   <text x="537" y="236" text-anchor="middle" class="text-small">>4 modules → load per level, evict after</text>
 
-  <text x="380" y="264" text-anchor="middle" class="text-small" style="font-weight:500">→ Ray Object Store (zero-copy broadcast to all workers)</text>
+  <text x="380" y="264" text-anchor="middle" class="text-small" style="font-weight:500">→ Per-worker model cache (eager + level-based loading)</text>
 
   <!-- Arrow 2→3 -->
   <line x1="380" y1="274" x2="380" y2="290" class="line-flow"/>
@@ -85,7 +85,7 @@
   <text x="122" y="435" text-anchor="middle" class="text-white">Data Integrity</text>
 
   <rect x="80" y="446" width="195" height="38" rx="6" class="box-inner"/>
-  <text x="177" y="462" text-anchor="middle" class="text" style="font-size:11px">StateDB (SQLite)</text>
+  <text x="177" y="462" text-anchor="middle" class="text" style="font-size:11px">State log (CSV)</text>
   <text x="177" y="476" text-anchor="middle" class="text-small">resume support · failed CSV log</text>
 
   <rect x="293" y="446" width="190" height="38" rx="6" class="box-inner"/>
