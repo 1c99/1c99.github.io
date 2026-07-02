@@ -215,8 +215,8 @@
 
         <figure class="diagram">
           <img
-            src="assets/ray-distributed.svg?v=5"
-            alt="Batch Mode: Ray Head Node distributes modules per worker via affinity, each processing all files with models cached in VRAM. 3-phase scheduling."
+            src="assets/ray-distributed.svg?v=6"
+            alt="Batch Mode: Ray head node distributes per-module batch tasks across workers (models cached in memory), balanced greedy longest-first and phased by DAG level for high throughput."
           />
         </figure>
 
@@ -235,15 +235,15 @@
           hardening that enable reliable processing of 2.3M+ files across
           multi-day runs: adaptive weight management with two loading
           strategies, memory-bounded workers with automatic respawn, and
-          crash-safe persistence via SQLite state tracking and atomic writes.
+          crash-safe persistence via state logging and atomic writes.
         </p>
       </div>
 
       <div class="wide-col">
         <figure class="diagram">
           <img
-            src="assets/production-architecture.svg?v=1"
-            alt="Production architecture: AdaptiveScheduler with dependency graph, performance profiler, and resource manager; SharedWeightsManager with eager and level-based strategies via Ray Object Store; Worker lifecycle with RSS monitoring and straggler detection; Data integrity with SQLite StateDB, atomic writes, and backpressure control"
+            src="assets/production-architecture.svg?v=2"
+            alt="Production architecture: AdaptiveScheduler with dependency graph, performance profiler, and resource manager; per-worker model caching with eager and level-based loading strategies; Worker lifecycle with RSS monitoring and straggler detection; Data integrity with CSV state logs, atomic writes, and backpressure control"
           />
           <figcaption>
             Large-Scale Processing &mdash; Scheduler, Memory, and Persistence
