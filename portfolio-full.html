@@ -9,10 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/notion.css" />
 <style>:root{
-  --bg:#0a0a0d; --bg2:#101016; --surface:#15151d; --surface2:#1a1a23; --line:#26262f;
-  --txt:#ededf2; --muted:#9a9aa5; --faint:#5a5a66;
-  --accent:#ff3b54; --accent-soft:#ff6b80; --accent-deep:#a31f34;
+  --bg:#f4f3f1; --bg2:#fafafa; --surface:#ffffff; --surface2:#f7f6f3; --line:#e5e4e1;
+  --txt:#37352f; --txt-soft:#55534e; --muted:#787774; --faint:#b4b4b0;
+  --accent:#a31f34; --accent-soft:#c0334a; --accent-deep:#7a1628;
   --disp:"Bricolage Grotesque",sans-serif; --dbody:"Hanken Grotesk",sans-serif; --mono:"JetBrains Mono",monospace;
+}
+:root[data-theme="dark"]{
+  --bg:#0a0a0d; --bg2:#101016; --surface:#15151d; --surface2:#1a1a23; --line:#26262f;
+  --txt:#ededf2; --txt-soft:#bfbfca; --muted:#9a9aa5; --faint:#5a5a66;
+  --accent:#ff3b54; --accent-soft:#ff6b80; --accent-deep:#a31f34;
 }
 *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 html{scroll-behavior:smooth;}
@@ -24,33 +29,37 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   max-width:1080px; margin:0 auto clamp(14px,2vw,24px);
   padding:clamp(32px,4.4vw,58px); overflow:hidden; border-radius:24px;
   background:var(--surface); border:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.03), 0 10px 30px -14px rgba(0,0,0,.08);
   color:var(--txt); font-family:var(--dbody);
 }
-.chapter.cover{ padding:clamp(46px,6vw,84px) clamp(32px,4.4vw,58px); }
+.chapter.cover{ padding:clamp(46px,6vw,84px) clamp(32px,4.4vw,58px) clamp(84px,11vh,128px); }
 .chapter *{box-sizing:border-box;}
 .chapter .wrap{width:100%;max-width:1120px;margin:0 auto;position:relative;z-index:3;}
 .chapter .glow{position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(60vw 60vw at 78% 18%,rgba(255,59,84,.10),transparent 60%),radial-gradient(50vw 50vw at 12% 88%,rgba(163,31,52,.10),transparent 60%);}
-.chapter .watermark{position:absolute;z-index:1;font-family:var(--disp);font-weight:800;color:#fff;opacity:.025;line-height:.8;letter-spacing:-.04em;user-select:none;pointer-events:none;}
+  background:radial-gradient(60vw 60vw at 78% 18%,rgba(163,31,52,.045),transparent 60%),radial-gradient(50vw 50vw at 12% 88%,rgba(163,31,52,.035),transparent 60%);}
+.chapter .watermark{position:absolute;z-index:1;font-family:var(--disp);font-weight:800;color:var(--accent);opacity:.05;line-height:.8;letter-spacing:-.04em;user-select:none;pointer-events:none;}
 .chapter .watermark.tr{top:-1.6rem;right:-.5rem;font-size:clamp(6rem,15vw,13rem);}
 .chapter .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s);}
 .chapter.active .reveal{opacity:1;transform:none;}
 .chapter .eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px;margin-bottom:clamp(18px,3vw,34px);}
 .chapter .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);}
 .chapter .accent{color:var(--accent);}
-.chapter .name{font-family:var(--disp);font-weight:800;font-size:clamp(3.4rem,12vw,10rem);line-height:.92;letter-spacing:-.04em;margin-bottom:clamp(20px,3vw,34px);}
-.chapter .tag{display:block;background:none !important;padding:0 !important;border:0 !important;border-radius:0 !important;font-size:clamp(1.05rem,2.1vw,1.6rem);color:#c9c9d2;max-width:720px;line-height:1.5;margin-bottom:clamp(28px,4vw,48px);}
-.chapter .tag b{color:#fff;}
+.chapter .name{font-family:var(--disp);font-weight:800;font-size:clamp(2.6rem,7.5vw,6rem);line-height:1;letter-spacing:-.04em;white-space:nowrap;margin-bottom:clamp(20px,3vw,34px);}
+.chapter .tag{display:block;background:none !important;padding:0 !important;border:0 !important;border-radius:0 !important;font-size:clamp(1.05rem,2.1vw,1.6rem);color:var(--txt-soft);max-width:720px;line-height:1.5;margin-bottom:clamp(28px,4vw,48px);}
+.chapter .tag b{color:var(--accent);}
 .chapter .meta{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:clamp(28px,4vw,44px);letter-spacing:.04em;}
 .chapter .chips{display:flex;flex-wrap:wrap;gap:12px;}
 .chapter.closing .chips{justify-content:center;}
 .chapter .chip{font-family:var(--mono);font-size:.82rem;color:var(--txt);text-decoration:none;padding:10px 18px;border:1px solid var(--line);border-radius:100px;background:rgba(255,255,255,.02);transition:.25s;}
 .chapter .chip:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+/* light mode: cover/closing chips match the homepage buttons — red text on white */
+:root:not([data-theme="dark"]) .chapter .chip{background:#fff;color:var(--accent);font-weight:700;}
+:root:not([data-theme="dark"]) .chapter .chip:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 .chapter .h-title{font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,6.5vw,5.4rem);line-height:.96;letter-spacing:-.035em;margin-bottom:clamp(14px,2vw,24px);}
-.chapter .h-sub{font-size:clamp(1rem,1.7vw,1.35rem);color:#bfbfca;max-width:760px;line-height:1.5;margin-bottom:clamp(28px,3.5vw,46px);}
-.chapter .h-sub b{color:#fff;}
+.chapter .h-sub{font-size:clamp(1rem,1.7vw,1.35rem);color:var(--txt-soft);max-width:760px;line-height:1.5;margin-bottom:clamp(28px,3.5vw,46px);}
+.chapter .h-sub b{color:var(--txt);}
 .chapter .metrics{display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,64px);margin-bottom:clamp(26px,3.5vw,44px);}
-.chapter .metric .num{font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1;letter-spacing:-.03em;color:#fff;}
+.chapter .metric .num{font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1;letter-spacing:-.03em;color:var(--txt);}
 .chapter .metric .num small{font-size:.5em;color:var(--accent);font-weight:700;}
 .chapter .metric .mlabel{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:10px;letter-spacing:.04em;max-width:180px;}
 .chapter .scrollfor{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;}
@@ -81,77 +90,66 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
 .chapter .hint span{animation:bob 1.8s ease-in-out infinite;font-size:1.1rem;}
 @keyframes bob{0%,100%{transform:translateY(0);opacity:.5;}50%{transform:translateY(6px);opacity:1;}}
 
-/* ════ DARK project content (override notion.css light theme) ════ */
-.proj-content{ background:transparent; color:#c6c6d0; font-family:var(--dbody); max-width:1080px; margin:0 auto; padding:0; }
+/* ════ LIGHT project content — inherit notion.css project-page theme ════ */
+.proj-content{ background:transparent; font-family:var(--dbody); max-width:1080px; margin:0 auto; padding:0; }
+.proj-content .hero{ display:none !important; }
+/* deck rhythm: each section as a soft white card on the light page */
 .proj-content .section{
-  background:var(--surface) !important; border:1px solid var(--line);
+  background:var(--surface); border:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.03), 0 10px 30px -14px rgba(0,0,0,.08);
   border-radius:20px; padding:clamp(24px,3.2vw,42px) !important;
   margin:0 0 clamp(14px,2vw,24px) !important; max-width:100%;
 }
 .proj-content .text-col,.proj-content .wide-col{ max-width:100% !important; padding-left:0 !important; padding-right:0 !important; margin:0 auto; }
-.proj-content :is(h1,h2,h3,h4,h5,h6){ color:#fff !important; }
-.proj-content :is(p,li,td,th,div,small,label){ color:#c2c2cd; }
-.proj-content span:not([class]){ color:#c6c6d0 !important; }  /* beat inline dark colors (e.g. vendor labels) */
-.proj-content a{ color:var(--accent-soft); }
-.proj-content .hero{ display:none !important; }
-.proj-content hr,.proj-content .divider{ border-color:var(--line) !important; background:var(--line) !important; }
+.proj-content a{ color:var(--accent); }
+/* figures/diagrams: native white SVGs + a light border for definition */
+.proj-content figure :is(img,svg){ max-width:100% !important; height:auto !important; }
+.proj-content .content-image,.proj-content .diagram img{ border:1px solid var(--line); border-radius:12px; }
 
-/* cards & surfaces → dark */
-.proj-content :is(.prong-card,.card,.quality-item,.approach-card,.comparison-box,.metric-card,
-.challenge-card,.status-col,.flow-step,.pipeline-step,.two-prong,.dag-node,.code-block){
-  background:var(--surface) !important; border-color:var(--line) !important; color:#c2c2cd !important; box-shadow:none !important;
-}
-.proj-content :is(.comparison-box.after){ background:#13201a !important; }
-.proj-content :is(.comparison-box.before){ background:var(--surface) !important; }
-.proj-content :is(.tag,.tech-tag,.lang-pill,.ptag,.badge){ background:var(--surface2) !important; color:#b6b6c1 !important; border-color:var(--line) !important; }
-.proj-content .lang-pill.source{ background:var(--accent-deep) !important; color:#fff !important; }
-.proj-content :is(.metric-card .number,.inline-metric .val,.metric .num,.q-title,.stat-value){ color:var(--accent-soft) !important; }
-.proj-content :is(.label,.lbl,.mlabel,.q-desc,figcaption){ color:var(--muted) !important; }
-.proj-content .model-table th{ color:var(--muted) !important; border-color:var(--line) !important; }
-.proj-content .model-table td{ border-color:#202028 !important; }
-.proj-content .model-table .highlight-row td{ background:#20151a !important; }
-
-/* callouts / highlight boxes → dark red-tinted (no light islands) */
-.proj-content :is(.impact-statement,.highlights-box,.flow-box.highlight,.proposed-note,.highlights-grid){
-  background:#1b1418 !important; border-color:var(--accent-deep) !important; color:#dcdce4 !important;
-  background-image:none !important;
-}
-.proj-content :is(.impact-statement em,.highlight-value,.highlights-box .num){ color:var(--accent-soft) !important; font-style:normal; }
-.proj-content .highlight-item{ background:var(--surface) !important; border-color:var(--line) !important; }
-.proj-content :is(.highlight-label,.proposed-note){ color:var(--muted) !important; }
-.proj-content .badge-proposed{ background:var(--surface2) !important; color:var(--muted) !important; }
-
-/* class-specific dark text that beats the generic override → force light */
-.proj-content :is(.prong-card .prong-desc,.challenge-card .desc,.approach-content .approach-desc,
-.status-col li,.flow-step,.dag-node,.comparison-row .stat-label){ color:#c2c2cd !important; }
-.proj-content :is(.comparison-box .heading,.inline-metric .lbl,.pipeline-step .step-tool,
-.metric-card .label,.pipeline-slide-title,.pipeline-slide-label,.pipeline-slide-sublabel){ color:var(--muted) !important; }
-
-/* vendor logos are light-bg lockups → uniform white chips, equal height */
-.proj-content img[src*="logos/gradient-health"],
-.proj-content img[src*="logos/protege"]{
-  background:#fff !important; height:24px !important; padding:10px 14px !important; border-radius:8px !important; opacity:1 !important; box-sizing:content-box !important;
-}
-.proj-content span:has(img[src*="logos/segmed"]){
-  background:#fff !important; height:44px !important; box-sizing:border-box !important;
-  display:inline-flex !important; align-items:center !important; gap:7px !important;
-  padding:0 14px !important; border-radius:8px !important; opacity:1 !important;
-}
-.proj-content span:has(img[src*="logos/segmed"]) img{ height:22px !important; }
-.proj-content span:has(img[src*="logos/segmed"]) span{ color:#37352f !important; font-size:14px !important; }
-
-/* diagrams: white-bg SVGs become clean white cards floating on dark */
-.proj-content figure :is(img,svg){ max-width:100% !important; height:auto !important; background:#fff; border-radius:12px; }
-.proj-content .content-image{ border:1px solid var(--line); border-radius:12px; }
-.proj-content :is(.diagram,figure){ background:transparent !important; }
+/* ════ DARK MODE — re-skin project content dark (scoped to the toggle) ════ */
+:root[data-theme="dark"] .chapter,:root[data-theme="dark"] .proj-content .section{ box-shadow:none !important; }
+:root[data-theme="dark"] .proj-content :is(h1,h2,h3,h4,h5,h6){ color:#fff !important; }
+:root[data-theme="dark"] .proj-content :is(p,li,td,th,div,small,label){ color:#c2c2cd; }
+:root[data-theme="dark"] .proj-content span:not([class]){ color:#c6c6d0 !important; }
+:root[data-theme="dark"] .proj-content hr,:root[data-theme="dark"] .proj-content .divider{ border-color:var(--line) !important; background:var(--line) !important; }
+:root[data-theme="dark"] .proj-content :is(.prong-card,.card,.quality-item,.approach-card,.comparison-box,.metric-card,.challenge-card,.status-col,.flow-step,.pipeline-step,.two-prong,.dag-node,.code-block){ background:var(--surface) !important; border-color:var(--line) !important; color:#c2c2cd !important; box-shadow:none !important; }
+:root[data-theme="dark"] .proj-content .comparison-box.after{ background:#13201a !important; }
+:root[data-theme="dark"] .proj-content .comparison-box.before{ background:var(--surface) !important; }
+:root[data-theme="dark"] .proj-content :is(.tag,.tech-tag,.lang-pill,.ptag,.badge){ background:var(--surface2) !important; color:#b6b6c1 !important; border-color:var(--line) !important; }
+:root[data-theme="dark"] .proj-content .lang-pill.source{ background:var(--accent-deep) !important; color:#fff !important; }
+:root[data-theme="dark"] .proj-content :is(.metric-card .number,.inline-metric .val,.metric .num,.q-title,.stat-value){ color:var(--accent-soft) !important; }
+:root[data-theme="dark"] .proj-content :is(.label,.lbl,.mlabel,.q-desc,figcaption){ color:var(--muted) !important; }
+:root[data-theme="dark"] .proj-content .model-table th{ color:var(--muted) !important; border-color:var(--line) !important; }
+:root[data-theme="dark"] .proj-content .model-table td{ border-color:#202028 !important; }
+:root[data-theme="dark"] .proj-content .model-table .highlight-row td{ background:#20151a !important; }
+:root[data-theme="dark"] .proj-content :is(.impact-statement,.highlights-box,.flow-box.highlight,.proposed-note,.highlights-grid){ background:#1b1418 !important; border-color:var(--accent-deep) !important; color:#dcdce4 !important; background-image:none !important; }
+:root[data-theme="dark"] .proj-content :is(.impact-statement em,.highlight-value,.highlights-box .num){ color:var(--accent-soft) !important; font-style:normal; }
+:root[data-theme="dark"] .proj-content .highlight-item{ background:var(--surface) !important; border-color:var(--line) !important; }
+:root[data-theme="dark"] .proj-content :is(.highlight-label,.proposed-note){ color:var(--muted) !important; }
+:root[data-theme="dark"] .proj-content .badge-proposed{ background:var(--surface2) !important; color:var(--muted) !important; }
+:root[data-theme="dark"] .proj-content :is(.prong-card .prong-desc,.challenge-card .desc,.approach-content .approach-desc,.status-col li,.flow-step,.dag-node,.comparison-row .stat-label){ color:#c2c2cd !important; }
+:root[data-theme="dark"] .proj-content :is(.comparison-box .heading,.inline-metric .lbl,.pipeline-step .step-tool,.metric-card .label,.pipeline-slide-title,.pipeline-slide-label,.pipeline-slide-sublabel){ color:var(--muted) !important; }
+:root[data-theme="dark"] .proj-content img[src*="logos/gradient-health"],:root[data-theme="dark"] .proj-content img[src*="logos/protege"]{ background:#fff !important; height:24px !important; padding:10px 14px !important; border-radius:8px !important; opacity:1 !important; box-sizing:content-box !important; }
+:root[data-theme="dark"] .proj-content span:has(img[src*="logos/segmed"]){ background:#fff !important; height:44px !important; box-sizing:border-box !important; display:inline-flex !important; align-items:center !important; gap:7px !important; padding:0 14px !important; border-radius:8px !important; opacity:1 !important; }
+:root[data-theme="dark"] .proj-content span:has(img[src*="logos/segmed"]) img{ height:22px !important; }
+:root[data-theme="dark"] .proj-content span:has(img[src*="logos/segmed"]) span{ color:#37352f !important; font-size:14px !important; }
+:root[data-theme="dark"] .proj-content figure :is(img,svg){ background:#fff; border-radius:12px; }
+/* dark mode: restore the ORIGINAL dark accents (white emphasis, white watermark, brighter glow) */
+:root[data-theme="dark"] .chapter .tag b,
+:root[data-theme="dark"] .chapter .h-sub b,
+:root[data-theme="dark"] .chapter .metric .num{ color:#fff; }
+:root[data-theme="dark"] .chapter .watermark{ color:#fff; opacity:.025; }
+:root[data-theme="dark"] .chapter .glow{ background:radial-gradient(60vw 60vw at 78% 18%,rgba(255,59,84,.10),transparent 60%),radial-gradient(50vw 50vw at 12% 88%,rgba(163,31,52,.10),transparent 60%); }
 
 /* ════ fixed UI (screen) ════ */
 .progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:200;box-shadow:0 0 12px var(--accent);}
 .dots{position:fixed;right:clamp(14px,2.4vw,30px);top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:13px;}
 .dots button{width:11px;height:11px;border-radius:50%;border:1.5px solid rgba(160,160,170,.5);cursor:pointer;background:transparent;padding:0;transition:.3s;}
 .dots button.on{background:var(--accent);border-color:var(--accent);box-shadow:0 0 12px var(--accent);transform:scale(1.25);}
-.toolbar{position:fixed;top:16px;right:60px;z-index:200;}
-.toolbar button{font-family:var(--mono);font-size:.76rem;background:var(--accent);color:#11070a;border:0;padding:11px 18px;border-radius:8px;cursor:pointer;font-weight:700;}
+.toolbar{position:fixed;top:16px;right:60px;z-index:200;display:flex;gap:8px;align-items:center;}
+.toolbar button{font-family:var(--mono);font-size:.76rem;background:var(--accent);color:#fff;border:0;padding:11px 18px;border-radius:8px;cursor:pointer;font-weight:700;}
+.toolbar #themeToggle{background:var(--surface2);color:var(--txt);border:1px solid var(--line);padding:9px 12px;font-size:1rem;line-height:1;}
+.toolbar #themeToggle:hover{border-color:var(--accent);color:var(--accent);}
 
 @media (max-width:720px){
   .chapter .edu-grid{grid-template-columns:1fr;}
@@ -168,6 +166,8 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   @page{ size:A4; margin:10mm; }
   /* hide on-screen-only chrome */
   .no-print,.dots,.progress,.toolbar,.chapter .hint,.chapter .scrollfor{ display:none !important; }
+  /* drop card shadows so the PDF stays clean (no gray smudges) */
+  .chapter,.proj-content .section{ box-shadow:none !important; }
   /* reveal-on-scroll elements would otherwise stay invisible below the fold */
   .chapter .reveal,.proj-content .fade-in{ opacity:1 !important; transform:none !important; }
   /* full-width cards on the page, content flows to fill pages (compact, minimal whitespace) */
@@ -193,16 +193,17 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   .pdf-challenges .challenges{ display:grid !important; grid-template-columns:1fr 1fr !important; gap:4mm !important; }
 }
 </style>
+<script>/* set theme before first paint to avoid a flash */try{if(localStorage.getItem('deckTheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
 </head>
 <body>
-<div class="toolbar no-print"><button onclick="exportPdf()">⤓ Save as PDF</button></div>
+<div class="toolbar no-print"><button id="themeToggle" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark theme">☾</button><button onclick="exportPdf()">⤓ Save as PDF</button></div>
 <div class="progress" id="progress"></div>
 
   <section class="chapter cover">
     <div class="glow"></div>
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Portfolio · 2026</div>
-      <h1 class="name reveal" style="--d:.05s">Wonchan<br><span class="accent">Son</span></h1>
+      <h1 class="name reveal" style="--d:.05s">Wonchan <span class="accent">Son</span></h1>
       <p class="tag reveal" style="--d:.15s">AI Research Engineer. From medical-imaging AI to <b>Physical AI</b> — generative diffusion, 3D spatial perception, and LLM/VLM systems, taken from research to deployment.</p>
       <div class="chips reveal" style="--d:.25s">
         <a class="chip" href="mailto:wonchan.son99@gmail.com">✉ wonchan.son99@gmail.com</a>
@@ -766,9 +767,9 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   <section class="chapter pdf-page-start" id="proj-llm-deidentification">
     <div class="glow"></div><div class="watermark tr">03</div>
     <div class="wrap">
-      <div class="eyebrow reveal"><span class="dot"></span>Project 03 · LLM / Agentic Systems</div>
+      <div class="eyebrow reveal"><span class="dot"></span>Project 03 · LLM Systems · Medical NLP</div>
       <h2 class="h-title reveal" style="--d:.05s">De-ID &amp; Translation</h2>
-      <p class="h-sub reveal" style="--d:.12s">Compliance-grade medical NLP — automated PHI de-identification and a multi-agent translation pipeline.</p>
+      <p class="h-sub reveal" style="--d:.12s">Two LLM systems for <b>MEDIP Box</b>, Medical IP's VR anatomy-education platform — PHI de-identification to keep its medical source data compliant and shareable, and a multi-agent pipeline to localize its content for international markets.</p>
       <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">98<small>%</small></div><div class="mlabel">PHI detection accuracy</div></div><div class="metric"><div class="num">KR→7</div><div class="mlabel">languages translated</div></div><div class="metric"><div class="num">4</div><div class="mlabel">role agents per loop</div></div></div>
       <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
     </div>
@@ -777,7 +778,11 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
     <section class="section">
       <div class="wide-col">
         <figure class="content-image-wrap">
-          <img class="content-image" src="projects/llm-deidentification/assets/llm-hero-medipbox.png" alt="MEDIP Box — VR anatomy table for digital cadaver literacy, the product driving international market expansion and multilingual translation needs" />
+          <img class="content-image" src="projects/llm-deidentification/assets/llm-hero-medipbox.png" alt="MEDIP Box — Medical IP's VR anatomy-education platform; its medical source imagery required PHI de-identification, and its content required localization for international markets" />
+          <figcaption>
+            MEDIP Box &mdash; the product both systems served: its source data
+            needed de-identification, its content needed localization
+          </figcaption>
         </figure>
       </div>
     </section>
@@ -1080,7 +1085,7 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
     <div class="wrap">
       <div class="eyebrow reveal" style="justify-content:center"><span class="dot"></span>Let's talk</div>
       <h2 class="big reveal" style="--d:.08s">Toward <span class="accent">Physical AI</span><br>&amp; robot intelligence.</h2>
-      <div class="chips reveal" style="--d:.2s" style2="justify-content:center">
+      <div class="chips reveal" style="--d:.2s">
         <a class="chip" href="mailto:wonchan.son99@gmail.com">✉ wonchan.son99@gmail.com</a>
         <a class="chip" href="https://github.com/1c99" target="_blank">GitHub ↗</a>
         <a class="chip" href="https://www.linkedin.com/in/1c99" target="_blank">LinkedIn ↗</a>
@@ -1090,8 +1095,29 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
   </section>
 <nav class="dots" id="dots"></nav>
 <script src="js/notion.js"></script>
-<script>// PDF export: clean compact A4 via the browser's native print → Save as PDF (deterministic).
-function exportPdf() { window.print(); }
+<script>// ── theme toggle (light default · dark on demand · choice persisted) ──
+function applyTheme(t){
+  const root = document.documentElement, btn = document.getElementById("themeToggle");
+  if (t === "dark") { root.setAttribute("data-theme", "dark"); if (btn) btn.textContent = "☀"; }
+  else { root.removeAttribute("data-theme"); if (btn) btn.textContent = "☾"; }
+}
+function toggleTheme(){
+  const t = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  applyTheme(t);
+  try { localStorage.setItem("deckTheme", t); } catch (e) {}
+}
+(function(){ let t = "light"; try { t = localStorage.getItem("deckTheme") || "light"; } catch (e) {} applyTheme(t); })();
+
+// PDF export: always print LIGHT (best on paper), then restore the on-screen theme.
+function exportPdf() {
+  const wasDark = document.documentElement.getAttribute("data-theme") === "dark";
+  if (wasDark) document.documentElement.removeAttribute("data-theme");
+  window.addEventListener("afterprint", function restore(){
+    if (wasDark) document.documentElement.setAttribute("data-theme", "dark");
+    window.removeEventListener("afterprint", restore);
+  });
+  window.print();
+}
 
 // chapter reveal + dot-nav for the long combined portfolio
 const chapters = [...document.querySelectorAll(".chapter")];
