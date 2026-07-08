@@ -164,7 +164,7 @@
           Training uses a ConcatConditionedUNet with noise prediction
           objective (MSE loss), conditioned on X-ray input via channel
           concatenation. 4-GPU DDP training (NCCL) with gradient
-          accumulation (effective batch size 512), mixed precision
+          accumulation for a large effective batch, mixed precision
           (FP16 + GradScaler), and cosine LR schedule with warmup.
         </p>
       </div>
