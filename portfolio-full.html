@@ -1086,7 +1086,7 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
       <div class="eyebrow reveal"><span class="dot"></span>Project 05 · Physical AI · Robot Learning</div>
       <h2 class="h-title reveal" style="--d:.05s">Humanoid Motion Imitation</h2>
       <p class="h-sub reveal" style="--d:.12s"><b>Self-directed</b> &mdash; a monocular dance video driven onto a <b>Unitree G1</b> humanoid via GPU-parallel reinforcement learning, in simulation. My bridge from generative diffusion to embodied robot control.</p>
-      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">8,192</div><div class="mlabel">parallel envs · 1&times;RTX 4090</div></div><div class="metric"><div class="num">0.185<small>m</small></div><div class="mlabel">root tracking error</div></div><div class="metric"><div class="num">28<small>s</small></div><div class="mlabel">full-clip hold, no fall</div></div><div class="metric"><div class="num">47<small>min</small></div><div class="mlabel">per-policy training</div></div></div>
+      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">8,192</div><div class="mlabel">parallel envs / GPU · 4&times;RTX 4090</div></div><div class="metric"><div class="num">38.6<small>s</small></div><div class="mlabel">full clip held, zero falls</div></div><div class="metric"><div class="num">~5<small>&deg;</small></div><div class="mlabel">arm joint tracking error</div></div><div class="metric"><div class="num">0.10<small>m</small></div><div class="mlabel">floor drift</div></div></div>
       <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
     </div>
   </section><div class="proj-content">
@@ -1094,10 +1094,11 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
     <section class="section">
       <div class="wide-col">
         <figure class="content-image-wrap">
-          <img class="content-image" src="images/side_proj/g1_3panel.gif" alt="Three-panel view: a source dance video with 2D pose overlay (ViTPose), then a Unitree G1 humanoid tracking the same motion in simulation" />
+          <img class="content-image" src="images/side_proj/g1_3panel.gif" alt="Three panels: a source dance video with 2D pose overlay, the trained Unitree G1 policy, and the reference motion — policy and reference stay in sync and hold the same facing" />
           <figcaption>
-            One frame, the whole pipeline: source dance video &rarr; 2D pose
-            (ViTPose) &rarr; Unitree&nbsp;G1 tracking the motion in simulation
+            The whole pipeline in one view &mdash; source dance video (with pose
+            overlay) &rarr; trained G1 policy &rarr; reference motion; the policy
+            tracks the choreography and holds its facing in sync
           </figcaption>
         </figure>
       </div>
@@ -1110,10 +1111,13 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
           A monocular dance video is lifted to 3D human motion
           (ViTPose &rarr; GVHMR / SMPL-X), retargeted to a Unitree G1 humanoid
           (GMR), and tracked by a motion-imitation PPO policy trained on
-          <b>MuJoCo MJX</b> &mdash; 8,192 parallel environments on a single
-          RTX 4090 (~47&nbsp;min per policy). The best policy holds a full
-          28-second dance from clip start without falling
-          (root-position error 0.185&nbsp;m).
+          <b>MuJoCo MJX</b> &mdash; 8,192 parallel environments per GPU on
+          4&times;RTX 4090. The policy holds the full 38.6-second choreography
+          with zero falls from every start (~5&deg; arm / ~6.5&deg; leg joint
+          error, 0.10&nbsp;m floor drift). Reaching this took a diagnosis-driven
+          campaign &mdash; a heading-reward + &ldquo;compass&rdquo; observation
+          cut facing drift from 34&deg; to 26&deg;, and a stand-then-dance
+          lead-in removed cold-start instability.
         </p>
         <div class="tags">
           <span class="tag">MuJoCo (MJX)</span>
@@ -1128,20 +1132,53 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
     </section>
 
     <div class="impact-statement">
-      <em>From diffusion to embodied control</em> &mdash; also trained a conditional
-      diffusion policy for manipulation (96% vs 92% BC on robomimic lift),
-      extending my DeepCatch&nbsp;X diffusion work to robot action generation
+      <em>From diffusion to embodied control</em> &mdash; the same generative
+      machinery I used for medical imaging (DeepCatch&nbsp;X), now denoising into
+      robot <b>actions</b> instead of images
     </div>
+
+    <section class="section">
+      <div class="text-col">
+        <h2>Manipulation &mdash; When Imitation Breaks, RL Fixes It</h2>
+        <p>
+          Beyond the humanoid, I studied <b>where imitation learning fails and
+          reinforcement learning recovers</b>. On a place-and-release task with a
+          sharp, irreversible decision (release at the right instant), a
+          behavior-cloning / diffusion policy <b>collapses to 8%</b> &mdash; it
+          regresses to the average and straddles the release boundary. Offline
+          <b>RL (IQL)</b> on the <em>same data</em> picks the high-value action
+          and reaches <b>98%</b>. I also verified a diffusion policy on robomimic
+          pick-and-place at <b>100%</b>. All numbers: 100 independent episodes,
+          reproducible.
+        </p>
+        <div class="tags">
+          <span class="tag">Diffusion Policy</span>
+          <span class="tag">Imitation Learning</span>
+          <span class="tag">Offline RL (IQL)</span>
+          <span class="tag">SAC · PPO</span>
+        </div>
+      </div>
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img class="content-image" src="images/side_proj/fetch_iql_demo.gif" alt="Fetch robot arm place-and-release: the IQL offline-RL policy (left) vs the scripted expert reference (right), succeeding on the same episode" />
+          <figcaption>
+            Place-and-release &mdash; offline-RL (IQL) policy (left) vs reference
+            (right); imitation learning scores 8% here, IQL 98% on the same data
+          </figcaption>
+        </figure>
+      </div>
+    </section>
 
     <section class="section">
       <div class="text-col">
         <h3>Scope</h3>
         <p>
           Built from state-of-the-art components (GVHMR, GMR, brax PPO, MuJoCo
-          Playground) &mdash; the pipeline integration, the mimic environment
-          (decoupled tracking, reference-state initialization), and the
-          retargeting are mine. <b>Simulation-only</b>; policies are per-clip and
-          evaluated by tracking error.
+          Playground, gymnasium-robotics) &mdash; the pipeline integration, the
+          mimic environment (decoupled tracking, reference-state initialization),
+          retargeting, and the RL/IL training &amp; evaluation are mine.
+          <b>Simulation-only.</b> All success rates are measured over 100
+          independent episodes with disjoint seeds.
         </p>
       </div>
     </section>
