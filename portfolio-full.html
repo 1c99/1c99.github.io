@@ -1296,9 +1296,10 @@ function onScroll() {
   const y = window.scrollY + window.innerHeight * 0.5;
   let idx = 0;
   chapters.forEach((c, i) => { if (c.offsetTop <= y) idx = i; });
-  // at the bottom of the page the short last chapter never crosses the
-  // midpoint test above — force it active
-  if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) idx = chapters.length - 1;
+  // the short last chapter may never cross the midpoint test above — make it
+  // win once half of it is on screen (matches the feel of the other sections)
+  const last = chapters[chapters.length - 1];
+  if (window.scrollY + window.innerHeight >= last.offsetTop + last.offsetHeight * 0.5) idx = chapters.length - 1;
   dots.forEach((d, i) => d.classList.toggle("on", i === idx));
   const max = document.documentElement.scrollHeight - window.innerHeight;
   progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
