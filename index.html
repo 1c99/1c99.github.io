@@ -498,26 +498,31 @@
     </div>
     <script>
       // clicking the email opens the mail client AND copies the address
-      document
-        .getElementById('email-button')
-        .addEventListener('click', function () {
-          var btn = this;
+      (function () {
+        var btn = document.getElementById('email-button');
+        var original = btn.innerHTML; // captured once — never the feedback text
+        var timer = null;
+        btn.addEventListener('click', function () {
           if (!navigator.clipboard) return;
           navigator.clipboard
             .writeText('wonchan.son99@gmail.com')
             .then(function () {
-              var old = btn.innerHTML;
+              if (timer) clearTimeout(timer); // re-click: restart the countdown
               btn.style.boxSizing = 'border-box'; // template is content-box
-              btn.style.width = btn.offsetWidth + 'px'; // hold shape during swap
+              if (!btn.style.width) {
+                btn.style.width = btn.offsetWidth + 'px'; // measured on original label only
+              }
               btn.innerHTML = '&ensp;Copied to clipboard ✓';
-              setTimeout(function () {
-                btn.innerHTML = old;
+              timer = setTimeout(function () {
+                btn.innerHTML = original;
                 btn.style.width = '';
                 btn.style.boxSizing = '';
+                timer = null;
               }, 1500);
             })
             .catch(function () {});
         });
+      })();
     </script>
   </body>
 </html>
