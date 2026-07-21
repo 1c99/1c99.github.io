@@ -143,9 +143,17 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
 
 /* ════ fixed UI (screen) ════ */
 .progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:200;box-shadow:0 0 12px var(--accent);}
-.dots{position:fixed;right:clamp(14px,2.4vw,30px);top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:13px;}
-.dots button{width:11px;height:11px;border-radius:50%;border:1.5px solid rgba(160,160,170,.5);cursor:pointer;background:transparent;padding:0;transition:.3s;}
-.dots button.on{background:var(--accent);border-color:var(--accent);box-shadow:0 0 12px var(--accent);transform:scale(1.25);}
+html{scroll-behavior:smooth;}
+.dots{position:fixed;right:clamp(14px,2.4vw,30px);top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:11px;align-items:flex-end;}
+.dots .dot-item{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;}
+.dots .dlabel{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:var(--muted);opacity:0;transform:translateX(8px);transition:.25s;white-space:nowrap;}
+.dots:hover .dlabel{opacity:1;transform:none;}
+.dots .dot-item:hover .dlabel{color:var(--txt);}
+.dots .dot-item.on .dlabel{opacity:1;transform:none;color:var(--accent);}
+.dots .ddot{width:11px;height:11px;border-radius:50%;border:1.5px solid rgba(160,160,170,.5);background:transparent;transition:.3s;flex:none;}
+.dots .dot-item:hover .ddot{border-color:var(--accent);}
+.dots .dot-item.on .ddot{background:var(--accent);border-color:var(--accent);box-shadow:0 0 12px var(--accent);transform:scale(1.25);}
+@media (min-width:1500px){ .dots .dlabel{opacity:.8;transform:none;} }
 .toolbar{position:fixed;top:16px;right:60px;z-index:200;display:flex;gap:8px;align-items:center;}
 .toolbar button{font-family:var(--mono);font-size:.76rem;background:var(--accent);color:#fff;border:0;padding:11px 18px;border-radius:8px;cursor:pointer;font-weight:700;}
 .toolbar #themeToggle{background:var(--surface2);color:var(--txt);border:1px solid var(--line);padding:9px 12px;font-size:1rem;line-height:1;}
@@ -1254,13 +1262,22 @@ const chapters = [...document.querySelectorAll(".chapter")];
 const dotsWrap = document.getElementById("dots");
 const progress = document.getElementById("progress");
 
-// labels for the dot nav (one per chapter)
+// labeled section nav (one entry per chapter; labels show on hover / wide screens)
 const labels = ["Home", "Profile", "DeepCatch X", "EVD", "De-ID / Translation", "DeepCatch M", "Robotics", "Contact"];
 chapters.forEach((c, i) => {
-  const b = document.createElement("button");
-  b.title = labels[i] || "Section " + (i + 1);
-  b.addEventListener("click", () => c.scrollIntoView({ behavior: "smooth" }));
-  dotsWrap.appendChild(b);
+  if (!c.id) c.id = "ch-" + i;
+  const a = document.createElement("a");
+  a.className = "dot-item";
+  a.href = "#" + c.id;
+  a.title = labels[i] || "Section " + (i + 1);
+  const lbl = document.createElement("span");
+  lbl.className = "dlabel";
+  lbl.textContent = labels[i] || "Section " + (i + 1);
+  const dot = document.createElement("span");
+  dot.className = "ddot";
+  a.appendChild(lbl);
+  a.appendChild(dot);
+  dotsWrap.appendChild(a);
 });
 const dots = [...dotsWrap.children];
 
