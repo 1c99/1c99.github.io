@@ -1108,16 +1108,13 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
       <div class="text-col">
         <h2>Video &rarr; Whole-Body Control</h2>
         <p>
-          A monocular dance video is lifted to 3D human motion
-          (ViTPose &rarr; GVHMR / SMPL-X), retargeted to a Unitree G1 humanoid
-          (GMR), and tracked by a motion-imitation PPO policy trained on
-          <b>MuJoCo MJX</b> &mdash; 8,192 parallel environments per GPU on
-          4&times;RTX 4090. The policy holds the full 38.6-second choreography
-          with zero falls from every start (~5&deg; arm / ~6.5&deg; leg joint
-          error, 0.10&nbsp;m floor drift). Reaching this took a diagnosis-driven
-          campaign &mdash; a heading-reward + &ldquo;compass&rdquo; observation
-          cut facing drift from 34&deg; to 26&deg;, and a stand-then-dance
-          lead-in removed cold-start instability.
+          A monocular dance video is lifted to 3D motion
+          (ViTPose &rarr; SMPL-X), retargeted to a <b>Unitree G1</b>, and tracked
+          by a motion-imitation <b>PPO</b> policy on <b>MuJoCo MJX</b>
+          (8,192 envs/GPU, 4&times;RTX 4090). It holds the full
+          <b>38.6-second</b> dance with <b>zero falls</b> &mdash; reached through
+          a diagnosis-driven tuning campaign (heading drift 34&deg;&rarr;26&deg;,
+          cold-start fixed).
         </p>
         <div class="tags">
           <span class="tag">MuJoCo (MJX)</span>
@@ -1138,18 +1135,56 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
     </div>
 
     <section class="section">
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img class="content-image" src="images/side_proj/fetch_lang_vla.gif" alt="Same 4-block scene, three instructions: 'put the red block on the marker', 'put the green block on the marker', 'put the yellow block on the marker' — the Fetch arm picks and places the named block each time" />
+          <figcaption>
+            Same scene, three instructions &mdash; &ldquo;put the red / green /
+            yellow block on the marker&rdquo;; the arm picks-and-places the named
+            block each time (language drives the action)
+          </figcaption>
+        </figure>
+      </div>
       <div class="text-col">
-        <h2>Manipulation &mdash; When Imitation Breaks, RL Fixes It</h2>
+        <h2>Language Grounding &mdash; Does the Policy Really Listen?</h2>
         <p>
-          Beyond the humanoid, I studied <b>where imitation learning fails and
-          reinforcement learning recovers</b>. On a place-and-release task with a
-          sharp, irreversible decision (release at the right instant), a
-          behavior-cloning / diffusion policy <b>collapses to 8%</b> &mdash; it
-          regresses to the average and straddles the release boundary. Offline
-          <b>RL (IQL)</b> on the <em>same data</em> picks the high-value action
-          and reaches <b>98%</b>. I also verified a diffusion policy on robomimic
-          pick-and-place at <b>100%</b>. All numbers: 100 independent episodes,
-          reproducible.
+          A <b>vision + language-conditioned</b> diffusion policy (frozen
+          MiniLM + CNN + FiLM-DDPM) for 4-object pick-and-place, on a task
+          <b>designed so language is necessary</b>. It places the <b>named</b>
+          block at <b>96%</b> (zero wrong), and an ablation proves it: swap the
+          instruction and it <b>obeys the wrong one (99%)</b> &mdash; causal
+          grounding, not scene-reading.
+        </p>
+        <div class="tags">
+          <span class="tag">Vision-Language-Action</span>
+          <span class="tag">Diffusion Policy</span>
+          <span class="tag">FiLM Conditioning</span>
+          <span class="tag">Ablation-Verified</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img class="content-image" src="images/side_proj/fetch_bc_vs_iql_contrast.gif" alt="Side-by-side Fetch arm place-and-release on the same episode: left, a behavior-cloning policy freezes and never releases; right, the IQL offline-RL policy places the block on target and releases" />
+          <figcaption>
+            Same task, same seed &mdash; behavior cloning (left) freezes at the
+            release decision (8%); offline RL / IQL (right) places on target and
+            releases (98%)
+          </figcaption>
+        </figure>
+      </div>
+      <div class="text-col">
+        <h2>When Imitation Breaks, RL Fixes It</h2>
+        <p>
+          Where imitation learning breaks and RL recovers: on a sharp,
+          irreversible place-and-release, a behavior-cloning / diffusion policy
+          <b>collapses to 8%</b> despite clean expert demos, while
+          <b>offline RL (IQL)</b> reaches <b>98%</b> (100 episodes) &mdash;
+          trained on mixed data <em>including failures</em>, the contrast a
+          value function needs and imitation can't use. A diffusion policy also
+          solves robomimic pick-and-place at <b>100%</b>.
         </p>
         <div class="tags">
           <span class="tag">Diffusion Policy</span>
@@ -1157,15 +1192,6 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
           <span class="tag">Offline RL (IQL)</span>
           <span class="tag">SAC · PPO</span>
         </div>
-      </div>
-      <div class="wide-col">
-        <figure class="content-image-wrap">
-          <img class="content-image" src="images/side_proj/fetch_iql_demo.gif" alt="Fetch robot arm place-and-release: the IQL offline-RL policy (left) vs the scripted expert reference (right), succeeding on the same episode" />
-          <figcaption>
-            Place-and-release &mdash; offline-RL (IQL) policy (left) vs reference
-            (right); imitation learning scores 8% here, IQL 98% on the same data
-          </figcaption>
-        </figure>
       </div>
     </section>
 
