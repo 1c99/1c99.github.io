@@ -49,6 +49,7 @@
           <ul>
             <li><a href="#about" class="active">About</a></li>
             <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li><a href="#research">Research</a></li>
             <li><a href="#publications">Publications</a></li>
             <li><a href="#patents">Patents</a></li>
@@ -181,6 +182,45 @@
               <li>Trained multi-organ MRI segmentation models (<b>SAT, VAT</b>) achieving <b>Dice &asymp; 0.9</b> on held-out validation.</li>
               <li>Designed and built a reproducible <b>MLOps pipeline</b> integrating W&amp;B, MLflow, and DVC for experiment tracking, model-weight management, and dataset versioning.</li>
             </ul>
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+          <div class="container">
+            <header class="major">
+              <h3>Projects</h3>
+            </header>
+            <div class="table-wrapper">
+              <div class="features">
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>Humanoid Motion Imitation from Monocular Video (simulation)</b> <a class="lowkey" href="portfolio-full.html">[portfolio]</a>
+                    <br />
+                    Trained a <b>Unitree G1</b> humanoid to imitate a full dance from a single monocular video
+                    (ViTPose &rarr; SMPL-X &rarr; GMR retargeting &rarr; motion-imitation <b>PPO</b> on
+                    <b>MuJoCo MJX</b>, 8,192 envs/GPU); <b>zero falls</b> over the 38.6&nbsp;s clip, reached
+                    through a diagnosis-driven tuning campaign. Extended the same stack to a
+                    command-conditioned <b>Go2 quadruped</b>.
+                    <br />
+                    <span style="color: #888;">2026 | Side project</span>
+                  </div>
+                </article>
+                <article>
+                  <div class="inner" style="width: 100%;">
+                    <b>Diffusion Policies for Manipulation (simulation)</b> <a class="lowkey" href="portfolio-full.html">[portfolio]</a>
+                    <br />
+                    Built a <b>vision + language-conditioned</b> diffusion policy (frozen MiniLM + CNN +
+                    FiLM-DDPM) for 4-object pick-and-place &mdash; places the <b>named</b> block at <b>96%</b>,
+                    with causal grounding verified by a swapped-instruction ablation. Rigorously compared
+                    imitation vs. RL on a sharp place-and-release task: behavior cloning <b>8%</b> vs.
+                    <b>offline RL (IQL) 98%</b> (100 episodes, disjoint seeds).
+                    <br />
+                    <span style="color: #888;">2026 | Side project</span>
+                  </div>
+                </article>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -358,6 +398,10 @@
                 <tr class="invisible">
                   <td><b>3D / Vision / Geometry</b></td>
                   <td>Open3D, ICP, 6-DoF pose estimation, ray tracing, mesh &amp; point cloud processing</td>
+                </tr>
+                <tr class="invisible">
+                  <td><b>Robotics / Sim &amp; RL</b></td>
+                  <td>MuJoCo (MJX), JAX/brax, PPO/SAC/IQL, imitation &amp; diffusion policy, offline-to-online RL; Isaac Sim (in progress)</td>
                 </tr>
                 <tr class="invisible">
                   <td><b>Inference &amp; Deployment</b></td>
