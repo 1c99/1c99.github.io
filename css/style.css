@@ -864,6 +864,7 @@ input[type='reset']:hover,
 input[type='button']:hover,
 .button:hover {
   background-color: #c2c0bf;
+  border-color: #a31f34;
   color: #a31f34 !important;
 }
 
