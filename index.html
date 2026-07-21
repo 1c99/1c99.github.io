@@ -507,9 +507,13 @@
             .writeText('wonchan.son99@gmail.com')
             .then(function () {
               var old = btn.innerHTML;
+              btn.style.boxSizing = 'border-box'; // template is content-box
+              btn.style.width = btn.offsetWidth + 'px'; // hold shape during swap
               btn.innerHTML = '&ensp;Copied to clipboard ✓';
               setTimeout(function () {
                 btn.innerHTML = old;
+                btn.style.width = '';
+                btn.style.boxSizing = '';
               }, 1500);
             })
             .catch(function () {});
