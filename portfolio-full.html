@@ -1307,6 +1307,18 @@ function onScroll() {
 window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("resize", onScroll);
 onScroll();
+
+// clicking an email chip opens the mail client AND copies the address
+document.querySelectorAll('a[href^="mailto:"]').forEach((el) => {
+  el.addEventListener("click", () => {
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText("wonchan.son99@gmail.com").then(() => {
+      const old = el.textContent;
+      el.textContent = "✓ copied to clipboard";
+      setTimeout(() => { el.textContent = old; }, 1500);
+    }).catch(() => {});
+  });
+});
 </script>
 </body>
 </html>

@@ -101,6 +101,7 @@
             <p>
               <a
                 class="button small icon fa-envelope"
+                id="email-button"
                 href="mailto:wonchan.son99@gmail.com"
                 >&ensp;wonchan.son99@gmail.com</a
               >
@@ -495,5 +496,24 @@
         </div>
       </section>
     </div>
+    <script>
+      // clicking the email opens the mail client AND copies the address
+      document
+        .getElementById('email-button')
+        .addEventListener('click', function () {
+          var btn = this;
+          if (!navigator.clipboard) return;
+          navigator.clipboard
+            .writeText('wonchan.son99@gmail.com')
+            .then(function () {
+              var old = btn.innerHTML;
+              btn.innerHTML = '&ensp;Copied to clipboard ✓';
+              setTimeout(function () {
+                btn.innerHTML = old;
+              }, 1500);
+            })
+            .catch(function () {});
+        });
+    </script>
   </body>
 </html>
