@@ -144,6 +144,7 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
 /* ════ fixed UI (screen) ════ */
 .progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:200;box-shadow:0 0 12px var(--accent);}
 html{scroll-behavior:smooth;}
+#physical-ai,#humanoid-motion-imitation,#robot-manipulation,.chapter,.proj-content .section{scroll-margin-top:14px;}
 .dots{position:fixed;right:clamp(14px,2.4vw,30px);top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:11px;align-items:flex-end;}
 .dots .dot-item{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;}
 .dots .dlabel{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:var(--muted);opacity:0;transform:translateX(8px);transition:.25s;white-space:nowrap;}
@@ -1090,7 +1091,7 @@ html{scroll-behavior:smooth;}
     </section>
 
     </div>
-  <section class="chapter" id="proj-robotics">
+  <section class="chapter" id="proj-robotics"><span id="physical-ai"></span><span id="humanoid-motion-imitation"></span>
     <div class="glow"></div><div class="watermark tr">05</div>
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Project 05 · Physical AI · Robot Learning</div>
@@ -1145,7 +1146,7 @@ html{scroll-behavior:smooth;}
       robot <b>actions</b> instead of images
     </div>
 
-    <section class="section">
+    <section class="section" id="robot-manipulation">
       <div class="wide-col">
         <figure class="content-image-wrap">
           <img class="content-image" src="images/side_proj/fetch_lang_vla.gif" alt="Same 4-block scene, three instructions: 'put the red block on the marker', 'put the green block on the marker', 'put the yellow block on the marker' — the Fetch arm picks and places the named block each time" />
