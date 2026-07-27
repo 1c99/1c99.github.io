@@ -1193,15 +1193,20 @@ html{scroll-behavior:smooth;}
           Where imitation learning breaks and RL recovers: on a sharp,
           irreversible place-and-release, a behavior-cloning / diffusion policy
           <b>collapses to 8%</b> despite clean expert demos, while
-          <b>offline RL (IQL)</b> reaches <b>98%</b> (100 episodes) &mdash;
-          trained on mixed data <em>including failures</em>, the contrast a
-          value function needs and imitation can't use. A diffusion policy also
+          <b>offline RL (IQL)</b> reaches <b>98%</b> (100 episodes). The full
+          {BC, IQL} &times; {clean, mixed} factorial shows why:
+          <b>value-based selection provides most of the gain</b> (IQL 70% vs BC
+          8% on identical clean data), and <em>contrastive failure data
+          completes it</em> (70&rarr;98). Online fine-tuning from weak offline
+          data adds 37&rarr;56%, with a 6-variant ablation showing the ceiling
+          is data-limited, not algorithm-limited. A diffusion policy also
           solves robomimic pick-and-place at <b>100%</b>.
         </p>
         <div class="tags">
           <span class="tag">Diffusion Policy</span>
           <span class="tag">Imitation Learning</span>
           <span class="tag">Offline RL (IQL)</span>
+          <span class="tag">Offline-to-Online</span>
           <span class="tag">SAC · PPO</span>
         </div>
       </div>
