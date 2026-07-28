@@ -207,7 +207,7 @@ html{scroll-behavior:smooth;}
 <script>/* set theme before first paint to avoid a flash */try{if(localStorage.getItem('deckTheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
 </head>
 <body>
-<div class="toolbar no-print"><button id="themeToggle" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark theme">☾</button><button onclick="exportPdf()">⤓ Save as PDF</button></div>
+<div class="toolbar no-print"><button id="themeToggle" onclick="toggleTheme()" title="Toggle light / dark" aria-label="Toggle light or dark theme">☾</button></div>
 <div class="progress" id="progress"></div>
 
   <section class="chapter cover">
@@ -1255,16 +1255,14 @@ function toggleTheme(){
 }
 (function(){ let t = "light"; try { t = localStorage.getItem("deckTheme") || "light"; } catch (e) {} applyTheme(t); })();
 
-// PDF export: always print LIGHT (best on paper), then restore the on-screen theme.
-function exportPdf() {
-  const wasDark = document.documentElement.getAttribute("data-theme") === "dark";
-  if (wasDark) document.documentElement.removeAttribute("data-theme");
-  window.addEventListener("afterprint", function restore(){
-    if (wasDark) document.documentElement.setAttribute("data-theme", "dark");
-    window.removeEventListener("afterprint", restore);
-  });
-  window.print();
-}
+// Printing (Cmd+P) always uses LIGHT for paper, then restores the on-screen theme.
+window.addEventListener("beforeprint", () => {
+  window.__wasDark = document.documentElement.getAttribute("data-theme") === "dark";
+  if (window.__wasDark) document.documentElement.removeAttribute("data-theme");
+});
+window.addEventListener("afterprint", () => {
+  if (window.__wasDark) document.documentElement.setAttribute("data-theme", "dark");
+});
 
 // chapter reveal + dot-nav for the long combined portfolio
 const chapters = [...document.querySelectorAll(".chapter")];
