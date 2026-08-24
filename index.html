@@ -160,7 +160,7 @@
               <span style="float: right; font-weight: normal; font-size: 0.9em;">Nov. 2023 &ndash; Present | Seoul, South Korea</span>
             </h4>
 
-            <h5>DeepCatch X (X-ray) <a class="lowkey" href="projects/deepcatch-x/">[details]</a></h5>
+            <h5><a href="projects/deepcatch-x/">DeepCatch X (X-ray)</a></h5>
             <ul>
               <li>Presented DeepCatch X at <b>NVIDIA GTC 2025</b> (exhibitor), demonstrating diffusion-based organ extraction and clinical quantification from CXR.</li>
               <li>Developed a <b>Conditional DDPM</b> for X-ray-to-aorta extraction (<b>Dice = 0.97</b>, outperforming the GAN baseline) that <b>outperformed radiologists</b> on aortic-dilation detection (Sensitivity 0.93 vs 0.31); trained on 4-GPU DDP with FP16 mixed precision. Proposed a 3D Latent Diffusion extension with VAE3D for volumetric reconstruction.</li>
@@ -170,20 +170,20 @@
               <li>Led end-to-end acquisition of <b>100TB+</b> medical datasets through multiple data vendors for FDA / MFDS regulatory submissions.</li>
             </ul>
 
-            <h5>3D FaceLandmark and AR Registration for EVD Surgical Navigation <a class="lowkey" href="projects/evd-navigation/">[details]</a></h5>
+            <h5><a href="projects/evd-navigation/">3D FaceLandmark and AR Registration for EVD Surgical Navigation</a></h5>
             <ul>
               <li>Built a <b>3D spatial perception pipeline</b> from volumetric CT &mdash; patient-specific skin-surface segmentation, 2D landmark detection, and ray tracing to lift 2D landmarks into 3D reference points.</li>
               <li>Implemented real-time <b>6-DoF pose estimation</b> between preoperative CT landmarks and an intraoperative iPad Pro LiDAR point cloud using statistical outlier removal (k-NN) followed by <b>Kabsch + ICP</b>; achieved <b>FRE = 1.8 mm</b>, supporting MFDS regulatory documentation.</li>
               <li>Co-developed with iOS engineers to deploy the full registration pipeline <b>on-device</b> for real-time operating-room use.</li>
             </ul>
 
-            <h5>LLM-based De-Identification System and Translation with Agentic Systems <a class="lowkey" href="projects/llm-deidentification/">[details]</a></h5>
+            <h5><a href="projects/llm-deidentification/">LLM-based De-Identification System and Translation with Agentic Systems</a></h5>
             <ul>
               <li>Developed a multi-modal PHI de-identification pipeline achieving <b>98% accuracy</b>; leveraged OCR + NER for pixel-level masking and LLM for metadata anonymization.</li>
               <li>Engineered a scalable multilingual translation pipeline (<b>KR &rarr; 7 languages</b>) with agentic orchestration; a persistent Translation Memory for cost reduction and a statistical consistency checker to validate terminology and auto-correct LLM hallucinations.</li>
             </ul>
 
-            <h5>DeepCatch M (MRI) <a class="lowkey" href="projects/deepcatch-m/">[details]</a></h5>
+            <h5><a href="projects/deepcatch-m/">DeepCatch M (MRI)</a></h5>
             <ul>
               <li>Trained <b>multi-organ MRI segmentation models</b> (SAT, VAT) achieving <b>Dice &asymp; 0.9</b> on held-out validation.</li>
               <li>Designed and built a reproducible <b>MLOps pipeline</b> integrating W&amp;B, MLflow, and DVC for experiment tracking, model-weight management, and dataset versioning.</li>
@@ -201,7 +201,7 @@
               <div class="features">
                 <article>
                   <div class="inner" style="width: 100%;">
-                    <b>Humanoid Motion Imitation from Monocular Video (simulation)</b> <a class="lowkey" href="portfolio-full.html#humanoid-motion-imitation">[portfolio]</a>
+                    <b><a href="portfolio-full.html#humanoid-motion-imitation">Humanoid Motion Imitation from Monocular Video (simulation)</a></b>
                     <br />
                     Trained a <b>Unitree G1</b> humanoid to imitate a full dance from a single monocular video
                     (ViTPose &rarr; SMPL-X &rarr; GMR retargeting &rarr; motion-imitation <b>PPO</b> on
@@ -214,7 +214,7 @@
                 </article>
                 <article>
                   <div class="inner" style="width: 100%;">
-                    <b>Diffusion Policies for Manipulation (simulation)</b> <a class="lowkey" href="portfolio-full.html#robot-manipulation">[portfolio]</a>
+                    <b><a href="portfolio-full.html#robot-manipulation">Diffusion Policies for Manipulation (simulation)</a></b>
                     <br />
                     Built a <b>vision + language-conditioned</b> diffusion policy (frozen MiniLM + CNN +
                     FiLM-DDPM) for 4-object pick-and-place &mdash; places the <b>named</b> block at <b>96%</b>,
