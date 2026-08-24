@@ -73,16 +73,16 @@ a.lowkey:hover {
 
 a.title-pill {
   border-bottom: none;
-  background: #f0f4f8;
+  background: #4a76a8;
   padding: 3px 10px;
   border-radius: 4px;
-  color: #4a76a8 !important;
+  color: #fff !important;
   display: inline-block;
   transition: all 0.2s ease;
 }
 
 a.title-pill:hover {
-  background: #4a76a8;
+  background: #35577d;
   color: #fff !important;
 }
 
