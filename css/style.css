@@ -73,17 +73,18 @@ a.lowkey:hover {
 
 a.title-pill {
   border-bottom: none;
-  background: #f0f4f8;
-  padding: 3px 10px;
-  border-radius: 4px;
+  background: none;
+  padding: 0;
   color: #333 !important;
-  display: inline-block;
-  transition: all 0.2s ease;
+  text-decoration: underline;
+  text-decoration-color: #333;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
 }
 
 a.title-pill:hover {
-  background: #4a76a8;
-  color: #fff !important;
+  color: #4a76a8 !important;
+  text-decoration-color: #4a76a8;
 }
 
 .coming-soon {
