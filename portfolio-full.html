@@ -215,7 +215,7 @@ html{scroll-behavior:smooth;}
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Portfolio · 2026</div>
       <h1 class="name reveal" style="--d:.05s">Wonchan <span class="accent">Son</span></h1>
-      <p class="tag reveal" style="--d:.15s">AI Research Engineer. From medical-imaging AI to <b>Physical AI</b> — generative diffusion, 3D spatial perception, robot learning, and LLM/VLM systems, taken from research to deployment.</p>
+      <p class="tag reveal" style="--d:.15s">X-ray AI Lead at Medical IP. From medical-imaging AI to <b>Physical AI</b> — generative diffusion, 3D spatial perception, robot learning, and LLM/VLM systems, taken from research to deployment.</p>
       <div class="chips reveal" style="--d:.25s">
         <a class="chip" href="mailto:wonchan.son99@gmail.com">✉ wonchan.son99@gmail.com</a>
         <a class="chip" href="https://github.com/1c99" target="_blank">GitHub ↗</a>
@@ -231,7 +231,7 @@ html{scroll-behavior:smooth;}
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Profile · Education</div>
       <h2 class="h-title reveal" style="--d:.05s">Who I am</h2>
-      <p class="h-sub reveal" style="--d:.12s">Nearly 3 years as an AI Research Engineer bridging academic research and production engineering — realizing theoretical ideas into deployed systems. Now bringing this applied-research foundation to Physical AI and robot intelligence.</p>
+      <p class="h-sub reveal" style="--d:.12s">Nearly 3 years at Medical IP &mdash; now X-ray AI Lead &mdash; bridging academic research and production engineering — realizing theoretical ideas into deployed systems. Now bringing this applied-research foundation to Physical AI and robot intelligence.</p>
       <div class="edu-grid reveal" style="--d:.2s">
         <div class="edu-card"><div class="deg">M.Res. Biomedical Research <span style="color:#8c8c98;font-weight:400;font-size:.85em">(Data Science)</span></div><div class="school">Imperial College London</div><div class="when">Oct 2021 – Sep 2022 · London, UK</div></div>
         <div class="edu-card"><div class="deg">B.Eng. Biomedical Systems Engineering</div><div class="school">University of Warwick</div><div class="when">Oct 2018 – Jun 2021 · Coventry, UK</div></div>
@@ -268,13 +268,19 @@ html{scroll-behavior:smooth;}
         <p>
           DeepCatch X is a medical imaging platform that extracts
           clinical measurements from standard chest X-rays that
-          traditionally require CT scans, using generative AI.
+          traditionally require CT scans, using generative AI &mdash;
+          aortic screening in production, with opportunistic
+          <b>osteoporosis screening</b> (T12&ndash;L2 CT attenuation) now in
+          development on a rectified-flow successor of the same stack.
           A distributed Ray inference pipeline achieves 100x daily
-          throughput improvement.
+          throughput improvement. In production, the platform is MFDS Class
+          II-certified (FDA submission filed), deployed at 20+ institutions
+          nationwide, and used by 20,000+ patients monthly.
         </p>
         <div class="tags">
           <span class="tag">PyTorch</span>
-          <span class="tag">Conditional DDPM</span>
+          <span class="tag">Conditional Diffusion</span>
+          <span class="tag">Rectified Flow</span>
           <span class="tag">LDM</span>
           <span class="tag">VLM</span>
           <span class="tag">Ray</span>
@@ -290,7 +296,9 @@ html{scroll-behavior:smooth;}
 
     <div class="impact-statement">
       <em>Outperformed radiologists</em> on aortic dilation
-      detection (Sensitivity 0.93 vs 0.31) &mdash; presented at NVIDIA GTC 2025
+      detection (Sensitivity 0.93 vs 0.31, comparative evaluation; externally evaluated in
+      <a href="https://doi.org/10.1016/j.ejrad.2025.112380" style="color: inherit;"><em>Eur. J. Radiology</em>, 2025</a>)
+      &mdash; presented at NVIDIA GTC 2025
     </div>
 
     <!-- ════════════════════════════════════════════════════════
@@ -352,8 +360,8 @@ html{scroll-behavior:smooth;}
           platforms to meet project requirements: demographic diversity
           (ethnicity, sex, height/weight), scan conditions (slice
           thickness, chest coverage), and clinical balance
-          (normal vs. disease). End-to-end acquisition of 100TB+ supported
-          FDA / MFDS regulatory submissions, requiring rigorous documentation
+          (normal vs. disease). End-to-end acquisition of 100TB+ underpinned
+          FDA and MFDS approvals across the product line, requiring rigorous documentation
           of dataset provenance and balance.
         </p>
         <div style="display: flex; align-items: center; gap: 40px; margin-top: 12px; flex-wrap: wrap">
@@ -364,6 +372,26 @@ html{scroll-behavior:smooth;}
           </span>
           <img src="images/logos/protege.svg" alt="Protege" style="height: 32px; opacity: 0.7"/>
         </div>
+
+        <h3>PHI De-identification for Compliant Handling</h3>
+        <p>
+          Handling patient data at this scale required a multi-modal
+          <b>PHI de-identification pipeline</b> &mdash; OCR + NER for pixel-level
+          masking of burned-in text and LLM-based metadata
+          <b>anonymization</b>, validated at <b>98% accuracy</b> on a real
+          delivery batch &mdash; making acquisition, transfer, and regulatory
+          submission compliant by construction.
+        </p>
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/llm-deidentification/assets/phi-pipeline.svg"
+            alt="PHI de-identification pipeline: OCR + NER pixel-level masking and LLM metadata anonymization"
+          />
+          <figcaption>
+            Multi-modal PHI De-identification Flow
+          </figcaption>
+        </figure>
 
       </div>
 
@@ -403,6 +431,45 @@ html{scroll-behavior:smooth;}
           />
           <figcaption>
             Two-Stage Diffusion Architecture &mdash; Conditional 2D DDPM (Implemented) and 3D Latent Diffusion Extension (Proposed)
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-x/assets/dcx-ddpm-results.png"
+            alt="Aorta extraction results: chest X-ray inputs with diffusion-model aorta extractions and reference comparisons"
+          />
+          <figcaption>
+            Aorta Extraction Results &mdash; Diffusion Model Output vs. Reference
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <h3>Rectified-Flow Osteoporosis Screening <span class="badge-proposed">IN DEVELOPMENT</span></h3>
+        <p>
+          The generative stack is now evolving from DDPM to
+          <b>rectified flow (flow matching)</b> &mdash; a conditional model with
+          x-prediction and shifted SD3-style timestep sampling for
+          opportunistic <b>osteoporosis screening</b>: jointly predicting
+          <b>T12&ndash;L2 vertebral masks and CT attenuation</b> from chest
+          radiographs, with vertebral mean-HU error incorporated into the
+          training objective and per-patient uncertainty estimated through
+          repeated sampling.
+        </p>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="projects/deepcatch-x/assets/rectified-flow-osteo.svg"
+            alt="Rectified-flow osteoporosis screening (in development): chest X-ray conditions a rectified-flow model jointly predicting T12-L2 vertebral masks and CT attenuation, with repeated sampling producing per-patient uncertainty"
+          />
+          <figcaption>
+            Rectified-Flow Joint Prediction &mdash; Vertebral Masks + CT Attenuation with Sampling-Based Uncertainty (In Development)
           </figcaption>
         </figure>
       </div>
@@ -554,8 +621,22 @@ html{scroll-behavior:smooth;}
           expectancy. The original R algorithm was ported to
           production C++ and compiled into a shared binary for integration into the
           deployment pipeline. Achieves numerical equivalence to the
-          original R implementation. Deployed across check-up centers.
+          original R implementation. Deployed across check-up centers,
+          underpinning the qCXR-bioage study with Kangbuk Samsung Hospital
+          (<a href="https://pubs.rsna.org/doi/10.1148/ryct.250327"><i>Radiology:
+          Cardiothoracic Imaging</i>, 2026</a>).
         </p>
+
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-x/assets/dcx-desktop-app.png"
+            alt="DeepCatch X desktop application: product UI showing chest X-ray analysis results and clinical quantifications"
+          />
+          <figcaption>
+            DeepCatch X Desktop Application &mdash; Product UI in Clinical Use
+          </figcaption>
+        </figure>
       </div>
 
     </section>
@@ -566,7 +647,7 @@ html{scroll-behavior:smooth;}
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Project 02 · 3D Spatial Perception &nbsp;—&nbsp; the bridge to robotics</div>
       <h2 class="h-title reveal" style="--d:.05s">AR Surgical Registration</h2>
-      <p class="h-sub reveal" style="--d:.12s">Real-time surgical navigation — preoperative CT registered to an intraoperative iPad Pro LiDAR point cloud.</p>
+      <p class="h-sub reveal" style="--d:.12s">Real-time surgical navigation — preoperative CT registered to an intraoperative iPad Pro LiDAR point cloud. Part of <b>MEDIP PRO AR</b>, Korea's first MFDS-certified AR surgical-navigation software — selected for the KMDF pan-ministerial top-10 projects (2024), now in clinical trials.</p>
       <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">1.8<small>mm</small></div><div class="mlabel">FRE registration error</div></div><div class="metric"><div class="num">6-DoF</div><div class="mlabel">real-time pose estimation</div></div><div class="metric"><div class="num">On-device</div><div class="mlabel">iOS / iPad LiDAR</div></div></div>
       <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
     </div>
@@ -779,9 +860,9 @@ html{scroll-behavior:smooth;}
     <div class="glow"></div><div class="watermark tr">03</div>
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Project 03 · LLM Systems · Medical NLP</div>
-      <h2 class="h-title reveal" style="--d:.05s">De-ID &amp; Translation</h2>
-      <p class="h-sub reveal" style="--d:.12s">Two LLM systems for <b>MEDIP Box</b>, Medical IP's VR anatomy-education platform — PHI de-identification to keep its medical source data compliant and shareable, and a multi-agent pipeline to localize its content for international markets.</p>
-      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">98<small>%</small></div><div class="mlabel">PHI detection accuracy</div></div><div class="metric"><div class="num">KR→7</div><div class="mlabel">languages translated</div></div><div class="metric"><div class="num">4</div><div class="mlabel">role agents per loop</div></div></div>
+      <h2 class="h-title reveal" style="--d:.05s">LLM Multilingual Translation</h2>
+      <p class="h-sub reveal" style="--d:.12s">A multi-agent LLM pipeline for <b>MEDIP Box</b>, Medical IP's VR anatomy-education platform &mdash; localizing its content for international markets. (PHI de-identification now lives in the DeepCatch X data chapter it serves.)</p>
+      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">KR→7</div><div class="mlabel">languages translated</div></div><div class="metric"><div class="num">4</div><div class="mlabel">role agents per loop</div></div><div class="metric"><div class="num">TM</div><div class="mlabel">persistent translation memory</div></div></div>
       <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
     </div>
   </section><div class="proj-content" id="content-llm">
@@ -791,75 +872,13 @@ html{scroll-behavior:smooth;}
         <figure class="content-image-wrap">
           <img class="content-image" src="projects/llm-deidentification/assets/llm-hero-medipbox.png" alt="MEDIP Box — Medical IP's VR anatomy-education platform; its medical source imagery required PHI de-identification, and its content required localization for international markets" />
           <figcaption>
-            MEDIP Box &mdash; the product both systems served: its source data
-            needed de-identification, its content needed localization
+            MEDIP Box &mdash; the product this system served: its content
+            needed localization for international markets
           </figcaption>
         </figure>
       </div>
     </section>
 
-
-    <!-- ════════════════════════════════════════════════════════
-         PHI DE-IDENTIFICATION
-         ════════════════════════════════════════════════════════ -->
-    <section class="section">
-      <div class="text-col">
-        <h2>PHI De-Identification Pipeline</h2>
-        <p>
-          Medical data needs strict HIPAA/GDPR compliance to be shared for
-          research and collaboration &mdash; but Protected Health Information
-          (PHI) hides across many modalities: burned-in text on images, DICOM
-          metadata, PDFs, and handwritten annotations. This system removes it
-          automatically, where manual de-identification is slow and error-prone.
-        </p>
-        <div class="tags">
-          <span class="tag">98% detection</span>
-          <span class="tag">LLM</span>
-          <span class="tag">OCR</span>
-          <span class="tag">NER</span>
-          <span class="tag">DICOM</span>
-        </div>
-
-        <h3>Two-Pronged Approach</h3>
-        <div class="two-prong">
-          <div class="prong-card">
-            <div class="prong-title">
-              <span class="icon">&#128196;</span> Metadata Anonymization
-            </div>
-            <div class="prong-desc">
-              LLM parses DICOM headers to identify PHI fields (Patient Name, ID,
-              Birth Date) and generates consistent anonymized mappings while
-              preserving non-PHI metadata.
-            </div>
-          </div>
-          <div class="prong-card">
-            <div class="prong-title">
-              <span class="icon">&#128444;&#65039;</span> Burn-in Text Detection
-            </div>
-            <div class="prong-desc">
-              OCR extracts text regions with bounding boxes. LLM/NER classifies
-              each as PHI or non-PHI. Pixel-level black mask applied over PHI
-              while preserving markers (L/R, PA).
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="wide-col">
-        <figure class="diagram">
-          <img
-            src="projects/llm-deidentification/assets/phi-pipeline.svg"
-            alt="PHI De-identification Pipeline: Metadata branch through LLM to anonymized values, Image branch through OCR and NER to PHI masking"
-          />
-          <figcaption>
-            Two-Pronged De-identification Pipeline
-          </figcaption>
-        </figure>
-      </div>
-
-    </section>
-
-    <hr class="divider" />
 
     <!-- ════════════════════════════════════════════════════════
          TRANSLATION SYSTEM
@@ -913,7 +932,7 @@ html{scroll-behavior:smooth;}
         <figure class="diagram">
           <img
             src="projects/llm-deidentification/assets/translation-pipeline.svg"
-            alt="Multi-agent medical translation: Translator, Reviewer, Fixer and Supervisor models (one per GPU, via Ollama + Ray) in a verification loop, with an independent terminology gate that watches clinical terms. Runs on-device."
+            alt="Multi-agent medical translation: Translator, Reviewer, Fixer and Supervisor models (one per GPU, via Ollama + Ray, migrating to vLLM) in a verification loop, with an independent terminology gate that watches clinical terms. Runs on-device."
           />
           <figcaption>
             Multi-agent verification loop &mdash; translator, reviewer, fixer and
@@ -1179,35 +1198,42 @@ html{scroll-behavior:smooth;}
     <section class="section">
       <div class="wide-col">
         <figure class="content-image-wrap">
-          <img class="content-image" src="images/side_proj/fetch_bc_vs_iql_contrast.gif" alt="Side-by-side Fetch arm place-and-release on the same episode: left, a behavior-cloning policy freezes and never releases; right, the IQL offline-RL policy places the block on target and releases" />
+          <!-- TODO before deploy: copy docs/media/fetch_bc_chunking_fix.gif from the robotics repo into images/side_proj/ or this 404s -->
+          <img class="content-image" src="images/side_proj/fetch_bc_chunking_fix.gif" alt="Same Fetch place-and-release episode under three policies: behavior cloning re-planning every two steps hovers at the marker without releasing; the same BC weights with action chunking place and release; IQL places and releases" />
           <figcaption>
-            Same task, same seed &mdash; behavior cloning (left) freezes at the
-            release decision (8%); offline RL / IQL (right) places on target and
-            releases (98%)
+            Same episode, three policies &mdash; behavior cloning re-planning
+            every 2 steps hovers at the marker (0% real); the <b>same weights</b>
+            with <b>action chunking</b> place and release (90%); offline RL / IQL
+            places and releases (98%)
           </figcaption>
         </figure>
       </div>
       <div class="text-col">
-        <h2>When Imitation Breaks, RL Fixes It</h2>
+        <h2>Reading Past the Number: BC vs RL, Debugged</h2>
         <p>
-          Where imitation learning breaks and RL recovers: on a sharp,
-          irreversible place-and-release, a behavior-cloning / diffusion policy
-          <b>collapses to 8%</b> despite clean expert demos, while
-          <b>offline RL (IQL)</b> reaches <b>98%</b> (100 episodes). The full
-          {BC, IQL} &times; {clean, mixed} factorial shows why:
-          <b>value-based selection provides most of the gain</b> (IQL 70% vs BC
-          8% on identical clean data), and <em>contrastive failure data
-          completes it</em> (70&rarr;98). Online fine-tuning from weak offline
-          data adds 37&rarr;56%, with a 6-variant ablation showing the ceiling
-          is data-limited, not algorithm-limited. A diffusion policy also
-          solves robomimic pick-and-place at <b>100%</b>.
+          The behavior-cloning baseline read <b>8%</b> &mdash; which turned out
+          to be the <b>do-nothing floor</b> (a few seeds spawn the block already
+          on the marker); real success was <b>0%</b>. The cause wasn't the
+          algorithm: the scripted expert switches phases at sharp thresholds
+          &mdash; it lowers the block only once it's within 2.5&nbsp;cm of the
+          marker &mdash; so a policy re-planning every 2 steps settled
+          ~3&nbsp;cm out, where every label says &ldquo;don't lower yet,&rdquo;
+          and hovered until time ran out (54 of 92 failures). Committing to
+          <b>14-step action chunks</b> carries it across that switch: the
+          <b>same weights</b> reach <b>90%</b> on held-out seeds.
+          <b>Offline RL (IQL)</b> reaches <b>98%</b>, but its edge is the
+          <em>failure data</em>, not RL itself &mdash; on expert-only demos IQL
+          is <b>70%</b>, below action-chunked BC. Online fine-tuning from weak
+          offline data adds 37&rarr;56% (a 6-variant ablation shows the ceiling
+          is data-limited). A diffusion policy also solves robomimic
+          pick-and-place at <b>100%</b>.
         </p>
         <div class="tags">
-          <span class="tag">Diffusion Policy</span>
           <span class="tag">Imitation Learning</span>
+          <span class="tag">Action Chunking</span>
           <span class="tag">Offline RL (IQL)</span>
           <span class="tag">Offline-to-Online</span>
-          <span class="tag">SAC · PPO</span>
+          <span class="tag">Honest Evaluation</span>
         </div>
       </div>
     </section>
@@ -1270,7 +1296,7 @@ const dotsWrap = document.getElementById("dots");
 const progress = document.getElementById("progress");
 
 // labeled section nav (one entry per chapter; labels show on hover / wide screens)
-const labels = ["Home", "Profile", "Diffusion · X-ray AI", "3D Perception · AR Surgery", "LLM Agents · De-ID", "Segmentation · MLOps", "Robot Learning", "Contact"];
+const labels = ["Home", "Profile", "Diffusion · X-ray AI", "3D Perception · AR Surgery", "LLM Agents · Translation", "Segmentation · MLOps", "Robot Learning", "Contact"];
 chapters.forEach((c, i) => {
   if (!c.id) c.id = "ch-" + i;
   const a = document.createElement("a");

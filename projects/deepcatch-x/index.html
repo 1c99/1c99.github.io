@@ -42,13 +42,19 @@
         <p>
           DeepCatch X is a medical imaging platform that extracts
           clinical measurements from standard chest X-rays that
-          traditionally require CT scans, using generative AI.
+          traditionally require CT scans, using generative AI &mdash;
+          aortic screening in production, with opportunistic
+          <b>osteoporosis screening</b> (T12&ndash;L2 CT attenuation) now in
+          development on a rectified-flow successor of the same stack.
           A distributed Ray inference pipeline achieves 100x daily
-          throughput improvement.
+          throughput improvement. In production, the platform is MFDS Class
+          II-certified (FDA submission filed), deployed at 20+ institutions
+          nationwide, and used by 20,000+ patients monthly.
         </p>
         <div class="tags">
           <span class="tag">PyTorch</span>
-          <span class="tag">Conditional DDPM</span>
+          <span class="tag">Conditional Diffusion</span>
+          <span class="tag">Rectified Flow</span>
           <span class="tag">LDM</span>
           <span class="tag">VLM</span>
           <span class="tag">Ray</span>
@@ -64,7 +70,9 @@
 
     <div class="impact-statement">
       <em>Outperformed radiologists</em> on aortic dilation
-      detection (Sensitivity 0.93 vs 0.31) &mdash; presented at NVIDIA GTC 2025
+      detection (Sensitivity 0.93 vs 0.31, comparative evaluation; externally evaluated in
+      <a href="https://doi.org/10.1016/j.ejrad.2025.112380" style="color: inherit;"><em>Eur. J. Radiology</em>, 2025</a>)
+      &mdash; presented at NVIDIA GTC 2025
     </div>
 
     <!-- ════════════════════════════════════════════════════════
@@ -126,8 +134,8 @@
           platforms to meet project requirements: demographic diversity
           (ethnicity, sex, height/weight), scan conditions (slice
           thickness, chest coverage), and clinical balance
-          (normal vs. disease). End-to-end acquisition of 100TB+ supported
-          FDA / MFDS regulatory submissions, requiring rigorous documentation
+          (normal vs. disease). End-to-end acquisition of 100TB+ underpinned
+          FDA and MFDS approvals across the product line, requiring rigorous documentation
           of dataset provenance and balance.
         </p>
         <div style="display: flex; align-items: center; gap: 40px; margin-top: 12px; flex-wrap: wrap">
@@ -138,6 +146,26 @@
           </span>
           <img src="../../images/logos/protege.svg" alt="Protege" style="height: 32px; opacity: 0.7"/>
         </div>
+
+        <h3>PHI De-identification for Compliant Handling</h3>
+        <p>
+          Handling patient data at this scale required a multi-modal
+          <b>PHI de-identification pipeline</b> &mdash; OCR + NER for pixel-level
+          masking of burned-in text and LLM-based metadata
+          <b>anonymization</b>, validated at <b>98% accuracy</b> on a real
+          delivery batch &mdash; making acquisition, transfer, and regulatory
+          submission compliant by construction.
+        </p>
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="../llm-deidentification/assets/phi-pipeline.svg"
+            alt="PHI de-identification pipeline: OCR + NER pixel-level masking and LLM metadata anonymization"
+          />
+          <figcaption>
+            Multi-modal PHI De-identification Flow
+          </figcaption>
+        </figure>
 
       </div>
 
@@ -177,6 +205,45 @@
           />
           <figcaption>
             Two-Stage Diffusion Architecture &mdash; Conditional 2D DDPM (Implemented) and 3D Latent Diffusion Extension (Proposed)
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="assets/dcx-ddpm-results.png"
+            alt="Aorta extraction results: chest X-ray inputs with diffusion-model aorta extractions and reference comparisons"
+          />
+          <figcaption>
+            Aorta Extraction Results &mdash; Diffusion Model Output vs. Reference
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <h3>Rectified-Flow Osteoporosis Screening <span class="badge-proposed">IN DEVELOPMENT</span></h3>
+        <p>
+          The generative stack is now evolving from DDPM to
+          <b>rectified flow (flow matching)</b> &mdash; a conditional model with
+          x-prediction and shifted SD3-style timestep sampling for
+          opportunistic <b>osteoporosis screening</b>: jointly predicting
+          <b>T12&ndash;L2 vertebral masks and CT attenuation</b> from chest
+          radiographs, with vertebral mean-HU error incorporated into the
+          training objective and per-patient uncertainty estimated through
+          repeated sampling.
+        </p>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            src="assets/rectified-flow-osteo.svg"
+            alt="Rectified-flow osteoporosis screening (in development): chest X-ray conditions a rectified-flow model with x-prediction and shifted SD3-style timestep sampling, jointly predicting T12-L2 vertebral masks and CT attenuation, with repeated sampling producing per-patient uncertainty"
+          />
+          <figcaption>
+            Rectified-Flow Joint Prediction &mdash; Vertebral Masks + CT Attenuation with Sampling-Based Uncertainty (In Development)
           </figcaption>
         </figure>
       </div>
@@ -318,8 +385,24 @@
           expectancy. The original R algorithm was ported to
           production C++ and compiled into a shared binary for integration into the
           deployment pipeline. Achieves numerical equivalence to the
-          original R implementation. Deployed across check-up centers.
+          original R implementation. Deployed across check-up centers,
+          underpinning the qCXR-bioage study with Kangbuk Samsung Hospital
+          (<a href="https://pubs.rsna.org/doi/10.1148/ryct.250327"><i>Radiology:
+          Cardiothoracic Imaging</i>, 2026</a>).
         </p>
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="assets/dcx-desktop-app.png"
+            alt="DeepCatch X desktop application: product UI showing chest X-ray analysis results and clinical quantifications"
+          />
+          <figcaption>
+            DeepCatch X Desktop Application &mdash; Product UI in Clinical Use
+          </figcaption>
+        </figure>
       </div>
 
     </section>
