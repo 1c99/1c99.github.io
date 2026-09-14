@@ -1211,22 +1211,17 @@ html{scroll-behavior:smooth;}
       <div class="text-col">
         <h2>Reading Past the Number: BC vs RL, Debugged</h2>
         <p>
-          The behavior-cloning baseline read <b>8%</b> &mdash; which turned out
-          to be the <b>do-nothing floor</b> (a few seeds spawn the block already
-          on the marker); real success was <b>0%</b>. The cause wasn't the
-          algorithm: the scripted expert switches phases at sharp thresholds
-          &mdash; it lowers the block only once it's within 2.5&nbsp;cm of the
-          marker &mdash; so a policy re-planning every 2 steps settled
-          ~3&nbsp;cm out, where every label says &ldquo;don't lower yet,&rdquo;
-          and hovered until time ran out (54 of 92 failures). Committing to
-          <b>14-step action chunks</b> carries it across that switch: the
-          <b>same weights</b> reach <b>90%</b> on held-out seeds.
-          <b>Offline RL (IQL)</b> reaches <b>98%</b>, but its edge is the
-          <em>failure data</em>, not RL itself &mdash; on expert-only demos IQL
-          is <b>70%</b>, below action-chunked BC. Online fine-tuning from weak
-          offline data adds 37&rarr;56% (a 6-variant ablation shows the ceiling
-          is data-limited). A diffusion policy also solves robomimic
-          pick-and-place at <b>100%</b>.
+          The behavior-cloning baseline scored <b>8%</b> &mdash; the
+          <b>do-nothing floor</b> (a few seeds start with the block already on
+          the marker). The real cause was the <em>demonstrations</em>: the
+          scripted expert lowers the block only once it's within 2.5&nbsp;cm of
+          the marker, so a policy re-planning every 2 steps stalled just outside
+          that point and hovered. Committing to <b>14-step action chunks</b>
+          fixed it &mdash; the <b>same weights</b> reach <b>90%</b> on held-out
+          seeds. <b>Offline RL (IQL)</b> reaches <b>98%</b>, but only with
+          failure data; on expert-only demos it scores <b>70%</b>. Online
+          fine-tuning from weak offline data adds 37&rarr;56%, and an ablation
+          shows that ceiling is set by the data.
         </p>
         <div class="tags">
           <span class="tag">Imitation Learning</span>
