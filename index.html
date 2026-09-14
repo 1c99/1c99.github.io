@@ -218,9 +218,10 @@
                     <br />
                     Built a <b>vision + language-conditioned</b> diffusion policy (frozen MiniLM + CNN +
                     FiLM-DDPM) for 4-object pick-and-place &mdash; places the <b>named</b> block at <b>96%</b>,
-                    with causal grounding verified by a swapped-instruction ablation. Rigorously compared
-                    imitation vs. RL on a sharp place-and-release task: behavior cloning <b>8%</b> vs.
-                    <b>offline RL (IQL) 98%</b> (100 episodes, disjoint seeds).
+                    with causal grounding verified by a swapped-instruction ablation. Compared
+                    imitation vs. RL on place-and-release: <b>action-chunked</b> behavior cloning
+                    <b>90%</b> vs. <b>offline RL (IQL) 98%</b> (100 held-out episodes), with IQL's edge
+                    coming from failure data (70% on expert-only demos).
                     <br />
                     <span style="color: #888;">2026 | Side project</span>
                   </div>

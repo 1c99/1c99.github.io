@@ -1179,35 +1179,41 @@ html{scroll-behavior:smooth;}
     <section class="section">
       <div class="wide-col">
         <figure class="content-image-wrap">
-          <img class="content-image" src="images/side_proj/fetch_bc_vs_iql_contrast.gif" alt="Side-by-side Fetch arm place-and-release on the same episode: left, a behavior-cloning policy freezes and never releases; right, the IQL offline-RL policy places the block on target and releases" />
+          <img class="content-image" src="images/side_proj/fetch_bc_chunking_fix.gif" alt="Same Fetch place-and-release episode under three policies: behavior cloning re-planning every two steps hovers at the marker without releasing; the same BC weights with action chunking place and release; IQL places and releases" />
           <figcaption>
-            Same task, same seed &mdash; behavior cloning (left) freezes at the
-            release decision (8%); offline RL / IQL (right) places on target and
-            releases (98%)
+            Same episode, three policies &mdash; behavior cloning re-planning
+            every 2 steps hovers at the marker (0% real); the <b>same weights</b>
+            with <b>action chunking</b> place and release (90%); offline RL / IQL
+            places and releases (98%)
           </figcaption>
         </figure>
       </div>
       <div class="text-col">
-        <h2>When Imitation Breaks, RL Fixes It</h2>
+        <h2>Reading Past the Number: BC vs RL, Debugged</h2>
         <p>
-          Where imitation learning breaks and RL recovers: on a sharp,
-          irreversible place-and-release, a behavior-cloning / diffusion policy
-          <b>collapses to 8%</b> despite clean expert demos, while
-          <b>offline RL (IQL)</b> reaches <b>98%</b> (100 episodes). The full
-          {BC, IQL} &times; {clean, mixed} factorial shows why:
-          <b>value-based selection provides most of the gain</b> (IQL 70% vs BC
-          8% on identical clean data), and <em>contrastive failure data
-          completes it</em> (70&rarr;98). Online fine-tuning from weak offline
-          data adds 37&rarr;56%, with a 6-variant ablation showing the ceiling
-          is data-limited, not algorithm-limited. A diffusion policy also
-          solves robomimic pick-and-place at <b>100%</b>.
+          The behavior-cloning baseline read <b>8%</b> &mdash; which turned out
+          to be the <b>do-nothing floor</b> (a few seeds spawn the block already
+          on the marker); real success was <b>0%</b>. The cause wasn't the
+          algorithm: the scripted expert switches phases at sharp thresholds
+          &mdash; it lowers the block only once it's within 2.5&nbsp;cm of the
+          marker &mdash; so a policy re-planning every 2 steps settled
+          ~3&nbsp;cm out, where every label says &ldquo;don't lower yet,&rdquo;
+          and hovered until time ran out (54 of 92 failures). Committing to
+          <b>14-step action chunks</b> carries it across that switch: the
+          <b>same weights</b> reach <b>90%</b> on held-out seeds.
+          <b>Offline RL (IQL)</b> reaches <b>98%</b>, but its edge is the
+          <em>failure data</em>, not RL itself &mdash; on expert-only demos IQL
+          is <b>70%</b>, below action-chunked BC. Online fine-tuning from weak
+          offline data adds 37&rarr;56% (a 6-variant ablation shows the ceiling
+          is data-limited). A diffusion policy also solves robomimic
+          pick-and-place at <b>100%</b>.
         </p>
         <div class="tags">
-          <span class="tag">Diffusion Policy</span>
           <span class="tag">Imitation Learning</span>
+          <span class="tag">Action Chunking</span>
           <span class="tag">Offline RL (IQL)</span>
           <span class="tag">Offline-to-Online</span>
-          <span class="tag">SAC · PPO</span>
+          <span class="tag">Honest Evaluation</span>
         </div>
       </div>
     </section>
