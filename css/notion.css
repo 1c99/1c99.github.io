@@ -103,6 +103,27 @@ a:hover {
   background: #fafafa;
 }
 
+/* portrait report pages (e.g. BioAge sample) render at reduced width */
+.content-image.report-page {
+  max-width: 380px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* two report pages (English + Korean) shown side by side */
+.report-pair {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.report-pair .report-page {
+  max-width: 320px;
+  flex: 0 1 320px;
+  margin: 0;
+}
+
 .content-image-wrap {
   margin: 32px 0;
 }
@@ -259,6 +280,12 @@ a:hover {
 .diagram img {
   width: 100%;
   display: block;
+}
+
+/* osteoporosis result figures rendered a touch smaller, centered */
+.diagram img.osteo-fig {
+  width: 88%;
+  margin: 0 auto;
 }
 
 .diagram figcaption {

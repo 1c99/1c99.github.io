@@ -93,11 +93,11 @@
               </p>
             </header>
             <p>
-              AI Research Engineer with nearly 3 years at <b>Medical IP</b>, currently serving as Technical Research
+              AI Research Engineer with nearly 3 years of experience, currently serving as Technical Research
               Personnel (Military Alternative Service). I specialize in <b>generative diffusion modeling</b>,
               <b>3D spatial registration</b>, and <b>LLM/VLM-driven data pipelines</b> &mdash; backed by scalable
               Ray-distributed inference, TensorRT optimization, and on-premise deployment. I led the acquisition of
-              100TB+ medical imaging datasets for FDA and MFDS approvals and exhibited at NVIDIA GTC 2025.
+              <b>100TB+</b> medical imaging datasets for FDA and MFDS approvals and exhibited at <b>NVIDIA GTC 2025</b>.
               I am now seeking to bring this applied-research foundation to <b>Physical AI and robot intelligence</b>.
             </p>
 
@@ -163,12 +163,12 @@
             <h5><a class="title-pill" href="projects/deepcatch-x/">DeepCatch X (X-ray)</a></h5>
             <ul>
               <li><b>Scale:</b> <b>MFDS Class II-certified</b> and FDA-submitted; deployed at <b>20+ institutions</b> nationwide, used by <b>20,000+ patients monthly</b> for aortic-health screening, with the largest single center processing up to 10,000 examinees per month.</li>
-              <li><b>International expansion:</b> engineered single-laptop operation (replacing a two-laptop competitor setup) for the portable X-ray bundle &mdash; a decisive factor in winning on price and performance &mdash; supporting DK Medical in its Southeast Asia expansion, with contracted volume scaling from <b>~500 systems in 2026 to ~2,000 in 2027</b>.</li>
-              <li><b>Aorta:</b> built the product's generative anatomy-extraction stack &mdash; a <b>diffusion-based model</b> for aorta extraction (<b>Dice = 0.97</b>, surpassing the GAN baseline), with downstream aortic-dilation detection reaching <b>sensitivity 0.93 vs 0.31 for radiologists</b> in a comparative evaluation (related publication: <a href="https://doi.org/10.1016/j.ejrad.2025.112380"><i>Eur. J. Radiology</i>, 2025</a>).</li>
-              <li><b>Osteoporosis:</b> developing a <b>conditional rectified-flow model</b> with x-prediction and shifted SD3-style timestep sampling for opportunistic osteoporosis screening; jointly predicting <b>T12&ndash;L2 vertebral masks and CT attenuation from chest radiographs</b>, incorporating vertebral mean-HU error into the training objective, and estimating per-patient uncertainty through repeated sampling.</li>
+              <li><b>International expansion:</b> reduced the inference pipeline's memory footprint enough to run the full portable X-ray bundle on a single laptop, supporting DK Medical (a major Korean X-ray manufacturer) in its Southeast Asia expansion (contracted <b>~500 systems in 2026 &rarr; ~2,000 in 2027</b>).</li>
+              <li><b>Aorta:</b> built the product's generative anatomy-extraction stack &mdash; a <b>diffusion-based model</b> for aorta extraction (<b>Dice = 0.97</b>, surpassing the GAN baseline), with downstream aortic-dilation detection reaching <b>sensitivity 0.93 vs 0.31 for radiologists</b> (<a href="https://doi.org/10.1016/j.ejrad.2025.112380"><i>Eur. J. Radiology</i>, 2025</a>).</li>
+              <li><b>Osteoporosis screening from chest radiographs:</b> a single-network <b>conditional rectified-flow model</b> (x-prediction, shifted logit-normal timestep sampling, self-generated warm-start prior, RAD-DINO cross-attention with LoRA adaptation) that jointly predicts <b>T12&ndash;L2 and clavicle masks, CT attenuation maps and bone-marrow HU</b>, with a density-anchored readout that trains the mean-HU error directly in the flow objective.</li>
               <li><b>BioAge:</b> ported the biological-age pipeline from research-grade R to production <b>C++</b> with verified numerical equivalence; deployed across check-up centers and underpinning the qCXR-bioage study with Kangbuk Samsung Hospital (<a href="https://pubs.rsna.org/doi/10.1148/ryct.250327"><i>Radiology: Cardiothoracic Imaging</i>, 2026</a>).</li>
               <li><b>Systems engineering:</b> engineered a <b>Ray-distributed inference pipeline</b> (14-module DAG of actors) with a VLM-driven PA-view pre-filter; achieved <b>100x daily throughput</b> and 2.8x per-case speedup via adaptive scheduling, shared memory, and TensorRT / ONNX / FP16 optimization. Applied to <b>2.3M+ cases</b>.</li>
-              <li><b>Production &amp; deployment:</b> built a CI/CD-driven on-premise deployment pipeline for collaborative hospital research &mdash; reduced production codebase by 76% in LoC and compiled into source-encrypted standalone executables.</li>
+              <li><b>Production &amp; deployment:</b> built a CI/CD-driven on-premise deployment pipeline for collaborative research with hospitals &mdash; reduced production codebase by 76% in LoC and compiled into source-encrypted standalone executables.</li>
               <li><b>Data &amp; regulatory:</b> led end-to-end acquisition of <b>100TB+</b> medical datasets through multiple data vendors and built a multi-modal PHI de-identification pipeline (OCR+NER pixel masking, LLM metadata <b>anonymization</b>, <b>98% accuracy</b>) for compliant data handling &mdash; underpinning <b>FDA and MFDS approvals</b> across the product line.</li>
               <li><b>Technical presentation:</b> presented DeepCatch X at <b>NVIDIA GTC 2025</b> (exhibitor), demonstrating diffusion-based organ extraction and clinical quantification from CXR.</li>
             </ul>
@@ -219,12 +219,13 @@
                   <div class="inner" style="width: 100%;">
                     <b><a class="title-pill" href="portfolio-full.html#robot-manipulation">Diffusion Policies for Manipulation (simulation)</a></b>
                     <br />
-                    Built a <b>vision + language-conditioned</b> diffusion policy (frozen MiniLM + CNN +
-                    FiLM-DDPM) for 4-object pick-and-place &mdash; places the <b>named</b> block at <b>96%</b>,
-                    with causal grounding verified by a swapped-instruction ablation. Compared
-                    imitation vs. RL on place-and-release: <b>action-chunked</b> behavior cloning
-                    <b>90%</b> vs. <b>offline RL (IQL) 98%</b> (100 held-out episodes), with IQL's edge
-                    coming from failure data (70% on expert-only demos).
+                    Built a <b>vision + language-conditioned</b> diffusion policy (frozen MiniLM +
+                    FiLM-conditioned DDPM) for 4-object pick-and-place: places the <b>named</b> block at
+                    <b>96%</b> with zero wrong placements; ablations show causal grounding &mdash; it
+                    collapses without the instruction and <b>obeys a swapped one</b> (<b>99%</b> at 4-way,
+                    chance 25%). Compared imitation vs. RL on place-and-release: <b>action-chunked</b>
+                    behavior cloning <b>90%</b> vs. <b>offline RL (IQL) 98%</b> (100 held-out episodes),
+                    with IQL's edge coming from failure data (70% on expert-only demos).
                     <br />
                     <span style="color: #888;">2026 | Side project</span>
                   </div>
@@ -316,7 +317,7 @@
                   <div class="inner" style="width: 100%;">
                     <b>OOD detection method and apparatus for Medical Image Segmentation</b>
                     <br />
-                    Korean Patent 10-2024-0171453
+                    Korean Patent 10-2024-0171453 (Granted)
                     <br />
                     <span style="color: #888;">Nov. 2024 | Seoul, Korea</span>
                   </div>
@@ -326,7 +327,7 @@
                   <div class="inner" style="width: 100%;">
                     <b>AR auto registration method and apparatus for EVD surgery</b>
                     <br />
-                    Korean Patent 10-2025-0107691
+                    Korean Patent 10-2025-0107691 (Filed)
                     <br />
                     <span style="color: #888;">Aug. 2025 | Seoul, Korea</span>
                   </div>
@@ -336,7 +337,7 @@
                   <div class="inner" style="width: 100%;">
                     <b>AR manual registration method and apparatus for EVD surgery</b>
                     <br />
-                    Korean Patent 10-2025-0107692
+                    Korean Patent 10-2025-0107692 (Filed)
                     <br />
                     <span style="color: #888;">Aug. 2025 | Seoul, Korea</span>
                   </div>
@@ -404,11 +405,11 @@
                 </tr>
                 <tr class="invisible">
                   <td><b>Robotics / Sim &amp; RL</b></td>
-                  <td>MuJoCo (MJX), JAX/brax, PPO/SAC/IQL, imitation, diffusion &amp; VLA-style policies, offline-to-online RL; ROS 2 (rclpy, URDF/TF, RViz); Isaac Sim (in progress)</td>
+                  <td>MuJoCo (MJX), JAX/brax, PPO/SAC/IQL, imitation, diffusion &amp; VLA-style policies, offline-to-online RL; ROS 2 (rclpy, URDF/TF, RViz); Isaac Sim</td>
                 </tr>
                 <tr class="invisible">
                   <td><b>Inference &amp; Deployment</b></td>
-                  <td>TensorRT, ONNX, Nuitka, Docker, Ollama, vLLM (in progress)</td>
+                  <td>TensorRT, ONNX, Nuitka, Docker, Ollama, vLLM</td>
                 </tr>
                 <tr class="invisible">
                   <td><b>LLM / Agentic Systems</b></td>
