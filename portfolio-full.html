@@ -105,6 +105,10 @@ body{ background:var(--bg); margin:0; padding:clamp(14px,2vw,26px) clamp(12px,3v
 /* figures/diagrams: native white SVGs + a light border for definition */
 .proj-content figure :is(img,svg){ max-width:100% !important; height:auto !important; }
 .proj-content .content-image,.proj-content .diagram img{ border:1px solid var(--line); border-radius:12px; }
+.proj-content figure img.report-page{ max-width:380px !important; display:block; margin:0 auto; }
+.proj-content .report-pair{ display:flex; gap:18px; justify-content:center; align-items:flex-start; flex-wrap:wrap; }
+.proj-content .report-pair img.report-page{ max-width:320px !important; flex:0 1 320px; margin:0; }
+.proj-content .diagram img.osteo-fig{ width:88% !important; display:block; margin:0 auto; }
 
 /* ════ DARK MODE — re-skin project content dark (scoped to the toggle) ════ */
 :root[data-theme="dark"] .chapter,:root[data-theme="dark"] .proj-content .section{ box-shadow:none !important; }
@@ -200,6 +204,7 @@ html{scroll-behavior:smooth;}
   /* De-ID project: tighter so it packs onto fewer, fuller pages */
   #content-llm .section{ margin:0 0 4mm !important; }
   #content-llm figure img,#content-llm .content-image,#content-llm .diagram img{ max-height:118mm !important; }
+  .proj-content .content-image.report-page{ max-height:90mm !important; }
   /* EVD Key Challenges: 2-column challenge cards so the section reads compactly */
   .pdf-challenges .challenges{ display:grid !important; grid-template-columns:1fr 1fr !important; gap:4mm !important; }
 }
@@ -215,7 +220,7 @@ html{scroll-behavior:smooth;}
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Portfolio · 2026</div>
       <h1 class="name reveal" style="--d:.05s">Wonchan <span class="accent">Son</span></h1>
-      <p class="tag reveal" style="--d:.15s">AI Research Engineer. From medical-imaging AI to <b>Physical AI</b> — generative diffusion, 3D spatial perception, robot learning, and LLM/VLM systems, taken from research to deployment.</p>
+      <p class="tag reveal" style="--d:.15s">X-ray AI Lead at Medical IP. From medical-imaging AI to <b>Physical AI</b> — generative diffusion, 3D spatial perception, robot learning, and LLM/VLM systems, taken from research to deployment.</p>
       <div class="chips reveal" style="--d:.25s">
         <a class="chip" href="mailto:wonchan.son99@gmail.com">✉ wonchan.son99@gmail.com</a>
         <a class="chip" href="https://github.com/1c99" target="_blank">GitHub ↗</a>
@@ -231,7 +236,7 @@ html{scroll-behavior:smooth;}
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Profile · Education</div>
       <h2 class="h-title reveal" style="--d:.05s">Who I am</h2>
-      <p class="h-sub reveal" style="--d:.12s">Nearly 3 years as an AI Research Engineer bridging academic research and production engineering — realizing theoretical ideas into deployed systems. Now bringing this applied-research foundation to Physical AI and robot intelligence.</p>
+      <p class="h-sub reveal" style="--d:.12s">Nearly 3 years at Medical IP &mdash; now X-ray AI Lead &mdash; bridging academic research and production engineering — realizing theoretical ideas into deployed systems. Now bringing this applied-research foundation to Physical AI and robot intelligence.</p>
       <div class="edu-grid reveal" style="--d:.2s">
         <div class="edu-card"><div class="deg">M.Res. Biomedical Research <span style="color:#8c8c98;font-weight:400;font-size:.85em">(Data Science)</span></div><div class="school">Imperial College London</div><div class="when">Oct 2021 – Sep 2022 · London, UK</div></div>
         <div class="edu-card"><div class="deg">B.Eng. Biomedical Systems Engineering</div><div class="school">University of Warwick</div><div class="when">Oct 2018 – Jun 2021 · Coventry, UK</div></div>
@@ -253,7 +258,7 @@ html{scroll-behavior:smooth;}
     <section class="section">
       <div class="wide-col">
         <figure class="content-image-wrap">
-          <img class="content-image" src="projects/deepcatch-x/assets/dcx-hero-pipeline.png" alt="X-ray to 3D aorta pipeline: chest X-ray input, 3D aorta reconstruction, diameter measurement with sensitivity/F1/AUROC vs radiologist comparison" />
+          <img class="content-image" src="projects/deepcatch-x/assets/dcx-hero-product.png" alt="DeepCatch X product view: raw chest X-ray alongside the AI analysis — heart volume, heart area, CT ratio, cardiothoracic measurements, and abnormality score overlaid on the radiograph (3D extraction from 2D X-ray)" />
         </figure>
       </div>
     </section>
@@ -268,13 +273,19 @@ html{scroll-behavior:smooth;}
         <p>
           DeepCatch X is a medical imaging platform that extracts
           clinical measurements from standard chest X-rays that
-          traditionally require CT scans, using generative AI.
+          traditionally require CT scans, using generative AI &mdash;
+          aortic screening in production, with opportunistic
+          <b>osteoporosis screening</b> (T12&ndash;L2 CT attenuation) now in
+          development on a conditional rectified-flow model.
           A distributed Ray inference pipeline achieves 100x daily
-          throughput improvement.
+          throughput improvement. In production, the platform is MFDS Class
+          II-certified (FDA submission filed), deployed at 20+ institutions
+          nationwide, and used by 20,000+ patients monthly.
         </p>
         <div class="tags">
           <span class="tag">PyTorch</span>
-          <span class="tag">Conditional DDPM</span>
+          <span class="tag">Conditional Diffusion</span>
+          <span class="tag">Rectified Flow</span>
           <span class="tag">LDM</span>
           <span class="tag">VLM</span>
           <span class="tag">Ray</span>
@@ -290,7 +301,9 @@ html{scroll-behavior:smooth;}
 
     <div class="impact-statement">
       <em>Outperformed radiologists</em> on aortic dilation
-      detection (Sensitivity 0.93 vs 0.31) &mdash; presented at NVIDIA GTC 2025
+      detection (Sensitivity 0.93 vs 0.31, comparative evaluation; externally evaluated in
+      <a href="https://doi.org/10.1016/j.ejrad.2025.112380" style="color: inherit;"><em>Eur. J. Radiology</em>, 2025</a>)
+      &mdash; presented at NVIDIA GTC 2025
     </div>
 
     <!-- ════════════════════════════════════════════════════════
@@ -319,54 +332,6 @@ html{scroll-behavior:smooth;}
           <div class="label">Dataset Scale</div>
         </div>
       </div>
-    </section>
-
-    <hr class="divider" />
-
-    <!-- ════════════════════════════════════════════════════════
-         DATA ACQUISITION
-         ════════════════════════════════════════════════════════ -->
-    <section class="section">
-      <div class="text-col">
-        <h2>Data Acquisition &amp; Management</h2>
-      </div>
-
-      <div class="wide-col">
-        <figure class="content-image-wrap">
-          <img
-            class="content-image"
-            src="projects/deepcatch-x/assets/dcx-data-consort.png"
-            alt="CONSORT flow diagram: SNUH (n=50,000) + NLST (n=13,895) for training, three external hospitals (n=16,544) for validation, with 467 exclusions for quality control"
-          />
-          <figcaption>
-            Dataset CONSORT Flow &mdash; Training, Internal &amp; External
-            Validation Splits
-          </figcaption>
-        </figure>
-      </div>
-
-      <div class="text-col">
-        <h3>International Data Vendors</h3>
-        <p>
-          Supplementary datasets were sourced from international medical data
-          platforms to meet project requirements: demographic diversity
-          (ethnicity, sex, height/weight), scan conditions (slice
-          thickness, chest coverage), and clinical balance
-          (normal vs. disease). End-to-end acquisition of 100TB+ supported
-          FDA / MFDS regulatory submissions, requiring rigorous documentation
-          of dataset provenance and balance.
-        </p>
-        <div style="display: flex; align-items: center; gap: 40px; margin-top: 12px; flex-wrap: wrap">
-          <img src="images/logos/gradient-health.svg" alt="Gradient Health" style="height: 32px; opacity: 0.7"/>
-          <span style="display: flex; align-items: center; gap: 6px; opacity: 0.7">
-            <img src="images/logos/segmed.png" alt="Segmed" style="height: 32px; border-radius: 4px"/>
-            <span style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; color: #37352f">Segmed</span>
-          </span>
-          <img src="images/logos/protege.svg" alt="Protege" style="height: 32px; opacity: 0.7"/>
-        </div>
-
-      </div>
-
     </section>
 
     <hr class="divider" />
@@ -403,6 +368,122 @@ html{scroll-behavior:smooth;}
           />
           <figcaption>
             Two-Stage Diffusion Architecture &mdash; Conditional 2D DDPM (Implemented) and 3D Latent Diffusion Extension (Proposed)
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-x/assets/dcx-hero-pipeline.png"
+            alt="X-ray to 3D aorta pipeline: chest X-ray input, 3D aorta reconstruction, diameter measurement with sensitivity/F1/AUROC vs radiologist comparison"
+          />
+          <figcaption>
+            X-ray to 3D Aorta Pipeline &mdash; chest X-ray input, 3D aorta reconstruction, and diameter measurement; aortic-dilation detection vs radiologists (sensitivity / F1 / AUROC)
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-x/assets/dcx-reader-study.png"
+            alt="Reader study ROC: DeepCatch X AI (AUC 0.89 / 0.88) plotted above five human readers — two cardiovascular radiologists (>20 years) and three less-experienced doctors — on ascending-aortic-dilation detection; published in European Journal of Radiology 2025"
+          />
+          <figcaption>
+            Reader Study &mdash; AI (AUC 0.89 / 0.88) above all five readers on aortic-dilation detection (<i>Eur. J. Radiology</i>, 2025)
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-x/assets/dcx-retrospective-study.png"
+            alt="Multi-site retrospective study (PA chest radiograph vs CT, n=17,011): ROC AUC 0.903 / 0.937 / 0.942 at 4 / 4.5 / 5 cm thresholds, with predicted-vs-actual, Bland-Altman, and ROC-curve panels"
+          />
+          <figcaption>
+            Multi-Site Retrospective Study &mdash; PA radiograph vs CT (n=17,011): ROC AUC 0.90&ndash;0.94 across dilation thresholds, with agreement and Bland-Altman analyses
+          </figcaption>
+        </figure>
+      </div>
+
+
+      <div class="text-col">
+        <h3>Rectified-Flow Osteoporosis Screening</h3>
+        <p>
+          For opportunistic <b>osteoporosis screening</b>, the latest
+          generation of the stack replaces a deployed adversarial
+          radiograph-to-CT-attenuation translator with a
+          <b>conditional rectified-flow model</b> that reads a chest
+          radiograph and returns <b>masks, CT attenuation projections, and
+          bone-marrow HU</b> for T12&ndash;L2 and both clavicles from one
+          network, with the clinical mean-HU error inside the training
+          objective.
+        </p>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            class="osteo-fig"
+            src="images/products/osteo_heldout.png"
+            alt="Held-out patients: from a single chest radiograph, the model predicts per-structure bone density — vertebral (T12-L2) and clavicle CT attenuation, with per-structure bone-marrow HU labels overlaid on each radiograph"
+          />
+          <figcaption>
+            Held-out patients &mdash; one chest radiograph in, per-structure
+            bone-density measurements out (T12&ndash;L2 + clavicles): predicted
+            CT attenuation with bone-marrow HU
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="wide-col">
+        <figure class="diagram">
+          <img
+            class="osteo-fig"
+            src="images/products/osteo_agreement.png"
+            alt="Bone-marrow HU from the radiograph vs the CT reference across held-out structures (T12, L1, L2, clavicles): agreement scatter (top) and Bland-Altman plots (bottom)"
+          />
+          <figcaption>
+            Agreement with the CT reference on held-out structures &mdash;
+            per-structure scatter (top) and Bland-Altman (bottom)
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <h3>BioAge: R to C++</h3>
+        <p>
+          The platform estimates biological age from chest X-ray biomarkers,
+          outputting 52 clinical fields including risk scores and life
+          expectancy. The original R algorithm was ported to
+          production C++ and compiled into a shared binary for integration into the
+          deployment pipeline. Achieves numerical equivalence to the
+          original R implementation. Deployed across check-up centers,
+          underpinning the qCXR-bioage study with Kangbuk Samsung Hospital
+          (<a href="https://pubs.rsna.org/doi/10.1148/ryct.250327"><i>Radiology:
+          Cardiothoracic Imaging</i>, 2026</a>).
+        </p>
+
+        <figure class="content-image-wrap">
+          <div class="report-pair">
+            <img
+              class="content-image report-page"
+              src="images/products/bioage_report_en.png"
+              alt="AI-based cardiorespiratory health-age report, English (sample, test patient): heart age, lung age, aging rate, and percentile derived from a chest radiograph"
+            />
+            <img
+              class="content-image report-page"
+              src="images/products/bioage_report_kr.png"
+              alt="AI-based cardiorespiratory health-age report, Korean (sample, test patient): heart age, lung age, aging rate, and percentile derived from a chest radiograph"
+            />
+          </div>
+          <figcaption>
+            AI Cardiorespiratory Health-Age Report &mdash; sample output, English and Korean (heart / lung age, aging rate, percentile)
           </figcaption>
         </figure>
       </div>
@@ -493,69 +574,67 @@ html{scroll-behavior:smooth;}
     <hr class="divider" />
 
     <!-- ════════════════════════════════════════════════════════
-         PILLAR 3: PRODUCTION ENGINEERING
+         DATA ACQUISITION
          ════════════════════════════════════════════════════════ -->
     <section class="section">
       <div class="text-col">
-        <h2>Production Engineering</h2>
-        <p>
-          Shipping deep learning to hospitals means standalone executables, no
-          Python runtime, and IP-protected binaries. A major refactoring effort
-          eliminated dead code and unified the architecture before Nuitka
-          compilation.
-        </p>
+        <h2>Data Acquisition &amp; Management</h2>
+      </div>
 
-        <h3>Codebase Refactoring</h3>
-        <div class="comparison">
-          <div class="comparison-box before">
-            <div class="heading">Before</div>
-            <div class="comparison-row">
-              <span class="stat-label">Files</span>
-              <span class="stat-value">110</span>
-            </div>
-            <div class="comparison-row">
-              <span class="stat-label">Lines of Code</span>
-              <span class="stat-value">34,266</span>
-            </div>
-            <div class="comparison-row">
-              <span class="stat-label">Entry Points</span>
-              <span class="stat-value">6</span>
-            </div>
-          </div>
-          <div class="comparison-box after">
-            <div class="heading">After</div>
-            <div class="comparison-row">
-              <span class="stat-label">Files</span>
-              <span class="stat-value">15</span>
-            </div>
-            <div class="comparison-row">
-              <span class="stat-label">Lines of Code</span>
-              <span class="stat-value">8,017</span>
-            </div>
-            <div class="comparison-row">
-              <span class="stat-label">Entry Points</span>
-              <span class="stat-value">1</span>
-            </div>
-          </div>
+      <div class="wide-col">
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/deepcatch-x/assets/dcx-data-consort.png"
+            alt="CONSORT flow diagram: SNUH (n=50,000) + NLST (n=13,895) for training, three external hospitals (n=16,544) for validation, with 467 exclusions for quality control"
+          />
+          <figcaption>
+            Dataset CONSORT Flow &mdash; Training, Internal &amp; External
+            Validation Splits
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="text-col">
+        <h3>International Data Vendors</h3>
+        <p>
+          Supplementary datasets were sourced from international medical data
+          platforms to meet project requirements: demographic diversity
+          (ethnicity, sex, height/weight), scan conditions (slice
+          thickness, chest coverage), and clinical balance
+          (normal vs. disease). End-to-end acquisition of 100TB+ underpinned
+          FDA and MFDS approvals across the product line, requiring rigorous documentation
+          of dataset provenance and balance.
+        </p>
+        <div style="display: flex; align-items: center; gap: 40px; margin-top: 12px; flex-wrap: wrap">
+          <img src="images/logos/gradient-health.svg" alt="Gradient Health" style="height: 32px; opacity: 0.7"/>
+          <span style="display: flex; align-items: center; gap: 6px; opacity: 0.7">
+            <img src="images/logos/segmed.png" alt="Segmed" style="height: 32px; border-radius: 4px"/>
+            <span style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; color: #37352f">Segmed</span>
+          </span>
+          <img src="images/logos/protege.svg" alt="Protege" style="height: 32px; opacity: 0.7"/>
         </div>
 
-        <h3>Nuitka Deployment</h3>
+        <h3>PHI De-identification for Compliant Handling</h3>
         <p>
-          Compiled to standalone executables with bundled CUDA/PyTorch
-          dependencies via Nuitka. Model inference accelerated with TensorRT
-          compilation, ONNX export, and FP16 precision. Source-code encryption
-          for IP protection in commercial deployments.
+          Handling patient data at this scale required a multi-modal
+          <b>PHI de-identification pipeline</b> &mdash; OCR + NER for pixel-level
+          masking of burned-in text and LLM-based metadata
+          <b>anonymization</b>, validated at <b>98% accuracy</b> on a real
+          delivery batch &mdash; making acquisition, transfer, and regulatory
+          submission compliant by construction.
         </p>
+        <figure class="content-image-wrap">
+          <img
+            class="content-image"
+            src="projects/llm-deidentification/assets/phi-pipeline.svg"
+            alt="PHI de-identification pipeline: OCR + NER pixel-level masking and LLM metadata anonymization"
+          />
+          <figcaption>
+            Multi-modal PHI De-identification Flow
+          </figcaption>
+        </figure>
 
-        <h3>BioAge: R to C++</h3>
-        <p>
-          The platform estimates biological age from chest X-ray biomarkers,
-          outputting 52 clinical fields including risk scores and life
-          expectancy. The original R algorithm was ported to
-          production C++ and compiled into a shared binary for integration into the
-          deployment pipeline. Achieves numerical equivalence to the
-          original R implementation. Deployed across check-up centers.
-        </p>
       </div>
 
     </section>
@@ -566,7 +645,7 @@ html{scroll-behavior:smooth;}
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Project 02 · 3D Spatial Perception &nbsp;—&nbsp; the bridge to robotics</div>
       <h2 class="h-title reveal" style="--d:.05s">AR Surgical Registration</h2>
-      <p class="h-sub reveal" style="--d:.12s">Real-time surgical navigation — preoperative CT registered to an intraoperative iPad Pro LiDAR point cloud.</p>
+      <p class="h-sub reveal" style="--d:.12s">Real-time surgical navigation — preoperative CT registered to an intraoperative iPad Pro LiDAR point cloud. Part of <b>MEDIP PRO AR</b>, Korea's first MFDS-certified AR surgical-navigation software — selected for the KMDF pan-ministerial top-10 projects (2024), now in clinical trials.</p>
       <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">1.8<small>mm</small></div><div class="mlabel">FRE registration error</div></div><div class="metric"><div class="num">6-DoF</div><div class="mlabel">real-time pose estimation</div></div><div class="metric"><div class="num">On-device</div><div class="mlabel">iOS / iPad LiDAR</div></div></div>
       <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
     </div>
@@ -779,9 +858,9 @@ html{scroll-behavior:smooth;}
     <div class="glow"></div><div class="watermark tr">03</div>
     <div class="wrap">
       <div class="eyebrow reveal"><span class="dot"></span>Project 03 · LLM Systems · Medical NLP</div>
-      <h2 class="h-title reveal" style="--d:.05s">De-ID &amp; Translation</h2>
-      <p class="h-sub reveal" style="--d:.12s">Two LLM systems for <b>MEDIP Box</b>, Medical IP's VR anatomy-education platform — PHI de-identification to keep its medical source data compliant and shareable, and a multi-agent pipeline to localize its content for international markets.</p>
-      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">98<small>%</small></div><div class="mlabel">PHI detection accuracy</div></div><div class="metric"><div class="num">KR→7</div><div class="mlabel">languages translated</div></div><div class="metric"><div class="num">4</div><div class="mlabel">role agents per loop</div></div></div>
+      <h2 class="h-title reveal" style="--d:.05s">LLM Multilingual Translation</h2>
+      <p class="h-sub reveal" style="--d:.12s">A multi-agent LLM pipeline for <b>MEDIP Box</b>, Medical IP's VR anatomy-education platform &mdash; localizing its content for international markets. (PHI de-identification now lives in the DeepCatch X data chapter it serves.)</p>
+      <div class="metrics reveal" style="--d:.18s"><div class="metric"><div class="num">KR→7</div><div class="mlabel">languages translated</div></div><div class="metric"><div class="num">4</div><div class="mlabel">role agents per loop</div></div><div class="metric"><div class="num">TM</div><div class="mlabel">persistent translation memory</div></div></div>
       <div class="scrollfor reveal" style="--d:.26s">details below <span>↓</span></div>
     </div>
   </section><div class="proj-content" id="content-llm">
@@ -791,75 +870,13 @@ html{scroll-behavior:smooth;}
         <figure class="content-image-wrap">
           <img class="content-image" src="projects/llm-deidentification/assets/llm-hero-medipbox.png" alt="MEDIP Box — Medical IP's VR anatomy-education platform; its medical source imagery required PHI de-identification, and its content required localization for international markets" />
           <figcaption>
-            MEDIP Box &mdash; the product both systems served: its source data
-            needed de-identification, its content needed localization
+            MEDIP Box &mdash; the product this system served: its content
+            needed localization for international markets
           </figcaption>
         </figure>
       </div>
     </section>
 
-
-    <!-- ════════════════════════════════════════════════════════
-         PHI DE-IDENTIFICATION
-         ════════════════════════════════════════════════════════ -->
-    <section class="section">
-      <div class="text-col">
-        <h2>PHI De-Identification Pipeline</h2>
-        <p>
-          Medical data needs strict HIPAA/GDPR compliance to be shared for
-          research and collaboration &mdash; but Protected Health Information
-          (PHI) hides across many modalities: burned-in text on images, DICOM
-          metadata, PDFs, and handwritten annotations. This system removes it
-          automatically, where manual de-identification is slow and error-prone.
-        </p>
-        <div class="tags">
-          <span class="tag">98% detection</span>
-          <span class="tag">LLM</span>
-          <span class="tag">OCR</span>
-          <span class="tag">NER</span>
-          <span class="tag">DICOM</span>
-        </div>
-
-        <h3>Two-Pronged Approach</h3>
-        <div class="two-prong">
-          <div class="prong-card">
-            <div class="prong-title">
-              <span class="icon">&#128196;</span> Metadata Anonymization
-            </div>
-            <div class="prong-desc">
-              LLM parses DICOM headers to identify PHI fields (Patient Name, ID,
-              Birth Date) and generates consistent anonymized mappings while
-              preserving non-PHI metadata.
-            </div>
-          </div>
-          <div class="prong-card">
-            <div class="prong-title">
-              <span class="icon">&#128444;&#65039;</span> Burn-in Text Detection
-            </div>
-            <div class="prong-desc">
-              OCR extracts text regions with bounding boxes. LLM/NER classifies
-              each as PHI or non-PHI. Pixel-level black mask applied over PHI
-              while preserving markers (L/R, PA).
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="wide-col">
-        <figure class="diagram">
-          <img
-            src="projects/llm-deidentification/assets/phi-pipeline.svg"
-            alt="PHI De-identification Pipeline: Metadata branch through LLM to anonymized values, Image branch through OCR and NER to PHI masking"
-          />
-          <figcaption>
-            Two-Pronged De-identification Pipeline
-          </figcaption>
-        </figure>
-      </div>
-
-    </section>
-
-    <hr class="divider" />
 
     <!-- ════════════════════════════════════════════════════════
          TRANSLATION SYSTEM
@@ -913,7 +930,7 @@ html{scroll-behavior:smooth;}
         <figure class="diagram">
           <img
             src="projects/llm-deidentification/assets/translation-pipeline.svg"
-            alt="Multi-agent medical translation: Translator, Reviewer, Fixer and Supervisor models (one per GPU, via Ollama + Ray) in a verification loop, with an independent terminology gate that watches clinical terms. Runs on-device."
+            alt="Multi-agent medical translation: Translator, Reviewer, Fixer and Supervisor models (one per GPU, via Ollama + Ray, migrating to vLLM) in a verification loop, with an independent terminology gate that watches clinical terms. Runs on-device."
           />
           <figcaption>
             Multi-agent verification loop &mdash; translator, reviewer, fixer and
@@ -1271,7 +1288,7 @@ const dotsWrap = document.getElementById("dots");
 const progress = document.getElementById("progress");
 
 // labeled section nav (one entry per chapter; labels show on hover / wide screens)
-const labels = ["Home", "Profile", "Diffusion · X-ray AI", "3D Perception · AR Surgery", "LLM Agents · De-ID", "Segmentation · MLOps", "Robot Learning", "Contact"];
+const labels = ["Home", "Profile", "Diffusion · X-ray AI", "3D Perception · AR Surgery", "LLM Agents · Translation", "Segmentation · MLOps", "Robot Learning", "Contact"];
 chapters.forEach((c, i) => {
   if (!c.id) c.id = "ch-" + i;
   const a = document.createElement("a");

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LLM De-Identification &amp; Translation</title>
+    <title>LLM Multilingual Translation with Agentic Systems</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap"
       rel="stylesheet"
@@ -17,9 +17,9 @@
          ════════════════════════════════════════════════════════ -->
     <section class="hero">
       <a class="back-link-hero" href="../../index.html#experience">&larr; Back to Portfolio</a>
-      <h1>LLM De-Identification &amp; Translation</h1>
+      <h1>LLM Multilingual Translation with Agentic Systems</h1>
       <p class="subtitle">
-        LLM Systems for Medical Data Processing
+        Agentic Medical-Content Localization at Production Scale
       </p>
       <div class="meta">
         <span>Medical IP &middot; Seoul, South Korea</span>
@@ -29,7 +29,7 @@
       <img
         class="hero-image"
         src="assets/llm-hero-medipbox.png"
-        alt="MEDIP Box — Medical IP's VR anatomy-education platform; its medical source imagery required PHI de-identification, and its content required localization for international markets"
+        alt="MEDIP Box — Medical IP's VR anatomy-education platform, whose content required localization for international markets"
       />
     </section>
 
@@ -40,74 +40,11 @@
       <div class="text-col">
         <p>
           <b>MEDIP Box</b>, Medical IP's VR anatomy-education platform, drove
-          both systems below &mdash; PHI de-identification to keep its medical
-          source data compliant and shareable, and a multi-agent pipeline to
-          localize its content for international markets.
+          this system &mdash; a multi-agent pipeline to localize its content
+          for international markets.
         </p>
       </div>
     </section>
-
-    <!-- ════════════════════════════════════════════════════════
-         PHI DE-IDENTIFICATION
-         ════════════════════════════════════════════════════════ -->
-    <section class="section">
-      <div class="text-col">
-        <h2>PHI De-Identification Pipeline</h2>
-        <p>
-          Medical data needs strict HIPAA/GDPR compliance to be shared for
-          research and collaboration &mdash; but Protected Health Information
-          (PHI) hides across many modalities: burned-in text on images, DICOM
-          metadata, PDFs, and handwritten annotations. This system removes it
-          automatically, where manual de-identification is slow and error-prone.
-        </p>
-        <div class="tags">
-          <span class="tag">98% detection</span>
-          <span class="tag">LLM</span>
-          <span class="tag">OCR</span>
-          <span class="tag">NER</span>
-          <span class="tag">DICOM</span>
-        </div>
-
-        <h3>Two-Pronged Approach</h3>
-        <div class="two-prong">
-          <div class="prong-card">
-            <div class="prong-title">
-              <span class="icon">&#128196;</span> Metadata Anonymization
-            </div>
-            <div class="prong-desc">
-              LLM parses DICOM headers to identify PHI fields (Patient Name, ID,
-              Birth Date) and generates consistent anonymized mappings while
-              preserving non-PHI metadata.
-            </div>
-          </div>
-          <div class="prong-card">
-            <div class="prong-title">
-              <span class="icon">&#128444;&#65039;</span> Burn-in Text Detection
-            </div>
-            <div class="prong-desc">
-              OCR extracts text regions with bounding boxes. LLM/NER classifies
-              each as PHI or non-PHI. Pixel-level black mask applied over PHI
-              while preserving markers (L/R, PA).
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="wide-col">
-        <figure class="diagram">
-          <img
-            src="assets/phi-pipeline.svg"
-            alt="PHI De-identification Pipeline: Metadata branch through LLM to anonymized values, Image branch through OCR and NER to PHI masking"
-          />
-          <figcaption>
-            Two-Pronged De-identification Pipeline
-          </figcaption>
-        </figure>
-      </div>
-
-    </section>
-
-    <hr class="divider" />
 
     <!-- ════════════════════════════════════════════════════════
          TRANSLATION SYSTEM
