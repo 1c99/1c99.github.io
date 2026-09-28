@@ -166,16 +166,16 @@
               <li><b>International expansion:</b> reduced the inference pipeline's memory footprint enough to run the full portable X-ray bundle on a single laptop, supporting DK Medical (a major Korean X-ray manufacturer) in its Southeast Asia expansion (contracted <b>~500 systems in 2026 &rarr; ~2,000 in 2027</b>).</li>
               <li><b>Aorta:</b> built the product's generative anatomy-extraction stack &mdash; a <b>diffusion-based model</b> for aorta extraction (<b>Dice = 0.97</b>, surpassing the GAN baseline), with downstream aortic-dilation detection reaching <b>sensitivity 0.93 vs 0.31 for radiologists</b> (<a href="https://doi.org/10.1016/j.ejrad.2025.112380"><i>Eur. J. Radiology</i>, 2025</a>).</li>
               <li><b>Osteoporosis screening from chest radiographs:</b> a single-network <b>conditional rectified-flow model</b> (x-prediction, shifted logit-normal timestep sampling, self-generated warm-start prior, RAD-DINO cross-attention with LoRA adaptation) that jointly predicts <b>T12&ndash;L2 and clavicle masks, CT attenuation maps and bone-marrow HU</b>, with a density-anchored readout that trains the mean-HU error directly in the flow objective.</li>
-              <li><b>BioAge:</b> ported the biological-age pipeline from research-grade R to production <b>C++</b> with verified numerical equivalence; deployed across check-up centers and underpinning the qCXR-bioage study with Kangbuk Samsung Hospital (<a href="https://pubs.rsna.org/doi/10.1148/ryct.250327"><i>Radiology: Cardiothoracic Imaging</i>, 2026</a>).</li>
-              <li><b>Systems engineering:</b> engineered a <b>Ray-distributed inference pipeline</b> (14-module DAG of actors) with a VLM-driven PA-view pre-filter; achieved <b>100x daily throughput</b> and 2.8x per-case speedup via adaptive scheduling, shared memory, and TensorRT / ONNX / FP16 optimization. Applied to <b>2.3M+ cases</b>.</li>
-              <li><b>Production &amp; deployment:</b> built a CI/CD-driven on-premise deployment pipeline for collaborative research with hospitals &mdash; reduced production codebase by 76% in LoC and compiled into source-encrypted standalone executables.</li>
+              <li><b>BioAge:</b> ported the biological-age pipeline from research-grade R to production <b>C++</b> with verified numerical equivalence; deployed across check-up centers and underpinning the <b>qCXR-bioage study with Kangbuk Samsung Hospital</b> (<a href="https://pubs.rsna.org/doi/10.1148/ryct.250327"><i>Radiology: Cardiothoracic Imaging</i>, 2026</a>).</li>
+              <li><b>Systems engineering:</b> engineered a <b>Ray-distributed inference pipeline</b> (14-module DAG of actors) with a VLM-driven PA-view pre-filter; achieved <b>100x daily throughput</b> and <b>2.8x per-case speedup</b> via adaptive scheduling, shared memory, and TensorRT / ONNX / FP16 optimization. Applied to <b>2.3M+ cases</b>.</li>
+              <li><b>Production &amp; deployment:</b> built a <b>CI/CD-driven on-premise deployment pipeline</b> for collaborative research with hospitals &mdash; reduced production codebase by 76% in LoC and compiled into source-encrypted standalone executables; maintain the production C++ codebase.</li>
               <li><b>Data &amp; regulatory:</b> led end-to-end acquisition of <b>100TB+</b> medical datasets through multiple data vendors and built a multi-modal PHI de-identification pipeline (OCR+NER pixel masking, LLM metadata <b>anonymization</b>, <b>98% accuracy</b>) for compliant data handling &mdash; underpinning <b>FDA and MFDS approvals</b> across the product line.</li>
               <li><b>Technical presentation:</b> presented DeepCatch X at <b>NVIDIA GTC 2025</b> (exhibitor), demonstrating diffusion-based organ extraction and clinical quantification from CXR.</li>
             </ul>
 
             <h5><a class="title-pill" href="projects/evd-navigation/">MEDIP PRO AR &mdash; 3D Perception &amp; EVD Surgical Navigation</a></h5>
             <ul>
-              <li>Korea's first MFDS-certified <b>AR surgical-navigation</b> software &mdash; selected for the KMDF pan-ministerial top-10 projects (2024), now in clinical trials (<a href="https://www.medicaltimes.com/Main/News/NewsView.html?ID=1146000">ref. 1</a>, <a href="https://www.medworld.co.kr/news/articleView.html?idxno=229999">ref. 2</a>).</li>
+              <li><b>Korea's first MFDS-certified AR surgical-navigation</b> software &mdash; selected for the KMDF pan-ministerial top-10 projects (2024), now in clinical trials (<a href="https://www.medicaltimes.com/Main/News/NewsView.html?ID=1146000">ref. 1</a>, <a href="https://www.medworld.co.kr/news/articleView.html?idxno=229999">ref. 2</a>).</li>
               <li>Built a <b>3D spatial perception pipeline</b> from volumetric CT &mdash; patient-specific skin-surface segmentation, 2D landmark detection, and ray tracing to lift 2D landmarks into 3D reference points.</li>
               <li>Implemented real-time <b>6-DoF pose estimation</b> between preoperative CT landmarks and an intraoperative iPad Pro LiDAR point cloud using k-NN statistical outlier removal followed by <b>Kabsch + ICP</b>; achieved <b>FRE = 1.8 mm</b>.</li>
               <li>Co-developed with iOS engineers to deploy the full registration pipeline <b>on-device</b> for real-time operating-room use; the registration stack also fed AR/VR glasses design for production.</li>
@@ -249,7 +249,7 @@
                     <br />
                     M.Res. Thesis and Presentation, <b>Imperial College London</b>
                     <br />
-                    Advisors: Dr. Joram M. Posma, Dr. Matthew Grech-Sollars
+                    Supervisors: Dr. Joram M. Posma, Dr. Matthew Grech-Sollars
                     <br />
                     <span style="color: #888;">Apr. 2022 &ndash; Sep. 2022 | London, UK</span>
                   </div>
@@ -261,7 +261,7 @@
                     <br />
                     M.Res. Thesis and Poster-presentation, <b>Imperial College London</b>
                     <br />
-                    Advisor: Dr. James McKenzie
+                    Supervisor: Dr. James McKenzie
                     <br />
                     <span style="color: #888;">Oct. 2021 &ndash; Mar. 2022 | London, UK</span>
                   </div>
@@ -273,7 +273,7 @@
                     <br />
                     B.Eng. Thesis, Progress Report, and Ethical Approval, <b>University of Warwick</b>
                     <br />
-                    Advisor: Dr. Joanna Collingwood
+                    Supervisor: Dr. Joanna Collingwood
                     <br />
                     <span style="color: #888;">Oct. 2020 &ndash; Jun. 2021 | Coventry, UK</span>
                   </div>
@@ -295,7 +295,7 @@
                   <div class="inner" style="width: 100%;">
                     <b><a class="title-pill" target="_blank" href="https://doi.org/10.1371/journal.pdig.0000835">Designing a CAD system for cardiomegaly detection and radiology report generation</a></b>
                     <br />
-                    Tianhao Zhu, Kenxin Xu, <u>Wonchan Son</u>, Kristofer Linton-Reid, Marc Boubnovski-Martell, Matt Grech-Sollars, Antoine D. Lain, Joram M. Posma
+                    Tianhao Zhu, Kexin Xu, <u>Wonchan Son</u>, Kristofer Linton-Reid, Marc Boubnovski-Martell, Matt Grech-Sollars, Antoine D. Lain, Joram M. Posma
                     <br />
                     <b>PLOS Digital Health</b>, May 2025
                   </div>
